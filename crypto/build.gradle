@@ -5,13 +5,12 @@ plugins {
 
 android {
     namespace 'com.kunzisoft.encrypt'
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
+    compileSdk 34
     ndkVersion "21.4.7075529"
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 33
+        minSdkVersion 19
+        targetSdkVersion 34
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -41,7 +40,9 @@ android {
 
 dependencies {
     // Crypto
-    implementation 'org.bouncycastle:bcprov-jdk15on:1.70'
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.78.1'
+    //implementation 'org.testng:testng:6.9.6'
 
     testImplementation "androidx.test:runner:$android_test_version"
+    //androidTestImplementation 'org.testng:testng:6.9.6'
 }

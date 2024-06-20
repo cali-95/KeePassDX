@@ -50,14 +50,12 @@ open class SaveDatabaseRunnable(
                 val contentResolver = context.contentResolver
                 // Build temp database file to avoid file corruption if error
                 database.saveData(
-                    cacheFile = File(context.cacheDir, databaseCopyUri.hashCode().toString()),
-                    databaseOutputStream = {
-                        contentResolver
-                            .getUriOutputStream(databaseCopyUri ?: database.fileUri)
-                    },
-                    isNewLocation = databaseCopyUri == null,
-                    mainCredential?.toMasterCredential(contentResolver),
-                    challengeResponseRetriever)
+                        cacheFile = File(context.cacheDir, databaseCopyUri.hashCode().toString()),
+                        databaseOutputStream = contentResolver
+                                .getUriOutputStream(databaseCopyUri ?: database.fileUri),
+                        isNewLocation = databaseCopyUri == null,
+                        mainCredential?.toMasterCredential(contentResolver),
+                        challengeResponseRetriever)
             } catch (e: DatabaseException) {
                 setError(e)
             }

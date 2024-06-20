@@ -73,29 +73,23 @@ class LockReceiver(var lockAction: () -> Unit) : BroadcastReceiver() {
                             )
                             // Launch the effective action after a small time
                             val first: Long = System.currentTimeMillis() + context.getString(R.string.timeout_screen_off).toLong()
+                            val mLockPendingIntentNonNull : PendingIntent = mLockPendingIntent!!
                             (context.getSystemService(ALARM_SERVICE) as AlarmManager?)?.let { alarmManager ->
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-                                        && !alarmManager.canScheduleExactAlarms()) {
-                                        alarmManager.set(
-                                            AlarmManager.RTC_WAKEUP,
-                                            first,
-                                            mLockPendingIntent
-                                        )
-                                    } else {
-                                        alarmManager.setExact(
-                                            AlarmManager.RTC_WAKEUP,
-                                            first,
-                                            mLockPendingIntent
-                                        )
-                                    }
-                                } else {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+                                    && !alarmManager.canScheduleExactAlarms()) {
                                     alarmManager.set(
                                         AlarmManager.RTC_WAKEUP,
                                         first,
-                                        mLockPendingIntent
+                                        mLockPendingIntentNonNull
+                                    )
+                                } else {
+                                    alarmManager.setExact(
+                                        AlarmManager.RTC_WAKEUP,
+                                        first,
+                                        mLockPendingIntentNonNull
                                     )
                                 }
+
                             }
                         } else {
                             cancelLockPendingIntent(context)
@@ -122,7 +116,7 @@ class LockReceiver(var lockAction: () -> Unit) : BroadcastReceiver() {
     private fun cancelLockPendingIntent(context: Context) {
         mLockPendingIntent?.let {
             val alarmManager = context.getSystemService(ALARM_SERVICE) as AlarmManager?
-            alarmManager?.cancel(mLockPendingIntent)
+            alarmManager?.cancel(mLockPendingIntent!!)
             mLockPendingIntent = null
         }
     }
@@ -131,15 +125,27 @@ class LockReceiver(var lockAction: () -> Unit) : BroadcastReceiver() {
 fun Context.registerLockReceiver(lockReceiver: LockReceiver?,
                                  registerKeyboardAction: Boolean = false) {
     lockReceiver?.let {
-        registerReceiver(it, IntentFilter().apply {
-            addAction(Intent.ACTION_SCREEN_OFF)
-            addAction(Intent.ACTION_SCREEN_ON)
-            addAction(LOCK_ACTION)
-            if (registerKeyboardAction) {
-                addAction(REMOVE_ENTRY_MAGIKEYBOARD_ACTION)
-                addAction(BACK_PREVIOUS_KEYBOARD_ACTION)
-            }
-        })
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            registerReceiver(it, IntentFilter().apply {
+                addAction(Intent.ACTION_SCREEN_OFF)
+                addAction(Intent.ACTION_SCREEN_ON)
+                addAction(LOCK_ACTION)
+                if (registerKeyboardAction) {
+                    addAction(REMOVE_ENTRY_MAGIKEYBOARD_ACTION)
+                    addAction(BACK_PREVIOUS_KEYBOARD_ACTION)
+                }
+            }, Context.RECEIVER_EXPORTED)
+        } else {
+            registerReceiver(it, IntentFilter().apply {
+                addAction(Intent.ACTION_SCREEN_OFF)
+                addAction(Intent.ACTION_SCREEN_ON)
+                addAction(LOCK_ACTION)
+                if (registerKeyboardAction) {
+                    addAction(REMOVE_ENTRY_MAGIKEYBOARD_ACTION)
+                    addAction(BACK_PREVIOUS_KEYBOARD_ACTION)
+                }
+            })
+        }
     }
 }
 

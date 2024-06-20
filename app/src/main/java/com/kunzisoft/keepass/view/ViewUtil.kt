@@ -117,7 +117,7 @@ fun TextView.customLink(listener: (View) -> Unit) {
 fun Snackbar.asError(): Snackbar {
     this.view.apply {
         setBackgroundColor(Color.RED)
-        findViewById<TextView>(R.id.snackbar_text).setTextColor(Color.WHITE)
+        findViewById<TextView>(com.google.android.material.R.id.snackbar_text).setTextColor(Color.WHITE)
     }
     return this
 }
@@ -356,23 +356,6 @@ fun View.applyWindowInsets(position: WindowInsetPosition = WindowInsetPosition.B
                     }
                 }
             }
-            WindowInsetPosition.BOTTOM_IME -> {
-                val imeHeight = windowInsets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-                if (view.layoutParams is ViewGroup.MarginLayoutParams) {
-                    view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                        bottomMargin = if (imeHeight > 1) 0 else insets.bottom
-                    }
-                }
-            }
-            WindowInsetPosition.TOP_BOTTOM_IME -> {
-                val imeHeight = windowInsets.getInsets(WindowInsetsCompat.Type.ime()).bottom
-                if (view.layoutParams is ViewGroup.MarginLayoutParams) {
-                    view.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                        topMargin = insets.top
-                        bottomMargin = if (imeHeight > 1) imeHeight else 0
-                    }
-                }
-            }
         }
         // If any of the children consumed the insets, return an appropriate value
         if (consumed) WindowInsetsCompat.CONSUMED else windowInsets
@@ -380,5 +363,5 @@ fun View.applyWindowInsets(position: WindowInsetPosition = WindowInsetPosition.B
 }
 
 enum class WindowInsetPosition {
-    TOP, BOTTOM, LEGIT_TOP, BOTTOM_IME, TOP_BOTTOM_IME
+    TOP, BOTTOM, LEGIT_TOP
 }

@@ -179,8 +179,8 @@ class EntryEditActivity : DatabaseLockActivity(),
 
         // To apply fit window with transparency
         setTransparentNavigationBar(applyToStatusBar = true) {
-            container?.applyWindowInsets(WindowInsetPosition.TOP_BOTTOM_IME)
-            footer?.applyWindowInsets(WindowInsetPosition.BOTTOM_IME)
+            container?.applyWindowInsets(WindowInsetPosition.TOP)
+            footer?.applyWindowInsets(WindowInsetPosition.BOTTOM)
         }
 
         stopService(Intent(this, ClipboardEntryNotificationService::class.java))
