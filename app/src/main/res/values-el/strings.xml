@@ -233,7 +233,7 @@
     <string name="html_text_ad_free">Σε αντίθεση με πολλές άλλες εφαρμογές διαχείρισης κωδικών πρόσβασης, αυτή είναι &lt;strong&gt;χωρίς διαφημίσεις&lt;/strong&gt;, &lt;strong&gt;copylefted libre λογισμικό&lt;/strong&gt; και δεν συλλέγει προσωπικά δεδομένα στους διακομιστές της, ανεξάρτητα από την έκδοση που χρησιμοποιείτε.</string>
     <string name="html_text_buy_pro">Με την αγορά της επαγγελματικής έκδοσης, θα έχετε πρόσβαση σε αυτό το &lt;strong&gt;οπτικό στοιχείο&lt;/strong&gt; και θα βοηθήσετε ιδιαίτερα την &lt;strong&gt;υλοποίηση ιδεών της κοινότητας.&lt;/strong&gt;</string>
     <string name="html_text_feature_generosity">Αυτό το &lt;strong&gt;οπτικό στυλ&lt;/strong&gt; είναι διαθέσιμο χάρη στη γενναιοδωρία σας.</string>
-    <string name="html_text_donation">Με τη &lt;strong&gt;συνεισφορά σας&lt;/strong&gt; στο έργο <i>(χρηματικά, κώδικα, μετάφραση)</i>, θα το βοηθήσετε να συνεχίσει να ζει και να ευδοκιμεί και θα είστε επίσης επιλέξιμοι για τη διαδικασία ξεκλειδώματος &lt;strong&gt;θεμάτων &lt;/strong&gt; .</string>
+    <string name="html_text_donation">Με τη &lt;strong&gt;συνεισφορά σας&lt;/strong&gt; στο έργο &lt;i&gt;(χρηματικά, κώδικα, μετάφραση)&lt;/i&gt;, θα το βοηθήσετε να συνεχίσει να ζει και να ευδοκιμεί και θα είστε επίσης επιλέξιμοι για τη διαδικασία ξεκλειδώματος &lt;strong&gt;θεμάτων &lt;/strong&gt; .</string>
     <string name="html_text_dev_feature">Αυτή η λειτουργία είναι &lt;strong&gt;υπό ανάπτυξη&lt;/strong&gt; και απαιτεί την &lt;strong&gt;συνεισφοράς&lt;/strong&gt; σας για να είναι σύντομα διαθέσιμη.</string>
     <string name="html_text_dev_feature_buy_pro">Με την αγορά της έκδοσης &lt;strong&gt;pro&lt;/strong&gt;,</string>
     <string name="html_text_dev_feature_contibute">Με την &lt;strong&gt;συνεισφορά&lt;/strong&gt; σας,</string>
@@ -503,7 +503,6 @@
     <string name="credential_before_click_advanced_unlock_button">Πληκτρολογήστε τον κωδικό πρόσβασης, και στη συνέχεια κάντε κλικ αυτό το κουμπί.</string>
     <string name="advanced_unlock_prompt_not_initialized">Δεν είναι δυνατή η προετοιμασία της προτροπής ξεκλειδώματος συσκευής.</string>
     <string name="advanced_unlock_not_recognized">Δεν ήταν δυνατή η αναγνώριση αποτυπώματος ξεκλειδώματος συσκευής</string>
-    <string name="advanced_unlock_scanning_error">Σφάλμα ξεκλειδώματος συσκευής: %1$s</string>
     <string name="advanced_unlock_invalid_key">Δεν είναι δυνατή η ανάγνωση του κλειδιού ξεκλειδώματος της συσκευής. Διαγράψτε το και επαναλάβετε τη διαδικασία αναγνώρισης ξεκλειδώματος.</string>
     <string name="advanced_unlock_prompt_extract_credential_message">Εξαγωγή διαπιστευτηρίων βάσης δεδομένων με δεδομένα ξεκλειδώματος συσκευής</string>
     <string name="education_advanced_unlock_summary">Συνδέστε τον κωδικό πρόσβασής σας με το σαρωμένο βιομετρικό ή τα διαπιστευτήρια της συσκευής σας για να ξεκλειδώσετε γρήγορα τη βάση δεδομένων σας.</string>
@@ -708,4 +707,5 @@
     <string name="warning_large_keyfile">Δεν συνιστάται η προσθήκη μεγάλου αρχείου κλειδιού, αυτό μπορεί να εμποδίσει το άνοιγμα της βάσης δεδομένων.</string>
     <string name="hide_templates_summary">Τα πρότυπα δεν εμφανίζονται</string>
     <string name="recursive_number_entries_title">Αναδρομικός αριθμός καταχωρήσεων</string>
+    <string name="error_otp_secret_length">Το μυστικό κλειδί πρέπει να έχει τουλάχιστον %1$d χαρακτήρες.</string>
 </resources>

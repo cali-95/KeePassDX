@@ -24,9 +24,11 @@ import com.kunzisoft.keepass.database.element.Entry
 import com.kunzisoft.keepass.database.element.Group
 import com.kunzisoft.keepass.database.element.node.NodeHandler
 import com.kunzisoft.keepass.database.element.node.NodeId
-import com.kunzisoft.keepass.model.EntryInfoPasskey.FIELD_RELYING_PARTY
+import com.kunzisoft.keepass.model.PasskeyEntryFields.FIELD_RELYING_PARTY
+import com.kunzisoft.keepass.model.PasskeyEntryFields.isPasskeyExclusion
 import com.kunzisoft.keepass.otp.OtpEntryFields.OTP_FIELD
-import com.kunzisoft.keepass.utils.UuidUtil
+import com.kunzisoft.keepass.otp.OtpEntryFields.isOtpExclusion
+import com.kunzisoft.keepass.utils.UUIDUtils.asHexString
 import com.kunzisoft.keepass.utils.inTheSameDomainAs
 
 class SearchHelper {
@@ -164,7 +166,7 @@ class SearchHelper {
                     return true
             }
             if (searchParameters.searchInUUIDs) {
-                val hexString = UuidUtil.toHexString(entry.nodeId.id) ?: ""
+                val hexString = entry.nodeId.id.asHexString() ?: ""
                 if (checkSearchQuery(hexString, searchParameters))
                     return true
             }
@@ -184,8 +186,8 @@ class SearchHelper {
             }
             if (searchParameters.searchInOther) {
                 if(entry.getExtraFields().any { field ->
-                    field.name != OTP_FIELD
-                            && field.name != FIELD_RELYING_PARTY
+                    field.isOtpExclusion()
+                            && field.isPasskeyExclusion()
                             && checkSearchQuery(field.protectedValue.toString(), searchParameters)
                 })
                     return true

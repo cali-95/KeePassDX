@@ -29,7 +29,6 @@
     <string name="advanced_unlock_prompt_not_initialized">無法初始化裝置解鎖提示。</string>
     <string name="advanced_unlock_prompt_store_credential_message">即使你使用裝置解鎖識別，你仍然需要記住你的解鎖憑證。</string>
     <string name="advanced_unlock_prompt_store_credential_title">裝置解鎖連線</string>
-    <string name="advanced_unlock_scanning_error">裝置解鎖出錯：%1$s</string>
     <string name="advanced_unlock_tap_delete">點擊刪除裝置解鎖密鑰</string>
     <string name="advanced_unlock_timeout">裝置解鎖超時</string>
     <string name="allow">允許</string>
@@ -330,7 +329,7 @@
     <string name="html_text_dev_feature_thanks">非常感謝你的捐助與貢獻。</string>
     <string name="html_text_dev_feature_upgrade">記得安裝最新版本來確保應用程式是最新的。</string>
     <string name="html_text_dev_feature_work_hard">我們正在努力的開發並盡快地發佈新功能。</string>
-    <string name="html_text_donation">透過為專案&lt;strong&gt;作出貢獻&lt;/strong&gt;<i>（財政、代碼、翻譯）</i>，你將幫助其繼續發展，並且你也將有資格獲得&lt;strong&gt;主題&lt;/strong&gt;解鎖步驟。</string>
+    <string name="html_text_donation">透過為專案&lt;strong&gt;作出貢獻&lt;/strong&gt;&lt;i&gt;（財政、代碼、翻譯）&lt;/i&gt;，你將幫助其繼續發展，並且你也將有資格獲得&lt;strong&gt;主題&lt;/strong&gt;解鎖步驟。</string>
     <string name="html_text_feature_generosity">此&lt;strong&gt;主題樣式&lt;/strong&gt;已可用，感謝你的慷慨相助。</string>
     <string name="icon_pack_choose_summary">應用程式使用的圖示包</string>
     <string name="icon_pack_choose_title">圖示包</string>

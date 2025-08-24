@@ -19,13 +19,13 @@
  */
 package com.kunzisoft.keepass.credentialprovider.activity
 
-import android.app.Activity
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.RequiresApi
 import androidx.credentials.GetCredentialResponse
@@ -41,24 +41,25 @@ import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialCreationParameters
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialUsageParameters
-import com.kunzisoft.keepass.credentialprovider.passkey.util.OriginHelper
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAuthCode
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addNodeId
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addSearchInfo
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildCreatePublicKeyCredentialResponse
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyPublicKeyCredential
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.checkSecurity
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removePasskey
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrieveNodeId
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrievePasskey
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrievePasskeyCreationComponent
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrievePasskeyCreationRequestParameters
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrievePasskeyUsageRequestParameters
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.node.NodeIdUUID
 import com.kunzisoft.keepass.database.helper.SearchHelper
-import com.kunzisoft.keepass.model.EntryInfoPasskey.getPasskey
 import com.kunzisoft.keepass.model.Passkey
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
-import com.kunzisoft.keepass.utils.getParcelableExtraCompat
+import java.io.InvalidObjectException
 import java.util.UUID
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
@@ -115,7 +116,6 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
                         PendingIntentHandler.setCreateCredentialResponse(
                             intent = responseIntent,
                             response = buildCreatePublicKeyCredentialResponse(
-                                packageName = packageName,
                                 publicKeyCredentialCreationParameters = it
                             )
                         )
@@ -141,19 +141,27 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
     override fun onDatabaseRetrieved(database: ContextualDatabase?) {
         super.onDatabaseRetrieved(database)
 
-        // TODO nodeId Really useful ? checkSecurity(intent, nodeId)
-        when (mSpecialMode) {
-            SpecialMode.SELECTION -> {
-                launchSelection(database, mSearchInfo)
+        try {
+            val nodeId = intent.retrieveNodeId()
+            checkSecurity(intent, nodeId)
+            when (mSpecialMode) {
+                SpecialMode.SELECTION -> {
+                    launchSelection(database, nodeId, mSearchInfo)
+                }
+                SpecialMode.REGISTRATION -> {
+                    // TODO Registration in predefined group
+                    // launchRegistration(database, nodeId, mSearchInfo)
+                    launchRegistration(database, null, mSearchInfo)
+                }
+                else -> {
+                    throw InvalidObjectException("Passkey launch mode not supported")
+                }
             }
-            SpecialMode.REGISTRATION -> {
-                launchRegistration(database, mSearchInfo)
-            }
-            else -> {
-                Log.e(TAG, "Passkey launch mode not supported")
-                setResult(Activity.RESULT_CANCELED)
-                finish()
-            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Passkey launch error", e)
+            Toast.makeText(this, e.localizedMessage, Toast.LENGTH_LONG).show()
+            setResult(RESULT_CANCELED)
+            finish()
         }
     }
 
@@ -166,7 +174,7 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
             val passkey = database
                 ?.getEntryById(NodeIdUUID(nodeId))
                 ?.getEntryInfo(database)
-                ?.getPasskey()
+                ?.passkey
                 ?: throw GetCredentialUnknownException("no passkey with nodeId $nodeId found")
 
             val result = Intent()
@@ -183,13 +191,14 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
             finish()
         } ?: run {
             Log.e(TAG, "Unable to auto select passkey, usage parameters are empty")
-            setResult(Activity.RESULT_CANCELED)
+            setResult(RESULT_CANCELED)
             finish()
         }
     }
 
     private fun launchSelection(
         database: ContextualDatabase?,
+        nodeId: UUID?,
         searchInfo: SearchInfo?
     ) {
         Log.d(TAG, "Launch passkey selection")
@@ -197,7 +206,7 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
             // Save the requested parameters
             mUsageParameters = usageParameters
             // Manage the passkey to use
-            intent.retrieveNodeId()?.let { nodeId ->
+            nodeId?.let { nodeId ->
                 autoSelectPasskeyAndSetResult(database, nodeId)
             } ?: run {
                 SearchHelper.checkAutoSearchInfo(
@@ -217,7 +226,7 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
                             database = openedDatabase,
                             activityResultLauncher = mPasskeySelectionActivityResultLauncher,
                             searchInfo = null,
-                            autoSearch = true
+                            autoSearch = false
                         )
                     },
                     onDatabaseClosed = {
@@ -235,105 +244,102 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
 
     private fun autoRegisterPasskeyAndSetResult(
         database: ContextualDatabase?,
-        nodeId: UUID
+        nodeId: UUID,
+        passkey: Passkey
     ) {
-        // TODO Overwrite automatic selection
+        // TODO Overwrite and Register in a predefined group
         mCreationParameters?.let { creationParameters ->
             // To set the passkey to the database
             setResult(RESULT_OK)
             finish()
         } ?: run {
             Log.e(TAG, "Unable to auto select passkey, usage parameters are empty")
-            setResult(Activity.RESULT_CANCELED)
+            setResult(RESULT_CANCELED)
             finish()
         }
     }
 
     private fun launchRegistration(
         database: ContextualDatabase?,
+        nodeId: UUID?,
         searchInfo: SearchInfo
     ) {
         Log.d(TAG, "Launch passkey registration")
-        PendingIntentHandler.retrieveProviderCreateCredentialRequest(intent)?.callingAppInfo?.let { callingAppInfo ->
-            retrievePasskeyCreationRequestParameters(
-                creationOptions = intent.retrievePasskeyCreationComponent(),
-                webOrigin = OriginHelper.getWebOrigin(callingAppInfo, assets),
-                apkSigningCertificate =
-                    callingAppInfo
-                        .signingInfo.apkContentsSigners
-                        .getOrNull(0)?.toByteArray(),
-                passkeyCreated = { passkey, publicKeyCredentialParameters ->
-                    // Save the requested parameters
-                    mPasskey = passkey
-                    mCreationParameters = publicKeyCredentialParameters
-                    // Manage the passkey and create a register info
-                    val registerInfo = RegisterInfo(
+        retrievePasskeyCreationRequestParameters(
+            intent = intent,
+            assetManager = assets,
+            packageName = packageName,
+            passkeyCreated = { passkey, publicKeyCredentialParameters ->
+                // Save the requested parameters
+                mPasskey = passkey
+                mCreationParameters = publicKeyCredentialParameters
+                // Manage the passkey and create a register info
+                val registerInfo = RegisterInfo(
+                    searchInfo = searchInfo,
+                    username = null,
+                    passkey = passkey
+                )
+                // If nodeId already provided
+                nodeId?.let { nodeId ->
+                    autoRegisterPasskeyAndSetResult(database, nodeId, passkey)
+                } ?: run {
+                    SearchHelper.checkAutoSearchInfo(
+                        context = this,
+                        database = database,
                         searchInfo = searchInfo,
-                        username = null,
-                        passkey = passkey
+                        onItemsFound = { openedDatabase, _ ->
+                            Log.w(TAG, "Passkey found for registration, " +
+                                    "but launch manual registration for a new entry")
+                            GroupActivity.launchForRegistration(
+                                context = this,
+                                activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
+                                database = openedDatabase,
+                                registerInfo = registerInfo,
+                                typeMode = TypeMode.PASSKEY
+                            )
+                        },
+                        onItemNotFound = { openedDatabase ->
+                            Log.d(TAG, "Launch new manual registration in opened database")
+                            GroupActivity.launchForRegistration(
+                                context = this,
+                                activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
+                                database = openedDatabase,
+                                registerInfo = registerInfo,
+                                typeMode = TypeMode.PASSKEY
+                            )
+                        },
+                        onDatabaseClosed = {
+                            Log.d(TAG, "Manual passkey registration in closed database")
+                            FileDatabaseSelectActivity.launchForRegistration(
+                                context = this,
+                                activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
+                                registerInfo = registerInfo,
+                                typeMode = TypeMode.PASSKEY
+                            )
+                        }
                     )
-                    // If nodeId already provided
-                    intent.retrieveNodeId()?.let { nodeId ->
-                        autoRegisterPasskeyAndSetResult(database, nodeId)
-                    } ?: run {
-                        SearchHelper.checkAutoSearchInfo(
-                            context = this,
-                            database = database,
-                            searchInfo = searchInfo,
-                            onItemsFound = { openedDatabase, _ ->
-                                Log.w(TAG, "Passkey found for registration, " +
-                                        "but launch manual registration for a new entry")
-                                GroupActivity.launchForRegistration(
-                                    context = this,
-                                    activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
-                                    database = openedDatabase,
-                                    registerInfo = registerInfo,
-                                    typeMode = TypeMode.PASSKEY
-                                )
-                            },
-                            onItemNotFound = { openedDatabase ->
-                                Log.d(TAG, "Launch new manual registration in opened database")
-                                GroupActivity.launchForRegistration(
-                                    context = this,
-                                    activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
-                                    database = openedDatabase,
-                                    registerInfo = registerInfo,
-                                    typeMode = TypeMode.PASSKEY
-                                )
-                            },
-                            onDatabaseClosed = {
-                                Log.d(TAG, "Manual passkey registration in closed database")
-                                FileDatabaseSelectActivity.launchForRegistration(
-                                    context = this,
-                                    activityResultLauncher = mPasskeyRegistrationActivityResultLauncher,
-                                    registerInfo = registerInfo,
-                                    typeMode = TypeMode.PASSKEY
-                                )
-                            }
-                        )
-                    }
                 }
-            )
-        }
+            }
+        )
     }
 
     companion object {
         private val TAG = PasskeyLauncherActivity::class.java.name
-        private const val EXTRA_SEARCH_INFO = "com.kunzisoft.keepass.extra.SEARCH_INFO"
 
-        fun Intent.retrieveSearchInfo(): SearchInfo? {
-            return this.getParcelableExtraCompat(EXTRA_SEARCH_INFO)
-        }
-
-        fun Intent.removeSearchInfo() {
-            return this.removeExtra(EXTRA_SEARCH_INFO)
-        }
-
+        /**
+         * Get a pending intent to launch the passkey launcher activity
+         * [nodeId] can be :
+         *  - null if manual selection is requested
+         *  - null if manual registration is requested
+         *  - an entry node id if direct selection is requested
+         *  - a group node id if direct registration is requested in a default group
+         *  - an entry node id if overwriting is requested in an existing entry
+         */
         fun getPendingIntent(
             context: Context,
             specialMode: SpecialMode,
             searchInfo: SearchInfo? = null,
-            passkeyEntryNodeId: UUID? = null
+            nodeId: UUID? = null
         ): PendingIntent? {
             return PendingIntent.getActivity(
                 context,
@@ -341,10 +347,9 @@ class PasskeyLauncherActivity : DatabaseModeActivity() {
                 Intent(context, PasskeyLauncherActivity::class.java).apply {
                     addSpecialMode(specialMode)
                     addTypeMode(TypeMode.PASSKEY)
-                    searchInfo?.let {
-                        putExtra(EXTRA_SEARCH_INFO, searchInfo)
-                    }
-                    addAuthCode(passkeyEntryNodeId)
+                    addSearchInfo(searchInfo)
+                    addNodeId(nodeId)
+                    addAuthCode(nodeId)
                 },
                 PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )

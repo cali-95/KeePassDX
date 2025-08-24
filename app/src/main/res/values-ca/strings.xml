@@ -613,7 +613,6 @@
     <string name="configure">Configura</string>
     <string name="biometric_security_update_required">Cal actualitzar la seguretat biomètrica.</string>
     <string name="unlock_and_link_biometric">Enllaç de desbloqueig del dispositiu</string>
-    <string name="advanced_unlock_scanning_error">Error en desbloquejar el dispositiu: %1$s</string>
     <string name="unavailable">No disponible</string>
     <string name="advanced_unlock_prompt_not_initialized">No s\'ha pogut inicialitzar l\'indicador de desbloqueig del dispositiu.</string>
     <string name="credential_before_click_advanced_unlock_button">Escriviu la contrasenya i, a continuació, feu clic en aquest botó.</string>
@@ -660,7 +659,7 @@
     <string name="education_unlock_title">Desbloqueja la base de dades</string>
     <string name="education_setup_OTP_summary">Configureu la gestió de contrasenyes d\'un sol ús (HOTP / TOTP) per generar un testimoni sol·licitat per a l\'autenticació de dos factors (2FA).</string>
     <string name="education_field_copy_title">Copia un camp</string>
-    <string name="html_text_donation">Al &lt;strong&gt;contribuir&lt;/strong&gt; al projecte <i>(monetàriament, codi, traducció)</i>, l\'ajudareu a continuar vivint i prosperant, i també podreu optar al procediment de desbloqueig del &lt;strong&gt;tema&lt;/strong&gt;.</string>
+    <string name="html_text_donation">Al &lt;strong&gt;contribuir&lt;/strong&gt; al projecte &lt;i&gt;(monetàriament, codi, traducció)&lt;/i&gt;, l\'ajudareu a continuar vivint i prosperant, i també podreu optar al procediment de desbloqueig del &lt;strong&gt;tema&lt;/strong&gt;.</string>
     <string name="upload_attachment">Puja %1$s</string>
     <string name="download_finalization">S\'està finalitzant…</string>
     <string name="entropy">Entropia: %1$s bit</string>
