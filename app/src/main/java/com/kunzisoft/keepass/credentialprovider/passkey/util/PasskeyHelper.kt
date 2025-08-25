@@ -224,12 +224,7 @@ object PasskeyHelper {
         return key
     }
 
-    private fun String.decodeHexToByteArray(): ByteArray {
-        if (length % 2 != 0) {
-            throw IllegalArgumentException("Must have an even length")
-        }
-        return chunked(2).map { it.toInt(16).toByte() }.toByteArray()
-    }
+
 
     fun ProviderCreateCredentialRequest.retrievePasskeyCreationComponent(): PublicKeyCredentialCreationOptions {
         val request = this
@@ -368,7 +363,8 @@ object PasskeyHelper {
                         type = ClientDataNotDefinedResponse.Type.GET,
                         challenge = requestOptions.challenge,
                         origin = originManager.origin,
-                        packageName = callingAppInfo.packageName
+                        packageName = callingAppInfo.packageName,
+                        crossOrigin = false // TODO should always be false?
                     )
                 }
             )
@@ -385,8 +381,8 @@ object PasskeyHelper {
                 requestOptions = usageParameters.publicKeyCredentialRequestOptions,
                 userPresent = true,
                 userVerified = true,
-                backupEligibility = true,
-                backupState = true,
+                backupEligibility = false, // TODO should always be false?
+                backupState = false, // TODO should always be false?
                 userHandle = passkey.userHandle,
                 privateKey = passkey.privateKeyPem,
                 clientDataResponse = usageParameters.clientDataResponse

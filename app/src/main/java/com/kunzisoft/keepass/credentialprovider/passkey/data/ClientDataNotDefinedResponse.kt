@@ -41,12 +41,16 @@ open class ClientDataNotDefinedResponse(
         crossOrigin?.let {
             clientJson.put("crossOrigin", it)
         }
+        /*
         topOrigin?.let {
             clientJson.put("topOrigin", it)
         }
+
         packageName?.let {
+
             clientJson.put("androidPackageName", packageName)
         }
+         */
     }
 
     override fun json(): JSONObject {

@@ -23,7 +23,9 @@ import android.content.res.AssetManager
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
+import androidx.credentials.exceptions.GetCredentialUnknownException
 import androidx.credentials.provider.CallingAppInfo
+import com.kunzisoft.encrypt.HashManager
 
 @RequiresApi(Build.VERSION_CODES.P)
 class OriginManager(
@@ -32,6 +34,8 @@ class OriginManager(
     private val relyingParty: String
 ) {
     private val webOrigin: String?
+
+    private val appOrigin: String
     private val apkSigningCertificate: ByteArray? = callingAppInfo?.signingInfo?.apkContentsSigners
         ?.getOrNull(0)?.toByteArray()
 
@@ -41,23 +45,29 @@ class OriginManager(
         }
         // for trusted browsers like Chrome and Firefox
         webOrigin = callingAppInfo?.getOrigin(privilegedAllowlist)?.removeSuffix("/")
+
+        appOrigin = "android:apk-key-hash:" + Base64Helper.b64Encode(HashManager.hashSha256(apkSigningCertificate))
     }
 
     // TODO isPrivileged app
     fun checkPrivilegedApp(
         clientDataHash: ByteArray?
     ) {
-        val isPrivilegedApp = webOrigin != null
-                && webOrigin == relyingParty && clientDataHash != null
+        val isPrivilegedApp = webOrigin != null && clientDataHash != null
         Log.d(TAG, "isPrivilegedApp = $isPrivilegedApp")
         if (!isPrivilegedApp) {
-            AppRelyingPartyRelation.isRelationValid(relyingParty, apkSigningCertificate)
+            val isValid = AppRelyingPartyRelation.isRelationValid(relyingParty, apkSigningCertificate)
+            if (isValid.not()) {
+                Log.e(TAG, "Relation between $relyingParty and the calling app is invalid")
+                //throw GetCredentialUnknownException("Relation between $relyingParty and the calling app is invalid") // TODO enable
+            }
         }
     }
 
+
     val origin: String
         get() {
-            return webOrigin ?: relyingParty
+            return webOrigin ?: appOrigin
         }
 
     companion object {

@@ -152,7 +152,9 @@ dependencies {
 
     // Credentials Provider
     implementation "androidx.credentials:credentials:1.2.2"
-    
+
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
     // Modules import
     implementation project(path: ':database')
     implementation project(path: ':icon-pack')
