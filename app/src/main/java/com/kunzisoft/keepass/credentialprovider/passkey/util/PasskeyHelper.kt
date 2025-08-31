@@ -255,11 +255,10 @@ object PasskeyHelper {
         packageName: String?,
         passkeyCreated: (Passkey, PublicKeyCredentialCreationParameters) -> Unit
     ) {
-        val getCredentialRequest = PendingIntentHandler.retrieveProviderGetCredentialRequest(intent)
-        val callingAppInfo = getCredentialRequest?.callingAppInfo
         val createCredentialRequest = PendingIntentHandler.retrieveProviderCreateCredentialRequest(intent)
         if (createCredentialRequest == null)
             throw CreateCredentialUnknownException("could not retrieve request from intent")
+        val callingAppInfo = createCredentialRequest.callingAppInfo
         val creationOptions = createCredentialRequest.retrievePasskeyCreationComponent()
 
         val relyingParty = creationOptions.relyingPartyEntity.id
@@ -322,15 +321,14 @@ object PasskeyHelper {
                 ) ?: mapOf<Int, Any>()),
                 userPresent = true,
                 userVerified = true,
-                backupEligibility = true,
-                backupState = true,
+                backupEligibility = true, // TODO
+                backupState = true, // TODO
                 publicKeyTypeId = keyTypeId,
                 publicKeyCbor = Signature.convertPublicKey(keyPair.public, keyTypeId)!!,
                 clientDataResponse = publicKeyCredentialCreationParameters.clientDataResponse
             ),
             authenticatorAttachment = "platform"
         ).json()
-        // log only the length to prevent logging sensitive information
         Log.d(javaClass.simpleName, "Json response for key creation")
         return CreatePublicKeyCredentialResponse(responseJson)
     }
@@ -381,8 +379,8 @@ object PasskeyHelper {
                 requestOptions = usageParameters.publicKeyCredentialRequestOptions,
                 userPresent = true,
                 userVerified = true,
-                backupEligibility = false, // TODO should always be false?
-                backupState = false, // TODO should always be false?
+                backupEligibility = true, // TODO should always be false?
+                backupState = true, // TODO should always be false?
                 userHandle = passkey.userHandle,
                 privateKey = passkey.privateKeyPem,
                 clientDataResponse = usageParameters.clientDataResponse

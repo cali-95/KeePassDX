@@ -29,7 +29,7 @@ class KeePassDXRandom {
 
         fun generateCredentialId(): ByteArray {
             // see https://w3c.github.io/webauthn/#credential-id
-            val size = 16
+            val size = 32
             val credentialId = ByteArray(size)
             internalSecureRandom.nextBytes(credentialId)
             return credentialId

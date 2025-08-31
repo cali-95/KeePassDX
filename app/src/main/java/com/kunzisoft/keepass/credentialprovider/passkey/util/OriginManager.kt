@@ -47,6 +47,10 @@ class OriginManager(
         webOrigin = callingAppInfo?.getOrigin(privilegedAllowlist)?.removeSuffix("/")
 
         appOrigin = "android:apk-key-hash:" + Base64Helper.b64Encode(HashManager.hashSha256(apkSigningCertificate))
+
+        if (webOrigin == null && apkSigningCertificate == null) {
+            Log.w(TAG, "no webOrigin and no apkSigningCertificate for relyingParty $relyingParty")
+        }
     }
 
     // TODO isPrivileged app
@@ -59,7 +63,7 @@ class OriginManager(
             val isValid = AppRelyingPartyRelation.isRelationValid(relyingParty, apkSigningCertificate)
             if (isValid.not()) {
                 Log.e(TAG, "Relation between $relyingParty and the calling app is invalid")
-                //throw GetCredentialUnknownException("Relation between $relyingParty and the calling app is invalid") // TODO enable
+                throw GetCredentialUnknownException("Relation between $relyingParty and the calling app is invalid")
             }
         }
     }
