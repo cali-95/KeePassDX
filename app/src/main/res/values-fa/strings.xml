@@ -235,7 +235,7 @@
     <string name="edit_entry">ویرایش ورودی</string>
     <string name="add_entry">افزودن ورودی</string>
     <string name="accept">قبول</string>
-    <string name="about_description">پیاده سازی آندروید از مدیر رمز عبور KeePass</string>
+    <string name="about_description">نسخه اندروید مدیریت رمز عبور KeePass.</string>
     <string name="homepage">صفحه اصلی</string>
     <string name="feedback">بازخورد</string>
     <string name="contribution">سهم</string>
@@ -317,4 +317,5 @@
     <string name="template_group_name">الگو ها</string>
     <string name="content_description_otp_information">اطلاعات رمز یکبار مصرف</string>
     <string name="content_description_credentials_information">اطلاعات اعتبار نامه</string>
+    <string name="info">اطلاعات</string>
 </resources>
