@@ -27,6 +27,8 @@ import android.os.Parcelable
  */
 class SearchParameters() : Parcelable{
     var searchQuery: String = ""
+    // Add an optional string to search with the main search query
+    var searchOption: String? = null
     var allowEmptyQuery = true
     var caseSensitive = false
     var isRegex = false

@@ -94,6 +94,7 @@ object SearchHelper {
             callback.invoke(
                 SearchParameters().apply {
                     searchQuery = query
+                    searchOption = optionString()
                     allowEmptyQuery = false
                     searchInTitles = false
                     searchInUsernames = false

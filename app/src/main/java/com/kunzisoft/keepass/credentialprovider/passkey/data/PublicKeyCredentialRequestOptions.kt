@@ -23,9 +23,32 @@ import com.kunzisoft.encrypt.Base64Helper
 import org.json.JSONObject
 
 class PublicKeyCredentialRequestOptions(requestJson: String) {
-    val json: JSONObject = JSONObject(requestJson)
+    private val json: JSONObject = JSONObject(requestJson)
     val challenge: ByteArray = Base64Helper.b64Decode(json.getString("challenge"))
     val timeout: Long = json.optLong("timeout", 0)
     val rpId: String = json.optString("rpId", "")
+    val allowCredentials: List<PublicKeyCredentialDescriptor>
     val userVerification: String = json.optString("userVerification", "preferred")
+
+    init {
+        val allowCredentialsJson = json.getJSONArray("allowCredentials")
+        val allowCredentialsTmp: MutableList<PublicKeyCredentialDescriptor> = mutableListOf()
+        for (i in 0 until allowCredentialsJson.length()) {
+            val allowCredentialJson = allowCredentialsJson.getJSONObject(i)
+
+            val transports: MutableList<String> = mutableListOf()
+            val transportsJson = allowCredentialJson.getJSONArray("transports")
+            for (j in 0 until transportsJson.length()) {
+                transports.add(transportsJson.getString(j))
+            }
+            allowCredentialsTmp.add(
+                PublicKeyCredentialDescriptor(
+                    type = allowCredentialJson.getString("type"),
+                    id = Base64Helper.b64Decode(allowCredentialJson.getString("id")),
+                    transports = transports
+                )
+            )
+        }
+        allowCredentials = allowCredentialsTmp.toList()
+    }
 }

@@ -29,6 +29,7 @@ import com.kunzisoft.keepass.model.AppOriginEntryField.isAppIdSignature
 import com.kunzisoft.keepass.model.AppOriginEntryField.isWebDomain
 import com.kunzisoft.keepass.model.PasskeyEntryFields.isPasskey
 import com.kunzisoft.keepass.model.PasskeyEntryFields.isRelyingParty
+import com.kunzisoft.keepass.model.PasskeyEntryFields.isCredentialId
 import com.kunzisoft.keepass.otp.OtpEntryFields.isOTP
 import com.kunzisoft.keepass.otp.OtpEntryFields.isOTPURIField
 import com.kunzisoft.keepass.utils.UUIDUtils.asHexString
@@ -176,11 +177,33 @@ class SearchHelper {
                 }
             }
             if (searchParameters.searchInRelyingParty) {
-                if(entry.getExtraFields().any { field ->
+                val relyingParty = searchParameters.searchQuery
+                val credentialId = searchParameters.searchOption
+                val containsRelyingParty = entry.getExtraFields().any { field ->
                         field.isRelyingParty()
-                        && checkSearchQuery(field.protectedValue.stringValue, searchParameters)
-                    })
-                    return true
+                                && checkSearchQuery(
+                                    stringToCheck = field.protectedValue.stringValue,
+                                    searchParameters = SearchParameters().apply {
+                                        searchQuery = relyingParty
+                                        searchInRelyingParty = true
+                                        caseSensitive = false
+                                        isRegex = false
+                                    }
+                                )
+                    }
+                val containsCredentialId =  if(credentialId == null) true
+                else entry.getExtraFields().any { field ->
+                       field.isCredentialId()
+                                && checkSearchQuery(
+                                    stringToCheck =  field.protectedValue.stringValue,
+                                    searchParameters = SearchParameters().apply {
+                                        searchQuery = credentialId
+                                        caseSensitive = false
+                                        isRegex = false
+                                    }
+                                )
+                    }
+                return containsRelyingParty && containsCredentialId
             }
             if (searchParameters.searchInNotes) {
                 if (checkSearchQuery(entry.notes, searchParameters))

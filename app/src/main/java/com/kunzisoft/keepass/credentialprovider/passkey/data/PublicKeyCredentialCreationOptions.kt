@@ -42,11 +42,10 @@ class PublicKeyCredentialCreationOptions(
         val rpJson = json.getJSONObject("rp")
         relyingPartyEntity = PublicKeyCredentialRpEntity(rpJson.getString("name"), rpJson.getString("id"))
         val rpUser = json.getJSONObject("user")
-        val userId = Base64Helper.b64Decode(rpUser.getString("id"))
         userEntity =
             PublicKeyCredentialUserEntity(
                 rpUser.getString("name"),
-                userId,
+                Base64Helper.b64Decode(rpUser.getString("id")),
                 rpUser.getString("displayName")
             )
         challenge = Base64Helper.b64Decode(json.getString("challenge"))
