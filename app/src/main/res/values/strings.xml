@@ -775,4 +775,5 @@
     <string name="passkey_backup_eligibility">Passkey Backup Eligibility</string>
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
+    <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialId %2$s</string>
 </resources>

@@ -112,10 +112,7 @@ class PasskeyProviderService : CredentialProviderService() {
             }
         } catch (e: Exception) {
             Log.e(javaClass.simpleName, "onBeginGetCredentialRequest error", e)
-            when (e) {
-                is IOException -> toastError(e)
-                else -> {}
-            }
+            toastError(e)
             callback.onError(GetCredentialUnknownException())
         }
     }
@@ -184,26 +181,36 @@ class PasskeyProviderService : CredentialProviderService() {
             },
             onItemNotFound = { _ ->
                 Log.w(TAG, "No passkey found in the database with this relying party : $relyingPartyId")
-                Log.d(TAG, "Add pending intent for passkey selection in opened database")
-                PasskeyLauncherActivity.getPendingIntent(
-                    context = applicationContext,
-                    specialMode = SpecialMode.SELECTION,
-                    searchInfo = searchInfo
-                )?.let { pendingIntent ->
-                    passkeyEntries.add(
-                        PublicKeyCredentialEntry(
-                            context = applicationContext,
-                            username = getString(R.string.passkey_database_username),
-                            displayName = getString(R.string.passkey_selection_description),
-                            icon = defaultIcon,
-                            pendingIntent = pendingIntent,
-                            beginGetPublicKeyCredentialOption = option,
-                            lastUsedTime = Instant.now(),
-                            isAutoSelectAllowed = isAutoSelectAllowed
+                if (credentialId == null) {
+                    Log.d(TAG, "Add pending intent for passkey selection in opened database")
+                    PasskeyLauncherActivity.getPendingIntent(
+                        context = applicationContext,
+                        specialMode = SpecialMode.SELECTION,
+                        searchInfo = searchInfo
+                    )?.let { pendingIntent ->
+                        passkeyEntries.add(
+                            PublicKeyCredentialEntry(
+                                context = applicationContext,
+                                username = getString(R.string.passkey_database_username),
+                                displayName = getString(R.string.passkey_selection_description),
+                                icon = defaultIcon,
+                                pendingIntent = pendingIntent,
+                                beginGetPublicKeyCredentialOption = option,
+                                lastUsedTime = Instant.now(),
+                                isAutoSelectAllowed = isAutoSelectAllowed
+                            )
+                        )
+                    }
+                    callback(passkeyEntries)
+                } else {
+                    throw IOException(
+                        getString(
+                            R.string.error_passkey_credential_id,
+                            relyingPartyId,
+                            credentialId
                         )
                     )
                 }
-                callback(passkeyEntries)
             },
             onDatabaseClosed = {
                 Log.d(TAG, "Add pending intent for passkey selection in closed database")

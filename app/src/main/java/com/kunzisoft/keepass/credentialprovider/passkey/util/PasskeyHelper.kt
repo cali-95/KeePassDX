@@ -22,6 +22,7 @@ package com.kunzisoft.keepass.credentialprovider.passkey.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Build
 import android.os.Bundle
 import android.security.keystore.KeyGenParameterSpec
@@ -198,6 +199,28 @@ object PasskeyHelper {
             ).show()
             setResult(Activity.RESULT_CANCELED)
         }
+    }
+
+    /**
+     * Build the Passkey error response
+     */
+    fun Activity.buildPasskeyErrorAndSetResult(
+        resources: Resources,
+        relyingPartyId: String?,
+        credentialId: String?
+    ) {
+        val error = resources.getString(
+            R.string.error_passkey_credential_id,
+            relyingPartyId,
+            credentialId
+        )
+        Log.e(javaClass.name, error)
+        Toast.makeText(
+            this,
+            error,
+            Toast.LENGTH_SHORT
+        ).show()
+        setResult(Activity.RESULT_CANCELED)
     }
 
     /**
