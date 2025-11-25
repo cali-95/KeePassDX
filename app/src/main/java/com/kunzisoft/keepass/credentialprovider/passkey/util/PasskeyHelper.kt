@@ -60,6 +60,7 @@ import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredential
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialCreationParameters
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialRequestOptions
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialUsageParameters
+import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PrivilegedAllowLists.getOriginFromPrivilegedAllowLists
 import com.kunzisoft.keepass.model.AndroidOrigin
 import com.kunzisoft.keepass.model.AppOrigin
@@ -67,7 +68,9 @@ import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.model.Passkey
 import com.kunzisoft.keepass.utils.AppUtil
 import com.kunzisoft.keepass.utils.StringUtil.toHexString
+import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.getParcelableExtraCompat
+import com.kunzisoft.keepass.utils.putEnumExtra
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -95,7 +98,8 @@ object PasskeyHelper {
     private const val EXTRA_APP_ORIGIN = "com.kunzisoft.keepass.extra.appOrigin"
     private const val EXTRA_TIMESTAMP = "com.kunzisoft.keepass.extra.timestamp"
     private const val EXTRA_AUTHENTICATION_CODE = "com.kunzisoft.keepass.extra.authenticationCode"
-    private const val EXTRA_UV_REQUIRED = "com.kunzisoft.keepass.extra.userVerification"
+    private const val EXTRA_USER_VERIFICATION = "com.kunzisoft.keepass.extra.userVerification"
+    private const val EXTRA_USER_VERIFIED_WITH_AUTH = "com.kunzisoft.keepass.extra.userVerifiedWithAuth"
 
     private const val SEPARATOR = "_"
 
@@ -113,25 +117,45 @@ object PasskeyHelper {
     private val internalSecureRandom: SecureRandom = SecureRandom()
 
     /**
-     * Add the user verification to the intent
+     * Add the User Verification to the intent
      */
-    fun Intent.addUserVerificationRequired(userVerification: Boolean) {
-        putExtra(EXTRA_UV_REQUIRED, userVerification)
+    fun Intent.addUserVerification(
+        userVerification: UserVerificationRequirement,
+        userVerifiedWithAuth: Boolean
+    ) {
+        putEnumExtra(EXTRA_USER_VERIFICATION, userVerification)
+        putExtra(EXTRA_USER_VERIFIED_WITH_AUTH, userVerifiedWithAuth)
     }
 
     /**
-     * Check if the user verification is required
+     * Get the User Verification from the intent
      */
-    fun Intent.isUserVerificationRequired(): Boolean {
-        return getBooleanExtra(EXTRA_UV_REQUIRED, false)
+    fun Intent.getUserVerificationCondition(): Boolean {
+        return (getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
+            ?: UserVerificationRequirement.PREFERRED) == UserVerificationRequirement.REQUIRED
     }
 
     /**
-     * Remove the user verification from the intent
+     * Define if the User is verified with authentification from the intent
      */
-    fun Intent.removeUserVerificationRequired() {
-        removeExtra(EXTRA_UV_REQUIRED)
+    fun Intent.getUserVerifiedWithAuth(): Boolean {
+        return getBooleanExtra(EXTRA_USER_VERIFIED_WITH_AUTH, true)
     }
+
+    /**
+     * Remove the User Verification from the intent
+     */
+    fun Intent.removeUserVerification() {
+        removeExtra(EXTRA_USER_VERIFICATION)
+    }
+
+    /**
+     * Remove the User verified with auth from the intent
+     */
+    fun Intent.removeUserVerifiedWithAuth() {
+        removeExtra(EXTRA_USER_VERIFIED_WITH_AUTH)
+    }
+
 
     /**
      * Allowed authenticators for the User Verification
@@ -622,6 +646,7 @@ object PasskeyHelper {
         requestOptions: PublicKeyCredentialRequestOptions,
         clientDataResponse: ClientDataResponse,
         passkey: Passkey,
+        userVerified: Boolean,
         defaultBackupEligibility: Boolean,
         defaultBackupState: Boolean
     ): PublicKeyCredential {
@@ -630,7 +655,7 @@ object PasskeyHelper {
             response = AuthenticatorAssertionResponse(
                 requestOptions = requestOptions,
                 userPresent = true,
-                userVerified = true,
+                userVerified = userVerified,
                 backupEligibility = passkey.backupEligibility ?: defaultBackupEligibility,
                 backupState = passkey.backupState ?: defaultBackupState,
                 userHandle = passkey.userHandle,

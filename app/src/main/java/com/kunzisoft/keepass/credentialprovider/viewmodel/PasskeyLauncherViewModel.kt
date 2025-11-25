@@ -24,8 +24,8 @@ import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredential
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildCreatePublicKeyCredentialResponse
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyPublicKeyCredential
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.checkSecurity
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getUserVerificationCondition
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getVerifiedGETClientDataResponse
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.isUserVerificationRequired
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removeAppOrigin
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removePasskey
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrieveAppOrigin
@@ -65,14 +65,16 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
     private var mPasskey: Passkey? = null
 
     private var mLockDatabaseAfterSelection: Boolean = false
+    private var mUserVerified: Boolean = true
     private var mBackupEligibility: Boolean = true
     private var mBackupState: Boolean = false
 
     private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
     val uiState: StateFlow<UIState> = mUiState
 
-    fun initialize() {
+    fun initialize(userVerified: Boolean) {
         mLockDatabaseAfterSelection = PreferencesUtil.isPasskeyCloseDatabaseEnable(getApplication())
+        mUserVerified = userVerified
         mBackupEligibility = PreferencesUtil.isPasskeyBackupEligibilityEnable(getApplication())
         mBackupState = PreferencesUtil.isPasskeyBackupStateEnable(getApplication())
     }
@@ -151,9 +153,11 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
     }
 
     fun launchAction(
+        userVerified: Boolean,
         intent: Intent,
         specialMode: SpecialMode,
     ) {
+        this.mUserVerified = userVerified
         super.launchActionIfNeeded(intent, specialMode, mDatabase)
     }
 
@@ -162,7 +166,7 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
         specialMode: SpecialMode,
         database: ContextualDatabase?
     ) {
-        if (intent.isUserVerificationRequired()) {
+        if (intent.getUserVerificationCondition()) {
             if (database != null) {
                 onDatabaseRetrieved(database)
             }
@@ -321,6 +325,7 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
                                     appOrigin = appOrigin
                                 ),
                                 passkey = passkey,
+                                userVerified = mUserVerified,
                                 defaultBackupEligibility = mBackupEligibility,
                                 defaultBackupState = mBackupState
                             )
@@ -377,6 +382,7 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
                                             appOrigin = appOrigin
                                         ),
                                         passkey = passkey,
+                                        userVerified = mUserVerified,
                                         defaultBackupEligibility = mBackupEligibility,
                                         defaultBackupState = mBackupState
                                     )

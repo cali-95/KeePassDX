@@ -157,9 +157,9 @@ class PasskeyProviderService : CredentialProviderService() {
         val credentialIdList = publicKeyCredentialRequestOptions.allowCredentials
             .map { b64Encode(it.id) }
         val searchInfo = buildPasskeySearchInfo(relyingPartyId, credentialIdList)
-        val userVerificationRequired = publicKeyCredentialRequestOptions
-            .userVerification == UserVerificationRequirement.REQUIRED
-        Log.d(TAG, "Build passkey search for UV $userVerificationRequired, " +
+        //val userVerification = publicKeyCredentialRequestOptions.userVerification
+        val userVerification = UserVerificationRequirement.REQUIRED
+        Log.d(TAG, "Build passkey search for UV $userVerification, " +
                 "RP $relyingPartyId and Credential IDs $credentialIdList")
         SearchHelper.checkAutoSearchInfo(
             context = this,
@@ -170,7 +170,7 @@ class PasskeyProviderService : CredentialProviderService() {
                     passkeyEntries = passkeyEntries,
                     searchInfo = searchInfo,
                     option = option,
-                    userVerificationRequired = userVerificationRequired
+                    userVerification = userVerification
                 ) {
                     Log.d(TAG, "Add pending intent for passkey selection with found items")
                     for (passkeyEntry in items) {
@@ -179,7 +179,8 @@ class PasskeyProviderService : CredentialProviderService() {
                             specialMode = SpecialMode.SELECTION,
                             nodeId = passkeyEntry.id,
                             appOrigin = passkeyEntry.appOrigin,
-                            userVerificationRequired = userVerificationRequired
+                            userVerification = userVerification,
+                            userVerifiedWithAuth = false
                         )?.let { usagePendingIntent ->
                             val passkey = passkeyEntry.passkey
                             passkeyEntries.add(
@@ -208,7 +209,7 @@ class PasskeyProviderService : CredentialProviderService() {
                     passkeyEntries = passkeyEntries,
                     searchInfo = searchInfo,
                     option = option,
-                    userVerificationRequired = userVerificationRequired
+                    userVerification = userVerification,
                 ) {
                     Log.w(TAG, "No passkey found in the database with this relying party : $relyingPartyId")
                     if (credentialIdList.isEmpty()) {
@@ -217,7 +218,8 @@ class PasskeyProviderService : CredentialProviderService() {
                             context = applicationContext,
                             specialMode = SpecialMode.SELECTION,
                             searchInfo = searchInfo,
-                            userVerificationRequired = userVerificationRequired
+                            userVerification = userVerification,
+                            userVerifiedWithAuth = false
                         )?.let { pendingIntent ->
                             passkeyEntries.add(
                                 PublicKeyCredentialEntry(
@@ -250,7 +252,8 @@ class PasskeyProviderService : CredentialProviderService() {
                 PasskeyLauncherActivity.getPendingIntent(
                     context = applicationContext,
                     specialMode = SpecialMode.SELECTION,
-                    searchInfo = searchInfo
+                    searchInfo = searchInfo,
+                    userVerifiedWithAuth = true
                 )?.let { pendingIntent ->
                     passkeyEntries.add(
                         PublicKeyCredentialEntry(
@@ -277,15 +280,16 @@ class PasskeyProviderService : CredentialProviderService() {
         passkeyEntries: MutableList<CredentialEntry>,
         searchInfo: SearchInfo,
         option: BeginGetPublicKeyCredentialOption,
-        userVerificationRequired: Boolean,
+        userVerification: UserVerificationRequirement,
         standardAction: () -> Unit
     ) {
-        if (userVerificationRequired && isAuthenticatorsAllowed().not()) {
+        if (userVerification == UserVerificationRequirement.REQUIRED && isAuthenticatorsAllowed().not()) {
             PasskeyLauncherActivity.getPendingIntent(
                 context = applicationContext,
                 specialMode = SpecialMode.SELECTION,
                 searchInfo = searchInfo,
-                userVerificationRequired = true
+                userVerification = userVerification,
+                userVerifiedWithAuth = true
             )?.let { pendingIntent ->
                 passkeyEntries.add(
                     PublicKeyCredentialEntry(

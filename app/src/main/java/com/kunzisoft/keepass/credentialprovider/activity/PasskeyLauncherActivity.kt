@@ -46,13 +46,15 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivity
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
+import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.ALLOWED_AUTHENTICATORS
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAuthCode
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addUserVerificationRequired
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addUserVerification
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getUserVerificationCondition
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getUserVerifiedWithAuth
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.isAuthenticatorsAllowed
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.isUserVerificationRequired
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removeUserVerificationRequired
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removeUserVerification
 import com.kunzisoft.keepass.credentialprovider.viewmodel.CredentialLauncherViewModel
 import com.kunzisoft.keepass.credentialprovider.viewmodel.PasskeyLauncherViewModel
 import com.kunzisoft.keepass.database.ContextualDatabase
@@ -91,16 +93,17 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        if (intent.isUserVerificationRequired()) {
+        val userVerificationCondition = intent.getUserVerificationCondition()
+        if (userVerificationCondition) {
             if (isAuthenticatorsAllowed().not()) {
-                intent.removeUserVerificationRequired()
+                intent.removeUserVerification()
                 sendBroadcast(Intent(LOCK_ACTION))
             }
         }
         // super.onCreate must be after UserVerification to allow database lock
         super.onCreate(savedInstanceState)
         // Biometric must be after super.onCreate
-        if (intent.isUserVerificationRequired()) {
+        if (userVerificationCondition) {
             if (isAuthenticatorsAllowed()) {
                 BiometricPrompt(
                     this, ContextCompat.getMainExecutor(this),
@@ -127,7 +130,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                             result: BiometricPrompt.AuthenticationResult
                         ) {
                             super.onAuthenticationSucceeded(result)
-                            passkeyLauncherViewModel.launchAction(intent, mSpecialMode)
+                            passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
                         }
                         override fun onAuthenticationFailed() {
                             super.onAuthenticationFailed()
@@ -146,7 +149,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
 
         lifecycleScope.launch {
             // Initialize the parameters
-            passkeyLauncherViewModel.initialize()
+            passkeyLauncherViewModel.initialize(userVerified = intent.getUserVerifiedWithAuth())
             // Retrieve the UI
             passkeyLauncherViewModel.uiState.collect { uiState ->
                 when (uiState) {
@@ -340,7 +343,8 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             searchInfo: SearchInfo? = null,
             appOrigin: AppOrigin? = null,
             nodeId: UUID? = null,
-            userVerificationRequired: Boolean = false
+            userVerification: UserVerificationRequirement = UserVerificationRequirement.PREFERRED,
+            userVerifiedWithAuth: Boolean = true
         ): PendingIntent? {
             return PendingIntent.getActivity(
                 context,
@@ -352,7 +356,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                     addAppOrigin(appOrigin)
                     addNodeId(nodeId)
                     addAuthCode(nodeId)
-                    addUserVerificationRequired(userVerificationRequired)
+                    addUserVerification(userVerification, userVerifiedWithAuth)
                 },
                 PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )
