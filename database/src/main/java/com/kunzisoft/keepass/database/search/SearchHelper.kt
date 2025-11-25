@@ -27,9 +27,9 @@ import com.kunzisoft.keepass.database.element.node.NodeId
 import com.kunzisoft.keepass.model.AppOriginEntryField.isAppId
 import com.kunzisoft.keepass.model.AppOriginEntryField.isAppIdSignature
 import com.kunzisoft.keepass.model.AppOriginEntryField.isWebDomain
+import com.kunzisoft.keepass.model.PasskeyEntryFields.isCredentialId
 import com.kunzisoft.keepass.model.PasskeyEntryFields.isPasskey
 import com.kunzisoft.keepass.model.PasskeyEntryFields.isRelyingParty
-import com.kunzisoft.keepass.model.PasskeyEntryFields.isCredentialId
 import com.kunzisoft.keepass.otp.OtpEntryFields.isOTP
 import com.kunzisoft.keepass.otp.OtpEntryFields.isOTPURIField
 import com.kunzisoft.keepass.utils.UUIDUtils.asHexString
@@ -178,7 +178,7 @@ class SearchHelper {
             }
             if (searchParameters.searchInRelyingParty) {
                 val relyingParty = searchParameters.searchQuery
-                val credentialId = searchParameters.searchOption
+                val credentialIds = searchParameters.searchOptions
                 val containsRelyingParty = entry.getExtraFields().any { field ->
                         field.isRelyingParty()
                                 && checkSearchQuery(
@@ -191,17 +191,20 @@ class SearchHelper {
                                     }
                                 )
                     }
-                val containsCredentialId =  if(credentialId == null) true
+                // Check empty to allow any credential if not defined
+                val containsCredentialId =  if(credentialIds.isEmpty()) true
                 else entry.getExtraFields().any { field ->
                        field.isCredentialId()
-                                && checkSearchQuery(
-                                    stringToCheck =  field.protectedValue.stringValue,
-                                    searchParameters = SearchParameters().apply {
-                                        searchQuery = credentialId
-                                        caseSensitive = false
-                                        isRegex = false
-                                    }
-                                )
+                               && credentialIds.any { credentialId ->
+                                   checkSearchQuery(
+                                       stringToCheck =  field.protectedValue.stringValue,
+                                       searchParameters = SearchParameters().apply {
+                                           searchQuery = credentialId
+                                           caseSensitive = false
+                                           isRegex = false
+                                       }
+                                   )
+                               }
                     }
                 return containsRelyingParty && containsCredentialId
             }

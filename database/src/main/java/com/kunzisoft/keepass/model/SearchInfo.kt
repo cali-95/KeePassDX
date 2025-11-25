@@ -35,7 +35,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
             return if (webDomain == null) null else field
         }
     var relyingParty: String? = null
-    var credentialId: String? = null
+    var credentialIds: List<String> = listOf()
     var otpString: String? = null
 
     constructor()
@@ -47,7 +47,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         webDomain = toCopy?.webDomain
         webScheme = toCopy?.webScheme
         relyingParty = toCopy?.relyingParty
-        credentialId = toCopy?.credentialId
+        credentialIds = toCopy?.credentialIds ?: listOf()
         otpString = toCopy?.otpString
     }
 
@@ -63,8 +63,9 @@ class SearchInfo : ObjectNameResource, Parcelable {
         webScheme = if (readScheme.isNullOrEmpty()) null else readScheme
         val readRelyingParty = parcel.readString()
         relyingParty = if (readRelyingParty.isNullOrEmpty()) null else readRelyingParty
-        val readCredentialId = parcel.readString()
-        credentialId = if (readCredentialId.isNullOrEmpty()) null else readCredentialId
+        val readCredentialIdList = mutableListOf<String>()
+        parcel.readStringList(readCredentialIdList)
+        credentialIds = readCredentialIdList.toList()
         val readOtp = parcel.readString()
         otpString = if (readOtp.isNullOrEmpty()) null else readOtp
     }
@@ -80,7 +81,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         parcel.writeString(webDomain ?: "")
         parcel.writeString(webScheme ?: "")
         parcel.writeString(relyingParty ?: "")
-        parcel.writeString(credentialId ?: "")
+        parcel.writeStringList(credentialIds)
         parcel.writeString(otpString ?: "")
     }
 
@@ -99,7 +100,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
                 && webDomain == null
                 && webScheme == null
                 && relyingParty == null
-                && credentialId == null
+                && credentialIds.isEmpty()
                 && otpString == null
     }
 
@@ -133,7 +134,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         if (webDomain != other.webDomain) return false
         if (webScheme != other.webScheme) return false
         if (relyingParty != other.relyingParty) return false
-        if (credentialId != other.credentialId) return false
+        if (credentialIds != other.credentialIds) return false
         if (otpString != other.otpString) return false
 
         return true
@@ -146,7 +147,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         result = 31 * result + (webDomain?.hashCode() ?: 0)
         result = 31 * result + (webScheme?.hashCode() ?: 0)
         result = 31 * result + (relyingParty?.hashCode() ?: 0)
-        result = 31 * result + (credentialId?.hashCode() ?: 0)
+        result = 31 * result + (credentialIds.hashCode())
         result = 31 * result + (otpString?.hashCode() ?: 0)
         return result
     }
@@ -155,8 +156,8 @@ class SearchInfo : ObjectNameResource, Parcelable {
         return otpString ?: webDomain ?: applicationId ?: relyingParty ?: tag ?: ""
     }
 
-    fun optionString(): String? {
-        return if (isPasskeySearch && credentialId != null) credentialId else null
+    fun optionsString(): List<String> {
+        return if (isPasskeySearch && credentialIds.isNotEmpty()) credentialIds else listOf()
     }
 
     fun toRegisterInfo(): RegisterInfo {

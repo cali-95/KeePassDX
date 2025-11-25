@@ -950,14 +950,14 @@ class GroupActivity : DatabaseLockActivity(),
     }
 
     private fun errorIfNeededForPasskeySelection(searchInfo: SearchInfo?) {
-        if (mTypeMode == TypeMode.PASSKEY && searchInfo?.credentialId != null) {
+        if (mTypeMode == TypeMode.PASSKEY && searchInfo?.credentialIds.isNullOrEmpty().not()) {
             removeSearch()
             // Build response with the entry selected
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
                 buildPasskeyErrorAndSetResult(
                     resources = resources,
                     relyingPartyId = searchInfo.relyingParty,
-                    credentialId = searchInfo.credentialId
+                    credentialIds = searchInfo.credentialIds
                 )
             }
             onValidateSpecialMode()

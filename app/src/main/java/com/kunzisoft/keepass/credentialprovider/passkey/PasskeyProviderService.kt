@@ -91,12 +91,13 @@ class PasskeyProviderService : CredentialProviderService() {
         super.onDestroy()
     }
 
-    private fun buildPasskeySearchInfo(relyingParty: String, credentialId: String? = null): SearchInfo {
+    private fun buildPasskeySearchInfo(
+        relyingParty: String,
+        credentialIds: List<String> = listOf()
+    ): SearchInfo {
         return SearchInfo().apply {
-            credentialId?.let {
-                this.credentialId = it
-            }
             this.relyingParty = relyingParty
+            this.credentialIds = credentialIds
         }
     }
 
@@ -145,9 +146,10 @@ class PasskeyProviderService : CredentialProviderService() {
 
         val publicKeyCredentialRequestOptions = PublicKeyCredentialRequestOptions(option.requestJson)
         val relyingPartyId = publicKeyCredentialRequestOptions.rpId
-        val credentialId = publicKeyCredentialRequestOptions.allowCredentials.firstOrNull()?.id?.let { b64Encode(it) }
-        val searchInfo = buildPasskeySearchInfo(relyingPartyId, credentialId)
-        Log.d(TAG, "Build passkey search for relying party $relyingPartyId, credentialId $credentialId")
+        val credentialIdList = publicKeyCredentialRequestOptions.allowCredentials
+            .map { b64Encode(it.id) }
+        val searchInfo = buildPasskeySearchInfo(relyingPartyId, credentialIdList)
+        Log.d(TAG, "Build passkey search for relying party $relyingPartyId, credentialIds $credentialIdList")
         SearchHelper.checkAutoSearchInfo(
             context = this,
             database = mDatabase,
@@ -181,7 +183,7 @@ class PasskeyProviderService : CredentialProviderService() {
             },
             onItemNotFound = { _ ->
                 Log.w(TAG, "No passkey found in the database with this relying party : $relyingPartyId")
-                if (credentialId == null) {
+                if (credentialIdList.isEmpty()) {
                     Log.d(TAG, "Add pending intent for passkey selection in opened database")
                     PasskeyLauncherActivity.getPendingIntent(
                         context = applicationContext,
@@ -207,7 +209,7 @@ class PasskeyProviderService : CredentialProviderService() {
                         getString(
                             R.string.error_passkey_credential_id,
                             relyingPartyId,
-                            credentialId
+                            credentialIdList
                         )
                     )
                 }

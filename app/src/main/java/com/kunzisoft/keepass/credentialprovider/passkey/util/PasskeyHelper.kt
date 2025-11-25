@@ -207,12 +207,12 @@ object PasskeyHelper {
     fun Activity.buildPasskeyErrorAndSetResult(
         resources: Resources,
         relyingPartyId: String?,
-        credentialId: String?
+        credentialIds: List<String>
     ) {
         val error = resources.getString(
             R.string.error_passkey_credential_id,
             relyingPartyId,
-            credentialId
+            credentialIds
         )
         Log.e(javaClass.name, error)
         Toast.makeText(
