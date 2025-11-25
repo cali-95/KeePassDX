@@ -157,8 +157,7 @@ class PasskeyProviderService : CredentialProviderService() {
         val credentialIdList = publicKeyCredentialRequestOptions.allowCredentials
             .map { b64Encode(it.id) }
         val searchInfo = buildPasskeySearchInfo(relyingPartyId, credentialIdList)
-        //val userVerification = publicKeyCredentialRequestOptions.userVerification
-        val userVerification = UserVerificationRequirement.REQUIRED
+        val userVerification = publicKeyCredentialRequestOptions.userVerification
         Log.d(TAG, "Build passkey search for UV $userVerification, " +
                 "RP $relyingPartyId and Credential IDs $credentialIdList")
         SearchHelper.checkAutoSearchInfo(
