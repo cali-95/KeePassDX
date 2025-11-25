@@ -1,3 +1,4 @@
  * Manual change of app language #1884 #1990
+ * Add Passkey User Verification #2283
  * Fix autofill username detection #2276
  * Fix Passkey in passwordless mode #2282

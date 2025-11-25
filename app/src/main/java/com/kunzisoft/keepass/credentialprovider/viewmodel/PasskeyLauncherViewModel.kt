@@ -25,6 +25,7 @@ import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.build
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyPublicKeyCredential
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.checkSecurity
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getVerifiedGETClientDataResponse
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.isUserVerificationRequired
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removeAppOrigin
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removePasskey
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.retrieveAppOrigin
@@ -149,14 +150,27 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
         }
     }
 
+    fun launchAction(
+        intent: Intent,
+        specialMode: SpecialMode,
+    ) {
+        super.launchActionIfNeeded(intent, specialMode, mDatabase)
+    }
+
     override fun launchActionIfNeeded(
         intent: Intent,
         specialMode: SpecialMode,
         database: ContextualDatabase?
     ) {
-        // Launch with database when a nodeId is present
-        if ((database != null && database.loaded) || intent.retrieveNodeId() == null) {
-            super.launchActionIfNeeded(intent, specialMode, database)
+        if (intent.isUserVerificationRequired()) {
+            if (database != null) {
+                onDatabaseRetrieved(database)
+            }
+        } else {
+            // Launch with database when a nodeId is present
+            if ((database != null && database.loaded) || intent.retrieveNodeId() == null) {
+                super.launchActionIfNeeded(intent, specialMode, database)
+            }
         }
     }
 

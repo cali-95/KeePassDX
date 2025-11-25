@@ -767,6 +767,7 @@
     <string name="passkey_selection_description">Select an existing passkey</string>
     <string name="passkey_database_username">KeePassDX Database</string>
     <string name="passkey_locked_database_description">Select to unlock</string>
+    <string name="passkey_relaunch_database_description">Reauthenticate (No Device Auth)</string>
     <string name="passkey_username">Passkey Username</string>
     <string name="passkey_private_key">Passkey Private Key</string>
     <string name="passkey_credential_id">Passkey Credential Id</string>
@@ -776,4 +777,5 @@
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
     <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialIds %2$s</string>
+    <string name="user_verification_required">User verification required</string>
 </resources>
