@@ -708,11 +708,11 @@
     <string name="warning_overwrite_data_title">Перезаписать существующие данные?</string>
     <string name="warning_overwrite_data_description">Будут заменены существующие данные в записи. Если включена история, там могут оказаться старые данные.</string>
     <string name="credential_provider">Поставщик учётных данных</string>
-    <string name="passkeys_explanation_summary">Настройка ключей доступа для быстрого и безопасного входа без ввода пароля</string>
+    <string name="passkeys_explanation_summary">Настройте ключи доступа для быстрого и безопасного входа без ввода пароля</string>
     <string name="passkeys">Ключи доступа</string>
     <string name="passkeys_preference_title">Настройки ключей доступа</string>
-    <string name="passkeys_close_database_title">Закрыть базу</string>
-    <string name="passkeys_close_database_summary">Закрыть базу после выбора ключа доступа</string>
+    <string name="passkeys_close_database_title">Закрывать базу</string>
+    <string name="passkeys_close_database_summary">Закрывать базу после выбора ключа доступа</string>
     <string name="passkeys_privileged_apps_title">Привилегированные приложения</string>
     <string name="passkeys_privileged_apps_summary">Управление пользовательским списком привилегированных приложений</string>
     <string name="passkeys_privileged_apps_explanation">ВНИМАНИЕ: привилегированное приложение действует как шлюз для получения информации о происхождении аутентификации. Убедитесь в его легитимности, чтобы избежать проблем с безопасностью.</string>
