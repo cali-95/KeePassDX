@@ -73,7 +73,6 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSea
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyErrorAndSetResult
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.MainCredential
@@ -726,8 +725,6 @@ class GroupActivity : DatabaseLockActivity(),
             // To get the form filling search as temp search
             val searchInfo: SearchInfo? = intent.retrieveSearchInfo()
             val autoSearch = intent.getBooleanExtra(AUTO_SEARCH_KEY, false)
-            // Directly return an error if credentialId is search because it's not found
-            errorIfNeededForPasskeySelection(searchInfo)
             // Get search query
             if (searchInfo != null && autoSearch) {
                 mAutoSearch = true
@@ -947,21 +944,6 @@ class GroupActivity : DatabaseLockActivity(),
             )
         }
         onValidateSpecialMode()
-    }
-
-    private fun errorIfNeededForPasskeySelection(searchInfo: SearchInfo?) {
-        if (mTypeMode == TypeMode.PASSKEY && searchInfo?.credentialIds.isNullOrEmpty().not()) {
-            removeSearch()
-            // Build response with the entry selected
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                buildPasskeyErrorAndSetResult(
-                    resources = resources,
-                    relyingPartyId = searchInfo.relyingParty,
-                    credentialIds = searchInfo.credentialIds
-                )
-            }
-            onValidateSpecialMode()
-        }
     }
 
     private fun entrySelectedForRegistration(
