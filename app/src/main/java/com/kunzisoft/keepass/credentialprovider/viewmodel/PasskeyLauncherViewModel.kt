@@ -525,6 +525,7 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
                                     intent = responseIntent,
                                     response = buildCreatePublicKeyCredentialResponse(
                                         publicKeyCredentialCreationParameters = it,
+                                        userVerified = mUserVerified,
                                         backupEligibility = passkey?.backupEligibility
                                             ?: mBackupEligibility,
                                         backupState = passkey?.backupState

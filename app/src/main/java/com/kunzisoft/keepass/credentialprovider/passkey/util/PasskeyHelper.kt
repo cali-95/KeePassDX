@@ -557,6 +557,7 @@ object PasskeyHelper {
      */
     fun buildCreatePublicKeyCredentialResponse(
         publicKeyCredentialCreationParameters: PublicKeyCredentialCreationParameters,
+        userVerified: Boolean,
         backupEligibility: Boolean,
         backupState: Boolean
     ): CreatePublicKeyCredentialResponse {
@@ -574,7 +575,7 @@ object PasskeyHelper {
                     keyTypeId = keyTypeId
                 ) ?: mapOf<Int, Any>()),
                 userPresent = true,
-                userVerified = true,
+                userVerified = userVerified,
                 backupEligibility = backupEligibility,
                 backupState = backupState,
                 publicKeyTypeId = keyTypeId,

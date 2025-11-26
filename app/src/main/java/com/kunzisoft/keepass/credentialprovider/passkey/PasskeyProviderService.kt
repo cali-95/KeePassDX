@@ -343,14 +343,17 @@ class PasskeyProviderService : CredentialProviderService() {
 
     private fun MutableList<CreateEntry>.addPendingIntentCreationNewEntry(
         accountName: String,
-        searchInfo: SearchInfo?
+        searchInfo: SearchInfo?,
+        userVerification: UserVerificationRequirement
     ) {
         Log.d(TAG, "Add pending intent for registration in opened database to create new item")
         // TODO add a setting to directly store in a specific group
         PasskeyLauncherActivity.getPendingIntent(
             context = applicationContext,
             specialMode = SpecialMode.REGISTRATION,
-            searchInfo = searchInfo
+            searchInfo = searchInfo,
+            userVerification = userVerification,
+            userVerifiedWithAuth = false
         )?.let { pendingIntent ->
             this.add(
                 CreateEntry(
@@ -379,6 +382,7 @@ class PasskeyProviderService : CredentialProviderService() {
         )
         val relyingPartyId = publicKeyCredentialCreationOptions.relyingPartyEntity.id
         val searchInfo = buildPasskeySearchInfo(relyingPartyId)
+        val userVerification = publicKeyCredentialCreationOptions.authenticatorSelection.userVerification
         Log.d(TAG, "Build passkey search for relying party $relyingPartyId")
         SearchHelper.checkAutoSearchInfo(
             context = this,
@@ -389,7 +393,11 @@ class PasskeyProviderService : CredentialProviderService() {
                     throw RegisterInReadOnlyDatabaseException()
                 } else {
                     // To create a new entry
-                    createEntries.addPendingIntentCreationNewEntry(accountName, searchInfo)
+                    createEntries.addPendingIntentCreationNewEntry(
+                        accountName = accountName,
+                        searchInfo = searchInfo,
+                        userVerification = userVerification
+                    )
                     /* TODO Overwrite
                     // To select an existing entry and permit an overwrite
                     Log.w(TAG, "Passkey already registered")
@@ -420,7 +428,11 @@ class PasskeyProviderService : CredentialProviderService() {
                 if (database.isReadOnly) {
                     throw RegisterInReadOnlyDatabaseException()
                 } else {
-                    createEntries.addPendingIntentCreationNewEntry(accountName, searchInfo)
+                    createEntries.addPendingIntentCreationNewEntry(
+                        accountName = accountName,
+                        searchInfo = searchInfo,
+                        userVerification = userVerification
+                    )
                 }
                 callback(createEntries)
             },
@@ -429,7 +441,8 @@ class PasskeyProviderService : CredentialProviderService() {
                 Log.d(TAG, "Add pending intent for passkey registration in closed database")
                 PasskeyLauncherActivity.getPendingIntent(
                     context = applicationContext,
-                    specialMode = SpecialMode.REGISTRATION
+                    specialMode = SpecialMode.REGISTRATION,
+                    userVerifiedWithAuth = true
                 )?.let { pendingIntent ->
                     createEntries.add(
                         CreateEntry(
