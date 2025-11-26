@@ -181,15 +181,8 @@ class SearchHelper {
                 val credentialIds = searchParameters.searchOptions
                 val containsRelyingParty = entry.getExtraFields().any { field ->
                         field.isRelyingParty()
-                                && checkSearchQuery(
-                                    stringToCheck = field.protectedValue.stringValue,
-                                    searchParameters = SearchParameters().apply {
-                                        searchQuery = relyingParty
-                                        searchInRelyingParty = true
-                                        caseSensitive = false
-                                        isRegex = false
-                                    }
-                                )
+                                && field.protectedValue.stringValue
+                                    .equals(relyingParty, ignoreCase = true)
                     }
                 // Check empty to allow any credential if not defined
                 val containsCredentialId =  if(credentialIds.isEmpty()) true
