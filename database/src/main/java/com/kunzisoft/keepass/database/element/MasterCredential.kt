@@ -42,9 +42,11 @@ import javax.xml.XMLConstants
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
 
-data class MasterCredential(var password: String? = null,
-                            var keyFileData: ByteArray? = null,
-                            var hardwareKey: HardwareKey? = null): Parcelable {
+data class MasterCredential(
+    var password: String? = null,
+    var keyFileData: ByteArray? = null,
+    var hardwareKey: HardwareKey? = null
+): Parcelable {
 
     constructor(parcel: Parcel) : this() {
         password = parcel.readString()
@@ -94,8 +96,9 @@ data class MasterCredential(var password: String? = null,
         private val TAG = MasterCredential::class.java.simpleName
 
         @Throws(IOException::class)
-        fun retrievePasswordKey(key: String,
-                                encoding: Charset
+        fun retrievePasswordKey(
+            key: String,
+            encoding: Charset
         ): ByteArray {
             val bKey: ByteArray = try {
                 key.toByteArray(encoding)

@@ -43,9 +43,9 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
-import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.addUserVerification
-import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.askUserVerification
-import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.getUserVerifiedWithAuth
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerifiedWithAuth
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
@@ -55,11 +55,13 @@ import com.kunzisoft.keepass.credentialprovider.viewmodel.PasskeyLauncherViewMod
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.SearchInfo
+import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CHECK_CREDENTIAL_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.view.toastError
 import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -68,6 +70,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
 
     private val passkeyLauncherViewModel: PasskeyLauncherViewModel by viewModels()
     private val mainCredentialViewModel: MainCredentialViewModel by viewModels()
+    private val userVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private var mPasskeySelectionActivityResultLauncher: ActivityResultLauncher<Intent>? =
         this.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -172,11 +175,28 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             mainCredentialViewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is MainCredentialViewModel.UIState.Loading -> {}
-                    is MainCredentialViewModel.UIState.OnMainCredentialValidated ->  {
-                        // TODO Pass through UserVerification View Model
-                        passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
+                    is MainCredentialViewModel.UIState.OnMainCredentialEntered ->  {
+                        checkMainCredential(uiState.mainCredential)
                     }
                     is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
+                        userVerificationViewModel.onUserVerificationFailed()
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            userVerificationViewModel.uiState.collect { uiState ->
+                when (uiState) {
+                    is UserVerificationViewModel.UIState.Loading -> {}
+                    is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                        passkeyLauncherViewModel.launchActionIfNeeded(
+                            userVerified = true,
+                            intent = intent,
+                            specialMode = mSpecialMode,
+                            database = uiState.database
+                        )
+                    }
+                    is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
                         passkeyLauncherViewModel.cancelResult()
                     }
                 }
@@ -186,21 +206,11 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
 
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
-
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        database?.let {
-            askUserVerification(
-                database = it,
-                onVerificationSucceeded = {
-                    passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
-                },
-                onVerificationFailed = {
-                    passkeyLauncherViewModel.cancelResult()
-                }
-            )
-        }
-
-        passkeyLauncherViewModel.launchActionIfNeeded(intent, mSpecialMode, database)
+        askUserVerification(
+            database = database,
+            userVerificationViewModel = userVerificationViewModel
+        )
     }
 
     override fun onDatabaseActionFinished(
@@ -213,6 +223,13 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             ACTION_DATABASE_UPDATE_ENTRY_TASK -> {
                 // TODO When auto save is enabled, WARNING filter by the calling activity
                 // passkeyLauncherViewModel.autoSelectPasskey(result, database)
+            }
+            ACTION_DATABASE_CHECK_CREDENTIAL_TASK -> {
+                if (result.isSuccess) {
+                    userVerificationViewModel.onUserVerificationSucceeded(database)
+                } else {
+                    userVerificationViewModel.onUserVerificationFailed(database)
+                }
             }
         }
     }

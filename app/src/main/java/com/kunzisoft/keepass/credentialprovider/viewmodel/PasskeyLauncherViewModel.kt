@@ -18,7 +18,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveNod
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
-import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.getUserVerificationCondition
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerificationCondition
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialCreationParameters
 import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialUsageParameters
@@ -152,13 +152,14 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
         }
     }
 
-    fun launchAction(
+    fun launchActionIfNeeded(
         userVerified: Boolean,
         intent: Intent,
         specialMode: SpecialMode,
+        database: ContextualDatabase?
     ) {
         this.mUserVerified = userVerified
-        super.launchActionIfNeeded(intent, specialMode, mDatabase)
+        super.launchActionIfNeeded(intent, specialMode, database)
     }
 
     override fun launchActionIfNeeded(

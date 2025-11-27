@@ -19,7 +19,7 @@ class MainCredentialViewModel: ViewModel() {
         databaseUri: Uri,
         mainCredential: MainCredential
     ) {
-        mUiState.value = UIState.OnMainCredentialValidated(databaseUri, mainCredential)
+        mUiState.value = UIState.OnMainCredentialEntered(databaseUri, mainCredential)
     }
 
     fun cancelMainCredential(
@@ -30,7 +30,7 @@ class MainCredentialViewModel: ViewModel() {
 
     sealed class UIState {
         object Loading: UIState()
-        data class OnMainCredentialValidated(
+        data class OnMainCredentialEntered(
             val databaseUri: Uri,
             val mainCredential: MainCredential
         ): UIState()

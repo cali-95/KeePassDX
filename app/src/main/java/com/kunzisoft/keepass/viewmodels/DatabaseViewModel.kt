@@ -133,6 +133,13 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         }
     }
 
+    fun checkMainCredential(
+        databaseUri: Uri,
+        mainCredential: MainCredential
+    ) {
+        mDatabaseTaskProvider.startDatabaseCheckCredential(databaseUri, mainCredential)
+    }
+
     fun saveDatabase(save: Boolean, saveToUri: Uri? = null) {
         mDatabaseTaskProvider.startDatabaseSave(save, saveToUri)
     }

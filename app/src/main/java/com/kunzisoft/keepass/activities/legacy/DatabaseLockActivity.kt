@@ -181,6 +181,14 @@ abstract class DatabaseLockActivity : DatabaseModeActivity(),
         }
     }
 
+    fun checkMainCredential(mainCredential: MainCredential) {
+        mDatabase?.let { database ->
+            database.fileUri?.let { databaseUri ->
+                mDatabaseViewModel.checkMainCredential(databaseUri, mainCredential)
+            }
+        }
+    }
+
     fun saveDatabase() {
         mDatabaseViewModel.saveDatabase(save = true)
     }

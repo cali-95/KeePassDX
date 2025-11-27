@@ -157,7 +157,6 @@ class GroupActivity : DatabaseLockActivity(),
 
     private val mGroupViewModel: GroupViewModel by viewModels()
     private val mGroupEditViewModel: GroupEditViewModel by viewModels()
-
     private val mMainCredentialViewModel: MainCredentialViewModel by viewModels()
 
     private val mGroupActivityEducation = GroupActivityEducation(this)
@@ -557,7 +556,7 @@ class GroupActivity : DatabaseLockActivity(),
             mMainCredentialViewModel.uiState.collect { uiState ->
                 when (uiState) {
                     is MainCredentialViewModel.UIState.Loading -> {}
-                    is MainCredentialViewModel.UIState.OnMainCredentialValidated -> {
+                    is MainCredentialViewModel.UIState.OnMainCredentialEntered -> {
                         mergeDatabaseFrom(uiState.databaseUri, uiState.mainCredential)
                     }
                     is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
