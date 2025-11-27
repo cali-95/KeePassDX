@@ -767,7 +767,6 @@
     <string name="passkey_selection_description">Select an existing passkey</string>
     <string name="passkey_database_username">KeePassDX Database</string>
     <string name="passkey_locked_database_description">Select to unlock</string>
-    <string name="passkey_relaunch_database_description">Reauthenticate (No Device Auth)</string>
     <string name="passkey_username">Passkey Username</string>
     <string name="passkey_private_key">Passkey Private Key</string>
     <string name="passkey_credential_id">Passkey Credential Id</string>

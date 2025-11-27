@@ -52,6 +52,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -75,7 +76,6 @@ import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
-import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.database.element.Entry
 import com.kunzisoft.keepass.database.element.Group
@@ -121,6 +121,8 @@ import com.kunzisoft.keepass.view.toastError
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.GroupEditViewModel
 import com.kunzisoft.keepass.viewmodels.GroupViewModel
+import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
+import kotlinx.coroutines.launch
 import org.joda.time.LocalDateTime
 import java.util.EnumSet
 
@@ -130,8 +132,7 @@ class GroupActivity : DatabaseLockActivity(),
         GroupFragment.NodesActionMenuListener,
         GroupFragment.OnScrollListener,
         GroupFragment.GroupRefreshedListener,
-        SortDialogFragment.SortSelectionListener,
-        MainCredentialDialogFragment.AskMainCredentialDialogListener {
+        SortDialogFragment.SortSelectionListener {
 
     // Views
     private var header: ViewGroup? = null
@@ -156,6 +157,8 @@ class GroupActivity : DatabaseLockActivity(),
 
     private val mGroupViewModel: GroupViewModel by viewModels()
     private val mGroupEditViewModel: GroupEditViewModel by viewModels()
+
+    private val mMainCredentialViewModel: MainCredentialViewModel by viewModels()
 
     private val mGroupActivityEducation = GroupActivityEducation(this)
 
@@ -545,6 +548,21 @@ class GroupActivity : DatabaseLockActivity(),
                             onLaunchActivitySpecialMode()
                         }
                     )
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            // Initialize the parameters
+            mMainCredentialViewModel.uiState.collect { uiState ->
+                when (uiState) {
+                    is MainCredentialViewModel.UIState.Loading -> {}
+                    is MainCredentialViewModel.UIState.OnMainCredentialValidated -> {
+                        mergeDatabaseFrom(uiState.databaseUri, uiState.mainCredential)
+                    }
+                    is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
+                        // Noting here
+                    }
                 }
             }
         }
@@ -1132,20 +1150,6 @@ class GroupActivity : DatabaseLockActivity(),
         finishNodeAction()
         return true
     }
-
-    override fun onAskMainCredentialDialogPositiveClick(
-        databaseUri: Uri?,
-        mainCredential: MainCredential
-    ) {
-        databaseUri?.let {
-            mergeDatabaseFrom(it, mainCredential)
-        }
-    }
-
-    override fun onAskMainCredentialDialogNegativeClick(
-        databaseUri: Uri?,
-        mainCredential: MainCredential
-    ) { }
 
     override fun onResume() {
         super.onResume()

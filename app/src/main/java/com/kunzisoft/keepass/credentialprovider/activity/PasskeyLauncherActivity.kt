@@ -31,8 +31,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.biometric.BiometricPrompt
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.FileDatabaseSelectActivity
@@ -45,16 +43,13 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.addUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerification.Companion.getUserVerifiedWithAuth
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.ALLOWED_AUTHENTICATORS
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAuthCode
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addUserVerification
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getUserVerificationCondition
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.getUserVerifiedWithAuth
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.isAuthenticatorsAllowed
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.removeUserVerification
 import com.kunzisoft.keepass.credentialprovider.viewmodel.CredentialLauncherViewModel
 import com.kunzisoft.keepass.credentialprovider.viewmodel.PasskeyLauncherViewModel
 import com.kunzisoft.keepass.database.ContextualDatabase
@@ -63,8 +58,8 @@ import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
-import com.kunzisoft.keepass.utils.LOCK_ACTION
 import com.kunzisoft.keepass.view.toastError
+import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -72,6 +67,7 @@ import java.util.UUID
 class PasskeyLauncherActivity : DatabaseLockActivity() {
 
     private val passkeyLauncherViewModel: PasskeyLauncherViewModel by viewModels()
+    private val mainCredentialViewModel: MainCredentialViewModel by viewModels()
 
     private var mPasskeySelectionActivityResultLauncher: ActivityResultLauncher<Intent>? =
         this.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -92,60 +88,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        val userVerificationCondition = intent.getUserVerificationCondition()
-        if (userVerificationCondition) {
-            if (isAuthenticatorsAllowed().not()) {
-                intent.removeUserVerification()
-                sendBroadcast(Intent(LOCK_ACTION))
-            }
-        }
-        // super.onCreate must be after UserVerification to allow database lock
         super.onCreate(savedInstanceState)
-        // Biometric must be after super.onCreate
-        if (userVerificationCondition) {
-            if (isAuthenticatorsAllowed()) {
-                BiometricPrompt(
-                    this, ContextCompat.getMainExecutor(this),
-                    object : BiometricPrompt.AuthenticationCallback() {
-                        override fun onAuthenticationError(
-                            errorCode: Int,
-                            errString: CharSequence
-                        ) {
-                            super.onAuthenticationError(errorCode, errString)
-                            when (errorCode) {
-                                BiometricPrompt.ERROR_CANCELED,
-                                BiometricPrompt.ERROR_NEGATIVE_BUTTON,
-                                BiometricPrompt.ERROR_USER_CANCELED -> {
-                                    // No operation
-                                    Log.i(TAG, "$errString")
-                                }
-                                else -> {
-                                    toastError(SecurityException("Authentication error: $errString"))
-                                }
-                            }
-                            passkeyLauncherViewModel.cancelResult()
-                        }
-                        override fun onAuthenticationSucceeded(
-                            result: BiometricPrompt.AuthenticationResult
-                        ) {
-                            super.onAuthenticationSucceeded(result)
-                            passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
-                        }
-                        override fun onAuthenticationFailed() {
-                            super.onAuthenticationFailed()
-                            toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
-                            passkeyLauncherViewModel.cancelResult()
-                        }
-                    }).authenticate(
-                    BiometricPrompt.PromptInfo.Builder()
-                        .setTitle(getString(R.string.user_verification_required))
-                        .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
-                        .setConfirmationRequired(false)
-                        .build()
-                )
-            }
-        }
 
         lifecycleScope.launch {
             // Initialize the parameters
@@ -225,10 +168,38 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                 }
             }
         }
+        lifecycleScope.launch {
+            mainCredentialViewModel.uiState.collect { uiState ->
+                when (uiState) {
+                    is MainCredentialViewModel.UIState.Loading -> {}
+                    is MainCredentialViewModel.UIState.OnMainCredentialValidated ->  {
+                        // TODO Pass through UserVerification View Model
+                        passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
+                    }
+                    is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
+                        passkeyLauncherViewModel.cancelResult()
+                    }
+                }
+            }
+        }
     }
 
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
+
+        // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
+        database?.let {
+            askUserVerification(
+                database = it,
+                onVerificationSucceeded = {
+                    passkeyLauncherViewModel.launchAction(userVerified = true, intent, mSpecialMode)
+                },
+                onVerificationFailed = {
+                    passkeyLauncherViewModel.cancelResult()
+                }
+            )
+        }
+
         passkeyLauncherViewModel.launchActionIfNeeded(intent, mSpecialMode, database)
     }
 
