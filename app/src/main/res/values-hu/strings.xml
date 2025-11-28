@@ -92,8 +92,6 @@
     <string name="list_size_summary">Szövegméret az elemlistában</string>
     <string name="loading_database">Adatbázis betöltése…</string>
     <string name="lowercase">Kisbetűk</string>
-    <string name="hide_password_title">Jelszavak elrejtése</string>
-    <string name="hide_password_summary">Jelszavak alapértelmezett elrejtése (***)</string>
     <string name="about">Névjegy</string>
     <string name="menu_change_key_settings">Mesterkulcs cseréje</string>
     <string name="settings">Beállítások</string>
@@ -101,7 +99,6 @@
     <string name="menu_delete">Törlés</string>
     <string name="menu_donate">Támogatás</string>
     <string name="menu_edit">Szerkesztés</string>
-    <string name="menu_hide_password">Jelszó elrejtése</string>
     <string name="menu_lock">Adatbázis zárolása</string>
     <string name="menu_open">Megnyitás</string>
     <string name="menu_search">Keresés</string>

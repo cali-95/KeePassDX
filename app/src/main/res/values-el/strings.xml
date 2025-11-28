@@ -92,8 +92,6 @@
     <string name="list_size_summary">Μέγεθος κειμένου στη λίστα στοιχείων</string>
     <string name="loading_database">Φόρτωση βάσης δεδομένων…</string>
     <string name="lowercase">Μικρά</string>
-    <string name="hide_password_title">Απόκρυψη κωδικών πρόσβασης</string>
-    <string name="hide_password_summary">Μάσκα κωδικούς πρόσβασης (***) από προεπιλογή</string>
     <string name="about">Σχετικά με</string>
     <string name="menu_change_key_settings">Αλλαγή Κύριου Κλειδιού</string>
     <string name="settings">Ρυθμίσεις</string>
@@ -101,7 +99,6 @@
     <string name="menu_delete">Διαγραφή</string>
     <string name="menu_donate">Δωρεά</string>
     <string name="menu_edit">Επεξεργασία</string>
-    <string name="menu_hide_password">Απόκρυψη κωδικού</string>
     <string name="menu_lock">Κλείδωμα βάσης δεδομένων</string>
     <string name="menu_open">Άνοιγμα</string>
     <string name="menu_search">Αναζήτηση</string>

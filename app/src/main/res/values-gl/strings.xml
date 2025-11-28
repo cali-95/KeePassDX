@@ -188,7 +188,6 @@
     <string name="corrupted_file">Ficheiro corrompido.</string>
     <string name="menu_keystore_remove_key">Borrar a clave do desbloqueo avanzado</string>
     <string name="loading_database">A carregar base de datos…</string>
-    <string name="hide_password_summary">Mascarar contrasinais (***) por predefinición</string>
     <string name="list_size_summary">Tamaño do texto na lista de elementos</string>
     <string name="creating_database">A crear a base de datos…</string>
     <string name="menu_move">Mover</string>
@@ -209,7 +208,6 @@
     <string name="colorize_password_title">Colorear contrasinais</string>
     <string name="colorize_password_summary">Colorear caracteres dos contrasinais por tipo</string>
     <string name="settings">Configuracións</string>
-    <string name="menu_hide_password">Ocultar contrasinal</string>
     <string name="menu_lock">Bloquear base de datos</string>
     <string name="menu_save_database">Gardar datos</string>
     <string name="no_results">Sen resultados da procura</string>
@@ -278,7 +276,6 @@
     <string name="list_entries_show_username_title">Mostrar nomes de usuario</string>
     <string name="hint_keyfile">Ficheiro clave</string>
     <string name="hint_pass">Contrasinal</string>
-    <string name="hide_password_title">Ocultar contrasinais</string>
     <string name="lowercase">Minúsculas</string>
     <string name="about">Sobre</string>
     <string name="copy_field">Copia de %1$s</string>

@@ -83,8 +83,6 @@
     <string name="list_size_summary">Tamanho do texto na lista de grupos</string>
     <string name="loading_database">Carregando banco de dados…</string>
     <string name="lowercase">Letras minúsculas</string>
-    <string name="hide_password_title">Esconder senhas</string>
-    <string name="hide_password_summary">Mascarar senhas (***) por padrão</string>
     <string name="about">Sobre</string>
     <string name="menu_change_key_settings">Modificar a chave-mestra</string>
     <string name="settings">Configurações</string>
@@ -92,7 +90,6 @@
     <string name="menu_delete">Deletar</string>
     <string name="menu_donate">Doar</string>
     <string name="menu_edit">Editar</string>
-    <string name="menu_hide_password">Esconder senha</string>
     <string name="menu_lock">Bloquear banco de dados</string>
     <string name="menu_open">Abrir</string>
     <string name="menu_search">Buscar</string>

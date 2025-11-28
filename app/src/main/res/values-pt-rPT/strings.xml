@@ -93,8 +93,6 @@
     <string name="list_size_summary">Tamanho do texto na lista de grupos</string>
     <string name="loading_database">A carregar a base de dados…</string>
     <string name="lowercase">Minúsculas</string>
-    <string name="hide_password_title">Ocultar palavras-passe</string>
-    <string name="hide_password_summary">Mascarar palavras-passe (***) por predefinição</string>
     <string name="about">Sobre</string>
     <string name="menu_change_key_settings">Alterar chave mestra</string>
     <string name="settings">Configurações</string>
@@ -102,7 +100,6 @@
     <string name="menu_delete">Eliminar</string>
     <string name="menu_donate">Donativos</string>
     <string name="menu_edit">Editar</string>
-    <string name="menu_hide_password">Ocultar palavra-chave</string>
     <string name="menu_lock">Bloquear base de dados</string>
     <string name="menu_open">Abrir</string>
     <string name="menu_search">Pesquisar</string>

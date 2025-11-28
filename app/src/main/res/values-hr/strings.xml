@@ -113,7 +113,6 @@
     <string name="list_groups_show_number_entries_summary">Prikazuje broj unosa u grupi</string>
     <string name="creating_database">Stvaranje baze podataka …</string>
     <string name="loading_database">Učitavanje baze podataka …</string>
-    <string name="hide_password_title">Sakrij lozinke</string>
     <string name="menu_change_key_settings">Promjeni glavni ključ</string>
     <string name="settings">Postavke</string>
     <string name="menu_app_settings">Postavke aplikacije</string>
@@ -127,7 +126,6 @@
     <string name="menu_copy">Kopiraj</string>
     <string name="menu_paste">Umetni</string>
     <string name="menu_delete">Izbriši</string>
-    <string name="menu_hide_password">Sakrij lozinku</string>
     <string name="menu_lock">Zaključaj bazu podataka</string>
     <string name="menu_save_database">Spremi podatke</string>
     <string name="menu_open">Otvori</string>
@@ -249,7 +247,6 @@
     <string name="list_size_title">Veličina elemenata popisa</string>
     <string name="list_size_summary">Veličina teksta u popisu elemenata</string>
     <string name="lowercase">Mala slova</string>
-    <string name="hide_password_summary">Standardno sakrij lozinke (***)</string>
     <string name="about">O aplikaciji</string>
     <string name="copy_field">Kopija od %1$s</string>
     <string name="menu_move">Premjesti</string>

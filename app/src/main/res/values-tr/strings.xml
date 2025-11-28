@@ -101,8 +101,6 @@
     <string name="list_size_summary">Öge listesindeki metin boyutu</string>
     <string name="loading_database">Veri tabanı yükleniyor…</string>
     <string name="lowercase">Küçük harf</string>
-    <string name="hide_password_title">Parolaları gizle</string>
-    <string name="hide_password_summary">Parolaları öntanımlı olarak (***) ile maskele</string>
     <string name="about">Hakkında</string>
     <string name="menu_change_key_settings">Ana anahtarı değiştir</string>
     <string name="copy_field">%1$s kopyalandı</string>
@@ -117,7 +115,6 @@
     <string name="menu_paste">Yapıştır</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_cancel">İptal</string>
-    <string name="menu_hide_password">Parolayı gizle</string>
     <string name="menu_lock">Veri tabanını kilitle</string>
     <string name="menu_open">Aç</string>
     <string name="menu_search">Ara</string>

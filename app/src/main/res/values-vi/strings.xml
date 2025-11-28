@@ -231,8 +231,6 @@
     <string name="invalid_db_sig">Không thể nhận dạng được định dạng cơ sở dữ liệu.</string>
     <string name="keyfile_is_empty">Tệp khóa trống.</string>
     <string name="length">Chiều dài</string>
-    <string name="hide_password_title">Ẩn mật khẩu</string>
-    <string name="hide_password_summary">Che dấu mật khẩu (***) theo mặc định</string>
     <string name="colorize_password_title">Tô màu mật khẩu</string>
     <string name="colorize_password_summary">Tô màu các ký tự mật khẩu theo loại</string>
     <string name="list_entries_show_username_title">Hiển thị tên người dùng</string>
@@ -271,7 +269,6 @@
     <string name="menu_paste">Dán</string>
     <string name="menu_delete">Xóa</string>
     <string name="menu_cancel">Hủy</string>
-    <string name="menu_hide_password">Ẩn mật khẩu</string>
     <string name="menu_lock">Khóa cơ sở dữ liệu</string>
     <string name="menu_save_database">Lưu dữ liệu</string>
     <string name="menu_merge_database">Hợp nhất dữ liệu</string>

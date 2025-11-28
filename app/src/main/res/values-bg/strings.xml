@@ -71,10 +71,8 @@
     <string name="unlock">Отключване</string>
     <string name="unavailable_feature_hardware">Необходимият хардуер не може да бъде намерен.</string>
     <string name="hardware_key">Хардуерен ключ</string>
-    <string name="hide_password_summary">Скриване на паролите (***) по подразбиране</string>
     <string name="select_database_file">Отключване на хранилище</string>
     <string name="content_description_hardware_key_checkbox">Отметка на поле с хардуерен ключ</string>
-    <string name="hide_password_title">Скриване на пароли</string>
     <string name="hint_pass">Парола</string>
     <string name="education_select_database_title">Отворете съществуващо хранилище</string>
     <string name="content_description_keyfile_checkbox">Отметка на поле за файл с ключ</string>
@@ -157,7 +155,6 @@
     <string name="template">Шаблон</string>
     <string name="menu_move">Преместване</string>
     <string name="menu_cancel">Отказ</string>
-    <string name="menu_hide_password">Скриване на парола</string>
     <string name="auto_focus_search_summary">Търсене при отключване на хранилище</string>
     <string name="saving_database">Запазване на хранилището…</string>
     <string name="command_execution">Изпълнение на команда…</string>

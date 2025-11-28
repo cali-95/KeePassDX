@@ -90,8 +90,6 @@
     <string name="list_size_summary">Velikost textu v seznamu prvků</string>
     <string name="loading_database">Načítám databázi…</string>
     <string name="lowercase">Malá písmena</string>
-    <string name="hide_password_title">Skrýt hesla</string>
-    <string name="hide_password_summary">Ve výchozím stavu zobrazit (***) místo hesla</string>
     <string name="about">O aplikaci</string>
     <string name="menu_change_key_settings">Změnit hlavní klíč</string>
     <string name="settings">Nastavení</string>
@@ -99,7 +97,6 @@
     <string name="menu_delete">Smazat</string>
     <string name="menu_donate">Přispět darem</string>
     <string name="menu_edit">Upravit</string>
-    <string name="menu_hide_password">Skrýt heslo</string>
     <string name="menu_lock">Zamknout databázi</string>
     <string name="menu_open">Otevřít</string>
     <string name="menu_search">Hledat</string>

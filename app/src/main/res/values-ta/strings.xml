@@ -278,8 +278,6 @@
     <string name="hint_group_name">குழு பெயர்</string>
     <string name="invalid_db_same_uuid">அதே uuid %2$s உடன் %1$s ஏற்கனவே உள்ளது.</string>
     <string name="invalid_db_sig">தரவுத்தள வடிவமைப்பை அடையாளம் காண முடியவில்லை.</string>
-    <string name="hide_password_title">கடவுச்சொற்களை மறைக்கவும்</string>
-    <string name="hide_password_summary">இயல்புநிலையாக கடவுச்சொற்களை (***) மறைக்கவும்</string>
     <string name="colorize_password_title">கடவுச்சொற்களை வண்ணமயமாக்குங்கள்</string>
     <string name="colorize_password_summary">தட்டச்சு மூலம் கடவுச்சொல் எழுத்துக்களை வண்ணமயமாக்குங்கள்</string>
     <string name="list_groups_show_number_entries_summary">ஒரு குழுவில் உள்ளீடுகளின் எண்ணிக்கையைக் காட்டுகிறது</string>
@@ -298,7 +296,6 @@
     <string name="menu_security_settings_summary">குறியாக்கம், முக்கிய வழித்தோன்றல் செயல்பாடு</string>
     <string name="menu_master_key_settings">முதன்மை விசை அமைப்புகள்</string>
     <string name="menu_paste">ஒட்டு</string>
-    <string name="menu_hide_password">கடவுச்சொல்லை மறைக்கவும்</string>
     <string name="menu_merge_database">தேதி செல்கிறது</string>
     <string name="menu_open_file_read_and_write">மாற்றியமைக்கக்கூடிய</string>
     <string name="menu_restore_entry_history">வரலாற்றை மீட்டமை</string>

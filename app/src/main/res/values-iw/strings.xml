@@ -90,8 +90,6 @@
     <string name="list_size_summary">גודל טקסט ברשימת הרכיבים</string>
     <string name="loading_database">טוען מסד נתונים…</string>
     <string name="lowercase">אות קטנה</string>
-    <string name="hide_password_title">הסתר סיסמאות</string>
-    <string name="hide_password_summary">הסווה סיסמאות (***) כברירת מחדל</string>
     <string name="about">אודות</string>
     <string name="menu_change_key_settings">שנה מפתח ראשי</string>
     <string name="settings">העדפות</string>
@@ -99,7 +97,6 @@
     <string name="menu_delete">מחק</string>
     <string name="menu_donate">תרום</string>
     <string name="menu_edit">ערוך</string>
-    <string name="menu_hide_password">הסתר סיסמה</string>
     <string name="menu_lock">נעל מסד נתונים</string>
     <string name="menu_open">פתח</string>
     <string name="menu_search">חיפוש</string>

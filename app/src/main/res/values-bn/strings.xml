@@ -182,7 +182,6 @@
     <string name="invalid_db_same_uuid">একই UUID সহ %1$s %2$s ইতিমধ্যেই বিদ্যমান।</string>
     <string name="passphrase">পাসফ্রেজ</string>
     <string name="keyfile_is_empty">কী ফাইলটি খালি।</string>
-    <string name="hide_password_title">পাসওয়ার্ড লুকান</string>
     <string name="list_size_summary">উপাদান তালিকায় পাঠ্যের আকার</string>
     <string name="creating_database">ডাটাবেস তৈরি করা হচ্ছে…</string>
     <string name="loading_database">ডাটাবেস লোড হচ্ছে…</string>
@@ -316,7 +315,6 @@
     <string name="field_value">ক্ষেত্রের মান</string>
     <string name="corrupted_file">দূষিত ফাইল।</string>
     <string name="show_uuid_title">UUID দেখান</string>
-    <string name="hide_password_summary">ডিফল্টরূপে মাস্ক পাসওয়ার্ড (***)</string>
     <string name="list_entries_show_username_title">ব্যবহারকারীর নাম দেখান</string>
     <string name="show_uuid_summary">একটি এন্ট্রি বা একটি গ্রুপের সাথে সংযুক্ত UUID প্রদর্শন করে</string>
     <string name="menu_reload_database">ডেটা পুনরায় লোড করুন</string>
@@ -330,7 +328,6 @@
     <string name="menu_merge_database">ডেটা মার্জ করুন</string>
     <string name="menu_merge_from">থেকে মার্জ করুন…</string>
     <string name="menu_showpass">পাসওয়ার্ড দেখাও</string>
-    <string name="menu_hide_password">পাসওয়ার্ড লুকান</string>
     <string name="menu_lock">ডাটাবেস লক করুন</string>
     <string name="menu_url">URL-এ যান</string>
     <string name="menu_empty_recycle_bin">রিসাইকেল বিন খালি করুন</string>

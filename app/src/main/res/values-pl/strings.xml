@@ -81,8 +81,6 @@
     <string name="list_size_summary">Rozmiar tekstu na liście elementów</string>
     <string name="loading_database">Wczytywanie bazy danych…</string>
     <string name="lowercase">Małe litery</string>
-    <string name="hide_password_title">Ukryj hasła</string>
-    <string name="hide_password_summary">Domyślnie maskuj hasła (***)</string>
     <string name="about">O aplikacji</string>
     <string name="menu_change_key_settings">Zmień klucz główny</string>
     <string name="settings">Ustawienia</string>
@@ -90,7 +88,6 @@
     <string name="menu_delete">Usuń</string>
     <string name="menu_donate">Wspomóż</string>
     <string name="menu_edit">Edytuj</string>
-    <string name="menu_hide_password">Ukryj hasło</string>
     <string name="menu_lock">Zablokuj bazę danych</string>
     <string name="menu_open">Otwórz</string>
     <string name="menu_search">Szukaj</string>

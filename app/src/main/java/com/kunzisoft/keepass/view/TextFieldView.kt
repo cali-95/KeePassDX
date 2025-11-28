@@ -204,9 +204,9 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    fun setProtection(protection: Boolean, hiddenProtectedValue: Boolean = false) {
+    fun setProtection(protection: Boolean) {
         showButton.isVisible = protection
-        showButton.isSelected = hiddenProtectedValue
+        showButton.isSelected = true
         showButton.setOnClickListener {
             showButton.isSelected = !showButton.isSelected
             changeProtectedValueParameters()

@@ -79,7 +79,6 @@
     <string name="menu_open">باز</string>
     <string name="menu_save_database">ذخیره پایگاه داده</string>
     <string name="menu_lock">بانک اطلاعاتی قفل</string>
-    <string name="menu_hide_password">پنهان کردن رمز عبور</string>
     <string name="menu_cancel">لغو</string>
     <string name="menu_delete">حذف</string>
     <string name="menu_paste">جاگذاری</string>
@@ -97,8 +96,6 @@
     <string name="copy_field">کپی %1$s</string>
     <string name="menu_change_key_settings">کلید اصلی را تغییر دهید</string>
     <string name="about">در باره</string>
-    <string name="hide_password_summary">رمزهای عبور ماسک (***) به طور پیش فرض</string>
-    <string name="hide_password_title">پنهان کردن رمزهای عبور</string>
     <string name="lowercase">ترجمه</string>
     <string name="loading_database">پایگاه داده بارگذاری…</string>
     <string name="creating_database">ایجاد پایگاه داده…</string>

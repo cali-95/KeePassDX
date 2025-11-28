@@ -21,7 +21,6 @@
     <string name="menu_search">തിരയുക</string>
     <string name="menu_security_settings">സുരക്ഷാ ക്രമീകരണങ്ങൾ</string>
     <string name="menu_database_settings">ഡാറ്റാബേസ് ക്രമീകരണങ്ങൾ</string>
-    <string name="hide_password_summary">സ്ഥിരസ്ഥിതിയായി പാസ്‌വേഡുകൾ (***) മാസ്ക് ചെയ്യുക</string>
     <string name="invalid_algorithm">തെറ്റായ അൽഗോരിതം.</string>
     <string name="password">പാസ്സ്‌വേഡ്</string>
     <string name="hint_pass">പാസ്സ്‌വേഡ്</string>
@@ -52,7 +51,6 @@
     <string name="menu_open">തുറക്കുക</string>
     <string name="menu_save_database">ഡാറ്റാബേസ് സംരക്ഷിക്കുക</string>
     <string name="menu_lock">ഡാറ്റാബേസ് ലോക്ക് ചെയ്യുക</string>
-    <string name="menu_hide_password">പാസ്‌വേഡുകൾ മറയ്‌ക്കുക</string>
     <string name="menu_cancel">റദ്ദാക്കുക</string>
     <string name="menu_delete">ഇല്ലാതാക്കുക</string>
     <string name="menu_move">നീക്കുക</string>
@@ -62,7 +60,6 @@
     <string name="menu_app_settings">അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ</string>
     <string name="settings">ക്രമീകരണങ്ങൾ</string>
     <string name="menu_change_key_settings">മാസ്റ്റർ കീ മാറ്റുക</string>
-    <string name="hide_password_title">പാസ്‌വേഡുകൾ മറയ്‌ക്കുക</string>
     <string name="loading_database">ഡാറ്റാബേസ് ലോഡുചെയ്യുന്നു…</string>
     <string name="creating_database">ഡാറ്റാബേസ് സൃഷ്ടിക്കുന്നു…</string>
     <string name="list_entries_show_username_title">ഉപയോക്തൃനാമങ്ങൾ കാണിക്കുക</string>

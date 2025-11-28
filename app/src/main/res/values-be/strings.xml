@@ -216,8 +216,6 @@
     <string name="keyfile_is_empty">Файл ключа пусты.</string>
     <string name="length">Даўжыня</string>
     <string name="nodes">Вузлы</string>
-    <string name="hide_password_title">Схаваць паролі</string>
-    <string name="hide_password_summary">Маскіраваць паролі (***) па змаўчанні</string>
     <string name="colorize_password_title">Размаляваць паролі</string>
     <string name="colorize_password_summary">Размаляваць сімвалы пароля па тыпу</string>
     <string name="list_entries_show_username_title">Паказаць імёны карыстальнікаў</string>
@@ -258,7 +256,6 @@
     <string name="menu_paste">Уставіць</string>
     <string name="menu_delete">Выдаліць</string>
     <string name="menu_cancel">Адмена</string>
-    <string name="menu_hide_password">Схаваць пароль</string>
     <string name="menu_lock">Заблакаваць базу дадзеных</string>
     <string name="menu_save_database">Захаваць дадзеныя</string>
     <string name="menu_merge_database">Аб\'яднаць дадзеныя</string>

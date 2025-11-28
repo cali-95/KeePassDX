@@ -20,7 +20,6 @@
     <string name="menu_app_settings">การตั้งค่าแอป</string>
     <string name="homepage">หน้าหลัก</string>
     <string name="security">ความปลอดภัย</string>
-    <string name="hide_password_summary">ปิดบังรหัสผ่านเป็น (***) โดยค่าเรื่มต้น</string>
     <string name="app_timeout_summary">ระยะเวลาที่ไม่ได้ใช้งานก่อนที่จะทำการล็อกฐานข้อมูล</string>
     <string name="settings">การตั้งค่า</string>
     <string name="hint_pass">รหัสผ่าน</string>
@@ -32,7 +31,6 @@
     <string name="error_pass_gen_type">จำเป็นต้องเลือกชนิดของรหัสผ่านที่จะสร้างอย่างน้อยหนึ่งอย่าง</string>
     <string name="generate_password">สร้างรหัสผ่าน</string>
     <string name="password">รหัสผ่าน</string>
-    <string name="hide_password_title">ซ่อนรหัสผ่าน</string>
     <string name="hint_conf_pass">ยืนยันรหัสผ่าน</string>
     <string name="contact">ติดต่อ</string>
     <string name="select_database_file">เปิดคลังรหัสผ่านที่มีอยู่แล้ว</string>
@@ -269,7 +267,6 @@
     <string name="list_groups_show_number_entries_summary">แสดงจำนวนรายการในกลุ่ม</string>
     <string name="list_size_title">ขนาดของรายการ</string>
     <string name="creating_database">กําลังสร้างฐานข้อมูล…</string>
-    <string name="menu_hide_password">ซ่อนรหัสผ่าน</string>
     <string name="menu_keystore_remove_key">ลบกุญแจปลดล็อกของอุปกรณ์</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="menu_move">ย้าย</string>

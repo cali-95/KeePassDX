@@ -142,7 +142,6 @@
     <string name="menu_search">Pesquisar</string>
     <string name="menu_open">Abrir</string>
     <string name="menu_lock">Bloquear base de dados</string>
-    <string name="menu_hide_password">Ocultar palavra-chave</string>
     <string name="menu_edit">Editar</string>
     <string name="menu_donate">Donativos</string>
     <string name="menu_delete">Eliminar</string>
@@ -246,8 +245,6 @@
     <string name="auto_focus_search_summary">Solicitar uma pesquisa quando abrir a base de dados</string>
     <string name="auto_focus_search_title">Pesquisa rápida</string>
     <string name="about">Sobre</string>
-    <string name="hide_password_summary">Mascarar palavras-passe (***) por predefinição</string>
-    <string name="hide_password_title">Ocultar palavras-passe</string>
     <string name="html_about_contribution">Para &lt;strong&gt;manter a liberdade&lt;/strong&gt;, &lt;strong&gt;corrigir erros&lt;/strong&gt;, &lt;strong&gt;adicionar funcionalidades&lt;/strong&gt; e &lt;strong&gt;para sermos sempre ativos&lt;/strong&gt;, contamos com sua &lt;strong&gt;contribuição&lt;/strong&gt;.</string>
     <string name="homepage">Página inicial</string>
     <string name="feedback">Comentários</string>

@@ -132,12 +132,6 @@ object PreferencesUtil {
             context.resources.getBoolean(R.bool.hide_templates_default))
     }
 
-    fun hideProtectedValue(context: Context): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getBoolean(context.getString(R.string.hide_password_key),
-            context.resources.getBoolean(R.bool.hide_password_default))
-    }
-
     fun colorizePassword(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.colorize_password_key),
@@ -882,7 +876,6 @@ object PreferencesUtil {
                 context.getString(R.string.show_entry_colors_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.hide_expired_entries_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.hide_templates_key) -> editor.putBoolean(name, value.toBoolean())
-                context.getString(R.string.hide_password_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.colorize_password_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.list_entries_show_username_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.list_groups_show_number_entries_key) -> editor.putBoolean(name, value.toBoolean())

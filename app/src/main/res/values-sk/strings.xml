@@ -83,8 +83,6 @@
     <string name="list_size_summary">Veľkosť textu v zozname prvkov</string>
     <string name="loading_database">Načítava sa databáza…</string>
     <string name="lowercase">Malé písmená</string>
-    <string name="hide_password_title">Skryť heslá</string>
-    <string name="hide_password_summary">Predvolene maskovať heslá (***)</string>
     <string name="about">O Programe</string>
     <string name="menu_change_key_settings">Zmeniť hlavný Kľúč</string>
     <string name="settings">Nastavenia</string>
@@ -92,7 +90,6 @@
     <string name="menu_delete">Zmazať</string>
     <string name="menu_donate">Darovať</string>
     <string name="menu_edit">Upraviť</string>
-    <string name="menu_hide_password">Skryť heslo</string>
     <string name="menu_lock">Zamknúť databázu</string>
     <string name="menu_open">Otvoriť</string>
     <string name="menu_search">Hľadať</string>

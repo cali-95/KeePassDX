@@ -89,8 +89,6 @@
     <string name="list_size_summary">Teksta izmērs ierakstos un grupu sarakstos</string>
     <string name="loading_database">Ielādēt datu bāzi…</string>
     <string name="lowercase">Mazie burti</string>
-    <string name="hide_password_title">Sēpt paroles</string>
-    <string name="hide_password_summary">Sēpt paroles *****</string>
     <string name="about">Par</string>
     <string name="menu_change_key_settings">Mainīt galveno paroli</string>
     <string name="settings">Iestatījumi</string>
@@ -98,7 +96,6 @@
     <string name="menu_delete">Dzēst</string>
     <string name="menu_donate">Ziedot</string>
     <string name="menu_edit">Rediģēt</string>
-    <string name="menu_hide_password">Paslēpt paroli</string>
     <string name="menu_lock">Bloķēt datu bāzi</string>
     <string name="menu_open">Atvērt</string>
     <string name="menu_search">Meklēšana</string>

@@ -14,7 +14,6 @@
     <string name="menu_open">Buka</string>
     <string name="menu_save_database">Simpan data</string>
     <string name="menu_lock">Basis Data Terkunci</string>
-    <string name="menu_hide_password">Sembunyikan Kata Sandi</string>
     <string name="menu_cancel">Batal</string>
     <string name="menu_delete">Hapus</string>
     <string name="menu_paste">Tempel</string>
@@ -32,8 +31,6 @@
     <string name="copy_field">Salinan dari %1$s</string>
     <string name="menu_change_key_settings">Ubah Kunci Utama</string>
     <string name="about">Tentang</string>
-    <string name="hide_password_summary">Secara otomatis tutupi kata sandi (***)</string>
-    <string name="hide_password_title">Sembunyikan Kata Sandi</string>
     <string name="lowercase">Huruf Kecil</string>
     <string name="loading_database">Memuat basis data…</string>
     <string name="creating_database">Pembuatan basis data…</string>

@@ -98,8 +98,6 @@
     <string name="list_size_summary">Taille du texte dans les éléments de liste</string>
     <string name="loading_database">Chargement de la base de données…</string>
     <string name="lowercase">Minuscules</string>
-    <string name="hide_password_title">Masquer les mots de passe</string>
-    <string name="hide_password_summary">Masque les mots de passe (***) par défaut</string>
     <string name="about">À propos</string>
     <string name="menu_change_key_settings">Modifier la clé principale</string>
     <string name="copy_field">%1$s copié</string>
@@ -108,7 +106,6 @@
     <string name="menu_delete">Supprimer</string>
     <string name="menu_donate">Faire un don</string>
     <string name="menu_edit">Modifier</string>
-    <string name="menu_hide_password">Masquer le mot de passe</string>
     <string name="menu_lock">Verrouiller la base de données</string>
     <string name="menu_open">Ouvrir</string>
     <string name="menu_search">Rechercher</string>

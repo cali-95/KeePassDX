@@ -93,8 +93,6 @@
     <string name="list_size_summary">Testuaren tamaina taldearen listan</string>
     <string name="loading_database">Datubasea kargatzen…</string>
     <string name="lowercase">minuskulak</string>
-    <string name="hide_password_title">Pasahitza estali</string>
-    <string name="hide_password_summary">Pasahitza estali modu lehenetsian</string>
     <string name="about">Honi buruz</string>
     <string name="menu_change_key_settings">Gako nagusia aldatu</string>
     <string name="settings">Ezarpenak</string>
@@ -102,7 +100,6 @@
     <string name="menu_delete">Ezabatu</string>
     <string name="menu_donate">Dirua eman</string>
     <string name="menu_edit">Editatu</string>
-    <string name="menu_hide_password">Pasahitza ezkutatu</string>
     <string name="menu_lock">Datu-basea blokeatu</string>
     <string name="menu_open">Ireki</string>
     <string name="menu_search">Bilatu</string>

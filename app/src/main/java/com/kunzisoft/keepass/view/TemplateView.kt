@@ -58,7 +58,7 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 PasskeyTextFieldView(it)
             else TextFieldView(it)).apply {
                 applyFontVisibility(mFontInVisibility)
-                setProtection(field.protectedValue.isProtected, mHideProtectedValue)
+                setProtection(field.protectedValue.isProtected)
                 label = templateAttribute.alias
                         ?: TemplateField.getLocalizedName(context, field.name)
                 setMaxChars(templateAttribute.options.getNumberChars())

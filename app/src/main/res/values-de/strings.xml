@@ -99,8 +99,6 @@
     <string name="list_size_summary">Schriftgröße der Listenelemente</string>
     <string name="loading_database">Datenbank wird geladen …</string>
     <string name="lowercase">Kleinbuchstaben</string>
-    <string name="hide_password_title">Passwörter verbergen</string>
-    <string name="hide_password_summary">Passwörter mit (***) maskieren</string>
     <string name="about">Über</string>
     <string name="menu_change_key_settings">Hauptschlüssel ändern</string>
     <string name="settings">Einstellungen</string>
@@ -108,7 +106,6 @@
     <string name="menu_delete">Löschen</string>
     <string name="menu_donate">Spenden</string>
     <string name="menu_edit">Bearbeiten</string>
-    <string name="menu_hide_password">Passwort verbergen</string>
     <string name="menu_lock">Datenbank sperren</string>
     <string name="menu_open">Öffnen</string>
     <string name="menu_search">Suche</string>

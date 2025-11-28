@@ -29,7 +29,6 @@
     <string name="menu_open">Otvori</string>
     <string name="menu_save_database">Sačuvaj podatake</string>
     <string name="menu_lock">Zaključaj bazu podataka</string>
-    <string name="menu_hide_password">Sakrij lozinku</string>
     <string name="menu_cancel">Otkaži</string>
     <string name="menu_delete">Izbriši</string>
     <string name="menu_paste">Nalepi</string>
@@ -47,8 +46,6 @@
     <string name="copy_field">Kopija od %1$s</string>
     <string name="menu_change_key_settings">Promeni glavni ključ</string>
     <string name="about">O aplikaciji</string>
-    <string name="hide_password_summary">Podrazumevaj maskiranje lozinki sa (***)</string>
-    <string name="hide_password_title">Sakrij lozinke</string>
     <string name="lowercase">Mala slova</string>
     <string name="loading_database">Učitavanje baze podataka…</string>
     <string name="creating_database">Kreiranje baze podataka…</string>

@@ -84,8 +84,6 @@
     <string name="list_size_summary">Tamaño del texto en la lista de elementos</string>
     <string name="loading_database">Cargando base de datos…</string>
     <string name="lowercase">Minúsculas</string>
-    <string name="hide_password_title">Ocultar contraseñas</string>
-    <string name="hide_password_summary">Oculta contraseñas (***) por defecto</string>
     <string name="about">Acerca de</string>
     <string name="menu_change_key_settings">Cambiar contraseña maestra</string>
     <string name="settings">Configuración</string>
@@ -93,7 +91,6 @@
     <string name="menu_delete">Eliminar</string>
     <string name="menu_donate">Donar</string>
     <string name="menu_edit">Editar</string>
-    <string name="menu_hide_password">Ocultar contraseña</string>
     <string name="menu_lock">Bloquear la base de datos</string>
     <string name="menu_open">Abrir</string>
     <string name="menu_search">Buscar</string>

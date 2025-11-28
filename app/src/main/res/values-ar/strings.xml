@@ -61,7 +61,6 @@
     <string name="list_size_summary">حجم النص في قائمة العناصر</string>
     <string name="loading_database">يحمل قاعدة البيانات…</string>
     <string name="lowercase">حروف صغيرة</string>
-    <string name="hide_password_summary">أخفِ كلمات السر (***) افتراضيًا</string>
     <string name="about">عن التطبيق</string>
     <string name="menu_change_key_settings">تغيير المفتاح الرئيسي</string>
     <string name="settings">الإعدادات</string>
@@ -143,13 +142,11 @@
     <string name="list_entries_show_username_summary">يعرض اسماء المستخدمين في قوائم المدخلات</string>
     <string name="hint_generated_password">كلمة السر مولّدة</string>
     <string name="hint_keyfile">ملف المفتاح</string>
-    <string name="hide_password_title">أخفِ كلمات السر</string>
     <string name="copy_field">نُسخة من %1$s</string>
     <string name="menu_copy">نسخ</string>
     <string name="menu_move">نقل</string>
     <string name="menu_paste">لصق</string>
     <string name="menu_cancel">ألغِ</string>
-    <string name="menu_hide_password">أخفِ كلمة السر</string>
     <string name="menu_showpass">أظهر كلمة السر</string>
     <string name="menu_url">الانتقال الى الرابط</string>
     <string name="menu_file_selection_read_only">محمي من التعديل</string>

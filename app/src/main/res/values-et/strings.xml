@@ -197,8 +197,6 @@
     <string name="hint_keyfile">Võtmefail</string>
     <string name="hint_length">Pikkus</string>
     <string name="password">Salasõna</string>
-    <string name="hide_password_title">Peida salasõnad</string>
-    <string name="hide_password_summary">Vakimisi peida salasõnad (***) maski taha</string>
     <string name="colorize_password_title">Värvi salasõnad</string>
     <string name="error_registration_read_only">Uue kirje salvestamine pole võimalik andmebaasis, milles on vaid lugemisõigus.</string>
     <string name="error_database_uri_null">Andmebaasi ühtset ressursiidentifikaatorit ei õnnestu laadida.</string>
@@ -213,7 +211,6 @@
     <string name="list_groups_show_number_entries_title">Näita kirjete arvu</string>
     <string name="show_uuid_title">Näita UUID\'d</string>
     <string name="show_uuid_summary">Näita kirje või grupiga seotud UUID\'d</string>
-    <string name="menu_hide_password">Peida salasõna</string>
     <string name="menu_showpass">Näita salasõna</string>
     <string name="error_cancel_by_user">Katkestatud kasutaja poolt.</string>
     <string name="error_driver_required">%1$s draiver on vajalik.</string>

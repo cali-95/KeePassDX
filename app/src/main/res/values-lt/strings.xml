@@ -81,7 +81,6 @@
     <string name="entry_confpassword">Patvirtinti slaptažodį</string>
     <string name="invalid_db_sig">Nepavyko atpažinti duomenų bazės formato.</string>
     <string name="sort_db">Natūrali tvarka</string>
-    <string name="menu_hide_password">Slėpti slaptažodį</string>
     <string name="app_timeout">Neveiklumas</string>
     <string name="clipboard_error_clear">Nepavyko išvalyti iškarpinės</string>
     <string name="list_size_summary">Teksto dydis grupės sąraše</string>
@@ -92,7 +91,6 @@
     <string name="search">Įrašo pavadinimas/aprašymas</string>
     <string name="menu_change_key_settings">Pakeisti pagrindinį raktą</string>
     <string name="entry_accessed">Naudota</string>
-    <string name="hide_password_title">Maskuoti slaptažodį</string>
     <string name="space">Tarpas</string>
     <string name="special">Specialus</string>
     <string name="uppercase">Didžiosios raidės</string>
@@ -100,7 +98,6 @@
     <string name="minus">Minusas</string>
     <string name="underline">Pabraukimas</string>
     <string name="default_checkbox">Naudoti šią duomenų bazę kaip numatytąją</string>
-    <string name="hide_password_summary">Slėpti slaptažodžius pagal nutylėjimą</string>
     <string name="invalid_algorithm">Neteisingas algoritmas.</string>
     <string name="error_invalid_path">Pasirūpininkite, kad kelias būtų teisingas.</string>
     <string name="education_unlock_summary">Įveskite slaptažodį ir/ar rakto failą, kad atrakintumėte savo duomenų bazę.

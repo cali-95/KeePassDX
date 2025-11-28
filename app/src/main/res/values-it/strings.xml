@@ -94,8 +94,6 @@
     <string name="list_size_summary">Dimensione del testo nell\'elenco del gruppo</string>
     <string name="loading_database">Caricamento del database…</string>
     <string name="lowercase">Minuscole</string>
-    <string name="hide_password_title">Nascondi le password</string>
-    <string name="hide_password_summary">Maschera le password (***) in modo predefinito</string>
     <string name="about">Informazioni</string>
     <string name="menu_change_key_settings">Modifica chiave principale</string>
     <string name="settings">Impostazioni</string>
@@ -103,7 +101,6 @@
     <string name="menu_delete">Elimina</string>
     <string name="menu_donate">Dona</string>
     <string name="menu_edit">Modifica</string>
-    <string name="menu_hide_password">Nascondi password</string>
     <string name="menu_lock">Blocca database</string>
     <string name="menu_open">Apri</string>
     <string name="menu_search">Cerca</string>

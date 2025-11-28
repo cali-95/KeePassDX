@@ -87,7 +87,6 @@
     <string name="menu_open">ਖੋਲ੍ਹੋ</string>
     <string name="menu_save_database">ਡਾਟਾਬੇਸ ਸੰਭਾਲੋ</string>
     <string name="menu_lock">ਡਾਟਾਬੇਸ ਲਾਕ ਕਰੋ</string>
-    <string name="menu_hide_password">ਪਾਸਵਰਡ ਲੁਕਾਓ</string>
     <string name="menu_cancel">ਰੱਦ ਕਰੋ</string>
     <string name="menu_delete">ਹਟਾਓ</string>
     <string name="menu_paste">ਚੇਪੋ</string>
@@ -105,8 +104,6 @@
     <string name="copy_field">%1$s ਦੀ ਕਾਪੀ</string>
     <string name="menu_change_key_settings">ਮਾਸਟਰ ਕੁੰਜੀ ਬਦਲੋ</string>
     <string name="about">ਇਸ ਬਾਰੇ</string>
-    <string name="hide_password_summary">ਪਾਸਵਰਡਾਂ ਨੂੰ ਮੂਲ ਰੂਪ ਵਿੱਚ ਲੁਕਾਓ (***)</string>
-    <string name="hide_password_title">ਪਾਸਵਰਡ ਲੁਕਾਓ</string>
     <string name="lowercase">ਛੋਟੇ ਅੱਖਰ (ਅੰਗਰੇਜ਼ੀ)</string>
     <string name="loading_database">…ਡਾਟਾਬੇਸ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ</string>
     <string name="creating_database">…ਡਾਟਾਬੇਸ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ</string>

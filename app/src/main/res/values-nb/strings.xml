@@ -101,8 +101,6 @@
     <string name="list_size_summary">Tekststørrelse i elemenetlisten</string>
     <string name="loading_database">Laster database…</string>
     <string name="lowercase">Små bokstaver</string>
-    <string name="hide_password_title">Masker passord</string>
-    <string name="hide_password_summary">Skjul passord som forvalg</string>
     <string name="about">Om</string>
     <string name="menu_change_key_settings">Endre hovednøkkel</string>
     <string name="copy_field">Kopi av%1$s</string>
@@ -117,7 +115,6 @@
     <string name="menu_paste">Lim inn</string>
     <string name="menu_delete">Slett</string>
     <string name="menu_cancel">Avbryt</string>
-    <string name="menu_hide_password">Skjul passord</string>
     <string name="menu_lock">Lås database</string>
     <string name="menu_open">Åpne</string>
     <string name="menu_search">Søk</string>

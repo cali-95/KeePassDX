@@ -193,8 +193,6 @@
     <string name="invalid_db_sig">S’u kuptua dot formati i bazës së të dhënave.</string>
     <string name="keyfile_is_empty">Kartela e kyçit është e zbrazët.</string>
     <string name="length">Gjatësi</string>
-    <string name="hide_password_title">Fshihi fjalëkalimet</string>
-    <string name="hide_password_summary">Si parazgjedhje, maskoji fjalëkalimet (***)</string>
     <string name="colorize_password_title">Ngjyrosi fjalëkalimet</string>
     <string name="list_entries_show_username_title">Shfaq emra përdoruesi</string>
     <string name="list_groups_show_number_entries_title">Shfaq numër zërash</string>
@@ -211,7 +209,6 @@
     <string name="menu_master_key_settings">Rregullime kyçi të përgjithshëm</string>
     <string name="menu_copy">Kopjoje</string>
     <string name="menu_cancel">Anuloje</string>
-    <string name="menu_hide_password">Fshihe fjalëkalimin</string>
     <string name="menu_lock">Kyçe bazën e të dhënave</string>
     <string name="menu_save_database">Ruaji të dhënat</string>
     <string name="menu_reload_database">Ringarko të dhënat</string>

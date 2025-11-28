@@ -83,8 +83,6 @@
     <string name="list_size_summary">Розмір тексту у переліку груп</string>
     <string name="loading_database">Завантаження бази даних…</string>
     <string name="lowercase">Малі літери</string>
-    <string name="hide_password_title">Ховати паролі</string>
-    <string name="hide_password_summary">Типово ховати паролі за (***)</string>
     <string name="about">Про KeePassDX</string>
     <string name="menu_change_key_settings">Змінити головний ключ</string>
     <string name="settings">Налаштування</string>
@@ -92,7 +90,6 @@
     <string name="menu_delete">Видалити</string>
     <string name="menu_donate">Підтримати</string>
     <string name="menu_edit">Змінити</string>
-    <string name="menu_hide_password">Сховати пароль</string>
     <string name="menu_lock">Заблокувати базу даних</string>
     <string name="menu_open">Відкрити</string>
     <string name="menu_search">Пошук</string>

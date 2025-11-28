@@ -84,8 +84,6 @@
     <string name="list_size_summary">Mida del text a la llista de grups</string>
     <string name="loading_database">Carregant base de dades…</string>
     <string name="lowercase">Minúscules</string>
-    <string name="hide_password_title">Emmascara contrasenya</string>
-    <string name="hide_password_summary">Amaga les contrasenyes per defecte</string>
     <string name="about">Sobre</string>
     <string name="menu_change_key_settings">Canvia Clau Mestra</string>
     <string name="settings">Paràmetres</string>
@@ -93,7 +91,6 @@
     <string name="menu_delete">Esborra</string>
     <string name="menu_donate">Donar</string>
     <string name="menu_edit">Editar</string>
-    <string name="menu_hide_password">Amaga contrasenya</string>
     <string name="menu_lock">Bloca la base de dades</string>
     <string name="menu_open">Obre</string>
     <string name="menu_search">Cerca</string>

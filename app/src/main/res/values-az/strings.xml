@@ -142,7 +142,6 @@
     <string name="menu_paste">Mubadilə buferindən əlavə et</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_cancel">Ləğv et</string>
-    <string name="menu_hide_password">Şifrəni gizlət</string>
     <string name="menu_lock">Məlumat bazasını kilidlə</string>
     <string name="menu_save_database">Məlumatları yadda saxla</string>
     <string name="menu_merge_database">Məlumatları birləşdir</string>
@@ -448,8 +447,6 @@
     <string name="invalid_db_sig">Məlumat bazasının formatını tanımaq mümkün olmadı.</string>
     <string name="keyfile_is_empty">Açar faylı boşdur.</string>
     <string name="length">Uzunluq</string>
-    <string name="hide_password_title">Şifrələri gizlət</string>
-    <string name="hide_password_summary">Şifrələri standart olaraq (***) ilə maskala</string>
     <string name="colorize_password_title">Şifrələri rəngləndir</string>
     <string name="colorize_password_summary">Şifrə hərflərini (simvollarını) növə görə rəngləndir</string>
     <string name="list_entries_show_username_title">İstifadəçi adlarını göstər</string>

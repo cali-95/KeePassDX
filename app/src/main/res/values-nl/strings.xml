@@ -85,8 +85,6 @@
     <string name="list_size_summary">Tekstgrootte in de itemslijst</string>
     <string name="loading_database">Database laden…</string>
     <string name="lowercase">Kleine letters</string>
-    <string name="hide_password_title">Wachtwoorden verbergen</string>
-    <string name="hide_password_summary">Wachtwoorden maskeren (***)</string>
     <string name="about">Over</string>
     <string name="menu_change_key_settings">Hoofdsleutel wijzigen</string>
     <string name="settings">Instellingen</string>
@@ -94,7 +92,6 @@
     <string name="menu_delete">Verwijderen</string>
     <string name="menu_donate">Doneren</string>
     <string name="menu_edit">Bewerken</string>
-    <string name="menu_hide_password">Wachtwoord verbergen</string>
     <string name="menu_lock">Database vergrendelen</string>
     <string name="menu_open">Openen</string>
     <string name="menu_search">Zoeken</string>

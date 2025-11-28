@@ -255,8 +255,6 @@
     <string name="passphrase">Дугачка лозинка</string>
     <string name="invalid_credentials">Није могуће прочитати податке за пријављивање.</string>
     <string name="invalid_db_same_uuid">%1$s са истим УУИД %2$s већ постоји.</string>
-    <string name="hide_password_title">Сакриј лозинке</string>
-    <string name="hide_password_summary">Подразумевај маскирање лозинки са (***)</string>
     <string name="colorize_password_title">Обојите лозинке</string>
     <string name="colorize_password_summary">Обојите знакове лозинке по типу</string>
     <string name="list_entries_show_username_title">Прикажи корисничка имена</string>
@@ -287,7 +285,6 @@
     <string name="master_key_settings_summary">Промена, обнова</string>
     <string name="menu_move">Премести</string>
     <string name="menu_cancel">Откажи</string>
-    <string name="menu_hide_password">Сакриј лозинку</string>
     <string name="menu_lock">Закључај базу података</string>
     <string name="menu_save_database">Сачувај податке</string>
     <string name="menu_merge_database">Обједини податке</string>

@@ -48,8 +48,6 @@ abstract class TemplateAbstractView<
     private var mViewFields = mutableListOf<ViewField>()
 
     protected var mFontInVisibility: Boolean = PreferencesUtil.fieldFontIsInVisibility(context)
-    protected var mHideProtectedValue: Boolean = PreferencesUtil.hideProtectedValue(context)
-
     protected var headerContainerView: ViewGroup
     protected var entryIconView: ImageView
     protected var backgroundColorView: View
@@ -121,9 +119,6 @@ abstract class TemplateAbstractView<
     }
 
     private fun buildTemplate() {
-        // Retrieve preferences
-        mHideProtectedValue = PreferencesUtil.hideProtectedValue(context)
-
         // Build each template section
         titleContainerView.removeAllViews()
         templateContainerView.removeAllViews()
@@ -282,10 +277,6 @@ abstract class TemplateAbstractView<
 
     fun setFontInVisibility(fontInVisibility: Boolean) {
         this.mFontInVisibility = fontInVisibility
-    }
-
-    fun setHideProtectedValue(hideProtectedValue: Boolean) {
-        this.mHideProtectedValue = hideProtectedValue
     }
 
     fun setEntryInfo(entryInfo: EntryInfo?) {

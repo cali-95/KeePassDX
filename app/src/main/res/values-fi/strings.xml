@@ -92,8 +92,6 @@
     <string name="list_size_summary">Tekstin koko ryhmälistauksessa</string>
     <string name="loading_database">Ladataan tietokantaa…</string>
     <string name="lowercase">pienet kirjaimet</string>
-    <string name="hide_password_title">Piilota salasana</string>
-    <string name="hide_password_summary">Piilota salasanat oletuksena</string>
     <string name="about">Tietoa</string>
     <string name="menu_change_key_settings">Vaihda pääsalasanaa</string>
     <string name="settings">Asetukset</string>
@@ -101,7 +99,6 @@
     <string name="menu_delete">Poista</string>
     <string name="menu_donate">Lahjoita</string>
     <string name="menu_edit">Muokkaa</string>
-    <string name="menu_hide_password">Piilota salasana</string>
     <string name="menu_lock">Lukitse tietokanta</string>
     <string name="menu_open">Avaa</string>
     <string name="menu_search">Etsi</string>
