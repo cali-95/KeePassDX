@@ -36,8 +36,14 @@ import java.util.UUID
 
 class EntryViewModel: ViewModel() {
 
-    private var mMainEntryId: NodeId<UUID>? = null
-    private var mHistoryPosition: Int = -1
+    var mainEntryId: NodeId<UUID>? = null
+        private set
+    var historyPosition: Int = -1
+        private set
+    var entryIsHistory: Boolean = false
+        private set
+    var entryLoaded = false
+        private set
 
     val entryInfoHistory : LiveData<EntryInfoHistory?> get() = _entryInfoHistory
     private val _entryInfoHistory = MutableLiveData<EntryInfoHistory?>()
@@ -60,12 +66,12 @@ class EntryViewModel: ViewModel() {
     private val _historySelected = SingleLiveEvent<EntryHistory>()
 
     fun loadDatabase(database: ContextualDatabase?) {
-        loadEntry(database, mMainEntryId, mHistoryPosition)
+        loadEntry(database, mainEntryId, historyPosition)
     }
 
     fun loadEntry(database: ContextualDatabase?, mainEntryId: NodeId<UUID>?, historyPosition: Int = -1) {
-        this.mMainEntryId = mainEntryId
-        this.mHistoryPosition = historyPosition
+        this.mainEntryId = mainEntryId
+        this.historyPosition = historyPosition
 
         if (database != null && mainEntryId != null) {
             IOActionTask(
@@ -104,6 +110,12 @@ class EntryViewModel: ViewModel() {
                     }
                 },
                 { entryInfoHistory ->
+                    if (entryInfoHistory != null) {
+                        this.mainEntryId = entryInfoHistory.mainEntryId
+                        this.historyPosition = historyPosition
+                        this.entryIsHistory = historyPosition > -1
+                        this.entryLoaded = true
+                    }
                     _entryInfoHistory.value = entryInfoHistory
                     _entryHistory.value = entryInfoHistory?.entryHistory
                 }

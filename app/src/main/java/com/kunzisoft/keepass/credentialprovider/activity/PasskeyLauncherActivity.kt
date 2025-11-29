@@ -31,7 +31,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.FileDatabaseSelectActivity
 import com.kunzisoft.keepass.activities.GroupActivity
@@ -43,6 +45,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerificationCondition
@@ -186,19 +189,23 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             }
         }
         lifecycleScope.launch {
-            userVerificationViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is UserVerificationViewModel.UIState.Loading -> {}
-                    is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                        passkeyLauncherViewModel.launchActionIfNeeded(
-                            userVerified = true,
-                            intent = intent,
-                            specialMode = mSpecialMode,
-                            database = uiState.database
-                        )
-                    }
-                    is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
-                        passkeyLauncherViewModel.cancelResult()
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                userVerificationViewModel.uiState.collect { uiState ->
+                    when (uiState) {
+                        is UserVerificationViewModel.UIState.Loading -> {}
+                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                            passkeyLauncherViewModel.launchActionIfNeeded(
+                                userVerified = true,
+                                intent = intent,
+                                specialMode = mSpecialMode,
+                                database = uiState.dataToVerify.database
+                            )
+                            userVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            passkeyLauncherViewModel.cancelResult()
+                            userVerificationViewModel.onUserVerificationReceived()
+                        }
                     }
                 }
             }
@@ -208,9 +215,11 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
+        // When a database is opened
         askUserVerification(
-            database = database,
-            userVerificationViewModel = userVerificationViewModel
+            userVerificationViewModel = userVerificationViewModel,
+            userVerificationCondition = intent.getUserVerificationCondition(),
+            dataToVerify = UserVerificationData(database)
         )
     }
 
@@ -227,9 +236,13 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             }
             ACTION_DATABASE_CHECK_CREDENTIAL_TASK -> {
                 if (result.isSuccess) {
-                    userVerificationViewModel.onUserVerificationSucceeded(database)
+                    userVerificationViewModel.onUserVerificationSucceeded(
+                        UserVerificationData(database)
+                    )
                 } else {
-                    userVerificationViewModel.onUserVerificationFailed(database)
+                    userVerificationViewModel.onUserVerificationFailed(
+                        UserVerificationData(database)
+                    )
                 }
             }
         }

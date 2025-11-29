@@ -14,7 +14,6 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment
 import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment.Companion.TAG_ASK_MAIN_CREDENTIAL
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
-import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.putEnumExtra
 import com.kunzisoft.keepass.view.toastError
@@ -86,12 +85,13 @@ class UserVerificationHelper {
          * Ask for the database credential otherwise
          */
         fun FragmentActivity.askUserVerification(
-            database: ContextualDatabase?,
-            userVerificationViewModel: UserVerificationViewModel
+            userVerificationViewModel: UserVerificationViewModel,
+            userVerificationCondition: Boolean,
+            dataToVerify: UserVerificationData
         ) {
-            if (this.intent.getUserVerificationCondition()) {
+            if (userVerificationCondition) {
                 // Important to check the nullable database here
-                database?.let {
+                dataToVerify.database?.let {
                     if (isAuthenticatorsAllowed()) {
                         BiometricPrompt(
                             this, ContextCompat.getMainExecutor(this),
@@ -113,20 +113,20 @@ class UserVerificationHelper {
                                             toastError(SecurityException("Authentication error: $errString"))
                                         }
                                     }
-                                    userVerificationViewModel.onUserVerificationFailed(database)
+                                    userVerificationViewModel.onUserVerificationFailed(dataToVerify)
                                 }
 
                                 override fun onAuthenticationSucceeded(
                                     result: BiometricPrompt.AuthenticationResult
                                 ) {
                                     super.onAuthenticationSucceeded(result)
-                                    userVerificationViewModel.onUserVerificationSucceeded(database)
+                                    userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
                                 }
 
                                 override fun onAuthenticationFailed() {
                                     super.onAuthenticationFailed()
                                     toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
-                                    userVerificationViewModel.onUserVerificationFailed(database)
+                                    userVerificationViewModel.onUserVerificationFailed(dataToVerify)
                                 }
                             }).authenticate(
                             BiometricPrompt.PromptInfo.Builder()
@@ -141,7 +141,7 @@ class UserVerificationHelper {
                             .findFragmentByTag(TAG_ASK_MAIN_CREDENTIAL) as? MainCredentialDialogFragment?
                         if (mainCredentialDialogFragment == null) {
                             mainCredentialDialogFragment = MainCredentialDialogFragment
-                                .getInstance(database.fileUri)
+                                .getInstance(dataToVerify.database.fileUri)
                             mainCredentialDialogFragment.show(
                                 supportFragmentManager,
                                 TAG_ASK_MAIN_CREDENTIAL
@@ -150,7 +150,7 @@ class UserVerificationHelper {
                     }
                 }
             } else {
-                userVerificationViewModel.onUserVerificationSucceeded(database)
+                userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
             }
         }
     }

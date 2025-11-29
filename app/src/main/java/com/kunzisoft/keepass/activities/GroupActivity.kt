@@ -52,7 +52,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -73,6 +75,8 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeModes
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
@@ -122,6 +126,7 @@ import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.GroupEditViewModel
 import com.kunzisoft.keepass.viewmodels.GroupViewModel
 import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 import org.joda.time.LocalDateTime
 import java.util.EnumSet
@@ -158,6 +163,7 @@ class GroupActivity : DatabaseLockActivity(),
     private val mGroupViewModel: GroupViewModel by viewModels()
     private val mGroupEditViewModel: GroupEditViewModel by viewModels()
     private val mMainCredentialViewModel: MainCredentialViewModel by viewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private val mGroupActivityEducation = GroupActivityEducation(this)
 
@@ -561,6 +567,33 @@ class GroupActivity : DatabaseLockActivity(),
                     }
                     is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
                         // Noting here
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mUserVerificationViewModel.uiState.collect { uIState ->
+                    when (uIState) {
+                        is UserVerificationViewModel.UIState.Loading -> {}
+                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                            uIState.dataToVerify.database?.let { database ->
+                                uIState.dataToVerify.entryId?.let { entryId ->
+                                    EntryEditActivity.launch(
+                                        activity = this@GroupActivity,
+                                        database = database,
+                                        registrationType = EntryEditActivity.RegistrationType.UPDATE,
+                                        nodeId = entryId,
+                                        activityResultLauncher = mEntryActivityResultLauncher
+                                    )
+                                }
+                            }
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
                     }
                 }
             }
@@ -1060,12 +1093,10 @@ class GroupActivity : DatabaseLockActivity(),
                 launchDialogForGroupUpdate(node as Group)
             }
             Type.ENTRY -> {
-                EntryEditActivity.launch(
-                    activity = this@GroupActivity,
-                    database = database,
-                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
-                    nodeId = (node as Entry).nodeId,
-                    activityResultLauncher = mEntryActivityResultLauncher
+                askUserVerification(
+                    userVerificationViewModel = mUserVerificationViewModel,
+                    userVerificationCondition = true,
+                    dataToVerify = UserVerificationData(database,node.nodeId)
                 )
             }
         }
