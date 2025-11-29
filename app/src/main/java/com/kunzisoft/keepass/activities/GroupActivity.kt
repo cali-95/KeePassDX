@@ -77,6 +77,7 @@ import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
@@ -1095,7 +1096,8 @@ class GroupActivity : DatabaseLockActivity(),
             Type.ENTRY -> {
                 askUserVerification(
                     userVerificationViewModel = mUserVerificationViewModel,
-                    userVerificationCondition = true,
+                    userVerificationCondition = (node as Entry).getEntryInfo(database)
+                        .isUserVerificationNeeded(),
                     dataToVerify = UserVerificationData(database,node.nodeId)
                 )
             }

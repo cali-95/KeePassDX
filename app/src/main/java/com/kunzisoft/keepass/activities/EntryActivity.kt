@@ -58,6 +58,7 @@ import com.kunzisoft.keepass.adapters.TagsAdapter
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -504,7 +505,8 @@ class EntryActivity : DatabaseLockActivity() {
             R.id.menu_edit -> {
                 askUserVerification(
                     userVerificationViewModel = mUserVerificationViewModel,
-                    userVerificationCondition = true,
+                    userVerificationCondition = mEntryViewModel.entryInfo
+                        ?.isUserVerificationNeeded() == true,
                     dataToVerify = UserVerificationData(mDatabase, mEntryViewModel.mainEntryId)
                 )
                 return true

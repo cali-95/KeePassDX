@@ -38,6 +38,8 @@ class EntryViewModel: ViewModel() {
 
     var mainEntryId: NodeId<UUID>? = null
         private set
+    var entryInfo: EntryInfo? = null
+        private set
     var historyPosition: Int = -1
         private set
     var entryIsHistory: Boolean = false
@@ -112,6 +114,7 @@ class EntryViewModel: ViewModel() {
                 { entryInfoHistory ->
                     if (entryInfoHistory != null) {
                         this.mainEntryId = entryInfoHistory.mainEntryId
+                        this.entryInfo = entryInfoHistory.entryInfo
                         this.historyPosition = historyPosition
                         this.entryIsHistory = historyPosition > -1
                         this.entryLoaded = true

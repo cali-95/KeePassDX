@@ -14,6 +14,7 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment
 import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment.Companion.TAG_ASK_MAIN_CREDENTIAL
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
+import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.putEnumExtra
 import com.kunzisoft.keepass.view.toastError
@@ -77,6 +78,13 @@ class UserVerificationHelper {
         fun Intent.getUserVerificationCondition(): Boolean {
             return (getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
                 ?: UserVerificationRequirement.PREFERRED) == UserVerificationRequirement.REQUIRED
+        }
+
+        /**
+         * Check if the User needs to be verified for this entry
+         */
+        fun EntryInfo.isUserVerificationNeeded(): Boolean {
+            return this.passkey != null
         }
 
         /**
