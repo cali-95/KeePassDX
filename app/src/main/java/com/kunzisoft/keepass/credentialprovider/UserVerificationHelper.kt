@@ -2,7 +2,9 @@ package com.kunzisoft.keepass.credentialprovider
 
 import android.content.Context
 import android.content.Intent
+import android.provider.Settings
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -11,8 +13,6 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.kunzisoft.keepass.R
-import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment
-import com.kunzisoft.keepass.activities.dialogs.MainCredentialDialogFragment.Companion.TAG_ASK_MAIN_CREDENTIAL
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.utils.getEnumExtra
@@ -97,69 +97,77 @@ class UserVerificationHelper {
             userVerificationCondition: Boolean,
             dataToVerify: UserVerificationData
         ) {
-            if (userVerificationCondition) {
+            if (isAuthenticatorsAllowed() && userVerificationCondition) {
                 // Important to check the nullable database here
                 dataToVerify.database?.let {
-                    if (isAuthenticatorsAllowed()) {
-                        BiometricPrompt(
-                            this, ContextCompat.getMainExecutor(this),
-                            object : BiometricPrompt.AuthenticationCallback() {
-                                override fun onAuthenticationError(
-                                    errorCode: Int,
-                                    errString: CharSequence
-                                ) {
-                                    super.onAuthenticationError(errorCode, errString)
-                                    when (errorCode) {
-                                        BiometricPrompt.ERROR_CANCELED,
-                                        BiometricPrompt.ERROR_NEGATIVE_BUTTON,
-                                        BiometricPrompt.ERROR_USER_CANCELED -> {
-                                            // No operation
-                                            Log.i("UserVerification", "$errString")
-                                        }
-
-                                        else -> {
-                                            toastError(SecurityException("Authentication error: $errString"))
-                                        }
+                    BiometricPrompt(
+                        this, ContextCompat.getMainExecutor(this),
+                        object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationError(
+                                errorCode: Int,
+                                errString: CharSequence
+                            ) {
+                                super.onAuthenticationError(errorCode, errString)
+                                when (errorCode) {
+                                    BiometricPrompt.ERROR_CANCELED,
+                                    BiometricPrompt.ERROR_NEGATIVE_BUTTON,
+                                    BiometricPrompt.ERROR_USER_CANCELED -> {
+                                        // No operation
+                                        Log.i("UserVerification", "$errString")
                                     }
-                                    userVerificationViewModel.onUserVerificationFailed(dataToVerify)
-                                }
 
-                                override fun onAuthenticationSucceeded(
-                                    result: BiometricPrompt.AuthenticationResult
-                                ) {
-                                    super.onAuthenticationSucceeded(result)
-                                    userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
+                                    else -> {
+                                        toastError(SecurityException("Authentication error: $errString"))
+                                    }
                                 }
+                                userVerificationViewModel.onUserVerificationFailed(dataToVerify)
+                            }
 
-                                override fun onAuthenticationFailed() {
-                                    super.onAuthenticationFailed()
-                                    toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
-                                    userVerificationViewModel.onUserVerificationFailed(dataToVerify)
-                                }
-                            }).authenticate(
-                            BiometricPrompt.PromptInfo.Builder()
-                                .setTitle(getString(R.string.user_verification_required))
-                                .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
-                                .setConfirmationRequired(false)
-                                .build()
-                        )
-                    } else {
-                        // TODO Check fragment
-                        var mainCredentialDialogFragment = supportFragmentManager
-                            .findFragmentByTag(TAG_ASK_MAIN_CREDENTIAL) as? MainCredentialDialogFragment?
-                        if (mainCredentialDialogFragment == null) {
-                            mainCredentialDialogFragment = MainCredentialDialogFragment
-                                .getInstance(dataToVerify.database.fileUri)
-                            mainCredentialDialogFragment.show(
-                                supportFragmentManager,
-                                TAG_ASK_MAIN_CREDENTIAL
-                            )
-                        }
-                    }
+                            override fun onAuthenticationSucceeded(
+                                result: BiometricPrompt.AuthenticationResult
+                            ) {
+                                super.onAuthenticationSucceeded(result)
+                                userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
+                            }
+
+                            override fun onAuthenticationFailed() {
+                                super.onAuthenticationFailed()
+                                toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
+                                userVerificationViewModel.onUserVerificationFailed(dataToVerify)
+                            }
+                        }).authenticate(
+                        BiometricPrompt.PromptInfo.Builder()
+                            .setTitle(getString(R.string.user_verification_required))
+                            .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
+                            .setConfirmationRequired(false)
+                            .build()
+                    )
                 }
             } else {
                 userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
             }
+        }
+
+        fun FragmentActivity.showUserVerificationMessage(
+            onActionPerformed: () -> Unit
+        ) {
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.set_up_user_verification_passkeys_title))
+                .setMessage(getString(R.string.set_up_user_verification_passkeys_description))
+                .setPositiveButton(resources.getString(R.string.set_up_user_verification)
+                ) { _, _ ->
+                    startActivity(Intent(Settings.ACTION_SECURITY_SETTINGS))
+                    onActionPerformed()
+                }
+                .setNegativeButton(resources.getString(android.R.string.cancel)
+                ) { _, _ ->
+                    onActionPerformed()
+                }
+                .setOnDismissListener {
+                    onActionPerformed()
+                }
+                .create()
+                .show()
         }
     }
 }

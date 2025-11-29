@@ -412,7 +412,6 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
         }
         warningAlertDialog = AlertDialog.Builder(activity)
             .setMessage(message)
-            .setIcon(android.R.drawable.ic_dialog_alert)
             .setPositiveButton(resources.getString(android.R.string.ok)
             ) { _, _ ->
                 validate?.invoke()

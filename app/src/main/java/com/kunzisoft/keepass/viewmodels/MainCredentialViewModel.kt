@@ -28,6 +28,10 @@ class MainCredentialViewModel: ViewModel() {
         mUiState.value = UIState.OnMainCredentialCanceled(databaseUri, MainCredential())
     }
 
+    fun onActionReceived() {
+        mUiState.value = UIState.Loading
+    }
+
     sealed class UIState {
         object Loading: UIState()
         data class OnMainCredentialEntered(

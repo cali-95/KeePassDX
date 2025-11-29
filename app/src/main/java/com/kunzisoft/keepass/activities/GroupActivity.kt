@@ -559,15 +559,17 @@ class GroupActivity : DatabaseLockActivity(),
         }
 
         lifecycleScope.launch {
-            // Initialize the parameters
-            mMainCredentialViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is MainCredentialViewModel.UIState.Loading -> {}
-                    is MainCredentialViewModel.UIState.OnMainCredentialEntered -> {
-                        mergeDatabaseFrom(uiState.databaseUri, uiState.mainCredential)
-                    }
-                    is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
-                        // Noting here
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mMainCredentialViewModel.uiState.collect { uiState ->
+                    when (uiState) {
+                        is MainCredentialViewModel.UIState.Loading -> {}
+                        is MainCredentialViewModel.UIState.OnMainCredentialEntered -> {
+                            mergeDatabaseFrom(uiState.databaseUri, uiState.mainCredential)
+                            mMainCredentialViewModel.onActionReceived()
+                        }
+                        is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
+                            mMainCredentialViewModel.onActionReceived()
+                        }
                     }
                 }
             }

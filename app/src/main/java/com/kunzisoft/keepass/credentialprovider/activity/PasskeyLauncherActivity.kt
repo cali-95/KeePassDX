@@ -50,6 +50,8 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerificationCondition
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerifiedWithAuth
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isAuthenticatorsAllowed
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.showUserVerificationMessage
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
@@ -64,7 +66,6 @@ import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.view.toastError
-import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
 import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 import java.util.UUID
@@ -73,7 +74,6 @@ import java.util.UUID
 class PasskeyLauncherActivity : DatabaseLockActivity() {
 
     private val passkeyLauncherViewModel: PasskeyLauncherViewModel by viewModels()
-    private val mainCredentialViewModel: MainCredentialViewModel by viewModels()
     private val userVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private var mPasskeySelectionActivityResultLauncher: ActivityResultLauncher<Intent>? =
@@ -176,19 +176,6 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             }
         }
         lifecycleScope.launch {
-            mainCredentialViewModel.uiState.collect { uiState ->
-                when (uiState) {
-                    is MainCredentialViewModel.UIState.Loading -> {}
-                    is MainCredentialViewModel.UIState.OnMainCredentialEntered ->  {
-                        checkMainCredential(uiState.mainCredential)
-                    }
-                    is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
-                        userVerificationViewModel.onUserVerificationFailed()
-                    }
-                }
-            }
-        }
-        lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 userVerificationViewModel.uiState.collect { uiState ->
                     when (uiState) {
@@ -215,12 +202,17 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        // When a database is opened
-        askUserVerification(
-            userVerificationViewModel = userVerificationViewModel,
-            userVerificationCondition = intent.getUserVerificationCondition(),
-            dataToVerify = UserVerificationData(database)
-        )
+        if (isAuthenticatorsAllowed()) {
+            askUserVerification(
+                userVerificationViewModel = userVerificationViewModel,
+                userVerificationCondition = intent.getUserVerificationCondition(),
+                dataToVerify = UserVerificationData(database)
+            )
+        } else {
+            showUserVerificationMessage {
+                userVerificationViewModel.onUserVerificationFailed()
+            }
+        }
     }
 
     override fun onDatabaseActionFinished(
