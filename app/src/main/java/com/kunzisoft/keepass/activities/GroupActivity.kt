@@ -76,7 +76,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSea
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
@@ -584,17 +584,7 @@ class GroupActivity : DatabaseLockActivity(),
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            uIState.dataToVerify.database?.let { database ->
-                                uIState.dataToVerify.entryId?.let { entryId ->
-                                    EntryEditActivity.launch(
-                                        activity = this@GroupActivity,
-                                        database = database,
-                                        registrationType = EntryEditActivity.RegistrationType.UPDATE,
-                                        nodeId = entryId,
-                                        activityResultLauncher = mEntryActivityResultLauncher
-                                    )
-                                }
-                            }
+                            editEntry(uIState.dataToVerify.database,  uIState.dataToVerify.entryId)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
@@ -1047,6 +1037,20 @@ class GroupActivity : DatabaseLockActivity(),
         ).containsSearchInfo(searchInfo)
     }
 
+    private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
+        database?.let {
+            entryId?.let {
+                EntryEditActivity.launch(
+                    activity = this@GroupActivity,
+                    database = database,
+                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
+                    nodeId = entryId,
+                    activityResultLauncher = mEntryActivityResultLauncher
+                )
+            }
+        }
+    }
+
     private fun finishNodeAction() {
         actionNodeMode?.finish()
     }
@@ -1096,12 +1100,14 @@ class GroupActivity : DatabaseLockActivity(),
                 launchDialogForGroupUpdate(node as Group)
             }
             Type.ENTRY -> {
-                askUserVerification(
-                    userVerificationViewModel = mUserVerificationViewModel,
-                    userVerificationCondition = (node as Entry).getEntryInfo(database)
-                        .isUserVerificationNeeded(),
-                    dataToVerify = UserVerificationData(database,node.nodeId)
-                )
+                if ((node as Entry).getEntryInfo(database).isUserVerificationNeeded()) {
+                    checkUserVerification(
+                        userVerificationViewModel = mUserVerificationViewModel,
+                        dataToVerify = UserVerificationData(database, node.nodeId)
+                    )
+                } else {
+                    editEntry(database, node.nodeId)
+                }
             }
         }
         return true

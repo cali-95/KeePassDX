@@ -75,9 +75,14 @@ class UserVerificationHelper {
         /**
          * Get the User Verification from the intent
          */
-        fun Intent.getUserVerificationCondition(): Boolean {
-            return (getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
-                ?: UserVerificationRequirement.PREFERRED) == UserVerificationRequirement.REQUIRED
+        fun Intent.isUserVerificationNeeded(userVerificationPreferred: Boolean): Boolean {
+            val userVerification: UserVerificationRequirement =
+                getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
+                ?: UserVerificationRequirement.PREFERRED
+            return (userVerification == UserVerificationRequirement.REQUIRED
+                    || (userVerificationPreferred
+                        && userVerification == UserVerificationRequirement.PREFERRED)
+                    )
         }
 
         /**
@@ -87,65 +92,64 @@ class UserVerificationHelper {
             return this.passkey != null
         }
 
-        /**
-         * Ask the user for verification
-         * Ask for the biometric if defined on the device
-         * Ask for the database credential otherwise
-         */
-        fun FragmentActivity.askUserVerification(
+        fun FragmentActivity.checkUserVerification(
             userVerificationViewModel: UserVerificationViewModel,
-            userVerificationCondition: Boolean,
             dataToVerify: UserVerificationData
         ) {
-            if (isAuthenticatorsAllowed() && userVerificationCondition) {
-                // Important to check the nullable database here
-                dataToVerify.database?.let {
-                    BiometricPrompt(
-                        this, ContextCompat.getMainExecutor(this),
-                        object : BiometricPrompt.AuthenticationCallback() {
-                            override fun onAuthenticationError(
-                                errorCode: Int,
-                                errString: CharSequence
-                            ) {
-                                super.onAuthenticationError(errorCode, errString)
-                                when (errorCode) {
-                                    BiometricPrompt.ERROR_CANCELED,
-                                    BiometricPrompt.ERROR_NEGATIVE_BUTTON,
-                                    BiometricPrompt.ERROR_USER_CANCELED -> {
-                                        // No operation
-                                        Log.i("UserVerification", "$errString")
-                                    }
-
-                                    else -> {
-                                        toastError(SecurityException("Authentication error: $errString"))
-                                    }
-                                }
-                                userVerificationViewModel.onUserVerificationFailed(dataToVerify)
-                            }
-
-                            override fun onAuthenticationSucceeded(
-                                result: BiometricPrompt.AuthenticationResult
-                            ) {
-                                super.onAuthenticationSucceeded(result)
-                                userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
-                            }
-
-                            override fun onAuthenticationFailed() {
-                                super.onAuthenticationFailed()
-                                toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
-                                userVerificationViewModel.onUserVerificationFailed(dataToVerify)
-                            }
-                        }).authenticate(
-                        BiometricPrompt.PromptInfo.Builder()
-                            .setTitle(getString(R.string.user_verification_required))
-                            .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
-                            .setConfirmationRequired(false)
-                            .build()
-                    )
-                }
+            if (isAuthenticatorsAllowed()) {
+                showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
             } else {
-                userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
+                showUserVerificationMessage {
+                    userVerificationViewModel.onUserVerificationFailed()
+                }
             }
+        }
+
+        fun FragmentActivity.showUserVerificationDeviceCredential(
+            userVerificationViewModel: UserVerificationViewModel,
+            dataToVerify: UserVerificationData
+        ) {
+            BiometricPrompt(
+                this, ContextCompat.getMainExecutor(this),
+                object : BiometricPrompt.AuthenticationCallback() {
+                    override fun onAuthenticationError(
+                        errorCode: Int,
+                        errString: CharSequence
+                    ) {
+                        super.onAuthenticationError(errorCode, errString)
+                        when (errorCode) {
+                            BiometricPrompt.ERROR_CANCELED,
+                            BiometricPrompt.ERROR_NEGATIVE_BUTTON,
+                            BiometricPrompt.ERROR_USER_CANCELED -> {
+                                // No operation
+                                Log.i("UserVerification", "$errString")
+                            }
+                            else -> {
+                                toastError(SecurityException("Authentication error: $errString"))
+                            }
+                        }
+                        userVerificationViewModel.onUserVerificationFailed(dataToVerify)
+                    }
+
+                    override fun onAuthenticationSucceeded(
+                        result: BiometricPrompt.AuthenticationResult
+                    ) {
+                        super.onAuthenticationSucceeded(result)
+                        userVerificationViewModel.onUserVerificationSucceeded(dataToVerify)
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        toastError(SecurityException(getString(R.string.device_unlock_not_recognized)))
+                        userVerificationViewModel.onUserVerificationFailed(dataToVerify)
+                    }
+                }).authenticate(
+                BiometricPrompt.PromptInfo.Builder()
+                    .setTitle(getString(R.string.user_verification_required))
+                    .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
+                    .setConfirmationRequired(false)
+                    .build()
+            )
         }
 
         fun FragmentActivity.showUserVerificationMessage(

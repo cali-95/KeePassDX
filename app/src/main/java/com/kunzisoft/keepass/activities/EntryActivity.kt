@@ -57,7 +57,7 @@ import com.kunzisoft.keepass.activities.legacy.DatabaseLockActivity
 import com.kunzisoft.keepass.adapters.TagsAdapter
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
@@ -331,17 +331,7 @@ class EntryActivity : DatabaseLockActivity() {
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            uIState.dataToVerify.database?.let { database ->
-                                uIState.dataToVerify.entryId?.let { entryId ->
-                                    EntryEditActivity.launch(
-                                        activity = this@EntryActivity,
-                                        database = database,
-                                        registrationType = EntryEditActivity.RegistrationType.UPDATE,
-                                        nodeId = entryId,
-                                        activityResultLauncher = mEntryActivityResultLauncher
-                                    )
-                                }
-                            }
+                            editEntry(uIState.dataToVerify.database, uIState.dataToVerify.entryId)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
@@ -500,15 +490,31 @@ class EntryActivity : DatabaseLockActivity() {
         }
     }
 
+    private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
+        database?.let { database ->
+            entryId?.let { entryId ->
+                EntryEditActivity.launch(
+                    activity = this@EntryActivity,
+                    database = database,
+                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
+                    nodeId = entryId,
+                    activityResultLauncher = mEntryActivityResultLauncher
+                )
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_edit -> {
-                askUserVerification(
-                    userVerificationViewModel = mUserVerificationViewModel,
-                    userVerificationCondition = mEntryViewModel.entryInfo
-                        ?.isUserVerificationNeeded() == true,
-                    dataToVerify = UserVerificationData(mDatabase, mEntryViewModel.mainEntryId)
-                )
+                if (mEntryViewModel.entryInfo?.isUserVerificationNeeded() == true) {
+                    checkUserVerification(
+                        userVerificationViewModel = mUserVerificationViewModel,
+                        dataToVerify = UserVerificationData(mDatabase, mEntryViewModel.mainEntryId)
+                    )
+                } else {
+                    editEntry(mDatabase, mEntryViewModel.mainEntryId)
+                }
                 return true
             }
             R.id.menu_restore_entry_history -> {

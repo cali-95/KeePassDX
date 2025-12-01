@@ -47,11 +47,9 @@ import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.askUserVerification
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerificationCondition
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerifiedWithAuth
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isAuthenticatorsAllowed
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.showUserVerificationMessage
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
@@ -63,6 +61,7 @@ import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CHECK_CREDENTIAL_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
+import com.kunzisoft.keepass.settings.PreferencesUtil.isPasskeyUserVerificationPreferred
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.view.toastError
@@ -202,16 +201,20 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        if (isAuthenticatorsAllowed()) {
-            askUserVerification(
+        val userVerificationNeeded = intent.isUserVerificationNeeded(
+            userVerificationPreferred = isPasskeyUserVerificationPreferred(this)
+        ) && intent.getUserVerifiedWithAuth().not()
+        if (userVerificationNeeded) {
+            checkUserVerification(
                 userVerificationViewModel = userVerificationViewModel,
-                userVerificationCondition = intent.getUserVerificationCondition(),
                 dataToVerify = UserVerificationData(database)
             )
         } else {
-            showUserVerificationMessage {
-                userVerificationViewModel.onUserVerificationFailed()
-            }
+            passkeyLauncherViewModel.launchActionIfNeeded(
+                intent = intent,
+                specialMode = mSpecialMode,
+                database = database
+            )
         }
     }
 

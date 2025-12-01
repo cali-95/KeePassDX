@@ -434,6 +434,8 @@
     <string name="passkeys_missing_signature_app_ask_question">Add app signature to passkey entry?</string>
     <string name="passkeys_auto_select_title">Auto select</string>
     <string name="passkeys_auto_select_summary">Auto select if only one entry and the database is open, only if the requesting app is compatible</string>
+    <string name="passkeys_user_verification_preferred_title">Preferred User Verification</string>
+    <string name="passkeys_user_verification_preferred_summary">Perform a user verification to access sensitive data when the relying party requests \"preferred\".</string>
     <string name="passkeys_backup_eligibility_title">Backup Eligibility</string>
     <string name="passkeys_backup_eligibility_summary">Determine at creation time whether the public key credential source is allowed to be backed up</string>
     <string name="passkeys_backup_state_title">Backup State</string>

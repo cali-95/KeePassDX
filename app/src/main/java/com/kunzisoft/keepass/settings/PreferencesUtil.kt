@@ -690,6 +690,12 @@ object PreferencesUtil {
             context.resources.getBoolean(R.bool.passkeys_close_database_default))
     }
 
+    fun isPasskeyUserVerificationPreferred(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.passkeys_user_verification_preferred_key),
+            context.resources.getBoolean(R.bool.passkeys_user_verification_preferred_default))
+    }
+
     fun isPasskeyBackupEligibilityEnable(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.passkeys_backup_eligibility_key),

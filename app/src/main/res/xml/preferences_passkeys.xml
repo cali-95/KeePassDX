@@ -38,6 +38,11 @@
     <PreferenceCategory
         android:title="@string/database">
         <SwitchPreferenceCompat
+            android:key="@string/passkeys_user_verification_preferred_key"
+            android:title="@string/passkeys_user_verification_preferred_title"
+            android:summary="@string/passkeys_user_verification_preferred_summary"
+            android:defaultValue="@bool/passkeys_user_verification_preferred_default"/>
+        <SwitchPreferenceCompat
             android:key="@string/passkeys_backup_eligibility_key"
             android:title="@string/passkeys_backup_eligibility_title"
             android:summary="@string/passkeys_backup_eligibility_summary"
