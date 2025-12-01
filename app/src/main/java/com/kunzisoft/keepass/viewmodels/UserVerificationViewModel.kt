@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 class UserVerificationViewModel: ViewModel() {
 
     private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
-    val uiState: StateFlow<UIState> = mUiState
+    val userVerificationState: StateFlow<UIState> = mUiState
 
     var dataToVerify: UserVerificationData = UserVerificationData()
 

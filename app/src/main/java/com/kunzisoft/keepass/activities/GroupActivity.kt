@@ -578,15 +578,15 @@ class GroupActivity : DatabaseLockActivity(),
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                mUserVerificationViewModel.uiState.collect { uIState ->
-                    when (uIState) {
+                mUserVerificationViewModel.userVerificationState.collect { uVState ->
+                    when (uVState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
-                            coordinatorLayout?.showError(uIState.error)
+                            coordinatorLayout?.showError(uVState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            editEntry(uIState.dataToVerify.database,  uIState.dataToVerify.entryId)
+                            editEntry(uVState.dataToVerify.database,  uVState.dataToVerify.entryId)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }

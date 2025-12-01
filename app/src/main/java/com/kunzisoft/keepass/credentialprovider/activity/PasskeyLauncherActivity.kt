@@ -175,7 +175,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
         }
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                userVerificationViewModel.uiState.collect { uiState ->
+                userVerificationViewModel.userVerificationState.collect { uiState ->
                     when (uiState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {

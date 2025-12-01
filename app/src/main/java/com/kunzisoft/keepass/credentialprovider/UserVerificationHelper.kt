@@ -9,6 +9,7 @@ import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
 import androidx.biometric.BiometricManager.BIOMETRIC_SUCCESS
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.CheckDatabaseCredentialDialogFragment
@@ -89,6 +90,17 @@ class UserVerificationHelper {
          */
         fun EntryInfo.isUserVerificationNeeded(): Boolean {
             return this.passkey != null
+        }
+
+        fun Fragment.checkUserVerification(
+            userVerificationViewModel: UserVerificationViewModel,
+            dataToVerify: UserVerificationData
+        ) {
+            if (context?.isAuthenticatorsAllowed() == true) {
+                activity?.showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
+            } else {
+                activity?.showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
+            }
         }
 
         fun FragmentActivity.checkUserVerification(
