@@ -84,6 +84,7 @@ import com.kunzisoft.keepass.view.changeTitleColor
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.viewmodels.EntryViewModel
 import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
@@ -214,7 +215,7 @@ class EntryActivity : DatabaseLockActivity() {
 
                 mEntryViewModel.loadEntry(mDatabase, mainEntryId, historyPosition)
             }
-        } catch (e: ClassCastException) {
+        } catch (_: ClassCastException) {
             Log.e(TAG, "Unable to retrieve the entry key")
         }
 
@@ -328,6 +329,7 @@ class EntryActivity : DatabaseLockActivity() {
                     when (uIState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uIState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {

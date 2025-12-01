@@ -42,7 +42,6 @@ import com.kunzisoft.keepass.database.exception.DatabaseException
 import com.kunzisoft.keepass.database.exception.DatabaseInputException
 import com.kunzisoft.keepass.database.exception.DatabaseOutputException
 import com.kunzisoft.keepass.database.exception.FileNotFoundDatabaseException
-import com.kunzisoft.keepass.database.exception.InvalidCredentialsDatabaseException
 import com.kunzisoft.keepass.database.exception.MergeDatabaseKDBException
 import com.kunzisoft.keepass.database.exception.SignatureDatabaseException
 import com.kunzisoft.keepass.database.file.DatabaseHeaderKDB
@@ -391,6 +390,9 @@ open class Database {
     val transformSeed: ByteArray?
         get() = mDatabaseKDB?.transformSeed ?: mDatabaseKDBX?.transformSeed
 
+    private val checkKey: ByteArray
+        get() = mDatabaseKDB?.checkKey ?: mDatabaseKDBX?.checkKey ?: ByteArray(32)
+
     var rootGroup: Group?
         get() {
             mDatabaseKDB?.rootGroup?.let {
@@ -619,51 +621,11 @@ open class Database {
         }
     }
 
-    fun checkMasterKey(
-        databaseStream: InputStream,
-        masterCredential: MasterCredential,
-        challengeResponseRetriever: (HardwareKey, ByteArray?) -> ByteArray,
-        progressTaskUpdater: ProgressTaskUpdater?
-    ) {
-        try {
-            var masterKey = byteArrayOf()
-            // Read database stream for the first time
-            readDatabaseStream(databaseStream,
-                { databaseInputStream ->
-                    val databaseKDB = DatabaseKDB()
-                    DatabaseInputKDB(databaseKDB)
-                        .openDatabase(databaseInputStream,
-                            progressTaskUpdater
-                        ) {
-                            databaseKDB.deriveMasterKey(
-                                masterCredential
-                            )
-                        }
-                    masterKey = databaseKDB.masterKey
-                },
-                { databaseInputStream ->
-                    val databaseKDBX = DatabaseKDBX()
-                    DatabaseInputKDBX(databaseKDBX).apply {
-                        openDatabase(databaseInputStream,
-                            progressTaskUpdater) {
-                            databaseKDBX.deriveMasterKey(
-                                masterCredential,
-                                challengeResponseRetriever
-                            )
-                        }
-                    }
-                    masterKey = databaseKDBX.masterKey
-                }
-            )
-            if (!this.masterKey.contentEquals(masterKey)) {
-                throw InvalidCredentialsDatabaseException()
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Unable to check the main credential")
-            if (e is DatabaseInputException)
-                throw e
-            throw DatabaseInputException(e)
-        }
+    /**
+     * Check if the key is valid
+     */
+    fun checkKey(key: ByteArray): Boolean {
+        return checkKey.contentEquals(key)
     }
 
     fun isMergeDataAllowed(): Boolean {
@@ -1268,7 +1230,7 @@ open class Database {
     }
 
     fun undoRecycle(entry: Entry, parent: Group) {
-        recycleBin?.let { it ->
+        recycleBin?.let {
             removeEntryFrom(entry, it)
         }
         addEntryTo(entry, parent)

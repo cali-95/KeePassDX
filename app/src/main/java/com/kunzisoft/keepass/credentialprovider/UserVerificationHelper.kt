@@ -2,9 +2,7 @@ package com.kunzisoft.keepass.credentialprovider
 
 import android.content.Context
 import android.content.Intent
-import android.provider.Settings
 import android.util.Log
-import androidx.appcompat.app.AlertDialog
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_WEAK
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -13,6 +11,7 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import com.kunzisoft.keepass.R
+import com.kunzisoft.keepass.activities.dialogs.CheckDatabaseCredentialDialogFragment
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.utils.getEnumExtra
@@ -99,9 +98,7 @@ class UserVerificationHelper {
             if (isAuthenticatorsAllowed()) {
                 showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
             } else {
-                showUserVerificationMessage {
-                    userVerificationViewModel.onUserVerificationFailed()
-                }
+                showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
             }
         }
 
@@ -145,33 +142,22 @@ class UserVerificationHelper {
                     }
                 }).authenticate(
                 BiometricPrompt.PromptInfo.Builder()
-                    .setTitle(getString(R.string.user_verification_required))
+                    .setTitle(getString(R.string.user_verification_required_title))
+                    .setSubtitle(getString(R.string.user_verification_required_description))
                     .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
                     .setConfirmationRequired(false)
                     .build()
             )
         }
 
-        fun FragmentActivity.showUserVerificationMessage(
-            onActionPerformed: () -> Unit
+        fun FragmentActivity.showUserVerificationDatabaseCredential(
+            userVerificationViewModel: UserVerificationViewModel,
+            dataToVerify: UserVerificationData
         ) {
-            AlertDialog.Builder(this)
-                .setTitle(getString(R.string.set_up_user_verification_passkeys_title))
-                .setMessage(getString(R.string.set_up_user_verification_passkeys_description))
-                .setPositiveButton(resources.getString(R.string.set_up_user_verification)
-                ) { _, _ ->
-                    startActivity(Intent(Settings.ACTION_SECURITY_SETTINGS))
-                    onActionPerformed()
-                }
-                .setNegativeButton(resources.getString(android.R.string.cancel)
-                ) { _, _ ->
-                    onActionPerformed()
-                }
-                .setOnDismissListener {
-                    onActionPerformed()
-                }
-                .create()
-                .show()
+            userVerificationViewModel.dataToVerify = dataToVerify
+            CheckDatabaseCredentialDialogFragment
+                .getInstance()
+                .show(this.supportFragmentManager, "checkDatabaseCredentialDialog")
         }
     }
 }

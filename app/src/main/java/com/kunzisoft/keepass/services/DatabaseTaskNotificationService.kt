@@ -37,7 +37,6 @@ import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.database.ProgressMessage
-import com.kunzisoft.keepass.database.action.CheckCredentialDatabaseRunnable
 import com.kunzisoft.keepass.database.action.CreateDatabaseRunnable
 import com.kunzisoft.keepass.database.action.LoadDatabaseRunnable
 import com.kunzisoft.keepass.database.action.MergeDatabaseRunnable
@@ -349,7 +348,6 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
             ACTION_DATABASE_MERGE_TASK -> buildDatabaseMergeActionTask(intent, database)
             ACTION_DATABASE_RELOAD_TASK -> buildDatabaseReloadActionTask(database)
             ACTION_DATABASE_ASSIGN_CREDENTIAL_TASK -> buildDatabaseAssignCredentialActionTask(intent, database)
-            ACTION_DATABASE_CHECK_CREDENTIAL_TASK -> buildDatabaseCheckCredentialActionTask(intent, database)
             ACTION_DATABASE_CREATE_GROUP_TASK -> buildDatabaseCreateGroupActionTask(intent, database)
             ACTION_DATABASE_UPDATE_GROUP_TASK -> buildDatabaseUpdateGroupActionTask(intent, database)
             ACTION_DATABASE_CREATE_ENTRY_TASK -> buildDatabaseCreateEntryActionTask(intent, database)
@@ -944,37 +942,6 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
         }
     }
 
-    private fun buildDatabaseCheckCredentialActionTask(
-        intent: Intent,
-        database: ContextualDatabase
-    ): ActionRunnable? {
-        return if (intent.hasExtra(DATABASE_URI_KEY)
-            && intent.hasExtra(MAIN_CREDENTIAL_KEY)
-        ) {
-            val databaseUri: Uri = intent.getParcelableExtraCompat(DATABASE_URI_KEY) ?: return null
-            val mainCredential: MainCredential =
-                intent.getParcelableExtraCompat(MAIN_CREDENTIAL_KEY) ?: MainCredential()
-            CheckCredentialDatabaseRunnable(
-                context = this,
-                mDatabase = database,
-                mDatabaseUri = databaseUri,
-                mMainCredential = mainCredential,
-                mChallengeResponseRetriever = { hardwareKey, seed ->
-                    retrieveResponseFromChallenge(hardwareKey, seed)
-                },
-                progressTaskUpdater = this
-            ).apply {
-                afterCheckCredential = {
-                    result.data = Bundle().apply {
-                        putParcelable(DATABASE_URI_KEY, databaseUri)
-                    }
-                }
-            }
-        } else {
-            null
-        }
-    }
-
     private fun eraseCredentials(databaseUri: Uri) {
         // Erase the biometric
         CipherDatabaseAction.getInstance(this)
@@ -1363,7 +1330,6 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
         const val ACTION_DATABASE_MERGE_TASK = "ACTION_DATABASE_MERGE_TASK"
         const val ACTION_DATABASE_RELOAD_TASK = "ACTION_DATABASE_RELOAD_TASK"
         const val ACTION_DATABASE_ASSIGN_CREDENTIAL_TASK = "ACTION_DATABASE_ASSIGN_CREDENTIAL_TASK"
-        const val ACTION_DATABASE_CHECK_CREDENTIAL_TASK = "ACTION_DATABASE_CHECK_CREDENTIAL_TASK"
         const val ACTION_DATABASE_CREATE_GROUP_TASK = "ACTION_DATABASE_CREATE_GROUP_TASK"
         const val ACTION_DATABASE_UPDATE_GROUP_TASK = "ACTION_DATABASE_UPDATE_GROUP_TASK"
         const val ACTION_DATABASE_CREATE_ENTRY_TASK = "ACTION_DATABASE_CREATE_ENTRY_TASK"

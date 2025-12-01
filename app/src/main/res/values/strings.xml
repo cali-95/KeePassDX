@@ -775,8 +775,10 @@
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
     <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialIds %2$s</string>
-    <string name="user_verification_required">User verification required</string>
-    <string name="set_up_user_verification">Set up user verification</string>
-    <string name="set_up_user_verification_passkeys_title">Set up user verification to use passkeys</string>
-    <string name="set_up_user_verification_passkeys_description">To use passkeys, make sure you have a device screen lock set up</string>
+    <string name="content_description_user_verification_information">User verification info</string>
+    <string name="user_verification_required_title">User Verification</string>
+    <string name="user_verification_required_description">User verification is required to use and edit passkeys</string>
+    <string name="user_verification_database_credential">Enter the first four characters of your database password</string>
+    <string name="first_chars">First chars</string>
+    <string name="check">Check</string>
 </resources>

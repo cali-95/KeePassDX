@@ -122,6 +122,7 @@ import com.kunzisoft.keepass.view.applyWindowInsets
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.view.toastError
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.GroupEditViewModel
@@ -581,6 +582,7 @@ class GroupActivity : DatabaseLockActivity(),
                     when (uIState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uIState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
@@ -711,14 +713,6 @@ class GroupActivity : DatabaseLockActivity(),
         result: ActionRunnable.Result
     ) {
         super.onDatabaseActionFinished(database, actionTask, result)
-
-        var entry: Entry? = null
-        try {
-            entry = result.data?.getNewEntry(database)
-        } catch (e: Exception) {
-            Log.e(TAG, "Unable to retrieve entry action for selection", e)
-        }
-
         when (actionTask) {
             ACTION_DATABASE_UPDATE_ENTRY_TASK -> {
                 if (result.isSuccess) {
@@ -731,6 +725,12 @@ class GroupActivity : DatabaseLockActivity(),
                             // Search not used
                         },
                         selectionAction = { intentSenderMode, typeMode, searchInfo ->
+                            var entry: Entry? = null
+                            try {
+                                entry = result.data?.getNewEntry(database)
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Unable to retrieve entry action for selection", e)
+                            }
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> entry?.let {
@@ -749,14 +749,12 @@ class GroupActivity : DatabaseLockActivity(),
                         }
                     )
                 }
+                coordinatorError?.showActionErrorIfNeeded(result)
+                // Reload the group
+                loadGroup()
+                finishNodeAction()
             }
         }
-
-        coordinatorError?.showActionErrorIfNeeded(result)
-
-        // Reload the group
-        loadGroup()
-        finishNodeAction()
     }
 
     private fun manageIntent(intent: Intent?) {

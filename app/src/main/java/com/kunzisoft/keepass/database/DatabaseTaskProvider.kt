@@ -49,7 +49,6 @@ import com.kunzisoft.keepass.model.CipherEncryptDatabase
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_CHALLENGE_RESPONDED
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_ASSIGN_CREDENTIAL_TASK
-import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CHECK_CREDENTIAL_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_COPY_NODES_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CREATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CREATE_GROUP_TASK
@@ -239,7 +238,7 @@ class DatabaseTaskProvider(
 
         try {
             context.unregisterReceiver(databaseTaskBroadcastReceiver)
-        } catch (e: IllegalArgumentException) {
+        } catch (_: IllegalArgumentException) {
             // If receiver not register, do nothing
         }
     }
@@ -324,16 +323,6 @@ class DatabaseTaskProvider(
             putParcelable(DatabaseTaskNotificationService.DATABASE_URI_KEY, databaseUri)
             putParcelable(DatabaseTaskNotificationService.MAIN_CREDENTIAL_KEY, mainCredential)
         }, ACTION_DATABASE_ASSIGN_CREDENTIAL_TASK)
-    }
-
-    fun startDatabaseCheckCredential(
-        databaseUri: Uri,
-        mainCredential: MainCredential
-    ) {
-        start(Bundle().apply {
-            putParcelable(DatabaseTaskNotificationService.DATABASE_URI_KEY, databaseUri)
-            putParcelable(DatabaseTaskNotificationService.MAIN_CREDENTIAL_KEY, mainCredential)
-        }, ACTION_DATABASE_CHECK_CREDENTIAL_TASK)
     }
 
     /*

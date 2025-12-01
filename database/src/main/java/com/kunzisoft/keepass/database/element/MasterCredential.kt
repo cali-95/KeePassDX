@@ -64,6 +64,10 @@ data class MasterCredential(
         return 0
     }
 
+    fun getCheckKey(): ByteArray {
+        return getCheckKey(password)
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -95,6 +99,15 @@ data class MasterCredential(
 
         private val TAG = MasterCredential::class.java.simpleName
 
+        fun getCheckKey(password: String?): ByteArray {
+            return retrievePasswordKey(
+                try {
+                    password?.substring(0, 3) ?: ""
+                } catch (_: Exception) { "" },
+                Charsets.UTF_8
+            )
+        }
+
         @Throws(IOException::class)
         fun retrievePasswordKey(
             key: String,
@@ -102,7 +115,7 @@ data class MasterCredential(
         ): ByteArray {
             val bKey: ByteArray = try {
                 key.toByteArray(encoding)
-            } catch (e: UnsupportedEncodingException) {
+            } catch (_: UnsupportedEncodingException) {
                 key.toByteArray()
             }
             return HashManager.hashSha256(bKey)
@@ -128,7 +141,7 @@ data class MasterCredential(
                     32 -> return keyFileData
                     64 -> try {
                         return Hex.decodeHex(String(keyFileData).toCharArray())
-                    } catch (ignoredException: Exception) {
+                    } catch (_: Exception) {
                         // Key is not base 64, treat it as binary data
                     }
                 }
@@ -151,7 +164,7 @@ data class MasterCredential(
                 // Disable certain unsecure XML-Parsing DocumentBuilderFactory features
                 try {
                     documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)
-                } catch (e : ParserConfigurationException) {
+                } catch (_ : ParserConfigurationException) {
                     Log.w(TAG, "Unable to add FEATURE_SECURE_PROCESSING to prevent XML eXternal Entity injection (XXE)")
                 }
 
@@ -187,7 +200,7 @@ data class MasterCredential(
                                             xmlKeyFileVersion = versionText.toFloat()
                                             Log.i(TAG, "Reading XML KeyFile version : $xmlKeyFileVersion")
                                         } catch (e: Exception) {
-                                            Log.e(TAG, "XML Keyfile version cannot be read : $versionText")
+                                            Log.e(TAG, "XML Keyfile version cannot be read : $versionText", e)
                                         }
                                     }
                                 }
@@ -235,7 +248,7 @@ data class MasterCredential(
                         }
                     }
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 return null
             }
             return null

@@ -59,7 +59,6 @@ import com.kunzisoft.keepass.credentialprovider.viewmodel.PasskeyLauncherViewMod
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.SearchInfo
-import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CHECK_CREDENTIAL_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.settings.PreferencesUtil.isPasskeyUserVerificationPreferred
 import com.kunzisoft.keepass.tasks.ActionRunnable
@@ -189,6 +188,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                             userVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            toastError(uiState.error)
                             passkeyLauncherViewModel.cancelResult()
                             userVerificationViewModel.onUserVerificationReceived()
                         }
@@ -228,17 +228,6 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             ACTION_DATABASE_UPDATE_ENTRY_TASK -> {
                 // TODO When auto save is enabled, WARNING filter by the calling activity
                 // passkeyLauncherViewModel.autoSelectPasskey(result, database)
-            }
-            ACTION_DATABASE_CHECK_CREDENTIAL_TASK -> {
-                if (result.isSuccess) {
-                    userVerificationViewModel.onUserVerificationSucceeded(
-                        UserVerificationData(database)
-                    )
-                } else {
-                    userVerificationViewModel.onUserVerificationFailed(
-                        UserVerificationData(database)
-                    )
-                }
             }
         }
     }
