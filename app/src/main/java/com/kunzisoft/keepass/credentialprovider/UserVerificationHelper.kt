@@ -90,7 +90,9 @@ class UserVerificationHelper {
          * Check if the User needs to be verified for this entry
          */
         fun EntryInfo.isUserVerificationNeeded(): Boolean {
-            return this.passkey != null
+            // Apply to any entry with protected content
+            // Not only this.passkey != null
+            return true
         }
 
         fun Fragment.checkUserVerification(

@@ -31,6 +31,9 @@ import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.utils.IOActionTask
+import com.kunzisoft.keepass.view.ProtectedFieldView
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
 
 
@@ -66,6 +69,9 @@ class EntryViewModel: ViewModel() {
 
     val historySelected : LiveData<EntryHistory> get() = _historySelected
     private val _historySelected = SingleLiveEvent<EntryHistory>()
+
+    private val mEntryState = MutableStateFlow<EntryState>(EntryState.Loading)
+    val entryState: StateFlow<EntryState> = mEntryState
 
     fun loadDatabase(database: ContextualDatabase?) {
         loadEntry(database, mainEntryId, historyPosition)
@@ -126,6 +132,10 @@ class EntryViewModel: ViewModel() {
         }
     }
 
+    fun requestUnprotectField(fieldView: ProtectedFieldView) {
+        mEntryState.value = EntryState.RequestUnprotectField(fieldView)
+    }
+
     fun onOtpElementUpdated(optElement: OtpElement?) {
         _onOtpElementUpdated.value = optElement
     }
@@ -144,6 +154,10 @@ class EntryViewModel: ViewModel() {
 
     fun selectSection(section: EntrySection) {
         _sectionSelected.value = section
+    }
+
+    fun actionPerformed() {
+        mEntryState.value = EntryState.Loading
     }
 
     data class EntryInfoHistory(var mainEntryId: NodeId<UUID>,
@@ -165,6 +179,13 @@ class EntryViewModel: ViewModel() {
                 return if (position == 1) ADVANCED else MAIN
             }
         }
+    }
+
+    sealed class EntryState {
+        object Loading: EntryState()
+        data class RequestUnprotectField(
+            val protectedFieldView: ProtectedFieldView
+        ): EntryState()
     }
 
     companion object {

@@ -171,14 +171,16 @@ open class TextEditFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    override fun setOnUnprotectClickListener(onUnprotectClickListener: OnClickListener?) {
-        labelView.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-        valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        /*
-        // FIXME Called by itself during orientation change
-        labelView.setEndIconOnClickListener {
-            onUnprotectClickListener?.onClick(this@TextEditFieldView)
-        }*/
+    override fun setProtection(protection: Boolean, onUnprotectClickListener: OnClickListener?) {
+        if (protection) {
+            labelView.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
+            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            /*
+            // FIXME Called by itself during orientation change
+            labelView.setEndIconOnClickListener {
+                onUnprotectClickListener?.onClick(this@TextEditFieldView)
+            }*/
+        }
     }
 
     override fun isCurrentlyProtected(): Boolean {

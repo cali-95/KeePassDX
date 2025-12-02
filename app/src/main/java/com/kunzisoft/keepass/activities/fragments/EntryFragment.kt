@@ -152,10 +152,12 @@ class EntryFragment: DatabaseFragment() {
     private fun assignEntryInfo(entryInfo: EntryInfo?) {
         // Set copy buttons
         templateView.apply {
+            setOnUnprotectClickListener { _, textEditFieldView ->
+                mEntryViewModel.requestUnprotectField(textEditFieldView)
+            }
             setOnAskCopySafeClickListener {
                 showClipboardDialog()
             }
-
             setOnCopyActionClickListener { field ->
                 mClipboardHelper?.timeoutCopyToClipboard(
                     TemplateField.getLocalizedName(context, field.name),
@@ -242,7 +244,7 @@ class EntryFragment: DatabaseFragment() {
     fun firstEntryFieldCopyView(): View? {
         return try {
             templateView.getActionImageView()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }

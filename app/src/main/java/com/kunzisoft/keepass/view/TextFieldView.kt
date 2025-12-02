@@ -42,7 +42,8 @@ import com.kunzisoft.keepass.utils.AppUtil.openExternalApp
 open class TextFieldView @JvmOverloads constructor(context: Context,
                                               attrs: AttributeSet? = null,
                                               defStyle: Int = 0)
-    : RelativeLayout(context, attrs, defStyle), GenericTextFieldView {
+    : RelativeLayout(context, attrs, defStyle),
+    GenericTextFieldView, ProtectedFieldView {
 
     protected var labelViewId = ViewCompat.generateViewId()
     private var valueViewId = ViewCompat.generateViewId()
@@ -204,15 +205,28 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    fun setProtection(protection: Boolean) {
+    override fun setProtection(protection: Boolean, onUnprotectClickListener: OnClickListener?) {
         showButton.isVisible = protection
         showButton.isSelected = true
         showButton.setOnClickListener {
-            showButton.isSelected = !showButton.isSelected
-            changeProtectedValueParameters()
+            onUnprotectClickListener?.onClick(this@TextFieldView)
         }
         changeProtectedValueParameters()
         invalidate()
+    }
+
+    override fun isCurrentlyProtected(): Boolean {
+        return showButton.isSelected
+    }
+
+    override fun protect() {
+        showButton.isSelected = !showButton.isSelected
+        changeProtectedValueParameters()
+    }
+
+    override fun unprotect() {
+        showButton.isSelected = !showButton.isSelected
+        changeProtectedValueParameters()
     }
 
     protected fun changeProtectedValueParameters() {

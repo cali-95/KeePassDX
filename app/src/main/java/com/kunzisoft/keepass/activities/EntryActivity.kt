@@ -325,6 +325,27 @@ class EntryActivity : DatabaseLockActivity() {
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mEntryViewModel.entryState.collect { entryState ->
+                    when (entryState) {
+                        is EntryViewModel.EntryState.Loading -> {}
+                        is EntryViewModel.EntryState.RequestUnprotectField -> {
+                            val fieldView = entryState.protectedFieldView
+                            if (fieldView.isCurrentlyProtected()) {
+                                checkUserVerification(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    dataToVerify = UserVerificationData(protectedFieldView = fieldView)
+                                )
+                            } else {
+                                fieldView.protect()
+                            }
+                            mEntryViewModel.actionPerformed()
+                        }
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 mUserVerificationViewModel.userVerificationState.collect { uVState ->
                     when (uVState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
@@ -333,7 +354,10 @@ class EntryActivity : DatabaseLockActivity() {
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                            // Edit Entry if corresponding data
                             editEntry(uVState.dataToVerify.database, uVState.dataToVerify.entryId)
+                            // Unprotect field if corresponding data
+                            uVState.dataToVerify.protectedFieldView?.unprotect()
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }

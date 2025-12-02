@@ -127,10 +127,8 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                 PasswordTextEditFieldView(it)
             else TextEditFieldView(it)).apply {
                 // hiddenProtectedValue (mHideProtectedValue) don't work with TextInputLayout
-                if (field.protectedValue.isProtected) {
-                    setOnUnprotectClickListener {
-                        mOnUnprotectClickListener?.invoke(field, this)
-                    }
+                setProtection(field.protectedValue.isProtected) {
+                    mOnUnprotectClickListener?.invoke(field, this)
                 }
                 default = templateAttribute.default
                 setMaxChars(templateAttribute.options.getNumberChars())
@@ -198,7 +196,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                     val value = field.protectedValue.toString().trim()
                     type = dateInstantType
                     activation = value.isNotEmpty()
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     type = dateInstantType
                     activation = false
                 }

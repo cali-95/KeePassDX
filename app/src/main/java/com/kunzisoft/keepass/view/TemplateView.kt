@@ -25,6 +25,11 @@ class TemplateView @JvmOverloads constructor(context: Context,
     : TemplateAbstractView<TextFieldView, TextFieldView, DateTimeFieldView>
         (context, attrs, defStyle) {
 
+    private var mOnUnprotectClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
+    fun setOnUnprotectClickListener(listener: ((Field, ProtectedFieldView) -> Unit)?) {
+        this.mOnUnprotectClickListener = listener
+    }
+
     private var mOnAskCopySafeClickListener: (() -> Unit)? = null
     fun setOnAskCopySafeClickListener(listener: (() -> Unit)? = null) {
         this.mOnAskCopySafeClickListener = listener
@@ -58,7 +63,9 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 PasskeyTextFieldView(it)
             else TextFieldView(it)).apply {
                 applyFontVisibility(mFontInVisibility)
-                setProtection(field.protectedValue.isProtected)
+                setProtection(field.protectedValue.isProtected) {
+                    mOnUnprotectClickListener?.invoke(field, this)
+                }
                 label = templateAttribute.alias
                         ?: TemplateField.getLocalizedName(context, field.name)
                 setMaxChars(templateAttribute.options.getNumberChars())
@@ -114,7 +121,7 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 try {
                     val value = field.protectedValue.toString().trim()
                     activation = value.isNotEmpty()
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     activation = false
                 }
             }

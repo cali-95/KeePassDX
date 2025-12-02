@@ -477,7 +477,7 @@ class EntryEditActivity : DatabaseLockActivity(),
                                 searchAction = {
                                     // Nothing when search retrieved
                                 },
-                                selectionAction = { intentSender, typeMode, searchInfo ->
+                                selectionAction = { _, typeMode, _ ->
                                     when(typeMode) {
                                         TypeMode.DEFAULT -> {}
                                         TypeMode.MAGIKEYBOARD ->
