@@ -21,11 +21,13 @@ package com.kunzisoft.keepass.activities.dialogs
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.activityViewModels
 import com.kunzisoft.keepass.R
+import com.kunzisoft.keepass.database.element.MasterCredential
 import com.kunzisoft.keepass.utils.UriUtil.openUrl
 import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 
@@ -39,12 +41,14 @@ class CheckDatabaseCredentialDialogFragment : DatabaseDialogFragment() {
             val builder = AlertDialog.Builder(activity)
             val inflater = activity.layoutInflater
             val rootView = inflater.inflate(R.layout.fragment_check_database_credential, null)
+            val editText = rootView.findViewById<TextView>(R.id.setup_check_password_edit_text)
+            editText.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(
+                MasterCredential.CHECK_KEY_PASSWORD_LENGTH)
+            )
             builder.setView(rootView)
                     .setPositiveButton(R.string.check) { _, _ ->
                         userVerificationViewModel.checkMainCredential(
-                            rootView
-                                .findViewById<TextView>(R.id.setup_check_password_edit_text)
-                                .text.toString(),
+                            editText.text.toString()
                         )
                     }
                     .setNegativeButton(android.R.string.cancel) { _, _ ->

@@ -103,6 +103,9 @@ class UserVerificationHelper {
             }
         }
 
+        /**
+         * Displays a dialog to verify the user
+         */
         fun FragmentActivity.checkUserVerification(
             userVerificationViewModel: UserVerificationViewModel,
             dataToVerify: UserVerificationData
@@ -114,6 +117,9 @@ class UserVerificationHelper {
             }
         }
 
+        /**
+         * Displays a dialog for entering the device credential to be checked
+         */
         fun FragmentActivity.showUserVerificationDeviceCredential(
             userVerificationViewModel: UserVerificationViewModel,
             dataToVerify: UserVerificationData
@@ -162,14 +168,22 @@ class UserVerificationHelper {
             )
         }
 
+        /**
+         * Displays a dialog for entering the database credential to be checked
+         */
         fun FragmentActivity.showUserVerificationDatabaseCredential(
             userVerificationViewModel: UserVerificationViewModel,
             dataToVerify: UserVerificationData
         ) {
             userVerificationViewModel.dataToVerify = dataToVerify
-            CheckDatabaseCredentialDialogFragment
-                .getInstance()
-                .show(this.supportFragmentManager, "checkDatabaseCredentialDialog")
+            val fragmentTag = "checkDatabaseCredentialDialog"
+            var fragment: CheckDatabaseCredentialDialogFragment? =
+                supportFragmentManager.findFragmentByTag(fragmentTag)
+                        as? CheckDatabaseCredentialDialogFragment?
+            if (fragment == null) {
+                fragment = CheckDatabaseCredentialDialogFragment.getInstance()
+                fragment.show(this.supportFragmentManager, fragmentTag)
+            }
         }
     }
 }

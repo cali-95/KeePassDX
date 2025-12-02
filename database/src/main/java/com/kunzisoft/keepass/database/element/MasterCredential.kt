@@ -102,7 +102,7 @@ data class MasterCredential(
         fun getCheckKey(password: String?): ByteArray {
             return retrievePasswordKey(
                 try {
-                    password?.substring(0, 3) ?: ""
+                    password?.substring(0, CHECK_KEY_PASSWORD_LENGTH) ?: ""
                 } catch (_: Exception) { "" },
                 Charsets.UTF_8
             )
@@ -273,5 +273,7 @@ data class MasterCredential(
         private const val XML_NODE_KEY_NAME = "Key"
         private const val XML_NODE_DATA_NAME = "Data"
         private const val XML_ATTRIBUTE_DATA_HASH = "Hash"
+
+        const val CHECK_KEY_PASSWORD_LENGTH = 4
     }
 }
