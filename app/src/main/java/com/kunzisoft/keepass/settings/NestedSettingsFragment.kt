@@ -30,11 +30,17 @@ import com.kunzisoft.keepass.activities.dialogs.UnderDevelopmentFeatureDialogFra
 abstract class NestedSettingsFragment : PreferenceFragmentCompat() {
 
     enum class Screen {
-        APPLICATION, FORM_FILLING, DEVICE_UNLOCK, APPEARANCE, DATABASE, DATABASE_SECURITY, DATABASE_MASTER_KEY
+        APPLICATION,
+        FORM_FILLING,
+        DEVICE_UNLOCK,
+        APPEARANCE,
+        DATABASE,
+        DATABASE_SECURITY,
+        DATABASE_MASTER_KEY
     }
 
     fun getScreen(): Screen {
-        return Screen.values()[requireArguments().getInt(TAG_KEY)]
+        return Screen.entries[requireArguments().getInt(TAG_KEY)]
     }
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -50,8 +56,7 @@ abstract class NestedSettingsFragment : PreferenceFragmentCompat() {
         preferenceInDev.setOnPreferenceClickListener { preference ->
             try { // don't check if we can
                 (preference as TwoStatePreference).isChecked = false
-            } catch (ignored: Exception) {
-            }
+            } catch (_: Exception) {}
             UnderDevelopmentFeatureDialogFragment().show(parentFragmentManager, "underDevFeatureDialog")
             false
         }

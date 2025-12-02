@@ -302,7 +302,7 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
                                 biometricUnlockEnablePreference.isChecked = false
                                 warningMessage(activity, keystoreWarning = true, deleteKeys = true) {
                                     biometricUnlockEnablePreference.isChecked = true
-                                    deviceCredentialUnlockEnablePreference?.isChecked = false
+                                    deviceCredentialUnlockEnablePreference.isChecked = false
                                 }
                             } else {
                                 biometricUnlockEnablePreference.isChecked = false
@@ -349,7 +349,7 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
                                 deviceCredentialUnlockEnablePreference.isChecked = false
                                 warningMessage(activity, keystoreWarning = true, deleteKeys = true) {
                                     deviceCredentialUnlockEnablePreference.isChecked = true
-                                    biometricUnlockEnablePreference?.isChecked = false
+                                    biometricUnlockEnablePreference.isChecked = false
                                 }
                             } else {
                                 deviceCredentialUnlockEnablePreference.isChecked = false
@@ -523,27 +523,23 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-
-        var otherDialogFragment = false
-
         var dialogFragment: DialogFragment? = null
-        // Main Preferences
+
         when (preference.key) {
             getString(R.string.app_timeout_key),
             getString(R.string.clipboard_timeout_key),
             getString(R.string.temp_device_unlock_timeout_key) -> {
                 dialogFragment = DurationDialogFragmentCompat.newInstance(preference.key)
             }
-            else -> otherDialogFragment = true
+            else -> {}
         }
 
         if (dialogFragment != null) {
             @Suppress("DEPRECATION")
             dialogFragment.setTargetFragment(this, 0)
             dialogFragment.show(parentFragmentManager, TAG_PREF_FRAGMENT)
-        }
-        // Could not be handled here. Try with the super method.
-        else if (otherDialogFragment) {
+        } else {
+            // Could not be handled here. Try with the super method.
             super.onDisplayPreferenceDialog(preference)
         }
     }

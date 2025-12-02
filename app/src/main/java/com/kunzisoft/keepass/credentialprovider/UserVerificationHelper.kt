@@ -15,6 +15,7 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.CheckDatabaseCredentialDialogFragment
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationDeviceCredential
 import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.putEnumExtra
 import com.kunzisoft.keepass.view.toastError
@@ -96,11 +97,7 @@ class UserVerificationHelper {
             userVerificationViewModel: UserVerificationViewModel,
             dataToVerify: UserVerificationData
         ) {
-            if (context?.isAuthenticatorsAllowed() == true) {
-                activity?.showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
-            } else {
-                activity?.showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
-            }
+            activity?.checkUserVerification(userVerificationViewModel, dataToVerify)
         }
 
         /**
@@ -110,7 +107,7 @@ class UserVerificationHelper {
             userVerificationViewModel: UserVerificationViewModel,
             dataToVerify: UserVerificationData
         ) {
-            if (isAuthenticatorsAllowed()) {
+            if (isAuthenticatorsAllowed() && isUserVerificationDeviceCredential(this)) {
                 showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
             } else {
                 showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)

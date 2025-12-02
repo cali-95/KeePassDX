@@ -60,7 +60,7 @@ import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
-import com.kunzisoft.keepass.settings.PreferencesUtil.isPasskeyUserVerificationPreferred
+import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationPreferred
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.view.toastError
@@ -202,7 +202,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
         super.onUnknownDatabaseRetrieved(database)
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
         val userVerificationNeeded = intent.isUserVerificationNeeded(
-            userVerificationPreferred = isPasskeyUserVerificationPreferred(this)
+            userVerificationPreferred = isUserVerificationPreferred(this)
         ) && intent.getUserVerifiedWithAuth().not()
         if (userVerificationNeeded) {
             checkUserVerification(
