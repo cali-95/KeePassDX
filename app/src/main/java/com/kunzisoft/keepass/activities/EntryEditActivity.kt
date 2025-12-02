@@ -63,6 +63,8 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecia
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -101,6 +103,7 @@ import com.kunzisoft.keepass.view.showActionErrorIfNeeded
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.ColorPickerViewModel
 import com.kunzisoft.keepass.viewmodels.EntryEditViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 import java.util.EnumSet
 import java.util.UUID
@@ -129,6 +132,7 @@ class EntryEditActivity : DatabaseLockActivity(),
     private var mTemplatesSelectorAdapter: TemplatesSelectorAdapter? = null
 
     private val mColorPickerViewModel: ColorPickerViewModel by viewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private var mAllowCustomFields = false
     private var mAllowOTP = false
@@ -383,23 +387,48 @@ class EntryEditActivity : DatabaseLockActivity(),
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mEntryEditViewModel.uiState.collect { uiState ->
+                mEntryEditViewModel.entryEditState.collect { uiState ->
                     when (uiState) {
-                        EntryEditViewModel.UIState.Loading -> {}
-                        EntryEditViewModel.UIState.ShowOverwriteMessage -> {
-                            if (mEntryEditViewModel.warningOverwriteDataAlreadyApproved.not()) {
-                                AlertDialog.Builder(this@EntryEditActivity)
-                                    .setTitle(R.string.warning_overwrite_data_title)
-                                    .setMessage(R.string.warning_overwrite_data_description)
-                                    .setNegativeButton(android.R.string.cancel) { _, _ ->
-                                        mEntryEditViewModel.backPressedAlreadyApproved = true
-                                        onCancelSpecialMode()
-                                    }
-                                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                                        mEntryEditViewModel.warningOverwriteDataAlreadyApproved = true
-                                    }
-                                    .create().show()
+                        is EntryEditViewModel.EntryEditState.Loading -> {}
+                        is EntryEditViewModel.EntryEditState.ShowOverwriteMessage -> {
+                            AlertDialog.Builder(this@EntryEditActivity)
+                                .setTitle(R.string.warning_overwrite_data_title)
+                                .setMessage(R.string.warning_overwrite_data_description)
+                                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                                    mEntryEditViewModel.backPressedAlreadyApproved = true
+                                    onCancelSpecialMode()
+                                }
+                                .setPositiveButton(android.R.string.ok) { _, _ -> }
+                                .create().show()
+                            mEntryEditViewModel.actionPerformed()
+                        }
+                        is EntryEditViewModel.EntryEditState.RequestUnprotectField -> {
+                            val fieldView = uiState.protectedFieldView
+                            if (fieldView.isCurrentlyProtected()) {
+                                checkUserVerification(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    dataToVerify = UserVerificationData(protectedFieldView = fieldView)
+                                )
+                            } else {
+                                fieldView.protect()
                             }
+                            mEntryEditViewModel.actionPerformed()
+                        }
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mUserVerificationViewModel.userVerificationState.collect { uVState ->
+                    when (uVState) {
+                        is UserVerificationViewModel.UIState.Loading -> {}
+                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                            uVState.dataToVerify.protectedFieldView?.unprotect()
+                            mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
                 }

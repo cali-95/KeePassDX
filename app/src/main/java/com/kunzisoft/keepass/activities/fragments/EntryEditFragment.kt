@@ -116,6 +116,9 @@ class EntryEditFragment: DatabaseFragment() {
             setOnForegroundColorClickListener {
                 mEntryEditViewModel.requestForegroundColorSelection(templateView.getForegroundColor())
             }
+            setOnUnprotectClickListener { _, textEditFieldView ->
+                mEntryEditViewModel.requestUnprotectField(textEditFieldView)
+            }
             setOnCustomEditionActionClickListener { field ->
                 mEntryEditViewModel.requestCustomFieldEdition(field)
             }

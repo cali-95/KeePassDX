@@ -18,9 +18,9 @@ import com.kunzisoft.keepass.database.element.template.TemplateAttributeAction
 import com.kunzisoft.keepass.database.element.template.TemplateField
 import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.database.helper.isStandardPasswordName
+import com.kunzisoft.keepass.model.AppOriginEntryField
 import com.kunzisoft.keepass.model.DataDate
 import com.kunzisoft.keepass.model.DataTime
-import com.kunzisoft.keepass.model.AppOriginEntryField
 import com.kunzisoft.keepass.model.PasskeyEntryFields
 import com.kunzisoft.keepass.otp.OtpEntryFields
 
@@ -34,6 +34,11 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
     // Current date time selection
     @IdRes
     private var mTempDateTimeViewId: Int? = null
+
+    private var mOnUnprotectClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
+    fun setOnUnprotectClickListener(listener: ((Field, ProtectedFieldView) -> Unit)?) {
+        this.mOnUnprotectClickListener = listener
+    }
 
     private var mOnCustomEditionActionClickListener: ((Field) -> Unit)? = null
     fun setOnCustomEditionActionClickListener(listener: ((Field) -> Unit)?) {
@@ -80,9 +85,9 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
         if (color != null) {
             backgroundColorView.background.colorFilter = BlendModeColorFilterCompat
                 .createBlendModeColorFilterCompat(color, BlendModeCompat.SRC_ATOP)
-            backgroundColorView.visibility = View.VISIBLE
+            backgroundColorView.visibility = VISIBLE
         } else {
-            backgroundColorView.visibility = View.GONE
+            backgroundColorView.visibility = GONE
         }
     }
 
@@ -103,9 +108,9 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
         if (color != null) {
             foregroundColorView.background.colorFilter = BlendModeColorFilterCompat
             .createBlendModeColorFilterCompat(color, BlendModeCompat.SRC_ATOP)
-            foregroundColorView.visibility = View.VISIBLE
+            foregroundColorView.visibility = VISIBLE
         } else {
-            foregroundColorView.visibility = View.GONE
+            foregroundColorView.visibility = GONE
         }
     }
 
@@ -113,14 +118,20 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
         headerContainerView.isVisible = true
     }
 
-    override fun buildLinearTextView(templateAttribute: TemplateAttribute,
-                                     field: Field): TextEditFieldView? {
+    override fun buildLinearTextView(
+        templateAttribute: TemplateAttribute,
+        field: Field
+    ): TextEditFieldView? {
         return context?.let {
             (if (TemplateField.isStandardPasswordName(context, templateAttribute.label))
                 PasswordTextEditFieldView(it)
             else TextEditFieldView(it)).apply {
                 // hiddenProtectedValue (mHideProtectedValue) don't work with TextInputLayout
-                setProtection(field.protectedValue.isProtected)
+                if (field.protectedValue.isProtected) {
+                    setOnUnprotectClickListener {
+                        mOnUnprotectClickListener?.invoke(field, this)
+                    }
+                }
                 default = templateAttribute.default
                 setMaxChars(templateAttribute.options.getNumberChars())
                 setMaxLines(templateAttribute.options.getNumberLines())
@@ -129,7 +140,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                     textDirection = TEXT_DIRECTION_LTR
                 }
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO
+                    importantForAutofill = IMPORTANT_FOR_AUTOFILL_NO
                 }
             }
         }
@@ -143,7 +154,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                 default = templateAttribute.default
                 setActionClick(templateAttribute, field, this)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    importantForAutofill = View.IMPORTANT_FOR_AUTOFILL_NO
+                    importantForAutofill = IMPORTANT_FOR_AUTOFILL_NO
                 }
             }
         }
@@ -157,7 +168,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
             label = templateAttribute.alias
                 ?: TemplateField.getLocalizedName(context, field.name)
             val fieldValue = field.protectedValue.stringValue
-            value = if (fieldValue.isEmpty()) templateAttribute.default else fieldValue
+            value = fieldValue.ifEmpty { templateAttribute.default }
             // TODO edition and password generator at same time
             when (templateAttribute.action) {
                 TemplateAttributeAction.NONE -> {

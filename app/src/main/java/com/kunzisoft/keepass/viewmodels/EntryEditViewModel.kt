@@ -20,6 +20,7 @@ import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.StreamDirection
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.utils.IOActionTask
+import com.kunzisoft.keepass.view.ProtectedFieldView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
@@ -37,7 +38,6 @@ class EntryEditViewModel: NodeEditViewModel() {
 
     // To show dialog only one time
     var backPressedAlreadyApproved = false
-    var warningOverwriteDataAlreadyApproved = false
 
     // Useful to not relaunch a current action
     private var actionLocked: Boolean = false
@@ -81,8 +81,8 @@ class EntryEditViewModel: NodeEditViewModel() {
     val onBinaryPreviewLoaded : LiveData<AttachmentPosition> get() = _onBinaryPreviewLoaded
     private val _onBinaryPreviewLoaded = SingleLiveEvent<AttachmentPosition>()
 
-    private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
-    val uiState: StateFlow<UIState> = mUiState
+    private val mEntryEditState = MutableStateFlow<EntryEditState>(EntryEditState.Loading)
+    val entryEditState: StateFlow<EntryEditState> = mEntryEditState
 
     fun loadTemplateEntry(database: ContextualDatabase?) {
         loadTemplateEntry(database, mEntryId, mParentId, mRegisterInfo)
@@ -125,7 +125,7 @@ class EntryEditViewModel: NodeEditViewModel() {
                         mEntryId = null
                         _templatesEntry.value = templatesEntry
                         if (templatesEntry?.overwrittenData == true) {
-                            mUiState.value = UIState.ShowOverwriteMessage
+                            mEntryEditState.value = EntryEditState.ShowOverwriteMessage
                         }
                     }
                 ).execute()
@@ -293,6 +293,10 @@ class EntryEditViewModel: NodeEditViewModel() {
         _onPasswordSelected.value = passwordField
     }
 
+    fun requestUnprotectField(fieldView: ProtectedFieldView) {
+        mEntryEditState.value = EntryEditState.RequestUnprotectField(fieldView)
+    }
+
     fun requestCustomFieldEdition(customField: Field) {
         _requestCustomFieldEdition.value = customField
     }
@@ -348,6 +352,10 @@ class EntryEditViewModel: NodeEditViewModel() {
         _onBinaryPreviewLoaded.value = AttachmentPosition(entryAttachmentState, viewPosition)
     }
 
+    fun actionPerformed() {
+        mEntryEditState.value = EntryEditState.Loading
+    }
+
     data class TemplatesEntry(
         val isTemplate: Boolean,
         val templates: List<Template>,
@@ -362,9 +370,12 @@ class EntryEditViewModel: NodeEditViewModel() {
     data class AttachmentUpload(val attachmentToUploadUri: Uri, val attachment: Attachment)
     data class AttachmentPosition(val entryAttachmentState: EntryAttachmentState, val viewPosition: Float)
 
-    sealed class UIState {
-        object Loading: UIState()
-        object ShowOverwriteMessage: UIState()
+    sealed class EntryEditState {
+        object Loading: EntryEditState()
+        object ShowOverwriteMessage: EntryEditState()
+        data class RequestUnprotectField(
+            val protectedFieldView: ProtectedFieldView
+        ): EntryEditState()
     }
 
     companion object {
