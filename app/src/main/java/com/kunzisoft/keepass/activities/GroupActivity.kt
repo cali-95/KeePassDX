@@ -561,11 +561,11 @@ class GroupActivity : DatabaseLockActivity(),
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
-                mMainCredentialViewModel.uiState.collect { uiState ->
-                    when (uiState) {
+                mMainCredentialViewModel.uiState.collect { credentialState ->
+                    when (credentialState) {
                         is MainCredentialViewModel.UIState.Loading -> {}
                         is MainCredentialViewModel.UIState.OnMainCredentialEntered -> {
-                            mergeDatabaseFrom(uiState.databaseUri, uiState.mainCredential)
+                            mergeDatabaseFrom(credentialState.databaseUri, credentialState.mainCredential)
                             mMainCredentialViewModel.onActionReceived()
                         }
                         is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
@@ -724,7 +724,7 @@ class GroupActivity : DatabaseLockActivity(),
                         searchAction = {
                             // Search not used
                         },
-                        selectionAction = { intentSenderMode, typeMode, searchInfo ->
+                        selectionAction = { _, typeMode, _ ->
                             var entry: Entry? = null
                             try {
                                 entry = result.data?.getNewEntry(database)
@@ -744,7 +744,7 @@ class GroupActivity : DatabaseLockActivity(),
                                 }
                             }
                         },
-                        registrationAction = { intentSenderMode, typeMode, searchInfo ->
+                        registrationAction = { _, _, _ ->
                             // Save not used
                         }
                     )
@@ -901,7 +901,7 @@ class GroupActivity : DatabaseLockActivity(),
                     searchAction = {
                         // Nothing here, a search is simply performed
                     },
-                    selectionAction = { intentSenderMode, typeMode, searchInfo ->
+                    selectionAction = { _, typeMode, searchInfo ->
                         when (typeMode) {
                             TypeMode.DEFAULT -> {}
                             TypeMode.MAGIKEYBOARD -> {
@@ -1686,13 +1686,13 @@ class GroupActivity : DatabaseLockActivity(),
                         context = activity,
                         database = database,
                         searchInfo = searchInfo,
-                        onItemsFound = { openedDatabase, items ->
+                        onItemsFound = { _, items ->
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> {
                                     MagikeyboardService.performSelection(
                                         items = items,
-                                        actionPopulateKeyboard = { entryInfo ->
+                                        actionPopulateKeyboard = { _ ->
                                             activity.buildSpecialModeResponseAndSetResult(items)
                                             onValidateSpecialMode()
                                         },

@@ -28,6 +28,7 @@ import androidx.fragment.app.activityViewModels
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.helpers.ExternalFileHelper
 import com.kunzisoft.keepass.database.MainCredential
+import com.kunzisoft.keepass.database.exception.FileNotFoundDatabaseException
 import com.kunzisoft.keepass.utils.UriUtil.getDocumentFile
 import com.kunzisoft.keepass.utils.getParcelableCompat
 import com.kunzisoft.keepass.view.MainCredentialView
@@ -71,15 +72,21 @@ class MainCredentialDialogFragment : DatabaseDialogFragment() {
                             databaseUri = databaseUri
                         )
                     }
-            }
 
-            mExternalFileHelper = ExternalFileHelper(this)
-            mExternalFileHelper?.buildOpenDocument { uri ->
-                if (uri != null) {
-                    mainCredentialView?.populateKeyFileView(uri)
+                mExternalFileHelper = ExternalFileHelper(this)
+                mExternalFileHelper?.buildOpenDocument { uri ->
+                    if (uri != null) {
+                        mainCredentialView?.populateKeyFileView(uri)
+                    }
                 }
+                mainCredentialView?.setOpenKeyfileClickListener(mExternalFileHelper)
+            } ?: run {
+                mMainCredentialViewModel.cancelMainCredential(
+                    databaseUri = null,
+                    error = FileNotFoundDatabaseException()
+                )
+                dismissAllowingStateLoss()
             }
-            mainCredentialView?.setOpenKeyfileClickListener(mExternalFileHelper)
 
             return builder.create()
         }

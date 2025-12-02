@@ -23,9 +23,10 @@ class MainCredentialViewModel: ViewModel() {
     }
 
     fun cancelMainCredential(
-        databaseUri: Uri
+        databaseUri: Uri?,
+        error: Throwable? = null
     ) {
-        mUiState.value = UIState.OnMainCredentialCanceled(databaseUri, MainCredential())
+        mUiState.value = UIState.OnMainCredentialCanceled(databaseUri, error)
     }
 
     fun onActionReceived() {
@@ -39,8 +40,8 @@ class MainCredentialViewModel: ViewModel() {
             val mainCredential: MainCredential
         ): UIState()
         data class OnMainCredentialCanceled(
-            val databaseUri: Uri,
-            val mainCredential: MainCredential
+            val databaseUri: Uri?,
+            val error: Throwable?
         ): UIState()
     }
 

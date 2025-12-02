@@ -214,7 +214,7 @@
     <string name="error_empty_key">Key cannot be empty.</string>
     <string name="field_name">Field name</string>
     <string name="field_value">Field value</string>
-    <string name="file_not_found_content">Could not find file. Try reopening it from your file browser.</string>
+    <string name="file_not_found_content">Could not find file</string>
     <string name="corrupted_file">Corrupted file.</string>
     <string name="file_browser">File manager</string>
     <string name="generate_password">Generate password</string>
