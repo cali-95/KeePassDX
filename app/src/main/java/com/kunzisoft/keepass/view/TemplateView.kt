@@ -25,8 +25,8 @@ class TemplateView @JvmOverloads constructor(context: Context,
     : TemplateAbstractView<TextFieldView, TextFieldView, DateTimeFieldView>
         (context, attrs, defStyle) {
 
-    private var mOnUnprotectClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
-    fun setOnUnprotectClickListener(listener: ((Field, ProtectedFieldView) -> Unit)?) {
+    private var mOnUnprotectClickListener: ((ProtectedFieldView) -> Unit)? = null
+    fun setOnUnprotectClickListener(listener: ((ProtectedFieldView) -> Unit)?) {
         this.mOnUnprotectClickListener = listener
     }
 
@@ -34,8 +34,8 @@ class TemplateView @JvmOverloads constructor(context: Context,
     fun setOnAskCopySafeClickListener(listener: (() -> Unit)? = null) {
         this.mOnAskCopySafeClickListener = listener
     }
-    private var mOnCopyActionClickListener: ((Field) -> Unit)? = null
-    fun setOnCopyActionClickListener(listener: ((Field) -> Unit)? = null) {
+    private var mOnCopyActionClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
+    fun setOnCopyActionClickListener(listener: ((Field, ProtectedFieldView) -> Unit)? = null) {
         this.mOnCopyActionClickListener = listener
     }
 
@@ -64,7 +64,7 @@ class TemplateView @JvmOverloads constructor(context: Context,
             else TextFieldView(it)).apply {
                 applyFontVisibility(mFontInVisibility)
                 setProtection(field.protectedValue.isProtected) {
-                    mOnUnprotectClickListener?.invoke(field, this)
+                    mOnUnprotectClickListener?.invoke(this)
                 }
                 label = templateAttribute.alias
                         ?: TemplateField.getLocalizedName(context, field.name)
@@ -85,7 +85,15 @@ class TemplateView @JvmOverloads constructor(context: Context,
                             setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                             setCopyButtonClickListener { label, value ->
                                 mOnCopyActionClickListener
-                                    ?.invoke(Field(label, ProtectedString(true, value)))
+                                    ?.invoke(
+                                        Field(
+                                            name = label,
+                                            value = ProtectedString(
+                                                enableProtection = true,
+                                                string = value
+                                            )
+                                        ), this
+                                    )
                             }
                         } else {
                             setCopyButtonState(TextFieldView.ButtonState.GONE)
@@ -96,7 +104,15 @@ class TemplateView @JvmOverloads constructor(context: Context,
                     setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                     setCopyButtonClickListener { label, value ->
                         mOnCopyActionClickListener
-                            ?.invoke(Field(label, ProtectedString(false, value)))
+                            ?.invoke(
+                                Field(
+                                    name = label,
+                                    value = ProtectedString(
+                                        enableProtection = false,
+                                        string = value
+                                    )
+                                ), this
+                            )
                     }
                 }
             }
@@ -184,9 +200,15 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 value = otpElement.tokenString
                 setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                 setCopyButtonClickListener { _, _ ->
-                    mOnCopyActionClickListener?.invoke(Field(
-                        otpElement.type.name,
-                        ProtectedString(false, otpElement.token)))
+                    mOnCopyActionClickListener?.invoke(
+                        Field(
+                            name = otpElement.type.name,
+                            value = ProtectedString(
+                                enableProtection = false,
+                                string = otpElement.token
+                            )
+                        ), this
+                    )
                 }
                 textDirection = TEXT_DIRECTION_LTR
                 mLastOtpTokenView = this

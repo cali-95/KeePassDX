@@ -19,17 +19,22 @@
  */
 package com.kunzisoft.keepass.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
+import com.kunzisoft.keepass.database.element.Field
 import com.kunzisoft.keepass.database.element.node.NodeId
 import com.kunzisoft.keepass.database.element.node.NodeIdUUID
 import com.kunzisoft.keepass.database.element.template.Template
+import com.kunzisoft.keepass.database.element.template.TemplateField
+import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.otp.OtpElement
+import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.IOActionTask
 import com.kunzisoft.keepass.view.ProtectedFieldView
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -37,7 +42,7 @@ import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
 
 
-class EntryViewModel: ViewModel() {
+class EntryViewModel(application: Application): AndroidViewModel(application) {
 
     var mainEntryId: NodeId<UUID>? = null
         private set
@@ -49,6 +54,8 @@ class EntryViewModel: ViewModel() {
         private set
     var entryLoaded = false
         private set
+
+    private var mClipboardHelper: ClipboardHelper = ClipboardHelper(application)
 
     val entryInfoHistory : LiveData<EntryInfoHistory?> get() = _entryInfoHistory
     private val _entryInfoHistory = MutableLiveData<EntryInfoHistory?>()
@@ -136,6 +143,14 @@ class EntryViewModel: ViewModel() {
         mEntryState.value = EntryState.RequestUnprotectField(fieldView)
     }
 
+    fun requestCopyField(field: Field, fieldView: ProtectedFieldView) {
+        // Only request the User Verification if the field is protected and not shown
+        if (field.protectedValue.isProtected && fieldView.isCurrentlyProtected())
+            mEntryState.value = EntryState.RequestCopyProtectedField(field)
+        else
+            copyToClipboard(field)
+    }
+
     fun onOtpElementUpdated(optElement: OtpElement?) {
         _onOtpElementUpdated.value = optElement
     }
@@ -154,6 +169,18 @@ class EntryViewModel: ViewModel() {
 
     fun selectSection(section: EntrySection) {
         _sectionSelected.value = section
+    }
+
+    fun copyToClipboard(field: Field) {
+        mClipboardHelper.timeoutCopyToClipboard(
+            TemplateField.getLocalizedName(getApplication(), field.name),
+            field.protectedValue.stringValue,
+            field.protectedValue.isProtected
+        )
+    }
+
+    fun copyToClipboard(text: String) {
+        mClipboardHelper.timeoutCopyToClipboard(text, text)
     }
 
     fun actionPerformed() {
@@ -185,6 +212,9 @@ class EntryViewModel: ViewModel() {
         object Loading: EntryState()
         data class RequestUnprotectField(
             val protectedFieldView: ProtectedFieldView
+        ): EntryState()
+        data class RequestCopyProtectedField(
+            val field: Field
         ): EntryState()
     }
 

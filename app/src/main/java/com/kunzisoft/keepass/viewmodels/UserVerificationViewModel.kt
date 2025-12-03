@@ -15,16 +15,17 @@ class UserVerificationViewModel: ViewModel() {
     private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
     val userVerificationState: StateFlow<UIState> = mUiState
 
-    var dataToVerify: UserVerificationData = UserVerificationData()
+    var dataToVerify: UserVerificationData? = null
 
     fun checkMainCredential(checkString: String) {
         // Check the password part
-        if (dataToVerify.database?.checkKey(getCheckKey(checkString)) == true)
-            onUserVerificationSucceeded(dataToVerify)
+        val data = dataToVerify
+        if (data?.database?.checkKey(getCheckKey(checkString)) == true)
+            onUserVerificationSucceeded(data)
         else {
             onUserVerificationFailed(dataToVerify, InvalidCredentialsDatabaseException())
         }
-        dataToVerify = UserVerificationData()
+        dataToVerify = null
     }
 
     fun onUserVerificationSucceeded(dataToVerify: UserVerificationData) {
@@ -32,7 +33,7 @@ class UserVerificationViewModel: ViewModel() {
     }
 
     fun onUserVerificationFailed(
-        dataToVerify: UserVerificationData = UserVerificationData(),
+        dataToVerify: UserVerificationData? = null,
         error: Throwable? = null
     ) {
         this.dataToVerify = dataToVerify
@@ -45,9 +46,11 @@ class UserVerificationViewModel: ViewModel() {
 
     sealed class UIState {
         object Loading: UIState()
-        data class OnUserVerificationSucceeded(val dataToVerify: UserVerificationData): UIState()
+        data class OnUserVerificationSucceeded(
+            val dataToVerify: UserVerificationData
+        ): UIState()
         data class OnUserVerificationCanceled(
-            val dataToVerify: UserVerificationData,
+            val dataToVerify: UserVerificationData?,
             val error: Throwable?
         ): UIState()
     }

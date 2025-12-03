@@ -45,6 +45,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
@@ -179,12 +180,18 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                     when (uiState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            passkeyLauncherViewModel.launchActionIfNeeded(
-                                userVerified = true,
-                                intent = intent,
-                                specialMode = mSpecialMode,
-                                database = uiState.dataToVerify.database
-                            )
+                            val data = uiState.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.LAUNCH_PASSKEY_CEREMONY -> {
+                                    passkeyLauncherViewModel.launchActionIfNeeded(
+                                        userVerified = true,
+                                        intent = intent,
+                                        specialMode = mSpecialMode,
+                                        database = uiState.dataToVerify.database
+                                    )
+                                }
+                                else -> {}
+                            }
                             userVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
@@ -207,7 +214,10 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
         if (userVerificationNeeded) {
             checkUserVerification(
                 userVerificationViewModel = userVerificationViewModel,
-                dataToVerify = UserVerificationData(database)
+                dataToVerify = UserVerificationData(
+                    actionType = UserVerificationActionType.LAUNCH_PASSKEY_CEREMONY,
+                    database = database
+                )
             )
         } else {
             passkeyLauncherViewModel.launchActionIfNeeded(

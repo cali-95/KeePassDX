@@ -56,10 +56,11 @@ import com.kunzisoft.keepass.activities.helpers.ExternalFileHelper
 import com.kunzisoft.keepass.activities.legacy.DatabaseLockActivity
 import com.kunzisoft.keepass.adapters.TagsAdapter
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestUnprotectField
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestShowUnprotectField
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -330,11 +331,26 @@ class EntryActivity : DatabaseLockActivity() {
                     when (entryState) {
                         is EntryViewModel.EntryState.Loading -> {}
                         is EntryViewModel.EntryState.RequestUnprotectField -> {
-                            requestUnprotectField(
-                                userVerificationViewModel = mUserVerificationViewModel,
-                                database = mDatabase,
-                                protectedFieldView = entryState.protectedFieldView
-                            )
+                            mDatabase?.let { database ->
+                                requestShowUnprotectField(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    database = database,
+                                    protectedFieldView = entryState.protectedFieldView
+                                )
+                            }
+                            mEntryViewModel.actionPerformed()
+                        }
+                        is EntryViewModel.EntryState.RequestCopyProtectedField -> {
+                            mDatabase?.let { database ->
+                                checkUserVerification(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    dataToVerify = UserVerificationData(
+                                        actionType = UserVerificationActionType.COPY_PROTECTED_FIELD,
+                                        database = database,
+                                        field = entryState.field,
+                                    )
+                                )
+                            }
                             mEntryViewModel.actionPerformed()
                         }
                     }
@@ -351,10 +367,24 @@ class EntryActivity : DatabaseLockActivity() {
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            // Edit Entry if corresponding data
-                            editEntry(uVState.dataToVerify.database, uVState.dataToVerify.entryId)
-                            // Unprotect field if corresponding data
-                            uVState.dataToVerify.protectedFieldView?.unprotect()
+                            val data = uVState.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
+                                    // Unprotect field by its view
+                                    data.protectedFieldView?.unprotect()
+                                }
+                                UserVerificationActionType.COPY_PROTECTED_FIELD -> {
+                                    // Copy field value
+                                    data.field?.let {
+                                        mEntryViewModel.copyToClipboard(it)
+                                    }
+                                }
+                                UserVerificationActionType.EDIT_ENTRY -> {
+                                    // Edit Entry
+                                    editEntry(data.database, data.entryId)
+                                }
+                                else -> {}
+                            }
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
@@ -531,10 +561,16 @@ class EntryActivity : DatabaseLockActivity() {
         when (item.itemId) {
             R.id.menu_edit -> {
                 if (mEntryViewModel.entryInfo?.isUserVerificationNeeded() == true) {
-                    checkUserVerification(
-                        userVerificationViewModel = mUserVerificationViewModel,
-                        dataToVerify = UserVerificationData(mDatabase, mEntryViewModel.mainEntryId)
-                    )
+                    mDatabase?.let { database ->
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.EDIT_ENTRY,
+                                database = database,
+                                entryId = mEntryViewModel.mainEntryId
+                            )
+                        )
+                    }
                 } else {
                     editEntry(mDatabase, mEntryViewModel.mainEntryId)
                 }

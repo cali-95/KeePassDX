@@ -16,13 +16,10 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.adapters.EntryAttachmentsItemsAdapter
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
-import com.kunzisoft.keepass.database.element.template.TemplateField
-import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.model.StreamDirection
 import com.kunzisoft.keepass.settings.PreferencesUtil
-import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.TimeUtil.getDateTimeString
 import com.kunzisoft.keepass.utils.UUIDUtils.asHexString
 import com.kunzisoft.keepass.view.TemplateView
@@ -50,8 +47,6 @@ class EntryFragment: DatabaseFragment() {
     private lateinit var uuidContainerView: View
     private lateinit var uuidReferenceView: TextView
 
-    private var mClipboardHelper: ClipboardHelper? = null
-
     private val mEntryViewModel: EntryViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -65,10 +60,6 @@ class EntryFragment: DatabaseFragment() {
     override fun onViewCreated(view: View,
                                savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        context?.let { context ->
-            mClipboardHelper = ClipboardHelper(context)
-        }
 
         rootView = view
         // Hide only the first time
@@ -152,18 +143,14 @@ class EntryFragment: DatabaseFragment() {
     private fun assignEntryInfo(entryInfo: EntryInfo?) {
         // Set copy buttons
         templateView.apply {
-            setOnUnprotectClickListener { _, textEditFieldView ->
-                mEntryViewModel.requestUnprotectField(textEditFieldView)
+            setOnUnprotectClickListener { protectedFieldView ->
+                mEntryViewModel.requestUnprotectField(protectedFieldView)
             }
             setOnAskCopySafeClickListener {
                 showClipboardDialog()
             }
-            setOnCopyActionClickListener { field ->
-                mClipboardHelper?.timeoutCopyToClipboard(
-                    TemplateField.getLocalizedName(context, field.name),
-                    field.protectedValue.stringValue,
-                    field.protectedValue.isProtected
-                )
+            setOnCopyActionClickListener { field, protectedFieldView ->
+                mEntryViewModel.requestCopyField(field, protectedFieldView)
             }
         }
 
@@ -251,7 +238,7 @@ class EntryFragment: DatabaseFragment() {
 
     fun launchEntryCopyEducationAction() {
         val appNameString = getString(R.string.app_name)
-        mClipboardHelper?.timeoutCopyToClipboard(appNameString, appNameString)
+        mEntryViewModel.copyToClipboard(appNameString)
     }
 
     companion object {

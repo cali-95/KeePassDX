@@ -104,15 +104,16 @@ class UserVerificationHelper {
             activity?.checkUserVerification(userVerificationViewModel, dataToVerify)
         }
 
-        fun FragmentActivity.requestUnprotectField(
+        fun FragmentActivity.requestShowUnprotectField(
             userVerificationViewModel: UserVerificationViewModel,
-            database: ContextualDatabase?,
+            database: ContextualDatabase,
             protectedFieldView: ProtectedFieldView
         ) {
             if (protectedFieldView.isCurrentlyProtected()) {
                 checkUserVerification(
                     userVerificationViewModel = userVerificationViewModel,
                     dataToVerify = UserVerificationData(
+                        actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
                         database = database,
                         protectedFieldView = protectedFieldView
                     )

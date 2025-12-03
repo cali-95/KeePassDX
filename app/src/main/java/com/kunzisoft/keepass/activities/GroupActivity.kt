@@ -75,6 +75,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeModes
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
@@ -586,7 +587,15 @@ class GroupActivity : DatabaseLockActivity(),
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            editEntry(uVState.dataToVerify.database,  uVState.dataToVerify.entryId)
+                            val data = uVState.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.EDIT_ENTRY -> {
+                                    editEntry(uVState.dataToVerify.database,  uVState.dataToVerify.entryId)
+                                }
+                                UserVerificationActionType.MERGE_FROM_DATABASE -> {}
+                                UserVerificationActionType.SAVE_TO_DATABASE -> {}
+                                else -> {}
+                            }
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
@@ -1101,7 +1110,11 @@ class GroupActivity : DatabaseLockActivity(),
                 if ((node as Entry).getEntryInfo(database).isUserVerificationNeeded()) {
                     checkUserVerification(
                         userVerificationViewModel = mUserVerificationViewModel,
-                        dataToVerify = UserVerificationData(database, node.nodeId)
+                        dataToVerify = UserVerificationData(
+                            actionType = UserVerificationActionType.EDIT_ENTRY,
+                            database = database,
+                            entryId = node.nodeId
+                        )
                     )
                 } else {
                     editEntry(database, node.nodeId)

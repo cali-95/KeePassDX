@@ -63,7 +63,8 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecia
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.TypeMode
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestUnprotectField
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestShowUnprotectField
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -403,11 +404,13 @@ class EntryEditActivity : DatabaseLockActivity(),
                             mEntryEditViewModel.actionPerformed()
                         }
                         is EntryEditViewModel.EntryEditState.RequestUnprotectField -> {
-                            requestUnprotectField(
-                                userVerificationViewModel = mUserVerificationViewModel,
-                                database = mDatabase,
-                                protectedFieldView = uiState.protectedFieldView
-                            )
+                            mDatabase?.let { database ->
+                                requestShowUnprotectField(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    database = database,
+                                    protectedFieldView = uiState.protectedFieldView
+                                )
+                            }
                             mEntryEditViewModel.actionPerformed()
                         }
                     }
@@ -424,7 +427,12 @@ class EntryEditActivity : DatabaseLockActivity(),
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
-                            uVState.dataToVerify.protectedFieldView?.unprotect()
+                            when (uVState.dataToVerify.actionType) {
+                                UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
+                                    uVState.dataToVerify.protectedFieldView?.unprotect()
+                                }
+                                else -> {}
+                            }
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
