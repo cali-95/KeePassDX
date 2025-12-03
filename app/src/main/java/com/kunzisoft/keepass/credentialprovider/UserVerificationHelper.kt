@@ -14,10 +14,12 @@ import androidx.fragment.app.FragmentActivity
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.CheckDatabaseCredentialDialogFragment
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
+import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationDeviceCredential
 import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.putEnumExtra
+import com.kunzisoft.keepass.view.ProtectedFieldView
 import com.kunzisoft.keepass.view.toastError
 import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 
@@ -102,6 +104,24 @@ class UserVerificationHelper {
             activity?.checkUserVerification(userVerificationViewModel, dataToVerify)
         }
 
+        fun FragmentActivity.requestUnprotectField(
+            userVerificationViewModel: UserVerificationViewModel,
+            database: ContextualDatabase?,
+            protectedFieldView: ProtectedFieldView
+        ) {
+            if (protectedFieldView.isCurrentlyProtected()) {
+                checkUserVerification(
+                    userVerificationViewModel = userVerificationViewModel,
+                    dataToVerify = UserVerificationData(
+                        database = database,
+                        protectedFieldView = protectedFieldView
+                    )
+                )
+            } else {
+                protectedFieldView.protect()
+            }
+        }
+
         /**
          * Displays a dialog to verify the user
          */
@@ -111,7 +131,7 @@ class UserVerificationHelper {
         ) {
             if (isAuthenticatorsAllowed() && isUserVerificationDeviceCredential(this)) {
                 showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
-            } else {
+            } else if (dataToVerify.database != null) {
                 showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
             }
         }

@@ -63,8 +63,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecia
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.TypeMode
-import com.kunzisoft.keepass.credentialprovider.UserVerificationData
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestUnprotectField
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -100,6 +99,7 @@ import com.kunzisoft.keepass.view.asError
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.ColorPickerViewModel
 import com.kunzisoft.keepass.viewmodels.EntryEditViewModel
@@ -403,15 +403,11 @@ class EntryEditActivity : DatabaseLockActivity(),
                             mEntryEditViewModel.actionPerformed()
                         }
                         is EntryEditViewModel.EntryEditState.RequestUnprotectField -> {
-                            val fieldView = uiState.protectedFieldView
-                            if (fieldView.isCurrentlyProtected()) {
-                                checkUserVerification(
-                                    userVerificationViewModel = mUserVerificationViewModel,
-                                    dataToVerify = UserVerificationData(protectedFieldView = fieldView)
-                                )
-                            } else {
-                                fieldView.protect()
-                            }
+                            requestUnprotectField(
+                                userVerificationViewModel = mUserVerificationViewModel,
+                                database = mDatabase,
+                                protectedFieldView = uiState.protectedFieldView
+                            )
                             mEntryEditViewModel.actionPerformed()
                         }
                     }
@@ -424,6 +420,7 @@ class EntryEditActivity : DatabaseLockActivity(),
                     when (uVState) {
                         is UserVerificationViewModel.UIState.Loading -> {}
                         is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uVState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
                         is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {

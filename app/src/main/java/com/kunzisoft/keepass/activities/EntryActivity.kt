@@ -59,6 +59,7 @@ import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestUnprotectField
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -329,15 +330,11 @@ class EntryActivity : DatabaseLockActivity() {
                     when (entryState) {
                         is EntryViewModel.EntryState.Loading -> {}
                         is EntryViewModel.EntryState.RequestUnprotectField -> {
-                            val fieldView = entryState.protectedFieldView
-                            if (fieldView.isCurrentlyProtected()) {
-                                checkUserVerification(
-                                    userVerificationViewModel = mUserVerificationViewModel,
-                                    dataToVerify = UserVerificationData(protectedFieldView = fieldView)
-                                )
-                            } else {
-                                fieldView.protect()
-                            }
+                            requestUnprotectField(
+                                userVerificationViewModel = mUserVerificationViewModel,
+                                database = mDatabase,
+                                protectedFieldView = entryState.protectedFieldView
+                            )
                             mEntryViewModel.actionPerformed()
                         }
                     }
