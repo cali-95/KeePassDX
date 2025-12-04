@@ -13,7 +13,6 @@ import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatImageButton
@@ -27,8 +26,7 @@ import com.kunzisoft.keepass.R
 open class TextEditFieldView @JvmOverloads constructor(context: Context,
                                                   attrs: AttributeSet? = null,
                                                   defStyle: Int = 0)
-    : RelativeLayout(context, attrs, defStyle),
-    GenericTextFieldView, ProtectedFieldView {
+    : ProtectedTextFieldView(context, attrs, defStyle) {
 
     private var labelViewId = ViewCompat.generateViewId()
     private var valueViewId = ViewCompat.generateViewId()
@@ -171,30 +169,30 @@ open class TextEditFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    override fun setProtection(protection: Boolean, onUnprotectClickListener: OnClickListener?) {
-        if (protection) {
+    override fun setProtection(
+        protection: Boolean,
+        isCurrentlyProtected: Boolean,
+        onUnprotectClickListener: OnClickListener?
+    ) {
+        super.setProtection(protection, isCurrentlyProtected, onUnprotectClickListener)
+        if (isProtected) {
             labelView.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            /*
             // FIXME Called by itself during orientation change
+            /*
             labelView.setEndIconOnClickListener {
                 onUnprotectClickListener?.onClick(this@TextEditFieldView)
             }*/
         }
     }
 
-    override fun isCurrentlyProtected(): Boolean {
-        return valueView.transformationMethod == PasswordTransformationMethod.getInstance()
-    }
-
-    override fun protect() {
-        valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
-        valueView.transformationMethod = PasswordTransformationMethod.getInstance()
-    }
-
-    override fun unprotect() {
-        valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-        valueView.transformationMethod = SingleLineTransformationMethod.getInstance()
+    override fun changeProtectedValueParameters() {
+        if (isCurrentlyProtected()) {
+            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            valueView.transformationMethod = PasswordTransformationMethod.getInstance()
+        } else {
+            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            valueView.transformationMethod = SingleLineTransformationMethod.getInstance()
+        }
     }
 
     override fun setOnActionClickListener(onActionClickListener: OnClickListener?,

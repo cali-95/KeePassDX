@@ -26,7 +26,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.ContextThemeWrapper
 import android.view.View
-import android.widget.RelativeLayout
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.appcompat.widget.AppCompatTextView
@@ -42,8 +41,7 @@ import com.kunzisoft.keepass.utils.AppUtil.openExternalApp
 open class TextFieldView @JvmOverloads constructor(context: Context,
                                               attrs: AttributeSet? = null,
                                               defStyle: Int = 0)
-    : RelativeLayout(context, attrs, defStyle),
-    GenericTextFieldView, ProtectedFieldView {
+    : ProtectedTextFieldView(context, attrs, defStyle) {
 
     protected var labelViewId = ViewCompat.generateViewId()
     private var valueViewId = ViewCompat.generateViewId()
@@ -205,38 +203,29 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    override fun setProtection(protection: Boolean, onUnprotectClickListener: OnClickListener?) {
-        showButton.isVisible = protection
-        showButton.isSelected = true
-        showButton.setOnClickListener {
-            onUnprotectClickListener?.onClick(this@TextFieldView)
+    override fun setProtection(
+        protection: Boolean,
+        isCurrentlyProtected: Boolean,
+        onUnprotectClickListener: OnClickListener?
+    ) {
+        super.setProtection(protection, isCurrentlyProtected, onUnprotectClickListener)
+        showButton.isVisible = isProtected
+        if (isProtected) {
+            showButton.setOnClickListener {
+                onUnprotectClickListener?.onClick(this@TextFieldView)
+            }
         }
-        changeProtectedValueParameters()
-        invalidate()
     }
 
-    override fun isCurrentlyProtected(): Boolean {
-        return showButton.isSelected
-    }
-
-    override fun protect() {
-        showButton.isSelected = !showButton.isSelected
-        changeProtectedValueParameters()
-    }
-
-    override fun unprotect() {
-        showButton.isSelected = !showButton.isSelected
-        changeProtectedValueParameters()
-    }
-
-    protected fun changeProtectedValueParameters() {
+    override fun changeProtectedValueParameters() {
         valueView.apply {
             if (showButton.isVisible) {
-                applyHiddenStyle(showButton.isSelected)
+                applyHiddenStyle(isCurrentlyProtected())
             } else {
                 linkify()
             }
         }
+        invalidate()
     }
 
     private fun linkify() {

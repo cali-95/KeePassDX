@@ -31,6 +31,7 @@ import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.otp.OtpEntryFields
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.KeyboardUtil.hideKeyboard
+import com.kunzisoft.keepass.utils.readListCompat
 import com.kunzisoft.keepass.utils.readParcelableCompat
 
 
@@ -44,6 +45,9 @@ abstract class TemplateAbstractView<
 
     private var mTemplate: Template? = null
     protected var mEntryInfo: EntryInfo? = null
+
+    // To keep unprotected views during orientation change
+    protected var mUnprotectedFields = mutableListOf<Field>()
 
     private var mViewFields = mutableListOf<ViewField>()
 
@@ -569,7 +573,7 @@ abstract class TemplateAbstractView<
         }
 
         return if (!isStandardFieldName(customField.name)) {
-            customFieldsContainerView.visibility = View.VISIBLE
+            customFieldsContainerView.visibility = VISIBLE
             if (getIndexViewFieldByName(customField.name) >= 0) {
                 // Update a custom field with a new value,
                 // new field name must be the same as old field name
@@ -674,6 +678,16 @@ abstract class TemplateAbstractView<
         putCustomField(Field(otpField.name, otpField.protectedValue))
     }
 
+    fun saveUnprotectedFieldState(field: Field, isCurrentlyProtected: Boolean) {
+        try {
+            if (!isCurrentlyProtected) {
+                mUnprotectedFields.add(field)
+            } else {
+                mUnprotectedFields.remove(field)
+            }
+        } catch (_: Exception) {}
+    }
+
     override fun onRestoreInstanceState(state: Parcelable?) {
         //begin boilerplate code so parent classes can restore state
         if (state !is SavedState) {
@@ -682,6 +696,7 @@ abstract class TemplateAbstractView<
         } else {
             mTemplate = state.template
             mEntryInfo = state.entryInfo
+            mUnprotectedFields = state.unprotectedFields
             onRestoreEntryInstanceState(state)
             buildTemplateAndPopulateInfo()
             super.onRestoreInstanceState(state.superState)
@@ -697,6 +712,7 @@ abstract class TemplateAbstractView<
                                    retrieveDefaultValues = false)
         saveState.template = this.mTemplate
         saveState.entryInfo = this.mEntryInfo
+        saveState.unprotectedFields = this.mUnprotectedFields
         onSaveEntryInstanceState(saveState)
         return saveState
     }
@@ -706,6 +722,7 @@ abstract class TemplateAbstractView<
     protected class SavedState : BaseSavedState {
         var template: Template? = null
         var entryInfo: EntryInfo? = null
+        var unprotectedFields = mutableListOf<Field>()
         // TODO Move
         var tempDateTimeViewId: Int? = null
 
@@ -714,6 +731,7 @@ abstract class TemplateAbstractView<
         private constructor(parcel: Parcel) : super(parcel) {
             template = parcel.readParcelableCompat() ?: template
             entryInfo = parcel.readParcelableCompat() ?: entryInfo
+            parcel.readListCompat<Field>(unprotectedFields)
             val dateTimeViewId = parcel.readInt()
             if (dateTimeViewId != -1)
                 tempDateTimeViewId = dateTimeViewId
@@ -723,6 +741,7 @@ abstract class TemplateAbstractView<
             super.writeToParcel(out, flags)
             out.writeParcelable(template, flags)
             out.writeParcelable(entryInfo, flags)
+            out.writeList(unprotectedFields)
             out.writeInt(tempDateTimeViewId ?: -1)
         }
 

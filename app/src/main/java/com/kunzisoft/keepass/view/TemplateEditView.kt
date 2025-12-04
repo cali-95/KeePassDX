@@ -127,8 +127,15 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                 PasswordTextEditFieldView(it)
             else TextEditFieldView(it)).apply {
                 // hiddenProtectedValue (mHideProtectedValue) don't work with TextInputLayout
-                setProtection(field.protectedValue.isProtected) {
+                setProtection(
+                    protection = field.protectedValue.isProtected,
+                    isCurrentlyProtected = mUnprotectedFields.contains(field).not()
+                ) {
                     mOnUnprotectClickListener?.invoke(field, this)
+                }
+                // Trick to bypass the onSaveInstanceState in rebuild child
+                onSaveInstanceState = {
+                    saveUnprotectedFieldState(field, isCurrentlyProtected())
                 }
                 default = templateAttribute.default
                 setMaxChars(templateAttribute.options.getNumberChars())

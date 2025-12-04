@@ -63,8 +63,15 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 PasskeyTextFieldView(it)
             else TextFieldView(it)).apply {
                 applyFontVisibility(mFontInVisibility)
-                setProtection(field.protectedValue.isProtected) {
+                setProtection(
+                    protection = field.protectedValue.isProtected,
+                    isCurrentlyProtected = mUnprotectedFields.contains(field).not()
+                ) {
                     mOnUnprotectClickListener?.invoke(this)
+                }
+                // Trick to bypass the onSaveInstanceState in rebuild child
+                onSaveInstanceState = {
+                    saveUnprotectedFieldState(field, isCurrentlyProtected())
                 }
                 label = templateAttribute.alias
                         ?: TemplateField.getLocalizedName(context, field.name)
