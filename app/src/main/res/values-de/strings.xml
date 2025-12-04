@@ -509,7 +509,7 @@
     <string name="temp_device_unlock_enable_summary">Bei Nutzung der Geräteentsperrung keine verschlüsselten Inhalte speichern</string>
     <string name="temp_device_unlock_enable_title">Zeitlich begrenzte Geräteentsperrung</string>
     <string name="device_credential_unlock_enable_summary">Ermöglicht das Öffnen der Datenbank mit den persönlichen Geräteanmeldedaten</string>
-    <string name="device_unlock_tap_delete">Drücken, um alle Geräteentsperrschlüssel zu löschen</string>
+    <string name="device_unlock_tap_delete">Tippen, um alle Geräteentsperrschlüssel zu löschen</string>
     <string name="content">Inhalt</string>
     <string name="device_unlock_prompt_extract_credential_title">Datenbank mit Geräteentsperrdaten öffnen</string>
     <string name="enter">Eingabetaste</string>
