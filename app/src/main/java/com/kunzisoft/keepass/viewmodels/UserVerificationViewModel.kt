@@ -12,8 +12,8 @@ import kotlinx.coroutines.flow.StateFlow
  */
 class UserVerificationViewModel: ViewModel() {
 
-    private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
-    val userVerificationState: StateFlow<UIState> = mUiState
+    private val mUVState = MutableStateFlow<UVState>(UVState.Loading)
+    val userVerificationState: StateFlow<UVState> = mUVState
 
     var dataToVerify: UserVerificationData? = null
 
@@ -29,7 +29,7 @@ class UserVerificationViewModel: ViewModel() {
     }
 
     fun onUserVerificationSucceeded(dataToVerify: UserVerificationData) {
-        mUiState.value = UIState.OnUserVerificationSucceeded(dataToVerify)
+        mUVState.value = UVState.OnUserVerificationSucceeded(dataToVerify)
     }
 
     fun onUserVerificationFailed(
@@ -37,22 +37,22 @@ class UserVerificationViewModel: ViewModel() {
         error: Throwable? = null
     ) {
         this.dataToVerify = dataToVerify
-        mUiState.value = UIState.OnUserVerificationCanceled(dataToVerify, error)
+        mUVState.value = UVState.OnUserVerificationCanceled(dataToVerify, error)
     }
 
     fun onUserVerificationReceived() {
-        mUiState.value = UIState.Loading
+        mUVState.value = UVState.Loading
     }
 
-    sealed class UIState {
-        object Loading: UIState()
+    sealed class UVState {
+        object Loading: UVState()
         data class OnUserVerificationSucceeded(
             val dataToVerify: UserVerificationData
-        ): UIState()
+        ): UVState()
         data class OnUserVerificationCanceled(
             val dataToVerify: UserVerificationData?,
             val error: Throwable?
-        ): UIState()
+        ): UVState()
     }
 
 }

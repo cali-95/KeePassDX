@@ -21,5 +21,5 @@ enum class UserVerificationActionType {
     EDIT_ENTRY,
     EDIT_DATABASE_SETTING,
     MERGE_FROM_DATABASE,
-    SAVE_TO_DATABASE
+    SAVE_DATABASE_COPY_TO
 }

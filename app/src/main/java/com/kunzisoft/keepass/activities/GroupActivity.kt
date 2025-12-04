@@ -367,14 +367,22 @@ class GroupActivity : DatabaseLockActivity(),
                         SettingsActivity.launch(this@GroupActivity, true)
                     }
                     R.id.menu_merge_from -> {
-                        mExternalFileHelper?.openDocument()
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.MERGE_FROM_DATABASE,
+                                database = mDatabase
+                            )
+                        )
                     }
                     R.id.menu_save_copy_to -> {
-                        mExternalFileHelper?.createDocument(
-                            getString(R.string.database_file_name_default) +
-                                    "_" +
-                                    LocalDateTime.now().toString() +
-                                    mDatabase?.defaultFileExtension)
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.SAVE_DATABASE_COPY_TO,
+                                database = mDatabase
+                            )
+                        )
                     }
                     R.id.menu_lock_all -> {
                         lockAndExit()
@@ -581,19 +589,28 @@ class GroupActivity : DatabaseLockActivity(),
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 mUserVerificationViewModel.userVerificationState.collect { uVState ->
                     when (uVState) {
-                        is UserVerificationViewModel.UIState.Loading -> {}
-                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
                             coordinatorLayout?.showError(uVState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
-                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
                             val data = uVState.dataToVerify
                             when (data.actionType) {
                                 UserVerificationActionType.EDIT_ENTRY -> {
                                     editEntry(uVState.dataToVerify.database,  uVState.dataToVerify.entryId)
                                 }
-                                UserVerificationActionType.MERGE_FROM_DATABASE -> {}
-                                UserVerificationActionType.SAVE_TO_DATABASE -> {}
+                                UserVerificationActionType.MERGE_FROM_DATABASE -> {
+                                    mExternalFileHelper?.openDocument()
+                                }
+                                UserVerificationActionType.SAVE_DATABASE_COPY_TO -> {
+                                    mExternalFileHelper?.createDocument(
+                                        getString(R.string.database_file_name_default) +
+                                                "_" +
+                                                LocalDateTime.now().toString() +
+                                                uVState.dataToVerify.database?.defaultFileExtension
+                                    )
+                                }
                                 else -> {}
                             }
                             mUserVerificationViewModel.onUserVerificationReceived()

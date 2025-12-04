@@ -421,12 +421,12 @@ class EntryEditActivity : DatabaseLockActivity(),
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 mUserVerificationViewModel.userVerificationState.collect { uVState ->
                     when (uVState) {
-                        is UserVerificationViewModel.UIState.Loading -> {}
-                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
                             coordinatorLayout?.showError(uVState.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
-                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
                             when (uVState.dataToVerify.actionType) {
                                 UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
                                     uVState.dataToVerify.protectedFieldView?.unprotect()

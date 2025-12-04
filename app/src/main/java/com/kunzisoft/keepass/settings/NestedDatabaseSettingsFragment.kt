@@ -183,12 +183,12 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 mUserVerificationViewModel.userVerificationState.collect { state ->
                     when (state) {
-                        is UserVerificationViewModel.UIState.Loading -> {}
-                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
                             mSettingsViewModel.showError(state.error)
                             mUserVerificationViewModel.onUserVerificationReceived()
                         }
-                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
                             val data = state.dataToVerify
                             when (data.actionType) {
                                 UserVerificationActionType.EDIT_DATABASE_SETTING -> {

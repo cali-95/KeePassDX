@@ -178,8 +178,8 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 userVerificationViewModel.userVerificationState.collect { uiState ->
                     when (uiState) {
-                        is UserVerificationViewModel.UIState.Loading -> {}
-                        is UserVerificationViewModel.UIState.OnUserVerificationSucceeded -> {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
                             val data = uiState.dataToVerify
                             when (data.actionType) {
                                 UserVerificationActionType.LAUNCH_PASSKEY_CEREMONY -> {
@@ -194,7 +194,7 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                             }
                             userVerificationViewModel.onUserVerificationReceived()
                         }
-                        is UserVerificationViewModel.UIState.OnUserVerificationCanceled -> {
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
                             toastError(uiState.error)
                             passkeyLauncherViewModel.cancelResult()
                             userVerificationViewModel.onUserVerificationReceived()
