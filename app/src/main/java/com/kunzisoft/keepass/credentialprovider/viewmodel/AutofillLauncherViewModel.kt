@@ -60,18 +60,18 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
         // Retrieve selection mode
         when (intent.retrieveSpecialMode()) {
             SpecialMode.SELECTION -> {
-                val searchInfo = intent.retrieveSearchInfo()
-                if (searchInfo == null)
-                    throw IOException("Search info is null")
+                val searchInfo =
+                    intent.retrieveSearchInfo()
+                        ?: throw IOException("Search info is null")
                 mAutofillComponent = intent.retrieveAutofillComponent()
                 // Build search param
                 launchSelection(database, mAutofillComponent, searchInfo)
             }
             SpecialMode.REGISTRATION -> {
                 // To register info
-                val registerInfo = intent.retrieveRegisterInfo()
-                if (registerInfo == null)
-                    throw IOException("Register info is null")
+                val registerInfo =
+                    intent.retrieveRegisterInfo()
+                        ?: throw IOException("Register info is null")
                 launchRegistration(database, registerInfo)
             }
             else -> {
@@ -157,9 +157,14 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                             throw IOException("Intent is null")
                         val entries = intent.retrieveAndRemoveEntries(database)
                         val autofillComponent = mAutofillComponent
-                        if (autofillComponent == null)
-                            throw IOException("Autofill component is null")
+                                ?: throw IOException("Autofill component is null")
                         withContext(Dispatchers.Main) {
+                            /* TODO Share context
+                            MagikeyboardService.addEntries(
+                                context = getApplication(),
+                                entryList = entries,
+                                toast = true
+                            )*/
                             AutofillHelper.buildResponse(
                                 context = getApplication(),
                                 autofillComponent = autofillComponent,

@@ -262,7 +262,7 @@ class EntryActivity : DatabaseLockActivity() {
                     ClipboardEntryNotificationService.checkAndLaunchNotification(this, entryInfo)
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
-                        MagikeyboardService.addEntryAndLaunchNotificationIfAllowed(this, entryInfo)
+                        MagikeyboardService.addEntry(this, entryInfo)
                     }
                 }
                 // Assign title icon

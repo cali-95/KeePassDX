@@ -24,10 +24,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import android.widget.Toast
 import androidx.preference.PreferenceManager
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.isMagikeyboardActivated
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.timeout.TimeoutHelper
@@ -60,6 +60,9 @@ class KeyboardEntryNotificationService : LockNotificationService() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         super.onStartCommand(intent, flags, startId)
+
+        if (this.isMagikeyboardActivated().not())
+            stopService()
 
         //Get settings
         mNotificationTimeoutMilliSecs = PreferenceManager.getDefaultSharedPreferences(this)
@@ -150,24 +153,17 @@ class KeyboardEntryNotificationService : LockNotificationService() {
 
         private const val CHANNEL_MAGIKEYBOARD_ID = "com.kunzisoft.keepass.notification.channel.magikeyboard"
 
-        const val ENTRY_INFO_KEY = "ENTRY_INFO_KEY"
-        const val ACTION_CLEAN_KEYBOARD_ENTRY = "ACTION_CLEAN_KEYBOARD_ENTRY"
+        private const val ENTRY_INFO_KEY = "ENTRY_INFO_KEY"
+        private const val ACTION_CLEAN_KEYBOARD_ENTRY = "ACTION_CLEAN_KEYBOARD_ENTRY"
 
-        fun launchNotificationIfAllowed(context: Context, entry: EntryInfo, toast: Boolean) {
+        fun launchNotificationIfAllowed(context: Context, entry: EntryInfo) {
 
             var startService = false
             val intent = Intent(context, KeyboardEntryNotificationService::class.java)
 
-            if (toast) {
-                Toast.makeText(context,
-                        context.getString(R.string.keyboard_notification_entry_content_title,
-                            entry.getVisualTitle()
-                        ),
-                        Toast.LENGTH_SHORT).show()
-            }
-
             // Show the notification if allowed in Preferences
-            if (PreferencesUtil.isKeyboardNotificationEntryEnable(context)) {
+            if (PreferencesUtil.isKeyboardNotificationEntryEnable(context)
+                && context.isMagikeyboardActivated()) {
                 startService = true
                 context.startService(intent.apply {
                     putExtra(ENTRY_INFO_KEY, entry)
