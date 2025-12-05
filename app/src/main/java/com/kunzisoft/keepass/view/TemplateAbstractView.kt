@@ -31,8 +31,9 @@ import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.otp.OtpEntryFields
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.KeyboardUtil.hideKeyboard
-import com.kunzisoft.keepass.utils.readListCompat
 import com.kunzisoft.keepass.utils.readParcelableCompat
+import com.kunzisoft.keepass.utils.readSetCompat
+import com.kunzisoft.keepass.utils.writeSetCompat
 
 
 abstract class TemplateAbstractView<
@@ -47,7 +48,7 @@ abstract class TemplateAbstractView<
     protected var mEntryInfo: EntryInfo? = null
 
     // To keep unprotected views during orientation change
-    protected var mUnprotectedFields = mutableListOf<Field>()
+    protected var mUnprotectedFields = mutableSetOf<Field>()
 
     private var mViewFields = mutableListOf<ViewField>()
 
@@ -696,7 +697,7 @@ abstract class TemplateAbstractView<
         } else {
             mTemplate = state.template
             mEntryInfo = state.entryInfo
-            mUnprotectedFields = state.unprotectedFields
+            mUnprotectedFields = state.unprotectedFields.toMutableSet()
             onRestoreEntryInstanceState(state)
             buildTemplateAndPopulateInfo()
             super.onRestoreInstanceState(state.superState)
@@ -722,7 +723,7 @@ abstract class TemplateAbstractView<
     protected class SavedState : BaseSavedState {
         var template: Template? = null
         var entryInfo: EntryInfo? = null
-        var unprotectedFields = mutableListOf<Field>()
+        var unprotectedFields = setOf<Field>()
         // TODO Move
         var tempDateTimeViewId: Int? = null
 
@@ -731,7 +732,7 @@ abstract class TemplateAbstractView<
         private constructor(parcel: Parcel) : super(parcel) {
             template = parcel.readParcelableCompat() ?: template
             entryInfo = parcel.readParcelableCompat() ?: entryInfo
-            parcel.readListCompat<Field>(unprotectedFields)
+            unprotectedFields = parcel.readSetCompat<Field>()
             val dateTimeViewId = parcel.readInt()
             if (dateTimeViewId != -1)
                 tempDateTimeViewId = dateTimeViewId
@@ -741,7 +742,7 @@ abstract class TemplateAbstractView<
             super.writeToParcel(out, flags)
             out.writeParcelable(template, flags)
             out.writeParcelable(entryInfo, flags)
-            out.writeList(unprotectedFields)
+            out.writeSetCompat(unprotectedFields)
             out.writeInt(tempDateTimeViewId ?: -1)
         }
 

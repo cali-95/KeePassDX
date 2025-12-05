@@ -218,9 +218,11 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
     }
 
     override fun changeProtectedValueParameters() {
+        val isCurrentlyProtected = isCurrentlyProtected()
+        showButton.isSelected = isCurrentlyProtected
         valueView.apply {
             if (showButton.isVisible) {
-                applyHiddenStyle(isCurrentlyProtected())
+                applyHiddenStyle(isCurrentlyProtected)
             } else {
                 linkify()
             }
