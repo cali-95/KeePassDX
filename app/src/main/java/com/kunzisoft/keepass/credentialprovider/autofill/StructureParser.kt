@@ -39,7 +39,14 @@ class StructureParser(private val structure: AssistStructure) {
     private var usernameIdCandidate: AutofillId? = null
     private var usernameValueCandidate: AutofillValue? = null
 
-    fun parse(saveValue: Boolean = false): Result? {
+    fun parseOrNull(saveValue: Boolean = false): Result? {
+        val result = parse(saveValue)
+        if (result != null && result.isValid())
+            return result
+        return null
+    }
+
+    fun parse(saveValue: Boolean): Result? {
         try {
             result = Result()
             result?.apply {
@@ -59,17 +66,12 @@ class StructureParser(private val structure: AssistStructure) {
                 // If not explicit username field found, add the field just before password field.
                 if (usernameId == null && passwordId != null && usernameIdCandidate != null) {
                     usernameId = usernameIdCandidate
-                    if (allowSaveValues) {
-                        usernameValue = usernameValueCandidate
-                    }
+                    usernameValue = usernameValueCandidate
                 }
             }
-
-            return if (result?.passwordId != null || result?.creditCardNumberId != null)
-                    result
-                else
-                    null
+            return result
         } catch (e: Exception) {
+            Log.e(TAG, "Autofill error", e)
             return null
         }
     }
@@ -497,6 +499,10 @@ class StructureParser(private val structure: AssistStructure) {
         var creditCardExpirationMonthId: AutofillId? = null
         var creditCardExpirationDayId: AutofillId? = null
         var cardVerificationValueId: AutofillId? = null
+
+        fun isValid(): Boolean {
+            return passwordId != null || creditCardNumberId != null
+        }
 
         fun allAutofillIds(): Array<AutofillId> {
             val all = ArrayList<AutofillId>()

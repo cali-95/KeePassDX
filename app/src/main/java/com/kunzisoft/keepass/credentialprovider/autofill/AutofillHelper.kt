@@ -561,7 +561,7 @@ object AutofillHelper {
         if (entriesInfo.isEmpty()) {
             throw IOException("No entries found")
         } else {
-            StructureParser(autofillComponent.assistStructure).parse()?.let { result ->
+            StructureParser(autofillComponent.assistStructure).parseOrNull()?.let { result ->
                 // New Response
                 onIntentCreated(Intent().putExtra(
                     AutofillManager.EXTRA_AUTHENTICATION_RESULT,

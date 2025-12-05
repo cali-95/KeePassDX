@@ -28,6 +28,18 @@
     android:paddingBottom="8dp"
     android:background="@color/grey_blue_deep"
     android:orientation="vertical">
+    <TextView
+        android:layout_marginVertical="4dp"
+        android:id="@+id/magikeyboard_package_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/grey_blue_deep"
+        android:gravity="center"
+        android:textSize="12sp"
+        tools:text="com.kunzisoft.keepass"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/grey_blue_slighter"/>
     <LinearLayout
         android:id="@+id/magikeyboard_entry_container"
         android:layout_width="wrap_content"
@@ -40,6 +52,7 @@
         android:paddingTop="4dp"
         android:paddingBottom="4dp"
         android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
         android:background="@drawable/key_border"
         android:orientation="vertical">
         <TextView
@@ -84,17 +97,6 @@
                 android:textColor="@color/grey_blue_slighter"/>
         </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/magikeyboard_package_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/grey_blue_deep"
-        android:gravity="center"
-        android:textSize="12sp"
-        tools:text="com.kunzisoft.keepass"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textColor="@color/grey_blue_slighter"/>
     <com.kunzisoft.keepass.credentialprovider.magikeyboard.KeyboardView
         android:id="@+id/magikeyboard_view"
         style="@style/KeepassDXStyle.Keyboard"

@@ -41,6 +41,10 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kunzisoft.keepass.R
@@ -66,7 +70,9 @@ import com.kunzisoft.keepass.utils.registerLockReceiver
 import com.kunzisoft.keepass.utils.unregisterLockReceiver
 import java.util.UUID
 
-class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionListener {
+class MagikeyboardService : InputMethodService(),
+    KeyboardView.OnKeyboardActionListener,
+    LifecycleOwner {
 
     private var mDatabaseTaskProvider: DatabaseTaskProvider? = null
     private var mDatabase: ContextualDatabase? = null
@@ -83,11 +89,18 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
     private var fieldsAdapter: FieldsAdapter? = null
     private var playSoundDuringCLick: Boolean = false
 
-    private var mFormPackageName: String? = null
-
     private var lockReceiver: LockReceiver? = null
 
+    private var mEntryId: UUID? = null
+    private var mSearchInfo: SearchInfo? = null
+
+    private val lifecycleDispatcher = ServiceLifecycleDispatcher(this)
+
+    override val lifecycle: Lifecycle
+        get() = lifecycleDispatcher.lifecycle
+
     override fun onCreate() {
+        lifecycleDispatcher.onServicePreSuperOnCreate()
         super.onCreate()
 
         mDatabaseTaskProvider = DatabaseTaskProvider(this)
@@ -113,7 +126,22 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
             }
         }
 
+        entryUUID.observe(this) { entryId ->
+            mEntryId = entryId
+            assignKeyboardView()
+        }
+
+        searchInfo.observe(this) { searchInfo ->
+            mSearchInfo = searchInfo
+            assignKeyboardView()
+        }
+
         registerLockReceiver(lockReceiver, true)
+    }
+
+    override fun onBindInput() {
+        lifecycleDispatcher.onServicePreSuperOnBind()
+        super.onBindInput()
     }
 
     override fun onCreateInputView(): View {
@@ -159,7 +187,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
 
     private fun getEntryInfo(): EntryInfo? {
         var entryInfoRetrieved: EntryInfo? = null
-        entryUUID?.let { entryId ->
+        mEntryId?.let { entryId ->
             entryInfoRetrieved = mDatabase
                 ?.getEntryById(NodeIdUUID(entryId))
                 ?.getEntryInfo(mDatabase)
@@ -168,6 +196,13 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
     }
 
     private fun assignKeyboardView() {
+        val searchString = mSearchInfo.toString()
+        if (searchString.isNotEmpty()) {
+            packageText?.text = searchString
+            packageText?.visibility = View.VISIBLE
+        } else {
+            packageText?.visibility = View.GONE
+        }
         dismissCustomKeys()
         if (keyboardView != null) {
             val entryInfo = getEntryInfo()
@@ -218,12 +253,8 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
 
     override fun onStartInputView(info: EditorInfo, restarting: Boolean) {
         super.onStartInputView(info, restarting)
-        mFormPackageName = info.packageName
-        if (!mFormPackageName.isNullOrEmpty()) {
-            packageText?.text = mFormPackageName
-            packageText?.visibility = View.VISIBLE
-        } else {
-            packageText?.visibility = View.GONE
+        mSearchInfo = searchInfo.value ?: SearchInfo().apply {
+            applicationId = info.packageName
         }
         assignKeyboardView()
     }
@@ -266,13 +297,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
                 showKeyboardPicker()
             }
             KEY_ENTRY -> {
-                var searchInfo: SearchInfo? = null
-                if (mFormPackageName != null) {
-                    searchInfo = SearchInfo().apply {
-                        applicationId = mFormPackageName
-                    }
-                }
-                actionKeyEntry(searchInfo)
+                actionKeyEntry(mSearchInfo)
             }
             KEY_ENTRY_ALT -> {
                 actionKeyEntry()
@@ -397,7 +422,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
     }
 
     override fun onPress(primaryCode: Int) {
-        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager?
         if (audioManager != null)
             when (primaryCode) {
                 Keyboard.KEYCODE_DELETE -> keyboardView?.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
@@ -426,6 +451,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
     }
 
     override fun onDestroy() {
+        lifecycleDispatcher.onServicePreSuperOnDestroy()
         dismissCustomKeys()
         unregisterLockReceiver(lockReceiver)
         mDatabaseTaskProvider?.unregisterProgressTask()
@@ -447,15 +473,24 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
         const val KEY_URL = 520
         const val KEY_FIELDS = 530
 
-        private var entryUUID: UUID? = null
+        private val searchInfo = MutableLiveData<SearchInfo?>()
+        private val entryUUID = MutableLiveData<UUID?>()
 
         private fun removeEntryInfo() {
-            entryUUID = null
+            this.entryUUID.value = null
         }
 
         fun removeEntry(context: Context) {
             removeEntryInfo()
             context.sendBroadcast(Intent(REMOVE_ENTRY_MAGIKEYBOARD_ACTION))
+        }
+
+        fun addSearchInfo(value: SearchInfo) {
+            this.searchInfo.value = value
+        }
+
+        fun removeSearchInfo() {
+            this.searchInfo.value = null
         }
 
         fun addEntry(
@@ -475,7 +510,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
             // Add a new entry if keyboard activated
             if (context.isMagikeyboardActivated()) {
                 val entry = entryList[0]
-                entryUUID = entry.id
+                this.entryUUID.value = entry.id
                 // Show the message
                 if (toast) {
                     Toast.makeText(
@@ -502,7 +537,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
             EntrySelectionHelper.performSelection(
                 items = items,
                 actionPopulateCredentialProvider = { itemFound ->
-                    if (entryUUID != itemFound.id) {
+                    if (this.entryUUID.value != itemFound.id) {
                         actionPopulateKeyboard.invoke(itemFound)
                     } else {
                         // Force selection if magikeyboard already populated
