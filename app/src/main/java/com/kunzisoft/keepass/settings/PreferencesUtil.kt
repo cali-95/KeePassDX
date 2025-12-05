@@ -413,12 +413,6 @@ object PreferencesUtil {
         }
     }
 
-    fun isClipboardNotificationsEnable(context: Context): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getBoolean(context.getString(R.string.clipboard_notifications_key),
-            context.resources.getBoolean(R.bool.clipboard_notifications_default))
-    }
-
     /**
      * Save current time, can be retrieve with `getTimeSaved()`
      */
@@ -581,12 +575,6 @@ object PreferencesUtil {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.allow_copy_password_key),
             context.resources.getBoolean(R.bool.allow_copy_password_default))
-    }
-
-    fun isClearClipboardNotificationEnable(context: Context): Boolean {
-        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
-        return prefs.getBoolean(context.getString(R.string.clear_clipboard_notification_key),
-            context.resources.getBoolean(R.bool.clear_clipboard_notification_default))
     }
 
     fun isClearKeyboardNotificationEnable(context: Context): Boolean {
@@ -855,8 +843,6 @@ object PreferencesUtil {
                 context.getString(R.string.temp_device_unlock_timeout_key) -> editor.putString(name, value.toLong().toString())
 
                 context.getString(R.string.magic_keyboard_key) -> editor.putBoolean(name, value.toBoolean())
-                context.getString(R.string.clipboard_notifications_key) -> editor.putBoolean(name, value.toBoolean())
-                context.getString(R.string.clear_clipboard_notification_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.clipboard_timeout_key) -> editor.putString(name, value.toLong().toString())
                 context.getString(R.string.keyboard_notification_entry_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_notification_entry_clear_close_key) -> editor.putBoolean(name, value.toBoolean())

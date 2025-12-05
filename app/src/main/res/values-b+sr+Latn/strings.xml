@@ -153,8 +153,6 @@
     <string name="database_default_username_title">Podrazumevano korisničko ime</string>
     <string name="database_description_title">Opis baze podataka</string>
     <string name="database_name_title">Naziv baze podataka</string>
-    <string name="clear_clipboard_notification_summary">Zaključaj bazu podataka kada istekne trajanje međuspremnika ili kada se obaveštenje zatvori nakon što počnete da je koristite</string>
-    <string name="clear_clipboard_notification_title">Isprazni pri zatvaranju</string>
     <string name="notification">Obaveštenje</string>
     <string name="disable">Onemogući</string>
     <string name="enable">Omogući</string>

@@ -128,7 +128,6 @@
     <string name="content_description_open_file">Відкрити файл</string>
     <string name="extended_ASCII">Розширений ASCII</string>
     <string name="edit_entry">Змінити запис</string>
-    <string name="clear_clipboard_notification_summary">Блокувати базу даних після закриття сповіщення після використання або якщо вичерпано час очікування</string>
     <string name="content_description_add_group">Додати групу</string>
     <string name="content_description_update_from_list">Оновити</string>
     <string name="keyboard">Клавіатура</string>
@@ -144,7 +143,6 @@
     <string name="database_name_title">Назва бази даних</string>
     <string name="disable">Вимкнути</string>
     <string name="enable">Увімкнути</string>
-    <string name="clear_clipboard_notification_title">Очищати під час закриття</string>
     <string name="allow_copy_password_summary">Дозволити копіювання пароля та захищених полів до буфера обміну</string>
     <string name="content_description_file_information">Відомості про файл</string>
     <string name="content_description_add_entry">Додати запис</string>
@@ -381,8 +379,6 @@
     <string name="lock_database_screen_off_title">Блокування екрана</string>
     <string name="lock">Блокування</string>
     <string name="clipboard_warning">Якщо не вдалось очистити буфер обміну автоматично, видаліть його історію вручну.</string>
-    <string name="clipboard_notifications_summary">Показувати сповіщення буфера обміну для копіювання полів під час перегляду запису</string>
-    <string name="clipboard_notifications_title">Сповіщення буфера обміну</string>
     <string name="clipboard_explanation_summary">Копіювати облікові дані за допомогою буфера обміну пристрою</string>
     <string name="clipboard">Буфер обміну</string>
     <string name="database_opened">Базу даних відкрито</string>

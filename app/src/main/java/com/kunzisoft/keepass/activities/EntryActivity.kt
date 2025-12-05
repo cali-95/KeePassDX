@@ -70,7 +70,6 @@ import com.kunzisoft.keepass.education.EntryActivityEducation
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.otp.OtpType
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_DELETE_ENTRY_HISTORY
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_RESTORE_ENTRY_HISTORY
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -258,8 +257,6 @@ class EntryActivity : DatabaseLockActivity() {
                 val entryInfo = entryInfoHistory.entryInfo
                 // Manage entry copy to start notification if allowed (at the first start)
                 if (savedInstanceState == null) {
-                    // Manage entry to launch copying notification if allowed
-                    ClipboardEntryNotificationService.checkAndLaunchNotification(this, entryInfo)
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
                         MagikeyboardService.addEntry(this, entryInfo)

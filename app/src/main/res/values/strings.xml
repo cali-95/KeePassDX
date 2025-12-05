@@ -455,8 +455,6 @@
     <string name="database_opened">Database opened</string>
     <string name="clipboard">Clipboard</string>
     <string name="clipboard_explanation_summary">Copy entry fields using the clipboard of your device</string>
-    <string name="clipboard_notifications_title">Clipboard notifications</string>
-    <string name="clipboard_notifications_summary">Show clipboard notifications to copy fields when viewing an entry</string>
     <string name="clipboard_warning">If automatic deletion of clipboard fails, delete its history manually.</string>
     <string name="lock">Lock</string>
     <string name="lock_database_screen_off_title">Screen lock</string>
@@ -520,8 +518,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="notification">Notification</string>
-    <string name="clear_clipboard_notification_title">Clear at closing</string>
-    <string name="clear_clipboard_notification_summary">Lock the database when the clipboard duration expires or the notification is closed after you start using it</string>
     <string name="database_name_title">Database name</string>
     <string name="database_description_title">Database description</string>
     <string name="database_default_username_title">Default username</string>

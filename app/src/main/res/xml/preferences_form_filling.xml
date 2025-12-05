@@ -74,17 +74,6 @@
             android:key="@string/clipboard_explanation_key"
             android:icon="@drawable/prefs_info_24dp"
             android:summary="@string/clipboard_explanation_summary"/>
-        <SwitchPreferenceCompat
-            android:key="@string/clipboard_notifications_key"
-            android:title="@string/clipboard_notifications_title"
-            android:defaultValue="@bool/clipboard_notifications_default"
-            android:summary="@string/clipboard_notifications_summary" />
-        <SwitchPreferenceCompat
-            android:key="@string/clear_clipboard_notification_key"
-            android:title="@string/clear_clipboard_notification_title"
-            android:summary="@string/clear_clipboard_notification_summary"
-            android:dependency="@string/clipboard_notifications_key"
-            android:defaultValue="@bool/clear_clipboard_notification_default"/>
         <com.kunzisoft.keepass.settings.preference.DurationDialogPreference
             android:key="@string/clipboard_timeout_key"
             android:title="@string/clipboard_timeout"

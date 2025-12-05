@@ -81,7 +81,6 @@ import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CREATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.getNewEntry
@@ -195,7 +194,6 @@ class EntryEditActivity : DatabaseLockActivity(),
             ))
         }
 
-        stopService(Intent(this, ClipboardEntryNotificationService::class.java))
         stopService(Intent(this, KeyboardEntryNotificationService::class.java))
 
         // Entry is retrieve, it's an entry to update

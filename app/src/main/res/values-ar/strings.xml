@@ -170,7 +170,6 @@
     <string name="list_password_generator_options_title">محارف كلمة السر</string>
     <string name="list_password_generator_options_summary">تعيين المحارف المسموح بها لتوليد كلمة السر</string>
     <string name="clipboard">حافظة</string>
-    <string name="clipboard_notifications_title">اشعارات الحافظة</string>
     <string name="clipboard_warning">اذا فشل الحذف التلقائي من الحافظة ,احذف تأريخه يدويا.</string>
     <string name="lock_database_screen_off_title">قفل الشاشة</string>
     <string name="lock_database_screen_off_summary">اقفل قاعدة البيانات بعد بضع ثوانٍ بمجرد إيقاف تشغيل الشاشة</string>
@@ -180,7 +179,6 @@
     <string name="file_name">اسم الملف</string>
     <string name="path">مسار</string>
     <string name="database_history">تأريخ</string>
-    <string name="clipboard_notifications_summary">أظهر اشعارات الحافظة لنسخ الحقول عند عرض مدخل</string>
     <string name="device_unlock">فتح الجهاز</string>
     <string name="biometric_unlock_enable_title">فحص البصمة</string>
     <string name="biometric_unlock_enable_summary">يتيح لك مسح بياناتك الحيوية لفتح قاعدة البيانات</string>
@@ -376,8 +374,6 @@
     <string name="compression">الضغط</string>
     <string name="database_custom_color_title">خصص لون لقاعدة البيانات</string>
     <string name="database_default_username_title">اسم المستخدم الافتراضي</string>
-    <string name="clear_clipboard_notification_summary">أغلق قاعدة البيانات عند انتهاء مهلة استخدام الحافظة أو عند إغلاق الإشعار</string>
-    <string name="clear_clipboard_notification_title">امسح عند الخروج</string>
     <string name="disable">عطّل</string>
     <string name="enable">فعّل</string>
     <string name="monospace_font_fields_enable_title">خط الحقول</string>

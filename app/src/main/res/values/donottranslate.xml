@@ -122,10 +122,6 @@
     <bool name="magic_keyboard_default" translatable="false">false</bool>
     <string name="magic_keyboard_preference_key" translatable="false">magic_keyboard_preference_key</string>
     <string name="clipboard_explanation_key" translatable="false">clipboard_explanation_key</string>
-    <string name="clipboard_notifications_key" translatable="false">clipboard_notifications_key</string>
-    <bool name="clipboard_notifications_default" translatable="false">false</bool>
-    <string name="clear_clipboard_notification_key" translatable="false">clear_clipboard_notification_key</string>
-    <bool name="clear_clipboard_notification_default" translatable="false">false</bool>
     <string name="clipboard_timeout_key" translatable="false">clip_timeout_key</string>
     <string name="clipboard_timeout_default" translatable="false">20000</string>
     <string name="credential_provider_key" translatable="false">credential_provider_key</string>

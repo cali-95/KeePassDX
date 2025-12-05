@@ -368,7 +368,6 @@
     <string name="biometric_security_update_required">등록된 생체정보를 업데이트해 주세요.</string>
     <string name="autofill_select_entry">항목 선택…</string>
     <string name="clipboard">클립보드</string>
-    <string name="clipboard_notifications_title">클립보드 알림</string>
     <string name="lock_database_screen_off_summary">화면이 꺼지면 몇 초 후에 데이터베이스를 잠급니다</string>
     <string name="lock_database_back_root_title">\'­뒤로가기\'를 눌러 잠금</string>
     <string name="unavailable_feature_text">이 기능을 사용할 수 없습니다.</string>

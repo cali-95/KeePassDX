@@ -280,8 +280,6 @@
     <string name="database_opened">データベースが開かれています</string>
     <string name="clipboard">クリップボード</string>
     <string name="clipboard_explanation_summary">デバイスのクリップボードを使用して、エントリーのフィールドをコピーします</string>
-    <string name="clipboard_notifications_title">クリップボード通知</string>
-    <string name="clipboard_notifications_summary">エントリーを開いているとき、フィールドをコピーするクリップボード通知を表示します</string>
     <string name="clipboard_warning">クリップボードの自動削除に失敗した場合は、手動でその履歴を削除してください。</string>
     <string name="lock">ロック</string>
     <string name="lock_database_screen_off_title">画面ロック</string>
@@ -330,8 +328,6 @@
     <string name="enable">有効</string>
     <string name="disable">無効</string>
     <string name="notification">通知</string>
-    <string name="clear_clipboard_notification_title">データベースを閉じて消去</string>
-    <string name="clear_clipboard_notification_summary">クリップボードでの保存期間が終了したとき、または使用開始後に通知が閉じられたとき、データベースをロックします</string>
     <string name="database_name_title">データベース名</string>
     <string name="database_description_title">データベースの説明</string>
     <string name="database_default_username_title">デフォルトのユーザー名</string>
