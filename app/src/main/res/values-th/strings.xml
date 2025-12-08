@@ -528,7 +528,7 @@
     <string name="database_history">ประวัติ</string>
     <string name="import_app_properties_summary">เลือกไฟล์ที่จะนําเข้าการตั้งค่าของแอป</string>
     <string name="success_import_app_properties">นำเข้าการตั้งค่าแอปแล้ว</string>
-    <string name="set_credential_provider_service_title">ตั่งค่าเป็นบริการกรอกข้อมูลอัตโนมัติเรื่มต้น</string>
+    <string name="set_credential_provider_service_title">ตั่งค่าเป็นบริการจัดการบัญชีเข้าใช้เรื่มต้น</string>
     <string name="error_export_app_properties">เกิดข้อผิดพลาดระหว่างการส่งออกการตั้งค่าของแอป</string>
     <string name="menu_appearance_settings">ลักษณะ</string>
     <string name="biometric">ไบโอเมตริก</string>
@@ -675,4 +675,11 @@
     <string name="warning_large_keyfile">ไม่แนะนำให้ใช้ keyfile ขนาดใหญ่ๆ เพราะอาจจะทำให้เปิดฐานข้อมูลรหัสผ่านไม่ได้</string>
     <string name="hide_templates_title">ซ่อนแม่แบบ</string>
     <string name="hide_templates_summary">แม่แบบไม่แสดง</string>
+    <string name="credential_provider">ผู้ให้บริการบัญชีเข้าใช้</string>
+    <string name="credential_provider_service_subtitle">ผู้ให้บริการพาสคีย์และการป้อนข้อมูลอัตโนมัติ</string>
+    <string name="passkey_service_name">ผู้ให้บริการบัญชีเข้าใช้ KeePassDX</string>
+    <string name="passkeys_explanation_summary">ตั้งค่าพาสคีย์เพื่อการเข้าสู่ระบบที่รวดเร็วและปลอดภัยยิ่งขึ้นโดยไม่ต้องกรอกรหัสผ่าน</string>
+    <string name="passkeys_preference_title">การตั้งค่าพาสคีย์</string>
+    <string name="passkeys_close_database_title">ปิดฐานข้อมูล</string>
+    <string name="passkeys_close_database_summary">ปิดฐานข้อมูลหลังจากการเลือกพาสคีย์เรียบร้อยแล้ว</string>
 </resources>
