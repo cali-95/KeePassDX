@@ -30,7 +30,7 @@ import android.util.Log
 import androidx.annotation.StringRes
 import androidx.media.app.NotificationCompat
 import com.kunzisoft.keepass.R
-import com.kunzisoft.keepass.activities.GroupActivity
+import com.kunzisoft.keepass.activities.FileDatabaseSelectActivity
 import com.kunzisoft.keepass.app.database.CipherDatabaseAction
 import com.kunzisoft.keepass.app.database.FileDatabaseHistoryAction
 import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
@@ -549,10 +549,11 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
                 // Database is normally open
                 if (database.loaded) {
                     // Build Intents for notification action
+                    // Open the start of the database workflow
                     val pendingDatabaseIntent = PendingIntent.getActivity(
                         this,
                         randomRequestCode(),
-                        Intent(this, GroupActivity::class.java),
+                        Intent(this, FileDatabaseSelectActivity::class.java),
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
                         } else {
