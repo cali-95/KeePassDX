@@ -42,6 +42,9 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.SetMainCredentialDialogFragment
 import com.kunzisoft.keepass.activities.legacy.DatabaseRetrieval
 import com.kunzisoft.keepass.activities.legacy.resetAppTimeoutWhenViewTouchedOrFocused
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.crypto.EncryptionAlgorithm
 import com.kunzisoft.keepass.database.crypto.kdf.KdfEngine
@@ -74,11 +77,16 @@ import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.getParcelableCompat
 import com.kunzisoft.keepass.utils.getSerializableCompat
 import com.kunzisoft.keepass.viewmodels.DatabaseViewModel
+import com.kunzisoft.keepass.viewmodels.SettingsViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 
 class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetrieval {
 
+    private val mSettingsViewModel: SettingsViewModel by activityViewModels()
     private val mDatabaseViewModel: DatabaseViewModel by activityViewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by activityViewModels()
+
     private val mDatabase: ContextualDatabase?
         get() = mDatabaseViewModel.database
     private var mDatabaseReadOnly: Boolean = false
@@ -167,6 +175,51 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
                 mDatabaseViewModel.databaseState.collect { database ->
                     database?.let {
                         onDatabaseRetrieved(database)
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mUserVerificationViewModel.userVerificationState.collect { state ->
+                    when (state) {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
+                            mSettingsViewModel.showError(state.error)
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
+                            val data = state.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.EDIT_DATABASE_SETTING -> {
+                                    val database = data.database
+                                    val preferenceKey = data.preferenceKey
+                                    if (database != null && preferenceKey != null) {
+                                        // Main Preferences
+                                        when (preferenceKey) {
+                                            // Master Key
+                                            getString(R.string.settings_database_change_credentials_key) -> {
+                                                SetMainCredentialDialogFragment
+                                                    .getInstance(database.allowNoMasterKey)
+                                                    .show(parentFragmentManager, "passwordDialog")
+                                            }
+                                            else -> {}
+                                        }
+                                        // TODO Settings in compose
+                                        @Suppress("DEPRECATION")
+                                        mSettingsViewModel.dialogFragment?.let { dialogFragment ->
+                                            dialogFragment.setTargetFragment(
+                                                this@NestedDatabaseSettingsFragment, 0
+                                            )
+                                            dialogFragment.show(parentFragmentManager, TAG_PREF_FRAGMENT)
+                                        }
+                                        mSettingsViewModel.dialogFragment = null
+                                    }
+                                }
+                                else -> {}
+                            }
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
                     }
                 }
             }
@@ -325,7 +378,6 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
             }
             // Change the recycle bin group
             recycleBinGroupPref?.setOnPreferenceClickListener {
-
                 true
             }
             // Recycle Bin group
@@ -431,11 +483,18 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
     }
 
     private fun onCreateDatabaseMasterKeyPreference(database: ContextualDatabase) {
-        findPreference<Preference>(getString(R.string.settings_database_change_credentials_key))?.apply {
+        val changeCredentialKey = getString(R.string.settings_database_change_credentials_key)
+        findPreference<Preference>(changeCredentialKey)?.apply {
             isEnabled = if (!mDatabaseReadOnly) {
                 onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    SetMainCredentialDialogFragment.getInstance(database.allowNoMasterKey)
-                            .show(parentFragmentManager, "passwordDialog")
+                    checkUserVerification(
+                        mUserVerificationViewModel,
+                        UserVerificationData(
+                            actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
+                            database = database,
+                            preferenceKey = changeCredentialKey
+                        )
+                    )
                     false
                 }
                 true
@@ -462,7 +521,7 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
             // To reassign color listener after orientation change
             val chromaDialog = parentFragmentManager.findFragmentByTag(TAG_PREF_FRAGMENT) as DatabaseColorPreferenceDialogFragmentCompat?
             chromaDialog?.onColorSelectedListener = colorSelectedListener
-        } catch (e: Exception) {}
+        } catch (_: Exception) {}
 
         return view
     }
@@ -730,9 +789,15 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
         }
 
         if (dialogFragment != null && !mDatabaseReadOnly) {
-            @Suppress("DEPRECATION")
-            dialogFragment.setTargetFragment(this, 0)
-            dialogFragment.show(parentFragmentManager, TAG_PREF_FRAGMENT)
+            mSettingsViewModel.dialogFragment = dialogFragment
+            checkUserVerification(
+                mUserVerificationViewModel,
+                UserVerificationData(
+                    actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
+                    database = mDatabase,
+                    preferenceKey =  preference.key
+                )
+            )
         }
         // Could not be handled here. Try with the super method.
         else if (otherDialogFragment) {
@@ -742,7 +807,6 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
 
     override fun onResume() {
         super.onResume()
-
         context?.let { context ->
             mDatabaseAutoSaveEnabled = PreferencesUtil.isAutoSaveDatabaseEnabled(context)
         }

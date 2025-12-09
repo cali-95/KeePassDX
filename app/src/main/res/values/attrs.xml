@@ -30,7 +30,6 @@
     <declare-styleable name="PasswordView">
         <attr name="passwordHint" format="string" />
         <attr name="passwordMaxLines" format="integer" />
-        <attr name="passwordVisible" format="boolean" />
     </declare-styleable>
 
     <!-- Specific keyboard attributes -->

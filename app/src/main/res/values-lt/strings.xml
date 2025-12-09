@@ -81,7 +81,6 @@
     <string name="entry_confpassword">Patvirtinti slaptažodį</string>
     <string name="invalid_db_sig">Nepavyko atpažinti duomenų bazės formato.</string>
     <string name="sort_db">Natūrali tvarka</string>
-    <string name="menu_hide_password">Slėpti slaptažodį</string>
     <string name="app_timeout">Neveiklumas</string>
     <string name="clipboard_error_clear">Nepavyko išvalyti iškarpinės</string>
     <string name="list_size_summary">Teksto dydis grupės sąraše</string>
@@ -92,7 +91,6 @@
     <string name="search">Įrašo pavadinimas/aprašymas</string>
     <string name="menu_change_key_settings">Pakeisti pagrindinį raktą</string>
     <string name="entry_accessed">Naudota</string>
-    <string name="hide_password_title">Maskuoti slaptažodį</string>
     <string name="space">Tarpas</string>
     <string name="special">Specialus</string>
     <string name="uppercase">Didžiosios raidės</string>
@@ -100,7 +98,6 @@
     <string name="minus">Minusas</string>
     <string name="underline">Pabraukimas</string>
     <string name="default_checkbox">Naudoti šią duomenų bazę kaip numatytąją</string>
-    <string name="hide_password_summary">Slėpti slaptažodžius pagal nutylėjimą</string>
     <string name="invalid_algorithm">Neteisingas algoritmas.</string>
     <string name="error_invalid_path">Pasirūpininkite, kad kelias būtų teisingas.</string>
     <string name="education_unlock_summary">Įveskite slaptažodį ir/ar rakto failą, kad atrakintumėte savo duomenų bazę.
@@ -482,8 +479,6 @@
     <string name="credential_provider_service_subtitle">Raktų sistemos, automatinio pildymo kredencialų teikėjas</string>
     <string name="clipboard">Iškarpinė</string>
     <string name="clipboard_explanation_summary">Kopijuoti įrašų laukus naudojant jūsų prietaiso iškarpinę</string>
-    <string name="clipboard_notifications_title">Iškarpinės pranešimai</string>
-    <string name="clipboard_notifications_summary">Rodyti iškarpinės pranešimus laukų kopijavimui žiūrint įrašą</string>
     <string name="clipboard_warning">Jei automatinis iškarpinės ištrynimas nepavyksta, ištrinkite jos istoriją rankiniu būdu.</string>
     <string name="lock_database_back_root_summary">Paspauskite \"Atgal\", kad užrakintumėte duomenų bazę, jei esate duomenų bazės šakniniame ekrane</string>
     <string name="device_unlock_tap_delete">Bakstelėkite, kad ištrintumėte įrenginio atrakinimo raktus</string>
@@ -525,8 +520,6 @@
     <string name="enable">Įgalinti</string>
     <string name="disable">Išjungti</string>
     <string name="notification">Pranešimas</string>
-    <string name="clear_clipboard_notification_title">Išvalyti uždarant</string>
-    <string name="clear_clipboard_notification_summary">Užrakinti duomenų bazę, kai iškarpinės trukmė baigiasi arba pranešimas uždaromas po to, kai pradėjote ją naudoti</string>
     <string name="database_name_title">Duomenų bazės pavadinimas</string>
     <string name="database_description_title">Duomenų bazės aprašymas</string>
     <string name="database_default_username_title">Numatytasis vartotojo vardas</string>

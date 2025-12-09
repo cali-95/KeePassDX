@@ -67,7 +67,7 @@ class EntrySelectionLauncherActivity : DatabaseModeActivity() {
                 when (uiState) {
                     is EntrySelectionViewModel.UIState.Loading -> {}
                     is EntrySelectionViewModel.UIState.PopulateKeyboard -> {
-                        MagikeyboardService.addEntryAndLaunchNotificationIfAllowed(
+                        MagikeyboardService.addEntry(
                             context = this@EntrySelectionLauncherActivity,
                             entry = uiState.entryInfo,
                             toast = true

@@ -19,25 +19,43 @@
  */
 package com.kunzisoft.keepass.viewmodels
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
+import com.kunzisoft.keepass.database.element.Field
 import com.kunzisoft.keepass.database.element.node.NodeId
 import com.kunzisoft.keepass.database.element.node.NodeIdUUID
 import com.kunzisoft.keepass.database.element.template.Template
+import com.kunzisoft.keepass.database.element.template.TemplateField
+import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.otp.OtpElement
+import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.IOActionTask
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
 
 
-class EntryViewModel: ViewModel() {
+class EntryViewModel(application: Application): AndroidViewModel(application) {
 
-    private var mMainEntryId: NodeId<UUID>? = null
-    private var mHistoryPosition: Int = -1
+    var mainEntryId: NodeId<UUID>? = null
+        private set
+    var entryInfo: EntryInfo? = null
+        private set
+    var historyPosition: Int = -1
+        private set
+    var entryIsHistory: Boolean = false
+        private set
+    var entryLoaded = false
+        private set
+
+    private var mClipboardHelper: ClipboardHelper = ClipboardHelper(application)
 
     val entryInfoHistory : LiveData<EntryInfoHistory?> get() = _entryInfoHistory
     private val _entryInfoHistory = MutableLiveData<EntryInfoHistory?>()
@@ -59,13 +77,16 @@ class EntryViewModel: ViewModel() {
     val historySelected : LiveData<EntryHistory> get() = _historySelected
     private val _historySelected = SingleLiveEvent<EntryHistory>()
 
+    private val mEntryState = MutableStateFlow<EntryState>(EntryState.Loading)
+    val entryState: StateFlow<EntryState> = mEntryState
+
     fun loadDatabase(database: ContextualDatabase?) {
-        loadEntry(database, mMainEntryId, mHistoryPosition)
+        loadEntry(database, mainEntryId, historyPosition)
     }
 
     fun loadEntry(database: ContextualDatabase?, mainEntryId: NodeId<UUID>?, historyPosition: Int = -1) {
-        this.mMainEntryId = mainEntryId
-        this.mHistoryPosition = historyPosition
+        this.mainEntryId = mainEntryId
+        this.historyPosition = historyPosition
 
         if (database != null && mainEntryId != null) {
             IOActionTask(
@@ -104,11 +125,36 @@ class EntryViewModel: ViewModel() {
                     }
                 },
                 { entryInfoHistory ->
+                    if (entryInfoHistory != null) {
+                        this.mainEntryId = entryInfoHistory.mainEntryId
+                        this.entryInfo = entryInfoHistory.entryInfo
+                        this.historyPosition = historyPosition
+                        this.entryIsHistory = historyPosition > -1
+                        this.entryLoaded = true
+                    }
                     _entryInfoHistory.value = entryInfoHistory
                     _entryHistory.value = entryInfoHistory?.entryHistory
                 }
             ).execute()
         }
+    }
+
+    fun updateProtectionField(fieldProtection: FieldProtection, value: Boolean) {
+        fieldProtection.isCurrentlyProtected = value
+        mEntryState.value = EntryState.OnFieldProtectionUpdated(fieldProtection)
+    }
+
+    fun requestChangeFieldProtection(fieldProtection: FieldProtection) {
+        mEntryState.value = EntryState.OnChangeFieldProtectionRequested(fieldProtection)
+    }
+
+    fun requestCopyField(fieldProtection: FieldProtection) {
+        // Only request the User Verification if the field is protected and not shown
+        val field = fieldProtection.field
+        if (field.protectedValue.isProtected && fieldProtection.isCurrentlyProtected)
+            mEntryState.value = EntryState.RequestCopyProtectedField(fieldProtection)
+        else
+            copyToClipboard(field)
     }
 
     fun onOtpElementUpdated(optElement: OtpElement?) {
@@ -131,6 +177,22 @@ class EntryViewModel: ViewModel() {
         _sectionSelected.value = section
     }
 
+    fun copyToClipboard(field: Field) {
+        mClipboardHelper.timeoutCopyToClipboard(
+            TemplateField.getLocalizedName(getApplication(), field.name),
+            field.protectedValue.stringValue,
+            field.protectedValue.isProtected
+        )
+    }
+
+    fun copyToClipboard(text: String) {
+        mClipboardHelper.timeoutCopyToClipboard(text, text)
+    }
+
+    fun actionPerformed() {
+        mEntryState.value = EntryState.Loading
+    }
+
     data class EntryInfoHistory(var mainEntryId: NodeId<UUID>,
                                 var historyPosition: Int,
                                 val template: Template,
@@ -150,6 +212,19 @@ class EntryViewModel: ViewModel() {
                 return if (position == 1) ADVANCED else MAIN
             }
         }
+    }
+
+    sealed class EntryState {
+        object Loading: EntryState()
+        data class OnChangeFieldProtectionRequested(
+            val fieldProtection: FieldProtection
+        ): EntryState()
+        data class OnFieldProtectionUpdated(
+            val fieldProtection: FieldProtection
+        ): EntryState()
+        data class RequestCopyProtectedField(
+            val fieldProtection: FieldProtection
+        ): EntryState()
     }
 
     companion object {

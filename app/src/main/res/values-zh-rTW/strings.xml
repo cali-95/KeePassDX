@@ -83,16 +83,12 @@
     <string name="brackets">括弧</string>
     <string name="build_label">版本號 %1$s</string>
     <string name="card_verification_value">安全碼</string>
-    <string name="clear_clipboard_notification_summary">剪貼簿過期或通知被關閉時，鎖定資料庫</string>
-    <string name="clear_clipboard_notification_title">關閉時清除</string>
     <string name="clipboard">剪貼簿</string>
     <string name="clipboard_cleared">剪貼簿已清除</string>
     <string name="clipboard_error">部份裝置不容許應用程式使用剪貼簿。</string>
     <string name="clipboard_error_clear">無法清除剪貼簿</string>
     <string name="clipboard_error_title">剪貼簿錯誤</string>
     <string name="clipboard_explanation_summary">使用裝置的剪貼簿複製項目欄位</string>
-    <string name="clipboard_notifications_summary">顯示剪貼簿通知，以便在查看項目時複製欄位</string>
-    <string name="clipboard_notifications_title">剪貼簿通知</string>
     <string name="clipboard_timeout">剪貼簿超時</string>
     <string name="clipboard_timeout_summary">剪貼簿的留存時間（如果裝置支援）</string>
     <string name="clipboard_warning">如自動清空剪貼簿失敗，則請手動清空。</string>
@@ -304,8 +300,6 @@
     <string name="hide_broken_locations_title">隱藏已損壞的資料庫路徑</string>
     <string name="hide_expired_entries_summary">過期條目將被隱藏</string>
     <string name="hide_expired_entries_title">隱藏過期的條目</string>
-    <string name="hide_password_summary">預設隱藏密碼</string>
-    <string name="hide_password_title">密碼遮罩</string>
     <string name="hint_conf_pass">確認密碼</string>
     <string name="hint_generated_password">生成密碼</string>
     <string name="hint_group_name">群組名</string>
@@ -424,7 +418,6 @@
     <string name="menu_external_icon">外部圖示</string>
     <string name="menu_file_selection_read_only">唯讀</string>
     <string name="menu_form_filling_settings">表格填入</string>
-    <string name="menu_hide_password">隱藏密碼</string>
     <string name="menu_keystore_remove_key">刪除裝置解鎖密鑰</string>
     <string name="menu_lock">鎖定資料庫</string>
     <string name="menu_master_key_settings">主密鑰設定</string>

@@ -45,6 +45,11 @@
             android:title="@string/show_entry_colors_title"
             android:summary="@string/show_entry_colors_summary"
             android:defaultValue="@bool/show_entry_colors_default"/>
+        <SwitchPreferenceCompat
+            android:key="@string/colorize_password_key"
+            android:title="@string/colorize_password_title"
+            android:summary="@string/colorize_password_summary"
+            android:defaultValue="@bool/colorize_password_default"/>
 
     </PreferenceCategory>
 
@@ -61,22 +66,6 @@
             android:title="@string/hide_templates_title"
             android:summary="@string/hide_templates_summary"
             android:defaultValue="@bool/hide_templates_default"/>
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/password">
-
-        <SwitchPreferenceCompat
-            android:key="@string/hide_password_key"
-            android:title="@string/hide_password_title"
-            android:summary="@string/hide_password_summary"
-            android:defaultValue="@bool/hide_password_default"/>
-        <SwitchPreferenceCompat
-            android:key="@string/colorize_password_key"
-            android:title="@string/colorize_password_title"
-            android:summary="@string/colorize_password_summary"
-            android:defaultValue="@bool/colorize_password_default"/>
 
     </PreferenceCategory>
 

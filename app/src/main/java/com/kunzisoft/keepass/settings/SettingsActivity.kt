@@ -28,9 +28,13 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.SetMainCredentialDialogFragment
@@ -41,6 +45,9 @@ import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.timeout.TimeoutHelper
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
+import com.kunzisoft.keepass.viewmodels.SettingsViewModel
+import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import java.util.Properties
 
@@ -48,6 +55,8 @@ open class SettingsActivity
     : DatabaseLockActivity(),
         MainPreferenceFragment.Callback,
         SetMainCredentialDialogFragment.AssignMainCredentialDialogListener {
+
+    private val mSettingsViewModel: SettingsViewModel by viewModels()
 
     private var backupManager: BackupManager? = null
     private var mExternalFileHelper: ExternalFileHelper? = null
@@ -118,7 +127,7 @@ open class SettingsActivity
         if (savedInstanceState?.getString(TITLE_KEY).isNullOrEmpty())
             toolbar?.setTitle(R.string.settings)
         else
-            toolbar?.title = savedInstanceState?.getString(TITLE_KEY)
+            toolbar?.title = savedInstanceState.getString(TITLE_KEY)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -144,6 +153,20 @@ open class SettingsActivity
             }
             // Eat state
             intent.removeExtra(FRAGMENT_ARG)
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mSettingsViewModel.settingsState.collect { settingsState ->
+                    when (settingsState) {
+                        is SettingsViewModel.SettingsState.Wait -> {}
+                        is SettingsViewModel.SettingsState.ShowError -> {
+                            coordinatorLayout?.showError(settingsState.error)
+                            mSettingsViewModel.errorShown()
+                        }
+                    }
+                }
+            }
         }
     }
 

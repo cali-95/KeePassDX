@@ -148,11 +148,12 @@ data class PublicKeyCredentialDescriptor(
     }
 }
 
+// https://www.w3.org/TR/webauthn-3/#dictdef-authenticatorselectioncriteria
 data class AuthenticatorSelectionCriteria(
     val authenticatorAttachment: String? = null,
     val residentKey: ResidentKeyRequirement? = null,
     val requireResidentKey: Boolean?,
-    val userVerification: UserVerificationRequirement? = UserVerificationRequirement.PREFERRED
+    val userVerification: UserVerificationRequirement = UserVerificationRequirement.PREFERRED
 ) {
     companion object {
         fun JSONObject.getAuthenticatorSelectionCriteria(
@@ -166,7 +167,9 @@ data class AuthenticatorSelectionCriteria(
                     ResidentKeyRequirement.fromString(authenticatorSelection.getString("residentKey"))
                 else null
             val requireResidentKey = authenticatorSelection.optBoolean("requireResidentKey", false)
-            val userVerification = UserVerificationRequirement.fromString(authenticatorSelection.optString("userVerification", "preferred"))
+            val userVerification = UserVerificationRequirement
+                .fromString(authenticatorSelection.optString("userVerification", "preferred"))
+                ?: UserVerificationRequirement.PREFERRED
             // https://www.w3.org/TR/webauthn-3/#enumdef-residentkeyrequirement
             if (residentKey == null) {
                 residentKey = if (requireResidentKey) {
@@ -195,7 +198,9 @@ enum class ResidentKeyRequirement(val value: String) {
     }
     companion object {
         fun fromString(value: String): ResidentKeyRequirement? {
-            return ResidentKeyRequirement.entries.firstOrNull { it.value == value }
+            return ResidentKeyRequirement.entries.firstOrNull {
+                it.value.equals(other = value, ignoreCase = true)
+            }
         }
     }
 }
@@ -210,7 +215,9 @@ enum class UserVerificationRequirement(val value: String) {
     }
     companion object {
         fun fromString(value: String): UserVerificationRequirement? {
-            return UserVerificationRequirement.entries.firstOrNull { it.value == value }
+            return UserVerificationRequirement.entries.firstOrNull {
+                it.value.equals(other = value, ignoreCase = true)
+            }
         }
     }
 }

@@ -24,7 +24,6 @@
     <string name="warning_replace_file">இந்த கோப்பைப் பதிவேற்றுவது தற்போதுள்ள ஒன்றை மாற்றும்.</string>
     <string name="database_history">வரலாறு</string>
     <string name="database_opened">தரவுத்தளம் திறக்கப்பட்டது</string>
-    <string name="clipboard_notifications_title">இடைநிலைப்பலகை அறிவிப்புகள்</string>
     <string name="device_unlock_timeout">சாதனம் திறத்தல் நேரம் முடிந்தது</string>
     <string name="templates_group_uuid_title">வார்ப்புருக்கள் குழு</string>
     <string name="monospace_font_fields_enable_summary">சிறந்த எழுத்து தெரிவுநிலைக்கு புலங்களில் பயன்படுத்தப்படும் எழுத்துருவை மாற்றவும்</string>
@@ -278,8 +277,6 @@
     <string name="hint_group_name">குழு பெயர்</string>
     <string name="invalid_db_same_uuid">அதே uuid %2$s உடன் %1$s ஏற்கனவே உள்ளது.</string>
     <string name="invalid_db_sig">தரவுத்தள வடிவமைப்பை அடையாளம் காண முடியவில்லை.</string>
-    <string name="hide_password_title">கடவுச்சொற்களை மறைக்கவும்</string>
-    <string name="hide_password_summary">இயல்புநிலையாக கடவுச்சொற்களை (***) மறைக்கவும்</string>
     <string name="colorize_password_title">கடவுச்சொற்களை வண்ணமயமாக்குங்கள்</string>
     <string name="colorize_password_summary">தட்டச்சு மூலம் கடவுச்சொல் எழுத்துக்களை வண்ணமயமாக்குங்கள்</string>
     <string name="list_groups_show_number_entries_summary">ஒரு குழுவில் உள்ளீடுகளின் எண்ணிக்கையைக் காட்டுகிறது</string>
@@ -298,7 +295,6 @@
     <string name="menu_security_settings_summary">குறியாக்கம், முக்கிய வழித்தோன்றல் செயல்பாடு</string>
     <string name="menu_master_key_settings">முதன்மை விசை அமைப்புகள்</string>
     <string name="menu_paste">ஒட்டு</string>
-    <string name="menu_hide_password">கடவுச்சொல்லை மறைக்கவும்</string>
     <string name="menu_merge_database">தேதி செல்கிறது</string>
     <string name="menu_open_file_read_and_write">மாற்றியமைக்கக்கூடிய</string>
     <string name="menu_restore_entry_history">வரலாற்றை மீட்டமை</string>
@@ -489,7 +485,6 @@
     <string name="templates_group_enable_title">வார்ப்புருக்கள் பயன்பாடு</string>
     <string name="settings_database_force_changing_master_key_next_time_summary">மாச்டர் விசையை அடுத்த முறை (ஒரு முறை) மாற்ற வேண்டும்</string>
     <string name="allow_copy_password_title">இடைநிலைப்பலகை டிரச்ட்</string>
-    <string name="clear_clipboard_notification_summary">இடைநிலைப்பலகை காலம் காலாவதியாகும்போது அல்லது நீங்கள் அதைப் பயன்படுத்தத் தொடங்கிய பின் அறிவிப்பு மூடப்படும் போது தரவுத்தளத்தைப் பூட்டுங்கள்</string>
     <string name="database_name_title">தரவுத்தள பெயர்</string>
     <string name="compression">சுருக்க</string>
     <string name="other">மற்றொன்று</string>
@@ -597,7 +592,6 @@
     <string name="list_password_generator_options_summary">அனுமதிக்கப்பட்ட கடவுச்சொல் செனரேட்டர் எழுத்துக்களை அமைக்கவும்</string>
     <string name="clipboard">இடைநிலைப் பலகை</string>
     <string name="clipboard_explanation_summary">உங்கள் சாதனத்தின் கிளிப்போர்டைப் பயன்படுத்தி நுழைவு புலங்களை நகலெடுக்கவும்</string>
-    <string name="clipboard_notifications_summary">உள்ளீட்டைப் பார்க்கும்போது புலங்களை நகலெடுக்க இடைநிலைப்பலகை அறிவிப்புகளைக் காட்டு</string>
     <string name="clipboard_warning">கிளிப்போர்டை தானாக நீக்குவது தோல்வியுற்றால், அதன் வரலாற்றை கைமுறையாக நீக்கவும்.</string>
     <string name="lock">பூட்டு</string>
     <string name="device_credential_unlock_enable_title">சாதன நற்சான்றிதழ் திறத்தல்</string>
@@ -612,7 +606,6 @@
     <string name="settings_database_force_changing_master_key_next_time_title">அடுத்த முறை புதுப்பிப்பை கட்டாயப்படுத்துங்கள்</string>
     <string name="allow_copy_password_summary">நுழைவு கடவுச்சொல் மற்றும் பாதுகாக்கப்பட்ட புலங்களை கிளிப்போர்டில் நகலெடுக்க அனுமதிக்கவும்</string>
     <string name="allow_copy_password_warning">எச்சரிக்கை: இடைநிலைப்பலகை அனைத்து பயன்பாடுகளாலும் பகிரப்படுகிறது. உணர்திறன் தரவு நகலெடுக்கப்பட்டால், பிற மென்பொருள்கள் அதை மீட்டெடுக்கலாம்.</string>
-    <string name="clear_clipboard_notification_title">மூடுவதில் தெளிவாக உள்ளது</string>
     <string name="database_description_title">தரவுத்தள விவரம்</string>
     <string name="database_default_username_title">இயல்புநிலை பயனர்பெயர்</string>
     <string name="database_version_title">தரவுத்தள பதிப்பு</string>

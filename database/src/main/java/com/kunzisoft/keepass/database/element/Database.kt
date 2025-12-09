@@ -390,6 +390,9 @@ open class Database {
     val transformSeed: ByteArray?
         get() = mDatabaseKDB?.transformSeed ?: mDatabaseKDBX?.transformSeed
 
+    private val checkKey: ByteArray
+        get() = mDatabaseKDB?.checkKey ?: mDatabaseKDBX?.checkKey ?: ByteArray(32)
+
     var rootGroup: Group?
         get() {
             mDatabaseKDB?.rootGroup?.let {
@@ -616,6 +619,13 @@ open class Database {
         } finally {
             dataModifiedSinceLastLoading = false
         }
+    }
+
+    /**
+     * Check if the key is valid
+     */
+    fun checkKey(key: ByteArray): Boolean {
+        return checkKey.contentEquals(key)
     }
 
     fun isMergeDataAllowed(): Boolean {
@@ -1220,7 +1230,7 @@ open class Database {
     }
 
     fun undoRecycle(entry: Entry, parent: Group) {
-        recycleBin?.let { it ->
+        recycleBin?.let {
             removeEntryFrom(entry, it)
         }
         addEntryTo(entry, parent)

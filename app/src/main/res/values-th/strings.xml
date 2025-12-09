@@ -20,7 +20,6 @@
     <string name="menu_app_settings">การตั้งค่าแอป</string>
     <string name="homepage">หน้าหลัก</string>
     <string name="security">ความปลอดภัย</string>
-    <string name="hide_password_summary">ปิดบังรหัสผ่านเป็น (***) โดยค่าเรื่มต้น</string>
     <string name="app_timeout_summary">ระยะเวลาที่ไม่ได้ใช้งานก่อนที่จะทำการล็อกฐานข้อมูล</string>
     <string name="settings">การตั้งค่า</string>
     <string name="hint_pass">รหัสผ่าน</string>
@@ -32,7 +31,6 @@
     <string name="error_pass_gen_type">จำเป็นต้องเลือกชนิดของรหัสผ่านที่จะสร้างอย่างน้อยหนึ่งอย่าง</string>
     <string name="generate_password">สร้างรหัสผ่าน</string>
     <string name="password">รหัสผ่าน</string>
-    <string name="hide_password_title">ซ่อนรหัสผ่าน</string>
     <string name="hint_conf_pass">ยืนยันรหัสผ่าน</string>
     <string name="contact">ติดต่อ</string>
     <string name="select_database_file">เปิดคลังรหัสผ่านที่มีอยู่แล้ว</string>
@@ -161,7 +159,6 @@
     <string name="database_opened">เปิดฐานข้อมูลแล้ว</string>
     <string name="clipboard">คลิปบอร์ด</string>
     <string name="clipboard_explanation_summary">คัดลอกเขตข้อมูลโดยใช้คลิปบอร์ดบนอุปกรณ์ของคุณ</string>
-    <string name="clipboard_notifications_summary">แสดงการแจ้งเตือนคลิปบอร์ดเพื่อคัดลอกเขตข้อมูลในขณะดูเขตข้อมูล</string>
     <string name="clipboard_warning">หากการลบข้อมูลในคลิปบอร์ดล้มเหลว โปรดลบข้อมูลออกจากประวัติด้วยตนเอง</string>
     <string name="lock_database_back_root_title">กด \"กลับ\" เพื่อล็อก</string>
     <string name="lock_database_show_button_summary">แสดงปุ่มล็อกในส่วนติดต่อของผู้ใช้</string>
@@ -269,7 +266,6 @@
     <string name="list_groups_show_number_entries_summary">แสดงจำนวนรายการในกลุ่ม</string>
     <string name="list_size_title">ขนาดของรายการ</string>
     <string name="creating_database">กําลังสร้างฐานข้อมูล…</string>
-    <string name="menu_hide_password">ซ่อนรหัสผ่าน</string>
     <string name="menu_keystore_remove_key">ลบกุญแจปลดล็อกของอุปกรณ์</string>
     <string name="about">เกี่ยวกับ</string>
     <string name="menu_move">ย้าย</string>
@@ -373,7 +369,6 @@
     <string name="autofill_preference_title">การตั้งค่าการกรอกข้อมูลอัตโนมัติ</string>
     <string name="password_size_title">ขนาดรหัสผ่านที่สร้าง</string>
     <string name="list_password_generator_options_title">อักขระรหัสผ่าน</string>
-    <string name="clipboard_notifications_title">การแจ้งเตือนคลิปบอร์ด</string>
     <string name="temp_device_unlock_enable_title">การปลดล็อกด้วยอุปกรณ์ชั่วคราว</string>
     <string name="keyboard_label">เมจิคีย์บอร์ด (KeePassDX)</string>
     <string name="keyboard_setting_label">การตั้งค่า เมจิคีย์บอร์ด</string>
@@ -389,7 +384,6 @@
     <string name="enable">เปิดใช้งาน</string>
     <string name="disable">ปิดใช้งาน</string>
     <string name="notification">การแจ้งเตือน</string>
-    <string name="clear_clipboard_notification_title">ล้างเมื่อทำการปิด</string>
     <string name="database_description_title">คำอธิบานฐานข้อมูล</string>
     <string name="other">อื่นๆ</string>
     <string name="compression_none">ไม่มี</string>
@@ -579,7 +573,6 @@
     <string name="settings_database_force_changing_master_key_next_time_summary">จำเป็นต้องเปลี่ยนรหัสผ่านหลักใหม่ในครั้งหน้า(ครั้งเดียว)</string>
     <string name="monospace_font_fields_enable_summary">เปลี่ยนแบบอักษรที่ใช้ในช่องเขตข้อมูลเพื่อให้มองเห็นตัวอักษรง่ายขึ้น</string>
     <string name="allow_copy_password_title">ไว้ใจคลิปบอร์ด</string>
-    <string name="clear_clipboard_notification_summary">ล็อกฐานข้อมูลเมื่อระยะเวลาในคลิปบอร์ดสิ้นสุดหรือปิดหลังจากคุณเรื่มใช้มันแล้ว</string>
     <string name="database_name_title">ชื่อฐานข้อมูล</string>
     <string name="magic_keyboard_explanation_summary">เปิดใช้งานแป้นพิมพ์แบบพิเศษที่จะสำรวจช่องกรอกรหัสผ่านและข้อมูลอื่นๆ</string>
     <string name="allow_copy_password_summary">อนุญาตให้คัดลอกรหัสผ่านและเขตข้อมูลที่ป้องกันไว้เก็บในคลิปบอร์ด</string>

@@ -27,6 +27,7 @@ import android.graphics.BlendMode
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.CancellationSignal
+import android.provider.Settings
 import android.service.autofill.AutofillService
 import android.service.autofill.FillCallback
 import android.service.autofill.FillRequest
@@ -38,10 +39,13 @@ import android.service.autofill.SaveInfo
 import android.service.autofill.SaveRequest
 import android.util.Log
 import android.view.autofill.AutofillId
+import android.view.autofill.AutofillManager
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.autofill.inline.UiVersions
 import androidx.autofill.inline.v1.InlineSuggestionUi
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.activity.AutofillLauncherActivity
 import com.kunzisoft.keepass.credentialprovider.autofill.StructureParser.Companion.APPLICATION_ID_POPUP_WINDOW
@@ -136,6 +140,12 @@ class KeeAutofillService : AutofillService() {
                     database = mDatabase,
                     searchInfo = searchInfo,
                     onItemsFound = { openedDatabase, items ->
+                        /* TODO Share context
+                        MagikeyboardService.addEntries(
+                            context = this,
+                            entryList = items,
+                            toast = true
+                        )*/
                         callback.onSuccess(
                             AutofillHelper.buildResponse(
                                 context = this,
@@ -465,6 +475,27 @@ class KeeAutofillService : AutofillService() {
                 }
             }
             return true
+        }
+
+        fun Context.isKeeAutofillActivated(): Boolean {
+            val activated = ContextCompat.getSystemService(
+                this,
+                AutofillManager::class.java
+            )?.hasEnabledAutofillServices() == true
+            return activated
+        }
+
+        fun Context.showAutofillDeviceSettings() {
+            try {
+                startActivity(
+                    Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE).apply {
+                        data = "package:${KeeAutofillService::class.java.canonicalName}".toUri()
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                )
+            } catch (e: Exception) {
+                Log.e(TAG, "Unable to choose the autofill service", e)
+            }
         }
     }
 }

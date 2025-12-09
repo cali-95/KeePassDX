@@ -142,7 +142,6 @@
     <string name="menu_paste">Mubadilə buferindən əlavə et</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_cancel">Ləğv et</string>
-    <string name="menu_hide_password">Şifrəni gizlət</string>
     <string name="menu_lock">Məlumat bazasını kilidlə</string>
     <string name="menu_save_database">Məlumatları yadda saxla</string>
     <string name="menu_merge_database">Məlumatları birləşdir</string>
@@ -274,7 +273,6 @@
     <string name="enable">Aktiv et</string>
     <string name="disable">Deaktiv et</string>
     <string name="notification">Bildiriş</string>
-    <string name="clear_clipboard_notification_title">Tətbiqi bağlayarkən sil</string>
     <string name="database_name_title">Məlumat bazasının adı</string>
     <string name="database_description_title">Məlumat bazasının açıqlaması</string>
     <string name="database_default_username_title">Standart (susmaya görə) istifadəçi adı</string>
@@ -336,8 +334,6 @@
     <string name="warning_database_info_changed_options">Məlumatları birləşdirin, məlumat bazasını yadda saxlayaraq xarici dəyişikliklərin üzərinə yazın və ya ən son dəyişikliklər ilə onu yenidən yükləyin.</string>
     <string name="clipboard">Mübadilə buferi</string>
     <string name="clipboard_explanation_summary">Cihazınızın mübadilə buferindən istifadə edərək şifrə sahələrini (bölmələrini) nüsxələyin</string>
-    <string name="clipboard_notifications_title">Mübadilə buferi bildirişləri</string>
-    <string name="clipboard_notifications_summary">Şifrəni göstərərkən sahələri (bölmə) nüsxələmək üçün mübadilə buferi bildirişlərini göstər</string>
     <string name="clipboard_warning">Əgər mübadilə buferinin avtomatik silinməsi uğursuz olarsa, onun tarixçəsini əllə silin.</string>
     <string name="html_text_ad_free">Digər bir çox şifrə menecerlerindən fərqli olaraq, bu tətbiq &lt;strong&gt;reklamsız&lt;/strong&gt;,&lt;strong&gt;azad lisenziyaya sahibdir&lt;/strong&gt; və hansı versiyanı istifadə etdiyinizdən asılı olmayaraq, şəxsi məlumatlarınızı öz serverlərində toplamır.</string>
     <string name="device_unlock_keystore_warning">Bu xüsusiyyət, şifrələnən şəxsiyyəti təsdiq edən məlumatları cihazın təhlükəsiz açar bazasında saxlayacaqdır.\n\nƏməliyyat sisteminin yerli APİ-nin tətbiqindən asılı olaraq, tam olaraq funksional olmaya bilər.\n\nCihazın istehsalçısı və istifadə etdiyiniz ROM-un tərtibatçısı ilə açar bazasının uyğunluğu və təhlükəsizliyini yoxlayın.</string>
@@ -448,8 +444,6 @@
     <string name="invalid_db_sig">Məlumat bazasının formatını tanımaq mümkün olmadı.</string>
     <string name="keyfile_is_empty">Açar faylı boşdur.</string>
     <string name="length">Uzunluq</string>
-    <string name="hide_password_title">Şifrələri gizlət</string>
-    <string name="hide_password_summary">Şifrələri standart olaraq (***) ilə maskala</string>
     <string name="colorize_password_title">Şifrələri rəngləndir</string>
     <string name="colorize_password_summary">Şifrə hərflərini (simvollarını) növə görə rəngləndir</string>
     <string name="list_entries_show_username_title">İstifadəçi adlarını göstər</string>
@@ -543,7 +537,6 @@
     <string name="monospace_font_fields_enable_title">Sahə (bölmə) yazı tipi</string>
     <string name="monospace_font_fields_enable_summary">Hərflərin (simvol) daha yaxşı görünməsi üçün sahələrdə (bölmə) istifadə olunan fontu dəyişdirin</string>
     <string name="allow_copy_password_title">Mübadilə buferi güvəni</string>
-    <string name="clear_clipboard_notification_summary">Mübadilə buferinin istifadə müddəti bitdikdə və ya istifadə etməyə başladıqdan sonra bildiriş bağlandığında məlumat bazasını kilidləyin</string>
     <string name="magic_keyboard_explanation_summary">Şifrə və bütün şəxsiyyət məlumatlarının daxil olduğu özəl klaviaturanı aktivləşdirin</string>
     <string name="keyboard_selection_entry_summary">KeePassDX-də bir şifrəyə baxarkən, Magikeyboard-da həmin şifrəni göstər</string>
     <string name="keyboard_save_search_info_summary">Gələcəkdə daha asan istifadələr üçün əl ilə şifrə seçimi edərkən paylaşılan məlumatları yadda saxlamağa çalışın</string>

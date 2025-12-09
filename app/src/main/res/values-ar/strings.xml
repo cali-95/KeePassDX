@@ -61,7 +61,6 @@
     <string name="list_size_summary">حجم النص في قائمة العناصر</string>
     <string name="loading_database">يحمل قاعدة البيانات…</string>
     <string name="lowercase">حروف صغيرة</string>
-    <string name="hide_password_summary">أخفِ كلمات السر (***) افتراضيًا</string>
     <string name="about">عن التطبيق</string>
     <string name="menu_change_key_settings">تغيير المفتاح الرئيسي</string>
     <string name="settings">الإعدادات</string>
@@ -143,13 +142,11 @@
     <string name="list_entries_show_username_summary">يعرض اسماء المستخدمين في قوائم المدخلات</string>
     <string name="hint_generated_password">كلمة السر مولّدة</string>
     <string name="hint_keyfile">ملف المفتاح</string>
-    <string name="hide_password_title">أخفِ كلمات السر</string>
     <string name="copy_field">نُسخة من %1$s</string>
     <string name="menu_copy">نسخ</string>
     <string name="menu_move">نقل</string>
     <string name="menu_paste">لصق</string>
     <string name="menu_cancel">ألغِ</string>
-    <string name="menu_hide_password">أخفِ كلمة السر</string>
     <string name="menu_showpass">أظهر كلمة السر</string>
     <string name="menu_url">الانتقال الى الرابط</string>
     <string name="menu_file_selection_read_only">محمي من التعديل</string>
@@ -173,7 +170,6 @@
     <string name="list_password_generator_options_title">محارف كلمة السر</string>
     <string name="list_password_generator_options_summary">تعيين المحارف المسموح بها لتوليد كلمة السر</string>
     <string name="clipboard">حافظة</string>
-    <string name="clipboard_notifications_title">اشعارات الحافظة</string>
     <string name="clipboard_warning">اذا فشل الحذف التلقائي من الحافظة ,احذف تأريخه يدويا.</string>
     <string name="lock_database_screen_off_title">قفل الشاشة</string>
     <string name="lock_database_screen_off_summary">اقفل قاعدة البيانات بعد بضع ثوانٍ بمجرد إيقاف تشغيل الشاشة</string>
@@ -183,7 +179,6 @@
     <string name="file_name">اسم الملف</string>
     <string name="path">مسار</string>
     <string name="database_history">تأريخ</string>
-    <string name="clipboard_notifications_summary">أظهر اشعارات الحافظة لنسخ الحقول عند عرض مدخل</string>
     <string name="device_unlock">فتح الجهاز</string>
     <string name="biometric_unlock_enable_title">فحص البصمة</string>
     <string name="biometric_unlock_enable_summary">يتيح لك مسح بياناتك الحيوية لفتح قاعدة البيانات</string>
@@ -379,8 +374,6 @@
     <string name="compression">الضغط</string>
     <string name="database_custom_color_title">خصص لون لقاعدة البيانات</string>
     <string name="database_default_username_title">اسم المستخدم الافتراضي</string>
-    <string name="clear_clipboard_notification_summary">أغلق قاعدة البيانات عند انتهاء مهلة استخدام الحافظة أو عند إغلاق الإشعار</string>
-    <string name="clear_clipboard_notification_title">امسح عند الخروج</string>
     <string name="disable">عطّل</string>
     <string name="enable">فعّل</string>
     <string name="monospace_font_fields_enable_title">خط الحقول</string>

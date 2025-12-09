@@ -90,8 +90,6 @@
     <string name="list_size_summary">גודל טקסט ברשימת הרכיבים</string>
     <string name="loading_database">טוען מסד נתונים…</string>
     <string name="lowercase">אות קטנה</string>
-    <string name="hide_password_title">הסתר סיסמאות</string>
-    <string name="hide_password_summary">הסווה סיסמאות (***) כברירת מחדל</string>
     <string name="about">אודות</string>
     <string name="menu_change_key_settings">שנה מפתח ראשי</string>
     <string name="settings">העדפות</string>
@@ -99,7 +97,6 @@
     <string name="menu_delete">מחק</string>
     <string name="menu_donate">תרום</string>
     <string name="menu_edit">ערוך</string>
-    <string name="menu_hide_password">הסתר סיסמה</string>
     <string name="menu_lock">נעל מסד נתונים</string>
     <string name="menu_open">פתח</string>
     <string name="menu_search">חיפוש</string>
@@ -349,8 +346,6 @@
     <string name="remember_database_locations_summary">עוקב אחר המיקום שבו מאוחסנים מסדי הנתונים</string>
     <string name="remember_keyfile_locations_title">זכור מיקומי קובץ מפתח</string>
     <string name="command_execution">מריץ את הפקודה…</string>
-    <string name="clipboard_notifications_title">התראות לוח העתקה</string>
-    <string name="clipboard_explanation_summary">העתק שדות רשומה בעזרת לוח ההעתקה של המכשיר שלך</string>
     <string name="max_history_size_summary">הגבל את גודל ההיסטוריה לכל רשומה</string>
     <string name="device_unlock">בטל נעילת מכשיר</string>
     <string name="database_version_title">גרסת מסד הנתונים</string>
@@ -372,7 +367,6 @@
     <string name="menu_device_unlock_settings_summary">ביומטרי, אישור מכשיר</string>
     <string name="menu_database_settings_summary">מטא-נתונים, סל מחזור, תבניות, היסטוריה</string>
     <string name="sort_last_access_time">גישה</string>
-    <string name="clipboard_notifications_summary">הצג התראות לוח העתקה כדי להעתיק שדות בעת צפייה ברשומה</string>
     <string name="assign_master_key">הקצה מפתח ראשי</string>
     <string name="contains_duplicate_uuid_procedure">האם לפתור את הבעיה על ידי יצירת מזהים ייחודיים אוניברסליים עבור כפילויות כדי להמשיך?</string>
     <string name="remember_keyfile_locations_summary">עוקב אחר המיקום שבו מאוחסנים קבצי מפתח</string>
@@ -381,7 +375,6 @@
     <string name="parallelism">מקבילות</string>
     <string name="parallelism_explanation">מידת המקבילות (כלומר מספר התהליכונים) המשמשת את פונקציית גזירת המפתח.</string>
     <string name="menu_appearance_settings">מראה</string>
-    <string name="clear_clipboard_notification_title">נקה בסגירה</string>
     <string name="kdf_explanation">על מנת לייצר את המפתח עבור אלגוריתם ההצפנה, המפתח הראשי עובר טרנספורמציה באמצעות פונקציית גזירת מפתח מלוחה באקראיות.</string>
     <string name="other">אחר</string>
     <string name="education_sort_title">מיון פריטים</string>
@@ -672,7 +665,6 @@
     <string name="temp_device_unlock_timeout_title">תפוגת ביטול נעילת מכשיר</string>
     <string name="temp_device_unlock_timeout_summary">משך השימוש בביטול נעילת מכשיר לפני מחיקת התוכן שלו</string>
     <string name="device_unlock_keystore_warning">תכונה זו תאחסן נתוני אישור מוצפנים במאגר המפתחות של המכשיר שלך.\n\nבהתאם ליישום ה-API המקורי של מערכת ההפעלה, זה עשוי להיות לא פונקציונלי לחלוטין.\n\nבדוק את התאימות והאבטחה של מאגר המפתחות עם היצרן של המכשיר שלך והיוצר של ה-ROM בו אתה משתמש.</string>
-    <string name="clear_clipboard_notification_summary">נעל את מסד הנתונים כאשר משך זמן לוח ההעתקה פג או ההתראה נסגרה לאחר שהתחלת להשתמש בו</string>
     <string name="magic_keyboard_explanation_summary">הפעל מקלדת מותאמת אישית המאכלסת את הסיסמאות שלך ואת כל שדות הזהות</string>
     <string name="keyboard_auto_go_action_summary">פעולת מקש \"עבור\" לאחר לחיצה על מקש \"שדה\"</string>
     <string name="autofill_save_search_info_summary">נסה לשמור מידע חיפוש כשעושים בחירת ערך ידנית בשביל שימושים עתידיים קלים יותר</string>

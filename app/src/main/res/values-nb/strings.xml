@@ -101,8 +101,6 @@
     <string name="list_size_summary">Tekststørrelse i elemenetlisten</string>
     <string name="loading_database">Laster database…</string>
     <string name="lowercase">Små bokstaver</string>
-    <string name="hide_password_title">Masker passord</string>
-    <string name="hide_password_summary">Skjul passord som forvalg</string>
     <string name="about">Om</string>
     <string name="menu_change_key_settings">Endre hovednøkkel</string>
     <string name="copy_field">Kopi av%1$s</string>
@@ -117,7 +115,6 @@
     <string name="menu_paste">Lim inn</string>
     <string name="menu_delete">Slett</string>
     <string name="menu_cancel">Avbryt</string>
-    <string name="menu_hide_password">Skjul passord</string>
     <string name="menu_lock">Lås database</string>
     <string name="menu_open">Åpne</string>
     <string name="menu_search">Søk</string>
@@ -181,8 +178,6 @@
     <string name="list_password_generator_options_title">Passordtegn</string>
     <string name="list_password_generator_options_summary">Sett forvalgte passordgenereringstegn</string>
     <string name="clipboard">Utklippstavle</string>
-    <string name="clipboard_notifications_title">Utklippstavlemerknader</string>
-    <string name="clipboard_notifications_summary">Vis utklippstavle-varsler for å kopiere felt når du ser på en oppføring</string>
     <string name="clipboard_warning">Hvis din enhet ikke er i stand til å slette ting fra utklippstavlen automatisk, slett det kopierte elementet fra din utklippshistorikk manuelt.</string>
     <string name="lock">Lås</string>
     <string name="lock_database_screen_off_title">Skjermlås</string>
@@ -292,8 +287,6 @@
     <string name="do_not_kill_app">Ikke drep programmet…</string>
     <string name="lock_database_back_root_title">Trykk «Tilbake» for å låse</string>
     <string name="lock_database_back_root_summary">Trykk «Tilbake» for å låse databasen hvis du er ved rotskjermen til databasen</string>
-    <string name="clear_clipboard_notification_title">Tøm ved lukking</string>
-    <string name="clear_clipboard_notification_summary">Lås databasen når utklippstavlens varighet utløper eller varselet lukkes etter at du begynner å bruke den</string>
     <string name="recycle_bin">Papirkurv</string>
     <string name="keyboard_selection_entry_title">Oppføringsvalg</string>
     <string name="keyboard_selection_entry_summary">Når du ser på en oppføring i KeePassDX blir Magikeyboard fylt opp med den oppføringen</string>

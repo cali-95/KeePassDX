@@ -218,8 +218,6 @@
     <string name="invalid_db_sig">Hindi makilala ang format ng database.</string>
     <string name="keyfile_is_empty">Walang laman ang keyfile.</string>
     <string name="length">Haba</string>
-    <string name="hide_password_title">Itago ang mga password</string>
-    <string name="hide_password_summary">I-mask ang mga password (***) bilang default</string>
     <string name="colorize_password_title">Kulayan ang mga password</string>
     <string name="colorize_password_summary">Kulayan ang mga password character ayon sa uri</string>
     <string name="list_entries_show_username_title">Ipakita ang mga username</string>
@@ -258,7 +256,6 @@
     <string name="menu_paste">I-paste</string>
     <string name="menu_delete">Burahin</string>
     <string name="menu_cancel">Kanselahin</string>
-    <string name="menu_hide_password">Itago ang password</string>
     <string name="menu_lock">I-lock ang database</string>
     <string name="menu_save_database">I-save ang data</string>
     <string name="menu_merge_database">I-merge ang data</string>

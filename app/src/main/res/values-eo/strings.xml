@@ -41,7 +41,6 @@
     <string name="menu_reload_database">Reŝargi datumbazon</string>
     <string name="menu_save_database">Konservi datumbazon</string>
     <string name="menu_lock">Ŝlosi datumbazon</string>
-    <string name="menu_hide_password">Kaŝi pasvorton</string>
     <string name="menu_cancel">Nuligi</string>
     <string name="menu_delete">Forigi</string>
     <string name="menu_paste">Algui</string>
@@ -56,8 +55,6 @@
     <string name="settings">Agordoj</string>
     <string name="copy_field">Kopio de %1$s</string>
     <string name="about">Pri</string>
-    <string name="hide_password_summary">Kaŝi pasvortojn sub (***) defaŭlte</string>
-    <string name="hide_password_title">Kaŝi pasvortojn</string>
     <string name="loading_database">Datumbaza ŝarĝado…</string>
     <string name="creating_database">Datumbaza kreado…</string>
     <string name="list_entries_show_username_summary">Vidigi uzantnomojn en elementaj listoj</string>

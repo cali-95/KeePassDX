@@ -238,7 +238,7 @@ class DatabaseTaskProvider(
 
         try {
             context.unregisterReceiver(databaseTaskBroadcastReceiver)
-        } catch (e: IllegalArgumentException) {
+        } catch (_: IllegalArgumentException) {
             // If receiver not register, do nothing
         }
     }
@@ -319,7 +319,6 @@ class DatabaseTaskProvider(
         databaseUri: Uri,
         mainCredential: MainCredential
     ) {
-
         start(Bundle().apply {
             putParcelable(DatabaseTaskNotificationService.DATABASE_URI_KEY, databaseUri)
             putParcelable(DatabaseTaskNotificationService.MAIN_CREDENTIAL_KEY, mainCredential)

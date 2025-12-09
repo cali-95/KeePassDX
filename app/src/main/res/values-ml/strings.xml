@@ -21,7 +21,6 @@
     <string name="menu_search">തിരയുക</string>
     <string name="menu_security_settings">സുരക്ഷാ ക്രമീകരണങ്ങൾ</string>
     <string name="menu_database_settings">ഡാറ്റാബേസ് ക്രമീകരണങ്ങൾ</string>
-    <string name="hide_password_summary">സ്ഥിരസ്ഥിതിയായി പാസ്‌വേഡുകൾ (***) മാസ്ക് ചെയ്യുക</string>
     <string name="invalid_algorithm">തെറ്റായ അൽഗോരിതം.</string>
     <string name="password">പാസ്സ്‌വേഡ്</string>
     <string name="hint_pass">പാസ്സ്‌വേഡ്</string>
@@ -52,7 +51,6 @@
     <string name="menu_open">തുറക്കുക</string>
     <string name="menu_save_database">ഡാറ്റാബേസ് സംരക്ഷിക്കുക</string>
     <string name="menu_lock">ഡാറ്റാബേസ് ലോക്ക് ചെയ്യുക</string>
-    <string name="menu_hide_password">പാസ്‌വേഡുകൾ മറയ്‌ക്കുക</string>
     <string name="menu_cancel">റദ്ദാക്കുക</string>
     <string name="menu_delete">ഇല്ലാതാക്കുക</string>
     <string name="menu_move">നീക്കുക</string>
@@ -62,7 +60,6 @@
     <string name="menu_app_settings">അപ്ലിക്കേഷൻ ക്രമീകരണങ്ങൾ</string>
     <string name="settings">ക്രമീകരണങ്ങൾ</string>
     <string name="menu_change_key_settings">മാസ്റ്റർ കീ മാറ്റുക</string>
-    <string name="hide_password_title">പാസ്‌വേഡുകൾ മറയ്‌ക്കുക</string>
     <string name="loading_database">ഡാറ്റാബേസ് ലോഡുചെയ്യുന്നു…</string>
     <string name="creating_database">ഡാറ്റാബേസ് സൃഷ്ടിക്കുന്നു…</string>
     <string name="list_entries_show_username_title">ഉപയോക്തൃനാമങ്ങൾ കാണിക്കുക</string>
@@ -203,7 +200,6 @@
     <string name="keyboard_name">Magikeyboard</string>
     <string name="keyboard">കീബോർഡ്</string>
     <string name="database_name_title">ഡാറ്റാബേസിന്റെ പേര്</string>
-    <string name="clear_clipboard_notification_title">അടയ്‌ക്കുമ്പോൾ മായ്ക്കുക</string>
     <string name="max_history_size_title">പരമാവധി വലുപ്പം</string>
     <string name="assign_master_key">ഒരു മാസ്റ്റർ കീ നൽകുക</string>
     <string name="unavailable_feature_text">ഈ സവിശേഷത ആരംഭിക്കാൻ കഴിഞ്ഞില്ല.</string>
@@ -371,7 +367,6 @@
     <string name="autofill_close_database_title">ഡാറ്റാബേസ് അടയ്ക്കുക</string>
     <string name="keyboard_previous_lock_title">ഡാറ്റാബേസ് പൂട്ടുക</string>
     <string name="keyboard_save_search_info_title">പങ്കിട്ട വിവരം സംരക്ഷിക്കുക</string>
-    <string name="clipboard_notifications_title">ക്ലിപ്ബോർഡ് അറിയിപ്പുകൾ</string>
     <string name="warning_empty_recycle_bin">റീസൈക്കിൾ ബിന്നിൽ നിന്ന് എല്ലാ നോഡുകളും ശാശ്വതമായി ഇല്ലാതാക്കണോ\?</string>
     <string name="search_mode">തിരയൽ മോഡ്</string>
     <string name="error_registration_read_only">read-only ഡാറ്റാബേസിൽ പുതിയ ഒരു ഇനം സംരക്ഷിക്കാൻ കഴിയില്ല.</string>

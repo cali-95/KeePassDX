@@ -42,9 +42,11 @@ import javax.xml.XMLConstants
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
 
-data class MasterCredential(var password: String? = null,
-                            var keyFileData: ByteArray? = null,
-                            var hardwareKey: HardwareKey? = null): Parcelable {
+data class MasterCredential(
+    var password: String? = null,
+    var keyFileData: ByteArray? = null,
+    var hardwareKey: HardwareKey? = null
+): Parcelable {
 
     constructor(parcel: Parcel) : this() {
         password = parcel.readString()
@@ -60,6 +62,10 @@ data class MasterCredential(var password: String? = null,
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    fun getCheckKey(): ByteArray {
+        return getCheckKey(password)
     }
 
     override fun equals(other: Any?): Boolean {
@@ -93,13 +99,23 @@ data class MasterCredential(var password: String? = null,
 
         private val TAG = MasterCredential::class.java.simpleName
 
+        fun getCheckKey(password: String?): ByteArray {
+            return retrievePasswordKey(
+                try {
+                    password?.substring(0, CHECK_KEY_PASSWORD_LENGTH) ?: ""
+                } catch (_: Exception) { "" },
+                Charsets.UTF_8
+            )
+        }
+
         @Throws(IOException::class)
-        fun retrievePasswordKey(key: String,
-                                encoding: Charset
+        fun retrievePasswordKey(
+            key: String,
+            encoding: Charset
         ): ByteArray {
             val bKey: ByteArray = try {
                 key.toByteArray(encoding)
-            } catch (e: UnsupportedEncodingException) {
+            } catch (_: UnsupportedEncodingException) {
                 key.toByteArray()
             }
             return HashManager.hashSha256(bKey)
@@ -125,7 +141,7 @@ data class MasterCredential(var password: String? = null,
                     32 -> return keyFileData
                     64 -> try {
                         return Hex.decodeHex(String(keyFileData).toCharArray())
-                    } catch (ignoredException: Exception) {
+                    } catch (_: Exception) {
                         // Key is not base 64, treat it as binary data
                     }
                 }
@@ -148,7 +164,7 @@ data class MasterCredential(var password: String? = null,
                 // Disable certain unsecure XML-Parsing DocumentBuilderFactory features
                 try {
                     documentBuilderFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true)
-                } catch (e : ParserConfigurationException) {
+                } catch (_ : ParserConfigurationException) {
                     Log.w(TAG, "Unable to add FEATURE_SECURE_PROCESSING to prevent XML eXternal Entity injection (XXE)")
                 }
 
@@ -184,7 +200,7 @@ data class MasterCredential(var password: String? = null,
                                             xmlKeyFileVersion = versionText.toFloat()
                                             Log.i(TAG, "Reading XML KeyFile version : $xmlKeyFileVersion")
                                         } catch (e: Exception) {
-                                            Log.e(TAG, "XML Keyfile version cannot be read : $versionText")
+                                            Log.e(TAG, "XML Keyfile version cannot be read : $versionText", e)
                                         }
                                     }
                                 }
@@ -232,7 +248,7 @@ data class MasterCredential(var password: String? = null,
                         }
                     }
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 return null
             }
             return null
@@ -257,5 +273,7 @@ data class MasterCredential(var password: String? = null,
         private const val XML_NODE_KEY_NAME = "Key"
         private const val XML_NODE_DATA_NAME = "Data"
         private const val XML_ATTRIBUTE_DATA_HASH = "Hash"
+
+        const val CHECK_KEY_PASSWORD_LENGTH = 4
     }
 }

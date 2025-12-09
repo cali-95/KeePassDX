@@ -90,8 +90,6 @@
     <string name="list_size_summary">Velikost textu v seznamu prvků</string>
     <string name="loading_database">Načítám databázi…</string>
     <string name="lowercase">Malá písmena</string>
-    <string name="hide_password_title">Skrýt hesla</string>
-    <string name="hide_password_summary">Ve výchozím stavu zobrazit (***) místo hesla</string>
     <string name="about">O aplikaci</string>
     <string name="menu_change_key_settings">Změnit hlavní klíč</string>
     <string name="settings">Nastavení</string>
@@ -99,7 +97,6 @@
     <string name="menu_delete">Smazat</string>
     <string name="menu_donate">Přispět darem</string>
     <string name="menu_edit">Upravit</string>
-    <string name="menu_hide_password">Skrýt heslo</string>
     <string name="menu_lock">Zamknout databázi</string>
     <string name="menu_open">Otevřít</string>
     <string name="menu_search">Hledat</string>
@@ -187,8 +184,6 @@
     <string name="list_password_generator_options_title">Znaky hesla</string>
     <string name="list_password_generator_options_summary">Nastavit povolené znaky pro generátor hesel</string>
     <string name="clipboard">Schránka</string>
-    <string name="clipboard_notifications_title">Oznámení schránky</string>
-    <string name="clipboard_notifications_summary">Ukázat oznámení schránky o kopírování pole při prohlížení záznamu</string>
     <string name="clipboard_warning">Vymazat historii schránky manuálně, pokud automatické vymazání schránky selže.</string>
     <string name="lock">Zamknout</string>
     <string name="lock_database_screen_off_title">Zámek obrazovky</string>
@@ -300,8 +295,6 @@
     <string name="do_not_kill_app">Nezavírejte aplikaci…</string>
     <string name="lock_database_back_root_title">K uzamknutí stiskněte Zpět</string>
     <string name="lock_database_back_root_summary">Stiskněte „Zpět“ pro uzamčení databáze, pokud se nacházíte na hlavní obrazovce databáze</string>
-    <string name="clear_clipboard_notification_title">Vymazat při ukončení</string>
-    <string name="clear_clipboard_notification_summary">Uzamknout databázi, jakmile trvání schránky vyprší nebo po uzavření oznámení</string>
     <string name="recycle_bin">Koš</string>
     <string name="keyboard_selection_entry_title">Výběr záznamu</string>
     <string name="keyboard_selection_entry_summary">Při prohlížení záznamu v KeePassDX zadat záznam do Magikeyboard</string>

@@ -20,11 +20,11 @@
 
 package com.kunzisoft.keepass.credentialprovider.magikeyboard
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.inputmethodservice.InputMethodService
 import android.media.AudioManager
+import android.provider.Settings
 import android.view.Gravity
 import android.view.HapticFeedbackConstants
 import android.view.KeyEvent
@@ -32,10 +32,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,7 +46,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.adapters.FieldsAdapter
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper
-import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeModes
 import com.kunzisoft.keepass.credentialprovider.activity.EntrySelectionLauncherActivity
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.DatabaseTaskProvider
@@ -96,8 +98,8 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
         }
         // Remove the entry and lock the keyboard when the lock signal is receive
         lockReceiver = LockReceiver {
-                        removeEntryInfo()
-                        assignKeyboardView()
+            removeEntryInfo()
+            assignKeyboardView()
         }
         lockReceiver?.backToPreviousKeyboardAction = {
             switchToPreviousKeyboard()
@@ -351,7 +353,7 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
                     items,
                     {
                         // Automatically populate keyboard
-                        addEntryAndLaunchNotificationIfAllowed(
+                        addEntry(
                             this,
                             items[0],
                             true
@@ -452,14 +454,44 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
         }
 
         fun removeEntry(context: Context) {
+            removeEntryInfo()
             context.sendBroadcast(Intent(REMOVE_ENTRY_MAGIKEYBOARD_ACTION))
         }
 
-        fun addEntryAndLaunchNotificationIfAllowed(context: Context, entry: EntryInfo, toast: Boolean = false) {
-            // Add a new entry
-            entryUUID = entry.id
+        fun addEntry(
+            context: Context,
+            entry: EntryInfo,
+            toast: Boolean = false
+        ) {
             // Launch notification if allowed
-            KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry, toast)
+            addEntries(context, listOf(entry), toast)
+        }
+
+        fun addEntries(
+            context: Context,
+            entryList: List<EntryInfo>,
+            toast: Boolean = false
+        ) {
+            // Add a new entry if keyboard activated
+            if (context.isMagikeyboardActivated()) {
+                val entry = entryList[0]
+                entryUUID = entry.id
+                // Show the message
+                if (toast) {
+                    Toast.makeText(
+                        context,
+                        context.getString(
+                            R.string.keyboard_notification_entry_content_title,
+                            entry.getVisualTitle()
+                        ),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                // Launch notification if allowed
+                KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
+            } else {
+                removeEntryInfo()
+            }
         }
 
         fun performSelection(
@@ -479,6 +511,21 @@ class MagikeyboardService : InputMethodService(), KeyboardView.OnKeyboardActionL
                 },
                 actionEntrySelection = actionEntrySelection
             )
+        }
+
+        fun Context.isMagikeyboardActivated(): Boolean {
+            return ContextCompat.getSystemService(
+                this,
+                InputMethodManager::class.java
+            )?.enabledInputMethodList?.any { inputMethod ->
+                inputMethod.packageName == this.packageName
+            } ?: false
+        }
+
+        fun Context.showKeyboardDeviceSettings() {
+            startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            })
         }
     }
 }

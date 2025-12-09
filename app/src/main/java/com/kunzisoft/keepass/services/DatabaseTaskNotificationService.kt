@@ -33,6 +33,7 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.GroupActivity
 import com.kunzisoft.keepass.app.database.CipherDatabaseAction
 import com.kunzisoft.keepass.app.database.FileDatabaseHistoryAction
+import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.database.ProgressMessage
@@ -61,7 +62,6 @@ import com.kunzisoft.keepass.database.element.node.Node
 import com.kunzisoft.keepass.database.element.node.NodeId
 import com.kunzisoft.keepass.database.element.node.Type
 import com.kunzisoft.keepass.hardware.HardwareKey
-import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
 import com.kunzisoft.keepass.model.CipherEncryptDatabase
 import com.kunzisoft.keepass.model.SnapFileDatabaseInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -917,7 +917,7 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
 
     private fun buildDatabaseAssignCredentialActionTask(
         intent: Intent,
-        database: ContextualDatabase,
+        database: ContextualDatabase
     ): ActionRunnable? {
         return if (intent.hasExtra(DATABASE_URI_KEY)
             && intent.hasExtra(MAIN_CREDENTIAL_KEY)

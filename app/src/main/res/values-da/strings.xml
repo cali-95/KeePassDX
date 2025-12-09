@@ -89,8 +89,6 @@
     <string name="list_size_summary">Tekststørrelse i elementlisten</string>
     <string name="loading_database">Indlæser database…</string>
     <string name="lowercase">Små bogstaver</string>
-    <string name="hide_password_title">Skjul adgangskoder</string>
-    <string name="hide_password_summary">Skjul adgangskoder (***) som standard</string>
     <string name="about">Om</string>
     <string name="menu_change_key_settings">Skift hovednøgle</string>
     <string name="settings">Indstillinger</string>
@@ -98,7 +96,6 @@
     <string name="menu_delete">Slet</string>
     <string name="menu_donate">Donér</string>
     <string name="menu_edit">Rediger</string>
-    <string name="menu_hide_password">Skjul adgangskode</string>
     <string name="menu_lock">Lås database</string>
     <string name="menu_open">Åbn</string>
     <string name="menu_search">Søg</string>
@@ -186,8 +183,6 @@
     <string name="list_password_generator_options_title">Adgangskodetegn</string>
     <string name="list_password_generator_options_summary">Angiv tilladte tegn for adgangskodegenerator</string>
     <string name="clipboard">Udklipsholder</string>
-    <string name="clipboard_notifications_title">Udklipsholder-notifikationer</string>
-    <string name="clipboard_notifications_summary">Vis udklipsholder-notifikationer for at kopiere felter, når en post vises</string>
     <string name="clipboard_warning">Hvis den automatiske sletning af udklipsholderen ikke lykkes, skal du slette dens historik manuelt.</string>
     <string name="lock">Lås</string>
     <string name="lock_database_screen_off_title">Skærmlås</string>
@@ -300,8 +295,6 @@
     <string name="do_not_kill_app">Luk ikke appen…</string>
     <string name="lock_database_back_root_title">Tryk på \'Tilbage\' for at låse</string>
     <string name="lock_database_back_root_summary">Lås databasen, når der klikkes på tilbage-knappen fra startskærmen</string>
-    <string name="clear_clipboard_notification_title">Ryd ved lukning</string>
-    <string name="clear_clipboard_notification_summary">Lås databasen, når udklipsholderens varighed udløber, eller notifikationen lukkes, efter at du begynder at bruge den</string>
     <string name="recycle_bin">Papirkurven</string>
     <string name="keyboard_selection_entry_title">Valg af indtastning</string>
     <string name="keyboard_selection_entry_summary">Når du ser en post i KeePassDX, skal Magikeyboard udfyldes med den pågældende post</string>

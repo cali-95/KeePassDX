@@ -82,8 +82,6 @@
     <string name="list_size_summary">列表文字大小</string>
     <string name="loading_database">正在加载数据库…</string>
     <string name="lowercase">小写</string>
-    <string name="hide_password_title">隐藏密码</string>
-    <string name="hide_password_summary">默认使用星号(***)隐藏密码</string>
     <string name="about">关于</string>
     <string name="menu_change_key_settings">更改主密钥</string>
     <string name="settings">设置</string>
@@ -91,7 +89,6 @@
     <string name="menu_delete">删除</string>
     <string name="menu_donate">捐赠</string>
     <string name="menu_edit">编辑</string>
-    <string name="menu_hide_password">隐藏密码</string>
     <string name="menu_lock">锁定数据库</string>
     <string name="menu_open">打开</string>
     <string name="menu_search">搜索</string>
@@ -175,7 +172,6 @@
     <string name="autofill">自动填充</string>
     <string name="autofill_sign_in_prompt">使用 KeePassDX 登录</string>
     <string name="clipboard">剪贴板</string>
-    <string name="clipboard_notifications_title">剪贴板通知</string>
     <string name="lock">锁定</string>
     <string name="device_unlock">设备解锁</string>
     <string name="file_name">文件名</string>
@@ -211,7 +207,6 @@
     <string name="password_size_summary">设置生成密码的默认长度</string>
     <string name="list_password_generator_options_title">密码字符集</string>
     <string name="list_password_generator_options_summary">设置密码生成时所允许的字符集</string>
-    <string name="clipboard_notifications_summary">显示剪贴板通知，以便在查看条目时复制字段</string>
     <string name="clipboard_warning">如果自动删除剪贴板失败，请手动删除其历史记录。</string>
     <string name="lock_database_screen_off_title">锁定屏幕</string>
     <string name="lock_database_screen_off_summary">屏幕关闭几秒钟后锁定数据库</string>
@@ -303,8 +298,6 @@
     <string name="do_not_kill_app">不要终止应用…</string>
     <string name="lock_database_back_root_title">按“返回”锁定</string>
     <string name="lock_database_back_root_summary">如果您位于数据库的根屏幕，请按“返回”锁定数据库</string>
-    <string name="clear_clipboard_notification_title">关闭应用时清空剪贴板</string>
-    <string name="clear_clipboard_notification_summary">剪贴板持续时间过期或通知在您开始使用后关闭时，锁定数据库</string>
     <string name="recycle_bin">回收站</string>
     <string name="keyboard_selection_entry_title">条目选择</string>
     <string name="keyboard_selection_entry_summary">在 KeePassDX 中查看条目时，用该条目填充 Magikeyboard</string>

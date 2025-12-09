@@ -34,7 +34,6 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.app.AppLifecycleObserver
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.KeyboardEntryNotificationService
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.timeout.TimeoutHelper
@@ -151,8 +150,6 @@ fun Context.closeDatabase(database: ContextualDatabase?) {
     MagikeyboardService.removeEntry(this)
 
     // Stop the notification service
-    stopService(Intent(this, ClipboardEntryNotificationService::class.java))
-
     Log.i(Context::class.java.name, "Close database after inactivity or manual lock")
     (getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager?)?.apply {
         cancelAll()

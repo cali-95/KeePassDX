@@ -92,8 +92,6 @@
     <string name="list_size_summary">Szövegméret az elemlistában</string>
     <string name="loading_database">Adatbázis betöltése…</string>
     <string name="lowercase">Kisbetűk</string>
-    <string name="hide_password_title">Jelszavak elrejtése</string>
-    <string name="hide_password_summary">Jelszavak alapértelmezett elrejtése (***)</string>
     <string name="about">Névjegy</string>
     <string name="menu_change_key_settings">Mesterkulcs cseréje</string>
     <string name="settings">Beállítások</string>
@@ -101,7 +99,6 @@
     <string name="menu_delete">Törlés</string>
     <string name="menu_donate">Támogatás</string>
     <string name="menu_edit">Szerkesztés</string>
-    <string name="menu_hide_password">Jelszó elrejtése</string>
     <string name="menu_lock">Adatbázis zárolása</string>
     <string name="menu_open">Megnyitás</string>
     <string name="menu_search">Keresés</string>
@@ -189,8 +186,6 @@
     <string name="list_password_generator_options_title">Jelszó karakterek</string>
     <string name="list_password_generator_options_summary">Beállítja a jelszó-előállító számára megengedett karaktereket</string>
     <string name="clipboard">Vágólap</string>
-    <string name="clipboard_notifications_title">Vágólap-értesítések</string>
-    <string name="clipboard_notifications_summary">Vágólap-értesítések megjelenítése a bejegyzésmezők másolásakor</string>
     <string name="clipboard_warning">Ha a vágólap automatikus törlése meghiúsul, akkor törölje saját kezűleg az előzményeket.</string>
     <string name="lock">Zárolás</string>
     <string name="lock_database_screen_off_title">Képernyőzár</string>
@@ -309,8 +304,6 @@
     <string name="error_create_database_file">Ezzel a jelszó és kulcsfájl kombinációval nem hozható létre adatbázis.</string>
     <string name="education_setup_OTP_summary">Állítson be egyszer használatos jelszókezelést (HOTP/TOTP), hogy tokent állítson elő a kétfaktoros hitelesítéshez (2FA).</string>
     <string name="education_setup_OTP_title">OTP beállítása</string>
-    <string name="clear_clipboard_notification_summary">Az adatbázis zárolása, ha a vágólap ideje lejár, vagy ha a használata után bezárja az értesítést</string>
-    <string name="clear_clipboard_notification_title">Zárolás bezáráskor</string>
     <string name="lock_database_show_button_summary">Megjeleníti a zárolás gombot a felhasználói felületen</string>
     <string name="lock_database_show_button_title">Zárolás gomb megjelenítése</string>
     <string name="lock_database_back_root_summary">Nyomja meg a „Vissza” gombot az adatbázis zárolásához, ha az adatbázis indítóképernyőjén tartózkodik</string>

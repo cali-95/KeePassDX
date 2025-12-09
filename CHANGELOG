@@ -1,7 +1,10 @@
 KeePassDX(4.3.0)
  * Manual change of app language #1884 #1990
+ * Add Passkey User Verification #2283
+ * Remove Clipboard notifications #2301
  * Fix autofill username detection #2276
  * Fix Passkey in passwordless mode #2282
+ * Fix Magikeyboard notification #2288
 
 KeePassDX(4.2.4)
  * Fix remembering database location #2262

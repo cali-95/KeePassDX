@@ -45,6 +45,7 @@
     <string name="magic_keyboard_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/Magikeyboard</string>
     <string name="clipboard_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/Clipboard</string>
     <string name="passkeys_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/Passkeys</string>
+    <string name="user_verification_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/User-Verification</string>
     <string name="autofill_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/Autofill</string>
     <string name="file_manager_explanation_url" translatable="false">https://github.com/Kunzisoft/KeePassDX/wiki/File-Manager-and-Sync</string>
     <string name="html_rose">--,--`--,{@</string>
@@ -68,6 +69,8 @@
     <bool name="allow_no_password_default" translatable="false">false</bool>
     <string name="delete_entered_password_key" translatable="false">delete_entered_password_key</string>
     <bool name="delete_entered_password_default" translatable="false">true</bool>
+    <string name="user_verification_device_credential_key" translatable="false">user_verification_device_credential_key</string>
+    <bool name="user_verification_device_credential_default" translatable="false">true</bool>
     <string name="enable_auto_save_database_key" translatable="false">enable_auto_save_database_key</string>
     <bool name="enable_auto_save_database_default" translatable="false">true</bool>
     <string name="enable_keep_screen_on_key" translatable="false">enable_keep_screen_on_key</string>
@@ -76,8 +79,6 @@
     <bool name="enable_screenshot_mode_key_default" translatable="false">false</bool>
     <string name="auto_focus_search_key" translatable="false">auto_focus_search_key</string>
     <bool name="auto_focus_search_default" translatable="false">false</bool>
-    <string name="subdomain_search_key" translatable="false">subdomain_search_key</string>
-    <bool name="subdomain_search_default" translatable="false">false</bool>
     <string name="app_timeout_key" translatable="false">app_timeout_key</string>
     <string name="lock_database_screen_off_key" translatable="false">lock_database_screen_off_key</string>
     <bool name="lock_database_screen_off_default" translatable="false">true</bool>
@@ -121,10 +122,6 @@
     <bool name="magic_keyboard_default" translatable="false">false</bool>
     <string name="magic_keyboard_preference_key" translatable="false">magic_keyboard_preference_key</string>
     <string name="clipboard_explanation_key" translatable="false">clipboard_explanation_key</string>
-    <string name="clipboard_notifications_key" translatable="false">clipboard_notifications_key</string>
-    <bool name="clipboard_notifications_default" translatable="false">false</bool>
-    <string name="clear_clipboard_notification_key" translatable="false">clear_clipboard_notification_key</string>
-    <bool name="clear_clipboard_notification_default" translatable="false">false</bool>
     <string name="clipboard_timeout_key" translatable="false">clip_timeout_key</string>
     <string name="clipboard_timeout_default" translatable="false">20000</string>
     <string name="credential_provider_key" translatable="false">credential_provider_key</string>
@@ -143,6 +140,10 @@
     <bool name="passkeys_backup_eligibility_default" translatable="false">true</bool>
     <string name="passkeys_backup_state_key" translatable="false">passkeys_backup_state_key</string>
     <bool name="passkeys_backup_state_default" translatable="false">true</bool>
+    <string name="user_verification_preferred_key" translatable="false">user_verification_preferred_key</string>
+    <bool name="user_verification_preferred_default" translatable="false">false</bool>
+    <string name="subdomain_search_key" translatable="false">subdomain_search_key</string>
+    <bool name="subdomain_search_default" translatable="false">false</bool>
     <string name="keyboard_notification_entry_key" translatable="false">keyboard_notification_entry_key</string>
     <bool name="keyboard_notification_entry_default" translatable="false">true</bool>
     <string name="keyboard_notification_entry_clear_close_key" translatable="false">keyboard_notification_entry_clear_close_key</string>
@@ -199,8 +200,6 @@
     <bool name="hide_expired_entries_default" translatable="false">false</bool>
     <string name="hide_templates_key" translatable="false">hide_templates_key</string>
     <bool name="hide_templates_default" translatable="false">true</bool>
-    <string name="hide_password_key" translatable="false">hide_password_key</string>
-    <bool name="hide_password_default" translatable="false">true</bool>
     <string name="colorize_password_key" translatable="false">colorize_password_key</string>
     <bool name="colorize_password_default" translatable="false">true</bool>
     <string name="list_entries_show_username_key" translatable="false">list_entries_show_username_key</string>

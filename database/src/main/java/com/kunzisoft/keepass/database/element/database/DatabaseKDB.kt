@@ -36,7 +36,7 @@ import com.kunzisoft.keepass.database.exception.EmptyKeyDatabaseException
 import com.kunzisoft.keepass.database.exception.HardwareKeyDatabaseException
 import java.io.IOException
 import java.nio.charset.Charset
-import java.util.*
+import java.util.UUID
 
 class DatabaseKDB : DatabaseVersioned<Int, UUID, GroupKDB, EntryKDB>() {
 
@@ -158,6 +158,9 @@ class DatabaseKDB : DatabaseVersioned<Int, UUID, GroupKDB, EntryKDB>() {
         } else {
             this.masterKey = passwordBytes ?: keyFileBytes ?: byteArrayOf(0)
         }
+
+        // Build check key
+        this.checkKey = masterCredential.getCheckKey()
     }
 
     override fun createGroup(): GroupKDB {

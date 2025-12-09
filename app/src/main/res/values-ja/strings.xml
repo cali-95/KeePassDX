@@ -159,8 +159,6 @@
     <string name="creating_database">データベースを作成しています…</string>
     <string name="loading_database">データベースを読み込んでいます…</string>
     <string name="lowercase">小文字</string>
-    <string name="hide_password_title">パスワードを非表示にする</string>
-    <string name="hide_password_summary">デフォルトでパスワードを隠します（***と表示）</string>
     <string name="about">概要</string>
     <string name="menu_change_key_settings">マスターキーを変更</string>
     <string name="copy_field">%1$s のコピー</string>
@@ -178,7 +176,6 @@
     <string name="menu_paste">貼り付け</string>
     <string name="menu_delete">削除</string>
     <string name="menu_cancel">キャンセル</string>
-    <string name="menu_hide_password">パスワードを非表示にする</string>
     <string name="menu_lock">データベースをロック</string>
     <string name="menu_save_database">保存する</string>
     <string name="menu_open">開く</string>
@@ -283,8 +280,6 @@
     <string name="database_opened">データベースが開かれています</string>
     <string name="clipboard">クリップボード</string>
     <string name="clipboard_explanation_summary">デバイスのクリップボードを使用して、エントリーのフィールドをコピーします</string>
-    <string name="clipboard_notifications_title">クリップボード通知</string>
-    <string name="clipboard_notifications_summary">エントリーを開いているとき、フィールドをコピーするクリップボード通知を表示します</string>
     <string name="clipboard_warning">クリップボードの自動削除に失敗した場合は、手動でその履歴を削除してください。</string>
     <string name="lock">ロック</string>
     <string name="lock_database_screen_off_title">画面ロック</string>
@@ -333,8 +328,6 @@
     <string name="enable">有効</string>
     <string name="disable">無効</string>
     <string name="notification">通知</string>
-    <string name="clear_clipboard_notification_title">データベースを閉じて消去</string>
-    <string name="clear_clipboard_notification_summary">クリップボードでの保存期間が終了したとき、または使用開始後に通知が閉じられたとき、データベースをロックします</string>
     <string name="database_name_title">データベース名</string>
     <string name="database_description_title">データベースの説明</string>
     <string name="database_default_username_title">デフォルトのユーザー名</string>

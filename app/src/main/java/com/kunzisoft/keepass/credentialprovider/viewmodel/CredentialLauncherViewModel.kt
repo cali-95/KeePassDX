@@ -24,7 +24,6 @@ abstract class CredentialLauncherViewModel(application: Application): AndroidVie
 
     protected var isResultLauncherRegistered: Boolean = false
     private var mSelectionResult: ActivityResult? = null
-
     protected val mCredentialUiState = MutableStateFlow<CredentialState>(CredentialState.Loading)
     val credentialUiState: StateFlow<CredentialState> = mCredentialUiState
 
@@ -56,7 +55,7 @@ abstract class CredentialLauncherViewModel(application: Application): AndroidVie
         )
     }
 
-    private fun onDatabaseRetrieved(database: ContextualDatabase) {
+    fun onDatabaseRetrieved(database: ContextualDatabase) {
         mDatabase = database
         mSelectionResult?.let { selectionResult ->
             manageSelectionResult(database, selectionResult)

@@ -19,17 +19,11 @@
  */
 package com.kunzisoft.keepass.settings
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
-import android.util.Log
-import android.view.autofill.AutofillManager
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.ListPreference
@@ -42,9 +36,12 @@ import com.kunzisoft.keepass.activities.dialogs.UnavailableFeatureDialogFragment
 import com.kunzisoft.keepass.activities.stylish.Stylish
 import com.kunzisoft.keepass.app.database.FileDatabaseHistoryAction
 import com.kunzisoft.keepass.biometric.DeviceUnlockManager
+import com.kunzisoft.keepass.credentialprovider.autofill.KeeAutofillService.Companion.isKeeAutofillActivated
+import com.kunzisoft.keepass.credentialprovider.autofill.KeeAutofillService.Companion.showAutofillDeviceSettings
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.isMagikeyboardActivated
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.showKeyboardDeviceSettings
 import com.kunzisoft.keepass.education.Education
 import com.kunzisoft.keepass.icons.IconPackChooser
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.settings.preference.IconPackListPreference
 import com.kunzisoft.keepass.settings.preferencedialogfragment.DurationDialogFragmentCompat
 import com.kunzisoft.keepass.utils.AppUtil.isContributingUser
@@ -117,71 +114,21 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
     private fun onCreateFormFillingPreference(rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences_form_filling, rootKey)
 
-        activity?.let { activity ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
-                // Hide Passkeys settings if needed
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                    findPreference<Preference>(getString(R.string.passkeys_explanation_key))
-                        ?.isVisible = false
-                    findPreference<Preference>(getString(R.string.settings_passkeys_key))
-                        ?.isVisible = false
-                }
-
-                val autoFillEnablePreference: TwoStatePreference? = findPreference(getString(R.string.settings_credential_provider_enable_key))
-                activity.getSystemService(AutofillManager::class.java)?.let { autofillManager ->
-                    if (autofillManager.hasEnabledAutofillServices())
-                        autoFillEnablePreference?.isChecked = autofillManager.hasEnabledAutofillServices()
-
-                    autoFillEnablePreference?.onPreferenceClickListener =
-                        object : Preference.OnPreferenceClickListener {
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            override fun onPreferenceClick(preference: Preference): Boolean {
-                                if ((preference as TwoStatePreference).isChecked) {
-                                    try {
-                                        enableService()
-                                    } catch (e: ActivityNotFoundException) {
-                                        val error =
-                                            getString(R.string.error_autofill_enable_service)
-                                        preference.isChecked = false
-                                        Log.d(javaClass.name, error, e)
-                                        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
-                                    }
-
-                                } else {
-                                    disableService()
-                                }
-                                return false
-                            }
-
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            private fun disableService() {
-                                if (autofillManager.hasEnabledAutofillServices()) {
-                                    autofillManager.disableAutofillServices()
-                                } else {
-                                    Log.d(javaClass.name, "Autofill service already disabled.")
-                                }
-                            }
-
-                            @RequiresApi(api = Build.VERSION_CODES.O)
-                            @Throws(ActivityNotFoundException::class)
-                            private fun enableService() {
-                                if (!autofillManager.hasEnabledAutofillServices()) {
-                                    val intent =
-                                        Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE)
-                                    intent.data =
-                                        "package:com.kunzisoft.keepass.autofill.KeeAutofillService".toUri()
-                                    Log.d(javaClass.name, "Autofill enable service: intent=$intent")
-                                    startActivity(intent)
-                                } else {
-                                    Log.d(javaClass.name, "Autofill service already enabled.")
-                                }
-                            }
-                        }
-                }
-            } else {
-                findPreference<Preference>(getString(R.string.credential_provider_key))?.isVisible = false
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Hide Passkeys settings if needed
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                findPreference<Preference>(getString(R.string.passkeys_explanation_key))
+                    ?.isVisible = false
+                findPreference<Preference>(getString(R.string.settings_passkeys_key))
+                    ?.isVisible = false
             }
+
+            findPreference<TwoStatePreference>(getString(R.string.settings_credential_provider_enable_key))?.setOnPreferenceClickListener {
+                context?.showAutofillDeviceSettings()
+                false
+            }
+        } else {
+            findPreference<Preference>(getString(R.string.credential_provider_key))?.isVisible = false
         }
 
         findPreference<Preference>(getString(R.string.magic_keyboard_explanation_key))?.setOnPreferenceClickListener {
@@ -190,9 +137,7 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
         }
 
         findPreference<Preference>(getString(R.string.magic_keyboard_key))?.setOnPreferenceClickListener {
-            startActivity(Intent(Settings.ACTION_INPUT_METHOD_SETTINGS).apply {
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            })
+            context?.showKeyboardDeviceSettings()
             false
         }
 
@@ -223,13 +168,6 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
                 startActivity(Intent(context, AutofillSettingsActivity::class.java))
                 false
             }
-        }
-
-        findPreference<Preference>(getString(R.string.clipboard_notifications_key))?.setOnPreferenceChangeListener { _, newValue ->
-            if (!(newValue as Boolean)) {
-                ClipboardEntryNotificationService.removeNotification(context)
-            }
-            true
         }
 
         findPreference<Preference>(getString(R.string.clipboard_explanation_key))?.setOnPreferenceClickListener {
@@ -302,7 +240,7 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
                                 biometricUnlockEnablePreference.isChecked = false
                                 warningMessage(activity, keystoreWarning = true, deleteKeys = true) {
                                     biometricUnlockEnablePreference.isChecked = true
-                                    deviceCredentialUnlockEnablePreference?.isChecked = false
+                                    deviceCredentialUnlockEnablePreference.isChecked = false
                                 }
                             } else {
                                 biometricUnlockEnablePreference.isChecked = false
@@ -349,7 +287,7 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
                                 deviceCredentialUnlockEnablePreference.isChecked = false
                                 warningMessage(activity, keystoreWarning = true, deleteKeys = true) {
                                     deviceCredentialUnlockEnablePreference.isChecked = true
-                                    biometricUnlockEnablePreference?.isChecked = false
+                                    biometricUnlockEnablePreference.isChecked = false
                                 }
                             } else {
                                 deviceCredentialUnlockEnablePreference.isChecked = false
@@ -412,7 +350,6 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
         }
         warningAlertDialog = AlertDialog.Builder(activity)
             .setMessage(message)
-            .setIcon(android.R.drawable.ic_dialog_alert)
             .setPositiveButton(resources.getString(android.R.string.ok)
             ) { _, _ ->
                 validate?.invoke()
@@ -524,40 +461,43 @@ class NestedAppSettingsFragment : NestedSettingsFragment() {
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-
-        var otherDialogFragment = false
-
         var dialogFragment: DialogFragment? = null
-        // Main Preferences
+
         when (preference.key) {
             getString(R.string.app_timeout_key),
             getString(R.string.clipboard_timeout_key),
             getString(R.string.temp_device_unlock_timeout_key) -> {
                 dialogFragment = DurationDialogFragmentCompat.newInstance(preference.key)
             }
-            else -> otherDialogFragment = true
+            else -> {}
         }
 
         if (dialogFragment != null) {
             @Suppress("DEPRECATION")
             dialogFragment.setTargetFragment(this, 0)
             dialogFragment.show(parentFragmentManager, TAG_PREF_FRAGMENT)
-        }
-        // Could not be handled here. Try with the super method.
-        else if (otherDialogFragment) {
+        } else {
+            // Could not be handled here. Try with the super method.
             super.onDisplayPreferenceDialog(preference)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        activity?.let { activity ->
+        context?.let { context ->
+            // Check Autofill service
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                findPreference<TwoStatePreference?>(getString(R.string.settings_credential_provider_enable_key))?.let { autoFillEnablePreference ->
-                    val autofillManager = activity.getSystemService(AutofillManager::class.java)
-                    autoFillEnablePreference.isChecked = autofillManager != null
-                            && autofillManager.hasEnabledAutofillServices()
+                findPreference<TwoStatePreference?>(
+                    getString(R.string.settings_credential_provider_enable_key)
+                )?.let { autoFillEnablePreference ->
+                    autoFillEnablePreference.isChecked = context.isKeeAutofillActivated()
                 }
+            }
+            // Check Magikeyboard service
+            findPreference<TwoStatePreference?>(
+                getString(R.string.magic_keyboard_key)
+            )?.let { magikeyboardEnablePreference ->
+                magikeyboardEnablePreference.isChecked = context.isMagikeyboardActivated()
             }
         }
     }

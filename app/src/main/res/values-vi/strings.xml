@@ -231,8 +231,6 @@
     <string name="invalid_db_sig">Không thể nhận dạng được định dạng cơ sở dữ liệu.</string>
     <string name="keyfile_is_empty">Tệp khóa trống.</string>
     <string name="length">Chiều dài</string>
-    <string name="hide_password_title">Ẩn mật khẩu</string>
-    <string name="hide_password_summary">Che dấu mật khẩu (***) theo mặc định</string>
     <string name="colorize_password_title">Tô màu mật khẩu</string>
     <string name="colorize_password_summary">Tô màu các ký tự mật khẩu theo loại</string>
     <string name="list_entries_show_username_title">Hiển thị tên người dùng</string>
@@ -271,7 +269,6 @@
     <string name="menu_paste">Dán</string>
     <string name="menu_delete">Xóa</string>
     <string name="menu_cancel">Hủy</string>
-    <string name="menu_hide_password">Ẩn mật khẩu</string>
     <string name="menu_lock">Khóa cơ sở dữ liệu</string>
     <string name="menu_save_database">Lưu dữ liệu</string>
     <string name="menu_merge_database">Hợp nhất dữ liệu</string>
@@ -422,8 +419,6 @@
     <string name="database_opened">Đã mở cơ sở dữ liệu</string>
     <string name="clipboard">Bảng nhớ tạm</string>
     <string name="clipboard_explanation_summary">Sao chép các trường nhập bằng bảng ghi tạm của thiết bị của bạn</string>
-    <string name="clipboard_notifications_title">Thông báo bảng nhớ tạm</string>
-    <string name="clipboard_notifications_summary">Hiển thị thông báo bảng nhớ tạm để sao chép các trường khi xem một mục</string>
     <string name="clipboard_warning">Nếu việc xóa tự động bảng nhớ tạm không thành công, hãy xóa lịch sử của nó theo cách thủ công.</string>
     <string name="lock">Khóa</string>
     <string name="lock_database_screen_off_title">Khóa màn hình</string>
@@ -487,8 +482,6 @@
     <string name="enable">Bật</string>
     <string name="disable">Tắt</string>
     <string name="notification">Thông báo</string>
-    <string name="clear_clipboard_notification_title">Xóa khi đóng</string>
-    <string name="clear_clipboard_notification_summary">Khóa cơ sở dữ liệu khi thời lượng bảng nhớ tạm hết hạn hoặc thông báo bị đóng sau khi bạn bắt đầu sử dụng</string>
     <string name="database_name_title">Tên cơ sở dữ liệu</string>
     <string name="database_description_title">Mô tả cơ sở dữ liệu</string>
     <string name="database_default_username_title">Tên người dùng mặc định</string>

@@ -219,8 +219,6 @@
     <string name="invalid_algorithm">Wrong algorithm.</string>
     <string name="invalid_db_same_uuid">%1$s with the same UUID %2$s already exists.</string>
     <string name="keyfile_is_empty">The keyfile is empty.</string>
-    <string name="hide_password_title">Hide passwords</string>
-    <string name="list_entries_show_username_title">Show usernames</string>
     <string name="error_otp_period">Period must be between %1$d and %2$d seconds.</string>
     <string name="error_string_type">This text does not match the requested item.</string>
     <string name="error_registration_read_only">Saving a new item is not allowed in a read-only database.</string>
@@ -231,7 +229,6 @@
     <string name="error_file_to_big">The file you are trying to upload is too big.</string>
     <string name="error_upload_file">An error occurred while uploading the file data.</string>
     <string name="error_location_unknown">Database location is unknown, database action cannot be performed.</string>
-    <string name="hide_password_summary">Mask passwords (***) by default</string>
     <string name="list_entries_show_username_summary">Displays usernames in entry lists</string>
     <string name="list_groups_show_number_entries_title">Show number of entries</string>
     <string name="show_otp_token_summary">Displays OTP tokens in the list of entries</string>

@@ -18,7 +18,6 @@
     <string name="menu_showpass">Серсүзне күрсәтү</string>
     <string name="menu_search">Эзләү</string>
     <string name="menu_open">Ачу</string>
-    <string name="menu_hide_password">Серсүзне яшерү</string>
     <string name="menu_move">Күчү</string>
     <string name="menu_cancel">Баш тарту</string>
     <string name="menu_delete">Бетерү</string>
@@ -27,7 +26,6 @@
     <string name="settings">Көйләүләр</string>
     <string name="menu_change_key_settings">Мастер ачкычны үзгәртү</string>
     <string name="about">Турында</string>
-    <string name="hide_password_title">Серсүзләрне яшерү</string>
     <string name="list_entries_show_username_title">Кулланучы исемнәрен күрсәтү</string>
     <string name="password">Серсүз</string>
     <string name="hint_pass">Серсүз</string>

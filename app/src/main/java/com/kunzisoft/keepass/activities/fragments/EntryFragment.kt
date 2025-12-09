@@ -9,6 +9,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -16,19 +19,18 @@ import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.adapters.EntryAttachmentsItemsAdapter
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
-import com.kunzisoft.keepass.database.element.template.TemplateField
-import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.model.StreamDirection
 import com.kunzisoft.keepass.settings.PreferencesUtil
-import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.TimeUtil.getDateTimeString
 import com.kunzisoft.keepass.utils.UUIDUtils.asHexString
 import com.kunzisoft.keepass.view.TemplateView
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.showByFading
 import com.kunzisoft.keepass.viewmodels.EntryViewModel
+import kotlinx.coroutines.launch
 
 class EntryFragment: DatabaseFragment() {
 
@@ -50,8 +52,6 @@ class EntryFragment: DatabaseFragment() {
     private lateinit var uuidContainerView: View
     private lateinit var uuidReferenceView: TextView
 
-    private var mClipboardHelper: ClipboardHelper? = null
-
     private val mEntryViewModel: EntryViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater,
@@ -65,10 +65,6 @@ class EntryFragment: DatabaseFragment() {
     override fun onViewCreated(view: View,
                                savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        context?.let { context ->
-            mClipboardHelper = ClipboardHelper(context)
-        }
 
         rootView = view
         // Hide only the first time
@@ -131,6 +127,22 @@ class EntryFragment: DatabaseFragment() {
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mEntryViewModel.entryState.collect { entryState ->
+                    when (entryState) {
+                        is EntryViewModel.EntryState.Loading -> {}
+                        is EntryViewModel.EntryState.RequestCopyProtectedField -> {}
+                        is EntryViewModel.EntryState.OnFieldProtectionUpdated -> {
+                            updateField(entryState.fieldProtection)
+                            mEntryViewModel.actionPerformed()
+                        }
+                        is EntryViewModel.EntryState.OnChangeFieldProtectionRequested -> {}
+                    }
+                }
+            }
+        }
     }
 
     override fun onDatabaseRetrieved(database: ContextualDatabase) {
@@ -152,16 +164,14 @@ class EntryFragment: DatabaseFragment() {
     private fun assignEntryInfo(entryInfo: EntryInfo?) {
         // Set copy buttons
         templateView.apply {
+            setOnChangeFieldProtectionClickListener { fieldProtection ->
+                mEntryViewModel.requestChangeFieldProtection(fieldProtection)
+            }
             setOnAskCopySafeClickListener {
                 showClipboardDialog()
             }
-
-            setOnCopyActionClickListener { field ->
-                mClipboardHelper?.timeoutCopyToClipboard(
-                    TemplateField.getLocalizedName(context, field.name),
-                    field.protectedValue.stringValue,
-                    field.protectedValue.isProtected
-                )
+            setOnCopyActionClickListener { fieldProtection ->
+                mEntryViewModel.requestCopyField(fieldProtection)
             }
         }
 
@@ -185,6 +195,10 @@ class EntryFragment: DatabaseFragment() {
 
         // Assign special data
         uuidReferenceView.text = entryInfo?.id?.asHexString()
+    }
+
+    fun updateField(field: FieldProtection) {
+        templateView.setFieldProtection(field)
     }
 
     private fun showClipboardDialog() {
@@ -242,14 +256,14 @@ class EntryFragment: DatabaseFragment() {
     fun firstEntryFieldCopyView(): View? {
         return try {
             templateView.getActionImageView()
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             null
         }
     }
 
     fun launchEntryCopyEducationAction() {
         val appNameString = getString(R.string.app_name)
-        mClipboardHelper?.timeoutCopyToClipboard(appNameString, appNameString)
+        mEntryViewModel.copyToClipboard(appNameString)
     }
 
     companion object {

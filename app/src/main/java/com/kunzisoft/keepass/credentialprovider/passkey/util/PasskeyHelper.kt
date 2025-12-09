@@ -494,6 +494,7 @@ object PasskeyHelper {
      */
     fun buildCreatePublicKeyCredentialResponse(
         publicKeyCredentialCreationParameters: PublicKeyCredentialCreationParameters,
+        userVerified: Boolean,
         backupEligibility: Boolean,
         backupState: Boolean
     ): CreatePublicKeyCredentialResponse {
@@ -511,7 +512,7 @@ object PasskeyHelper {
                     keyTypeId = keyTypeId
                 ) ?: mapOf<Int, Any>()),
                 userPresent = true,
-                userVerified = true,
+                userVerified = userVerified,
                 backupEligibility = backupEligibility,
                 backupState = backupState,
                 publicKeyTypeId = keyTypeId,
@@ -583,6 +584,7 @@ object PasskeyHelper {
         requestOptions: PublicKeyCredentialRequestOptions,
         clientDataResponse: ClientDataResponse,
         passkey: Passkey,
+        userVerified: Boolean,
         defaultBackupEligibility: Boolean,
         defaultBackupState: Boolean
     ): PublicKeyCredential {
@@ -591,7 +593,7 @@ object PasskeyHelper {
             response = AuthenticatorAssertionResponse(
                 requestOptions = requestOptions,
                 userPresent = true,
-                userVerified = true,
+                userVerified = userVerified,
                 backupEligibility = passkey.backupEligibility ?: defaultBackupEligibility,
                 backupState = passkey.backupState ?: defaultBackupState,
                 userHandle = passkey.userHandle,

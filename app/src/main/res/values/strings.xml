@@ -214,7 +214,7 @@
     <string name="error_empty_key">Key cannot be empty.</string>
     <string name="field_name">Field name</string>
     <string name="field_value">Field value</string>
-    <string name="file_not_found_content">Could not find file. Try reopening it from your file browser.</string>
+    <string name="file_not_found_content">Could not find file</string>
     <string name="corrupted_file">Corrupted file.</string>
     <string name="file_browser">File manager</string>
     <string name="generate_password">Generate password</string>
@@ -235,8 +235,6 @@
     <string name="keyfile_is_empty">The keyfile is empty.</string>
     <string name="length">Length</string>
     <string name="nodes">Nodes</string>
-    <string name="hide_password_title">Hide passwords</string>
-    <string name="hide_password_summary">Mask passwords (***) by default</string>
     <string name="colorize_password_title">Colorize passwords</string>
     <string name="colorize_password_summary">Colorize password characters by type</string>
     <string name="list_entries_show_username_title">Show usernames</string>
@@ -277,7 +275,6 @@
     <string name="menu_paste">Paste</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_cancel">Cancel</string>
-    <string name="menu_hide_password">Hide password</string>
     <string name="menu_lock">Lock database</string>
     <string name="menu_save_database">Save data</string>
     <string name="menu_merge_database">Merge data</string>
@@ -403,9 +400,9 @@
     <string name="keystore_not_accessible">The keystore is not properly initialized.</string>
     <string name="unlock_and_link_biometric">Device unlock link</string>
     <string name="device_unlock_prompt_store_credential_title">Link to device unlocking</string>
-    <string name="device_unlock_prompt_store_credential_message">You still need to remember your vault main credential if you use device unlock recognition.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Device unlock recognition</string>
-    <string name="device_unlock_prompt_extract_credential_message">Extract database credential with device unlock data</string>
+    <string name="device_unlock_prompt_store_credential_message">WARNING: You still need to remember your vault main credential</string>
+    <string name="device_unlock_prompt_extract_credential_title">Device unlocking</string>
+    <string name="device_unlock_prompt_extract_credential_message">Open database with device credential</string>
     <string name="encrypted_value_stored">Encrypted password stored</string>
     <string name="device_unlock_invalid_key">Cannot read the device unlock key. Please delete it and repeat the unlock recognition procedure.</string>
     <string name="device_unlock_not_recognized">Could not recognize device unlock print</string>
@@ -447,6 +444,10 @@
     <string name="autofill_explanation_summary">Configure autofilling to quickly fill out forms in other apps</string>
     <string name="autofill_select_entry">Select entry…</string>
     <string name="autofill_preference_title">Autofill settings</string>
+    <string name="user_verification_device_credential_title">User Verification credential</string>
+    <string name="user_verification_device_credential_summary">Use the device credential as user verification if available</string>
+    <string name="user_verification_preferred_title">Preferred User Verification</string>
+    <string name="user_verification_preferred_summary">Perform a user verification when the relying party requests \"preferred\"</string>
     <string name="password_size_title">Generated password size</string>
     <string name="password_size_summary">Sets default size of the generated passwords</string>
     <string name="list_password_generator_options_title">Password characters</string>
@@ -454,8 +455,6 @@
     <string name="database_opened">Database opened</string>
     <string name="clipboard">Clipboard</string>
     <string name="clipboard_explanation_summary">Copy entry fields using the clipboard of your device</string>
-    <string name="clipboard_notifications_title">Clipboard notifications</string>
-    <string name="clipboard_notifications_summary">Show clipboard notifications to copy fields when viewing an entry</string>
     <string name="clipboard_warning">If automatic deletion of clipboard fails, delete its history manually.</string>
     <string name="lock">Lock</string>
     <string name="lock_database_screen_off_title">Screen lock</string>
@@ -519,8 +518,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="notification">Notification</string>
-    <string name="clear_clipboard_notification_title">Clear at closing</string>
-    <string name="clear_clipboard_notification_summary">Lock the database when the clipboard duration expires or the notification is closed after you start using it</string>
     <string name="database_name_title">Database name</string>
     <string name="database_description_title">Database description</string>
     <string name="database_default_username_title">Default username</string>
@@ -776,4 +773,10 @@
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
     <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialIds %2$s</string>
+    <string name="content_description_user_verification_information">User verification info</string>
+    <string name="user_verification_required_title">User Verification</string>
+    <string name="user_verification_required_description">Access to this data requires verification</string>
+    <string name="user_verification_database_credential">Enter the first four characters of your database password</string>
+    <string name="first_chars">First chars</string>
+    <string name="check">Check</string>
 </resources>

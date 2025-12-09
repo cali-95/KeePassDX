@@ -52,6 +52,9 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
@@ -72,10 +75,13 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeModes
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
-import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.database.element.Entry
 import com.kunzisoft.keepass.database.element.Group
@@ -117,10 +123,14 @@ import com.kunzisoft.keepass.view.applyWindowInsets
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.view.toastError
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.GroupEditViewModel
 import com.kunzisoft.keepass.viewmodels.GroupViewModel
+import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
+import kotlinx.coroutines.launch
 import org.joda.time.LocalDateTime
 import java.util.EnumSet
 
@@ -130,8 +140,7 @@ class GroupActivity : DatabaseLockActivity(),
         GroupFragment.NodesActionMenuListener,
         GroupFragment.OnScrollListener,
         GroupFragment.GroupRefreshedListener,
-        SortDialogFragment.SortSelectionListener,
-        MainCredentialDialogFragment.AskMainCredentialDialogListener {
+        SortDialogFragment.SortSelectionListener {
 
     // Views
     private var header: ViewGroup? = null
@@ -156,6 +165,8 @@ class GroupActivity : DatabaseLockActivity(),
 
     private val mGroupViewModel: GroupViewModel by viewModels()
     private val mGroupEditViewModel: GroupEditViewModel by viewModels()
+    private val mMainCredentialViewModel: MainCredentialViewModel by viewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private val mGroupActivityEducation = GroupActivityEducation(this)
 
@@ -356,14 +367,22 @@ class GroupActivity : DatabaseLockActivity(),
                         SettingsActivity.launch(this@GroupActivity, true)
                     }
                     R.id.menu_merge_from -> {
-                        mExternalFileHelper?.openDocument()
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.MERGE_FROM_DATABASE,
+                                database = mDatabase
+                            )
+                        )
                     }
                     R.id.menu_save_copy_to -> {
-                        mExternalFileHelper?.createDocument(
-                            getString(R.string.database_file_name_default) +
-                                    "_" +
-                                    LocalDateTime.now().toString() +
-                                    mDatabase?.defaultFileExtension)
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.SAVE_DATABASE_COPY_TO,
+                                database = mDatabase
+                            )
+                        )
                     }
                     R.id.menu_lock_all -> {
                         lockAndExit()
@@ -548,6 +567,58 @@ class GroupActivity : DatabaseLockActivity(),
                 }
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mMainCredentialViewModel.uiState.collect { credentialState ->
+                    when (credentialState) {
+                        is MainCredentialViewModel.UIState.Loading -> {}
+                        is MainCredentialViewModel.UIState.OnMainCredentialEntered -> {
+                            mergeDatabaseFrom(credentialState.databaseUri, credentialState.mainCredential)
+                            mMainCredentialViewModel.onActionReceived()
+                        }
+                        is MainCredentialViewModel.UIState.OnMainCredentialCanceled -> {
+                            mMainCredentialViewModel.onActionReceived()
+                        }
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mUserVerificationViewModel.userVerificationState.collect { uVState ->
+                    when (uVState) {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uVState.error)
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
+                            val data = uVState.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.EDIT_ENTRY -> {
+                                    editEntry(uVState.dataToVerify.database,  uVState.dataToVerify.entryId)
+                                }
+                                UserVerificationActionType.MERGE_FROM_DATABASE -> {
+                                    mExternalFileHelper?.openDocument()
+                                }
+                                UserVerificationActionType.SAVE_DATABASE_COPY_TO -> {
+                                    mExternalFileHelper?.createDocument(
+                                        getString(R.string.database_file_name_default) +
+                                                "_" +
+                                                LocalDateTime.now().toString() +
+                                                uVState.dataToVerify.database?.defaultFileExtension
+                                    )
+                                }
+                                else -> {}
+                            }
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun viewToInvalidateTimeout(): View? {
@@ -668,14 +739,6 @@ class GroupActivity : DatabaseLockActivity(),
         result: ActionRunnable.Result
     ) {
         super.onDatabaseActionFinished(database, actionTask, result)
-
-        var entry: Entry? = null
-        try {
-            entry = result.data?.getNewEntry(database)
-        } catch (e: Exception) {
-            Log.e(TAG, "Unable to retrieve entry action for selection", e)
-        }
-
         when (actionTask) {
             ACTION_DATABASE_UPDATE_ENTRY_TASK -> {
                 if (result.isSuccess) {
@@ -687,7 +750,13 @@ class GroupActivity : DatabaseLockActivity(),
                         searchAction = {
                             // Search not used
                         },
-                        selectionAction = { intentSenderMode, typeMode, searchInfo ->
+                        selectionAction = { _, typeMode, _ ->
+                            var entry: Entry? = null
+                            try {
+                                entry = result.data?.getNewEntry(database)
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Unable to retrieve entry action for selection", e)
+                            }
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> entry?.let {
@@ -701,19 +770,17 @@ class GroupActivity : DatabaseLockActivity(),
                                 }
                             }
                         },
-                        registrationAction = { intentSenderMode, typeMode, searchInfo ->
+                        registrationAction = { _, _, _ ->
                             // Save not used
                         }
                     )
                 }
+                coordinatorError?.showActionErrorIfNeeded(result)
+                // Reload the group
+                loadGroup()
+                finishNodeAction()
             }
         }
-
-        coordinatorError?.showActionErrorIfNeeded(result)
-
-        // Reload the group
-        loadGroup()
-        finishNodeAction()
     }
 
     private fun manageIntent(intent: Intent?) {
@@ -860,7 +927,7 @@ class GroupActivity : DatabaseLockActivity(),
                     searchAction = {
                         // Nothing here, a search is simply performed
                     },
-                    selectionAction = { intentSenderMode, typeMode, searchInfo ->
+                    selectionAction = { _, typeMode, searchInfo ->
                         when (typeMode) {
                             TypeMode.DEFAULT -> {}
                             TypeMode.MAGIKEYBOARD -> {
@@ -994,6 +1061,20 @@ class GroupActivity : DatabaseLockActivity(),
         ).containsSearchInfo(searchInfo)
     }
 
+    private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
+        database?.let {
+            entryId?.let {
+                EntryEditActivity.launch(
+                    activity = this@GroupActivity,
+                    database = database,
+                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
+                    nodeId = entryId,
+                    activityResultLauncher = mEntryActivityResultLauncher
+                )
+            }
+        }
+    }
+
     private fun finishNodeAction() {
         actionNodeMode?.finish()
     }
@@ -1043,13 +1124,18 @@ class GroupActivity : DatabaseLockActivity(),
                 launchDialogForGroupUpdate(node as Group)
             }
             Type.ENTRY -> {
-                EntryEditActivity.launch(
-                    activity = this@GroupActivity,
-                    database = database,
-                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
-                    nodeId = (node as Entry).nodeId,
-                    activityResultLauncher = mEntryActivityResultLauncher
-                )
+                if ((node as Entry).getEntryInfo(database).isUserVerificationNeeded()) {
+                    checkUserVerification(
+                        userVerificationViewModel = mUserVerificationViewModel,
+                        dataToVerify = UserVerificationData(
+                            actionType = UserVerificationActionType.EDIT_ENTRY,
+                            database = database,
+                            entryId = node.nodeId
+                        )
+                    )
+                } else {
+                    editEntry(database, node.nodeId)
+                }
             }
         }
         return true
@@ -1132,20 +1218,6 @@ class GroupActivity : DatabaseLockActivity(),
         finishNodeAction()
         return true
     }
-
-    override fun onAskMainCredentialDialogPositiveClick(
-        databaseUri: Uri?,
-        mainCredential: MainCredential
-    ) {
-        databaseUri?.let {
-            mergeDatabaseFrom(it, mainCredential)
-        }
-    }
-
-    override fun onAskMainCredentialDialogNegativeClick(
-        databaseUri: Uri?,
-        mainCredential: MainCredential
-    ) { }
 
     override fun onResume() {
         super.onResume()
@@ -1644,13 +1716,13 @@ class GroupActivity : DatabaseLockActivity(),
                         context = activity,
                         database = database,
                         searchInfo = searchInfo,
-                        onItemsFound = { openedDatabase, items ->
+                        onItemsFound = { _, items ->
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> {
                                     MagikeyboardService.performSelection(
                                         items = items,
-                                        actionPopulateKeyboard = { entryInfo ->
+                                        actionPopulateKeyboard = { _ ->
                                             activity.buildSpecialModeResponseAndSetResult(items)
                                             onValidateSpecialMode()
                                         },
