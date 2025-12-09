@@ -5,6 +5,7 @@ KeePassDX(4.3.0)
  * Fix autofill username detection #2276
  * Fix Passkey in passwordless mode #2282
  * Fix Magikeyboard notification #2288
+ * Small fixes #2289 #2277
 
 KeePassDX(4.2.4)
  * Fix remembering database location #2262

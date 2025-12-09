@@ -4,3 +4,4 @@
  * Fix autofill username detection #2276
  * Fix Passkey in passwordless mode #2282
  * Fix Magikeyboard notification #2288
+ * Small fixes #2289 #2277

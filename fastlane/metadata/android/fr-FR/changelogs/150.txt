@@ -4,3 +4,4 @@
  * Correction de la détection du nom d'utilisateur pour le remplissage auto #2276
  * Correction de Passkey en mode passwordless #2282
  * Correction de la notification du Magiclavier #2288
+ * Petites corrections #2289 #2277
