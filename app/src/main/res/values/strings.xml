@@ -400,9 +400,9 @@
     <string name="keystore_not_accessible">The keystore is not properly initialized.</string>
     <string name="unlock_and_link_biometric">Device unlock link</string>
     <string name="device_unlock_prompt_store_credential_title">Link to device unlocking</string>
-    <string name="device_unlock_prompt_store_credential_message">You still need to remember your vault main credential if you use device unlock recognition.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Device unlock recognition</string>
-    <string name="device_unlock_prompt_extract_credential_message">Extract database credential with device unlock data</string>
+    <string name="device_unlock_prompt_store_credential_message">WARNING: You still need to remember your vault main credential</string>
+    <string name="device_unlock_prompt_extract_credential_title">Device unlocking</string>
+    <string name="device_unlock_prompt_extract_credential_message">Open database with device credential</string>
     <string name="encrypted_value_stored">Encrypted password stored</string>
     <string name="device_unlock_invalid_key">Cannot read the device unlock key. Please delete it and repeat the unlock recognition procedure.</string>
     <string name="device_unlock_not_recognized">Could not recognize device unlock print</string>
