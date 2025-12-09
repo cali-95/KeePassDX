@@ -27,6 +27,7 @@ import com.kunzisoft.keepass.database.element.template.TemplateEngine
 import com.kunzisoft.keepass.database.element.template.TemplateEngine.Companion.addTemplateDecorator
 import com.kunzisoft.keepass.database.element.template.TemplateField
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.otp.OtpEntryFields
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -49,6 +50,7 @@ abstract class TemplateAbstractView<
 
     // To keep unprotected views during orientation change
     protected var mUnprotectedFields = mutableSetOf<Field>()
+    protected var mFields = mutableMapOf<Field, ProtectedFieldView>()
 
     private var mViewFields = mutableListOf<ViewField>()
 
@@ -313,6 +315,14 @@ abstract class TemplateAbstractView<
             fieldView?.applyFontVisibility(mFontInVisibility)
         } catch(e: Exception) {
             Log.e(TAG, "Unable to populate entry field view", e)
+        }
+    }
+
+    fun setFieldProtection(value: FieldProtection) {
+        if (value.isCurrentlyProtected) {
+            this.mFields[value.field]?.protect()
+        } else {
+            this.mFields[value.field]?.unprotect()
         }
     }
 
