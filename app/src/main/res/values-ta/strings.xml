@@ -73,7 +73,7 @@
     <string name="biometric_security_update_required">பயோமெட்ரிக் பாதுகாப்பு புதுப்பிப்பு தேவை.</string>
     <string name="keystore_not_accessible">கீச்டோர் சரியாக துவக்கப்படவில்லை.</string>
     <string name="menu_appearance_settings">தோற்றம்</string>
-    <string name="set_credential_provider_service_title">இயல்புநிலை ஆட்டோஃபில் சேவையை அமைக்கவும்</string>
+    <string name="set_credential_provider_service_title">நுழைவுச்சான்றிதழ் வழங்கும் சேவை</string>
     <string name="autofill_preference_title">ஆட்டோஃபில் அமைப்புகள்</string>
     <string name="lock_database_screen_off_title">திரை பூட்டு</string>
     <string name="content">உள்ளடக்கம்</string>
@@ -392,7 +392,7 @@
     <string name="parallelism">இணையானவாதம்</string>
     <string name="sort_last_modify_time">மாற்றம்</string>
     <string name="ask">கேளுங்கள்</string>
-    <string name="biometric">பயோமெட்ரிக்</string>
+    <string name="biometric">உயிரியளவியல்</string>
     <string name="general">பொது</string>
     <string name="device_unlock_delete_all_key_warning">சாதன திறத்தல் ஏற்பு தொடர்பான அனைத்து குறியாக்க விசைகளையும் நீக்கவா?</string>
     <string name="recycle_bin_title">மறுசுழற்சி பின் பயன்பாடு</string>
@@ -420,7 +420,7 @@
     <string name="download">பதிவிறக்கம்</string>
     <string name="permission">இசைவு</string>
     <string name="device_unlock_prompt_not_initialized">சாதன திறத்தல் வரியில் துவக்க முடியவில்லை.</string>
-    <string name="device_credential">சாதன நற்சான்றிதழ்</string>
+    <string name="device_credential">சாதன நுழைவுச்சான்றிதழ்</string>
     <string name="database_data_compression_title">தரவு சுருக்க</string>
     <string name="info">தகவல்</string>
     <string name="content_description_otp_information">ஒரு முறை கடவுச்சொல் செய்தி</string>
@@ -661,4 +661,17 @@
     <string name="upload_attachment">%1$s ஐ பதிவேற்றவும்</string>
     <string name="download_initialization">தொடங்குதல்…</string>
     <string name="download_progression">செயலில்:%1$d %%</string>
+    <string name="warning_overwrite_data_title">இருக்கும் தரவை மேலெழுத வேண்டுமா?</string>
+    <string name="warning_overwrite_data_description">இந்த செயல் உள்ளீட்டில் இருக்கும் தரவை மாற்றிவிடும், இதன் வரலாறு இயக்கத்தில் இருந்தால் அந்தப் பழைய தரவை மீட்க முடியும்</string>
+    <string name="credential_provider">அறிமுகச்சான்று வழங்குபவர்</string>
+    <string name="passkeys">கடவுத்திறவுகோல்கள்</string>
+    <string name="passkeys_explanation_summary">கடவுச்சொற்கள் அல்லாத உள்நுழைவிற்கு கடவுத்திறவுகோல்களை உள்ளமைக்கவும்</string>
+    <string name="passkeys_preference_title">கடவுத்திறவுகோல்களின் அமைப்புகள்</string>
+    <string name="passkeys_close_database_title">தரவுத்தளத்தை மூடு</string>
+    <string name="passkeys_close_database_summary">கடவுத்திறவுகோலை தேர்ந்தெடுத்த பின்பு தரவுத்தளத்தை மூடவும்</string>
+    <string name="passkeys_privileged_apps_title">சலுகை பெற்ற செயலிகள்</string>
+    <string name="passkeys_privileged_apps_explanation">ஒரு சலுகைபெற்ற செயலியானது உறுதிப்பாட்டின் தோற்றத்தை மீட்டெடுக்கும் நுழைவாயிலாக செயல்படும்.</string>
+    <string name="passkeys_privileged_apps_ask_title">ஏற்பு அற்ற செயலி</string>
+    <string name="passkeys_privileged_apps_ask_message">ஒரு கடவுத்திறவுகோலின் செயலை நிகழ்த்த %1$s முயல்கிறது.\n\nஇதைச் சலுகைபெற்ற செயலிகள் பட்டியலில் சேர்க்க வேண்டுமா?</string>
+    <string name="passkeys_missing_signature_app_ask_title">ஒப்பம் காணவில்லை</string>
 </resources>
