@@ -3,6 +3,7 @@ package com.kunzisoft.keepass.services
 import android.Manifest
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
@@ -21,6 +22,7 @@ import androidx.core.app.ServiceCompat
 import androidx.core.content.ContextCompat
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.stylish.Stylish
+import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -169,6 +171,21 @@ abstract class NotificationService : Service() {
         Log.e(javaClass::class.simpleName, "The service took too long to execute")
         cancelNotification()
         stopSelf()
+    }
+
+    protected open fun buildPendingIntent(
+        intent: Intent
+    ): PendingIntent {
+        return PendingIntent.getActivity(
+            this,
+            randomRequestCode(),
+            intent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
     }
 
     protected fun cancelNotification() {

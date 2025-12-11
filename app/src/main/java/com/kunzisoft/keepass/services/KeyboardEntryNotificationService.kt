@@ -27,6 +27,7 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.buildSwitchMagikeyboardIntent
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.isMagikeyboardActivated
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -106,12 +107,17 @@ class KeyboardEntryNotificationService : LockNotificationService() {
             }
         )
 
+        val switchKeyboardIntent = buildSwitchMagikeyboardIntent(this)
+        val pendingIntent: PendingIntent? =
+            if (switchKeyboardIntent.resolveActivity(packageManager) != null) {
+                buildPendingIntent(switchKeyboardIntent)
+            } else null
         val builder = buildNewNotification()
                 .setSmallIcon(R.drawable.notification_ic_keyboard_key_24dp)
                 .setContentTitle(getString(R.string.keyboard_notification_entry_content_title, entryTitle))
                 .setContentText(getString(R.string.keyboard_notification_entry_content_text, entryUsername))
                 .setAutoCancel(false)
-                .setContentIntent(null)
+                .setContentIntent(pendingIntent)
                 .setDeleteIntent(pendingDeleteIntent)
 
         checkNotificationsPermission(this, PreferencesUtil.isKeyboardNotificationEntryEnable(this)) {
@@ -152,7 +158,6 @@ class KeyboardEntryNotificationService : LockNotificationService() {
         private const val TAG = "KeyboardEntryNotifSrv"
 
         private const val CHANNEL_MAGIKEYBOARD_ID = "com.kunzisoft.keepass.notification.channel.magikeyboard"
-
         private const val ENTRY_INFO_KEY = "ENTRY_INFO_KEY"
         private const val ACTION_CLEAN_KEYBOARD_ENTRY = "ACTION_CLEAN_KEYBOARD_ENTRY"
 

@@ -272,7 +272,7 @@ class MagikeyboardService : InputMethodService(),
     }
 
     private fun playClick(keyCode: Int) {
-        val audioManager = getSystemService(Context.AUDIO_SERVICE) as AudioManager?
+        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager?
         when (keyCode) {
             Keyboard.KEYCODE_DONE, 10 -> audioManager?.playSoundEffect(AudioManager.FX_KEYPRESS_RETURN)
             Keyboard.KEYCODE_DELETE -> audioManager?.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE)
@@ -375,8 +375,8 @@ class MagikeyboardService : InputMethodService(),
             searchInfo = searchInfo,
             onItemsFound = { _, items ->
                 performSelection(
-                    items,
-                    {
+                    items = items,
+                    actionPopulateKeyboard = {
                         // Automatically populate keyboard
                         addEntry(
                             this,
@@ -385,7 +385,7 @@ class MagikeyboardService : InputMethodService(),
                         )
                         assignKeyboardView()
                     },
-                    {
+                    actionEntrySelection = {
                         launchEntrySelection(searchInfo)
                     }
                 )
@@ -476,6 +476,9 @@ class MagikeyboardService : InputMethodService(),
         private val searchInfo = MutableLiveData<SearchInfo?>()
         private val entryUUID = MutableLiveData<UUID?>()
 
+        private const val SWITCH_KEYBOARD_ACTION = "com.android.keyboard.SWITCH_KEYBOARD"
+        private const val KEYBOARD_ID = "KEYBOARD_ID"
+
         private fun removeEntryInfo() {
             this.entryUUID.value = null
         }
@@ -496,23 +499,32 @@ class MagikeyboardService : InputMethodService(),
         fun addEntry(
             context: Context,
             entry: EntryInfo,
-            toast: Boolean = false
+            toast: Boolean = false,
+            autoSwitchKeyboard: Boolean = false
         ) {
             // Launch notification if allowed
-            addEntries(context, listOf(entry), toast)
+            addEntries(context, listOf(entry), toast, autoSwitchKeyboard)
         }
 
         fun addEntries(
             context: Context,
             entryList: List<EntryInfo>,
-            toast: Boolean = false
+            toast: Boolean = false,
+            autoSwitchKeyboard: Boolean = false
         ) {
             // Add a new entry if keyboard activated
             if (context.isMagikeyboardActivated()) {
                 val entry = entryList[0]
                 this.entryUUID.value = entry.id
-                // Show the message
-                if (toast) {
+                // Launch notification if allowed
+                KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
+                // Auto switch to the Magikeyboard
+                val magikeyboardIntent = buildSwitchMagikeyboardIntent(context)
+                if (autoSwitchKeyboard
+                    && magikeyboardIntent.resolveActivity(context.packageManager) != null) {
+                    context.startActivity(magikeyboardIntent)
+                } else if (toast) {
+                    // Show the message
                     Toast.makeText(
                         context,
                         context.getString(
@@ -522,10 +534,19 @@ class MagikeyboardService : InputMethodService(),
                         Toast.LENGTH_SHORT
                     ).show()
                 }
-                // Launch notification if allowed
-                KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
             } else {
                 removeEntryInfo()
+            }
+        }
+
+        fun getMagikeyboardId(context: Context): String {
+            return "${context.packageName}/${MagikeyboardService::class.java.canonicalName}"
+        }
+
+        fun buildSwitchMagikeyboardIntent(context: Context): Intent {
+            return Intent(SWITCH_KEYBOARD_ACTION).apply {
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                putExtra(KEYBOARD_ID, getMagikeyboardId(context))
             }
         }
 

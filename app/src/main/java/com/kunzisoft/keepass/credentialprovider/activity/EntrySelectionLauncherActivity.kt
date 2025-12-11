@@ -70,7 +70,8 @@ class EntrySelectionLauncherActivity : DatabaseModeActivity() {
                         MagikeyboardService.addEntry(
                             context = this@EntrySelectionLauncherActivity,
                             entry = uiState.entryInfo,
-                            toast = true
+                            toast = true,
+                            autoSwitchKeyboard = true
                         )
                     }
                     is EntrySelectionViewModel.UIState.LaunchFileDatabaseSelectForSearch -> {

@@ -145,12 +145,13 @@ class EntrySelectionViewModel(application: Application): CredentialLauncherViewM
                         )
                     }
                 } else if (searchShareForMagikeyboard) {
+                    // TODO Manage multiple entries in Magikeyboard #2305
                     MagikeyboardService.performSelection(
-                        items,
-                        { entryInfo ->
+                        items = items,
+                        actionPopulateKeyboard = { entryInfo ->
                             populateKeyboard(entryInfo)
                         },
-                        { autoSearch ->
+                        actionEntrySelection = { _ ->
                             mCredentialUiState.value = CredentialState.LaunchGroupActivityForSelection(
                                 database = openedDatabase,
                                 searchInfo = searchInfo,

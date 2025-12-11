@@ -760,13 +760,13 @@ class GroupActivity : DatabaseLockActivity(),
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> entry?.let {
-                                    entrySelectedForKeyboardSelection(database, it)
+                                    entrySelectedForSelection(database, it)
                                 }
                                 TypeMode.PASSKEY -> entry?.let {
                                     entrySelectedForPasskeySelection(database, it)
                                 }
                                 TypeMode.AUTOFILL -> entry?.let {
-                                    entrySelectedForAutofillSelection(database, it)
+                                    entrySelectedForSelection(database, it)
                                 }
                             }
                         },
@@ -942,7 +942,7 @@ class GroupActivity : DatabaseLockActivity(),
                                         searchInfo.toRegisterInfo()
                                     )
                                 } else {
-                                    entrySelectedForKeyboardSelection(database, entryVersioned)
+                                    entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
                             TypeMode.PASSKEY -> {
@@ -960,7 +960,7 @@ class GroupActivity : DatabaseLockActivity(),
                                         searchInfo.toRegisterInfo()
                                     )
                                 } else {
-                                    entrySelectedForAutofillSelection(database, entryVersioned)
+                                    entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
                         }
@@ -986,19 +986,10 @@ class GroupActivity : DatabaseLockActivity(),
         }
     }
 
-    private fun entrySelectedForKeyboardSelection(database: ContextualDatabase, entry: Entry) {
+    private fun entrySelectedForSelection(database: ContextualDatabase, entry: Entry) {
         removeSearch()
         // Build response with the entry selected
         this.buildSpecialModeResponseAndSetResult(entry.getEntryInfo(database))
-        onValidateSpecialMode()
-    }
-
-    private fun entrySelectedForAutofillSelection(database: ContextualDatabase, entry: Entry) {
-        removeSearch()
-        // Build response with the entry selected
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            this.buildSpecialModeResponseAndSetResult(entry.getEntryInfo(database))
-        }
         onValidateSpecialMode()
     }
 
@@ -1720,6 +1711,7 @@ class GroupActivity : DatabaseLockActivity(),
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> {
+                                    // TODO Multiple entries in Magikeyboard #2305
                                     MagikeyboardService.performSelection(
                                         items = items,
                                         actionPopulateKeyboard = { _ ->
