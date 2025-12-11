@@ -33,10 +33,10 @@ import com.kunzisoft.keepass.database.element.template.TemplateField
 import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.IOActionTask
-import com.kunzisoft.keepass.view.ProtectedFieldView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
@@ -139,14 +139,20 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
         }
     }
 
-    fun requestUnprotectField(fieldView: ProtectedFieldView) {
-        mEntryState.value = EntryState.RequestUnprotectField(fieldView)
+    fun updateProtectionField(fieldProtection: FieldProtection, value: Boolean) {
+        fieldProtection.isCurrentlyProtected = value
+        mEntryState.value = EntryState.OnFieldProtectionUpdated(fieldProtection)
     }
 
-    fun requestCopyField(field: Field, fieldView: ProtectedFieldView) {
+    fun requestChangeFieldProtection(fieldProtection: FieldProtection) {
+        mEntryState.value = EntryState.OnChangeFieldProtectionRequested(fieldProtection)
+    }
+
+    fun requestCopyField(fieldProtection: FieldProtection) {
         // Only request the User Verification if the field is protected and not shown
-        if (field.protectedValue.isProtected && fieldView.isCurrentlyProtected())
-            mEntryState.value = EntryState.RequestCopyProtectedField(field)
+        val field = fieldProtection.field
+        if (field.protectedValue.isProtected && fieldProtection.isCurrentlyProtected)
+            mEntryState.value = EntryState.RequestCopyProtectedField(fieldProtection)
         else
             copyToClipboard(field)
     }
@@ -210,11 +216,14 @@ class EntryViewModel(application: Application): AndroidViewModel(application) {
 
     sealed class EntryState {
         object Loading: EntryState()
-        data class RequestUnprotectField(
-            val protectedFieldView: ProtectedFieldView
+        data class OnChangeFieldProtectionRequested(
+            val fieldProtection: FieldProtection
+        ): EntryState()
+        data class OnFieldProtectionUpdated(
+            val fieldProtection: FieldProtection
         ): EntryState()
         data class RequestCopyProtectedField(
-            val field: Field
+            val fieldProtection: FieldProtection
         ): EntryState()
     }
 

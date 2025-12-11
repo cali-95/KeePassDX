@@ -21,6 +21,7 @@ import com.kunzisoft.keepass.database.helper.isStandardPasswordName
 import com.kunzisoft.keepass.model.AppOriginEntryField
 import com.kunzisoft.keepass.model.DataDate
 import com.kunzisoft.keepass.model.DataTime
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.model.PasskeyEntryFields
 import com.kunzisoft.keepass.otp.OtpEntryFields
 
@@ -35,9 +36,9 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
     @IdRes
     private var mTempDateTimeViewId: Int? = null
 
-    private var mOnUnprotectClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
-    fun setOnUnprotectClickListener(listener: ((Field, ProtectedFieldView) -> Unit)?) {
-        this.mOnUnprotectClickListener = listener
+    private var mOnChangeFieldProtectionClickListener: ((FieldProtection) -> Unit)? = null
+    fun setOnChangeFieldProtectionClickListener(listener: ((FieldProtection) -> Unit)?) {
+        this.mOnChangeFieldProtectionClickListener = listener
     }
 
     private var mOnCustomEditionActionClickListener: ((Field) -> Unit)? = null
@@ -131,7 +132,9 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                     protection = field.protectedValue.isProtected,
                     isCurrentlyProtected = mUnprotectedFields.contains(field).not()
                 ) {
-                    mOnUnprotectClickListener?.invoke(field, this)
+                    mOnChangeFieldProtectionClickListener?.invoke(
+                        FieldProtection(field, isCurrentlyProtected())
+                    )
                 }
                 // Trick to bypass the onSaveInstanceState in rebuild child
                 onSaveInstanceState = {
@@ -147,6 +150,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     importantForAutofill = IMPORTANT_FOR_AUTOFILL_NO
                 }
+                mFields[field] = this
             }
         }
     }

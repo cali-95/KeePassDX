@@ -1,6 +1,8 @@
  * Changement manuel de la langue de l'appli #1884 #1990
  * Ajout de la Verification Utilisateur pour Passkey #2283
  * Partage d'URL/Entrée depuis le remplissage Auto vers le Magiclavier #1465
+ * Suppression des notifications de copie dans le presse-papier #2301
  * Correction de la détection du nom d'utilisateur pour le remplissage auto #2276
  * Correction de Passkey en mode passwordless #2282
  * Correction de la notification du Magiclavier #2288
+ * Petites corrections #2289 #2277

@@ -16,11 +16,11 @@ import com.kunzisoft.keepass.database.element.template.Template
 import com.kunzisoft.keepass.model.AttachmentState
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.StreamDirection
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.utils.IOActionTask
-import com.kunzisoft.keepass.view.ProtectedFieldView
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.UUID
@@ -293,8 +293,8 @@ class EntryEditViewModel: NodeEditViewModel() {
         _onPasswordSelected.value = passwordField
     }
 
-    fun requestUnprotectField(fieldView: ProtectedFieldView) {
-        mEntryEditState.value = EntryEditState.RequestUnprotectField(fieldView)
+    fun requestChangeFieldProtection(fieldProtection: FieldProtection) {
+        mEntryEditState.value = EntryEditState.OnChangeFieldProtectionRequested(fieldProtection)
     }
 
     fun requestCustomFieldEdition(customField: Field) {
@@ -352,6 +352,11 @@ class EntryEditViewModel: NodeEditViewModel() {
         _onBinaryPreviewLoaded.value = AttachmentPosition(entryAttachmentState, viewPosition)
     }
 
+    fun updateFieldProtection(fieldProtection: FieldProtection, value: Boolean) {
+        fieldProtection.isCurrentlyProtected = value
+        mEntryEditState.value = EntryEditState.OnFieldProtectionUpdated(fieldProtection)
+    }
+
     fun actionPerformed() {
         mEntryEditState.value = EntryEditState.Loading
     }
@@ -373,8 +378,11 @@ class EntryEditViewModel: NodeEditViewModel() {
     sealed class EntryEditState {
         object Loading: EntryEditState()
         object ShowOverwriteMessage: EntryEditState()
-        data class RequestUnprotectField(
-            val protectedFieldView: ProtectedFieldView
+        data class OnChangeFieldProtectionRequested(
+            val fieldProtection: FieldProtection
+        ): EntryEditState()
+        data class OnFieldProtectionUpdated(
+            val fieldProtection: FieldProtection
         ): EntryEditState()
     }
 

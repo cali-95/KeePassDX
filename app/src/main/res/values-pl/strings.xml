@@ -185,8 +185,6 @@
     <string name="list_password_generator_options_title">Znaki hasła</string>
     <string name="list_password_generator_options_summary">Ustaw dozwolone znaki generatora haseł</string>
     <string name="clipboard">Schowek</string>
-    <string name="clipboard_notifications_title">Powiadomienia schowka</string>
-    <string name="clipboard_notifications_summary">Pokaż powiadomienia schowka, aby skopiować pola podczas przeglądania wpisu</string>
     <string name="clipboard_warning">Jeśli automatyczne usuwanie schowka nie powiedzie się, ręcznie usuń jego historię.</string>
     <string name="lock">Zablokuj</string>
     <string name="lock_database_screen_off_title">Blokada ekranu</string>
@@ -294,8 +292,6 @@
     <string name="do_not_kill_app">Nie zamykaj aplikacji…</string>
     <string name="lock_database_back_root_title">Naciśnij „Wstecz”, aby zablokować</string>
     <string name="lock_database_back_root_summary">Naciśnij „Wstecz”, aby zablokować bazę danych, jeśli znajdujesz się na ekranie głównym bazy danych</string>
-    <string name="clear_clipboard_notification_title">Wyczyść po zamknięciu</string>
-    <string name="clear_clipboard_notification_summary">Blokowanie bazy danych po wygaśnięciu czasu trwania schowka lub zamknięciu powiadomienia po rozpoczęciu korzystania z niej</string>
     <string name="recycle_bin">Kosz</string>
     <string name="keyboard_selection_entry_title">Wybór wpisu</string>
     <string name="keyboard_selection_entry_summary">Podczas przeglądania wpisu w KeePassDX zapełnij Magikeyboard tym wpisem</string>

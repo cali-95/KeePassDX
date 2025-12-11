@@ -479,8 +479,6 @@
     <string name="credential_provider_service_subtitle">Raktų sistemos, automatinio pildymo kredencialų teikėjas</string>
     <string name="clipboard">Iškarpinė</string>
     <string name="clipboard_explanation_summary">Kopijuoti įrašų laukus naudojant jūsų prietaiso iškarpinę</string>
-    <string name="clipboard_notifications_title">Iškarpinės pranešimai</string>
-    <string name="clipboard_notifications_summary">Rodyti iškarpinės pranešimus laukų kopijavimui žiūrint įrašą</string>
     <string name="clipboard_warning">Jei automatinis iškarpinės ištrynimas nepavyksta, ištrinkite jos istoriją rankiniu būdu.</string>
     <string name="lock_database_back_root_summary">Paspauskite \"Atgal\", kad užrakintumėte duomenų bazę, jei esate duomenų bazės šakniniame ekrane</string>
     <string name="device_unlock_tap_delete">Bakstelėkite, kad ištrintumėte įrenginio atrakinimo raktus</string>
@@ -522,8 +520,6 @@
     <string name="enable">Įgalinti</string>
     <string name="disable">Išjungti</string>
     <string name="notification">Pranešimas</string>
-    <string name="clear_clipboard_notification_title">Išvalyti uždarant</string>
-    <string name="clear_clipboard_notification_summary">Užrakinti duomenų bazę, kai iškarpinės trukmė baigiasi arba pranešimas uždaromas po to, kai pradėjote ją naudoti</string>
     <string name="database_name_title">Duomenų bazės pavadinimas</string>
     <string name="database_description_title">Duomenų bazės aprašymas</string>
     <string name="database_default_username_title">Numatytasis vartotojo vardas</string>

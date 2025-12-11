@@ -182,8 +182,6 @@
     <string name="password_size_summary">Imposta la dimensione predefinita delle password generate</string>
     <string name="list_password_generator_options_title">Caratteri password</string>
     <string name="list_password_generator_options_summary">Imposta i caratteri permessi di generazione password</string>
-    <string name="clipboard_notifications_title">Notifiche appunti</string>
-    <string name="clipboard_notifications_summary">Abilita le notifiche degli appunti per copiare i campi durante la visualizzazione di un elemento</string>
     <string name="clipboard_warning">Se l\'eliminazione automatica degli appunti fallisce, cancellali manualmente.</string>
     <string name="lock">Blocca</string>
     <string name="lock_database_screen_off_title">Blocco schermo</string>
@@ -302,8 +300,6 @@
     <string name="do_not_kill_app">Non terminare l\'app…</string>
     <string name="lock_database_back_root_title">Premere \'\'Indietro\'\' per bloccare</string>
     <string name="lock_database_back_root_summary">Premi \'Indietro\' per bloccare il database se sei nella schermata principale del database</string>
-    <string name="clear_clipboard_notification_title">Pulisci alla chiusura</string>
-    <string name="clear_clipboard_notification_summary">Blocca il database quando scade la durata degli appunti o la notifica viene chiusa dopo che inizi ad usarlo</string>
     <string name="recycle_bin">Cestino</string>
     <string name="keyboard_selection_entry_title">Selezione elemento</string>
     <string name="keyboard_selection_entry_summary">Durante la visualizzazione di una voce in KeePassDX, inseriscila nella Magitastiera</string>

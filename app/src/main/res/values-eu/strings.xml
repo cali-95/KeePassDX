@@ -281,7 +281,6 @@
     <string name="export_app_properties_summary">Sortu fitxategia aplikazioaren ezarpenak esportatzeko</string>
     <string name="max_history_items_summary">Mugatu historial elementu kopurua sarrera bakoitzeko</string>
     <string name="max_history_size_title">Tamaina maximoa</string>
-    <string name="clear_clipboard_notification_summary">Blokeatu datu-basea arbelaren iraupena amaitzean edo jakinarazpena ixtean erabiltzen hasi ondoren</string>
     <string name="database_description_title">Datu-basearen deskribapena</string>
     <string name="keyboard_previous_lock_title">Blokeatu datu-basea</string>
     <string name="keyboard_previous_lock_summary">Aldatu automatikoki aurreko teklatura datu-basea blokeatu ondoren</string>
@@ -434,7 +433,6 @@
     <string name="settings_database_recommend_changing_master_key_summary">Gako nagusia aldatzea gomendatu (egunak)</string>
     <string name="settings_database_force_changing_master_key_title">Berritzea derrigortu</string>
     <string name="settings_database_force_changing_master_key_next_time_title">Berritzea behartu hurrengo aldian</string>
-    <string name="clear_clipboard_notification_title">Ixtean hustu</string>
     <string name="database_name_title">Datu-basearen izena</string>
     <string name="database_default_username_title">Aurre ezarritako erabiltzaile izena</string>
     <string name="application_appearance">Interfazea</string>
@@ -578,10 +576,8 @@
     <string name="list_password_generator_options_summary">Ezarri pasahitza sortzeko onartutako karaktereak</string>
     <string name="list_password_generator_options_title">Pasahitzerako karaktereak</string>
     <string name="clipboard">Arbela</string>
-    <string name="clipboard_notifications_title">Arbelaren jakinarazpenak</string>
     <string name="password_size_title">Sortuko den pasahitzaren tamaina</string>
     <string name="password_size_summary">Lehenetsi sortuko diren pasahitzen luzera</string>
-    <string name="clipboard_notifications_summary">Erakutsi arbelaren eremuak kopiatzeko jakinarazpenak sarrera bat ikustean</string>
     <string name="clipboard_warning">Arbelaren ezabatze automatikoak huts egiten badu, ezabatu historiala eskuz.</string>
     <string name="lock_database_screen_off_title">Pantaila blokeatu</string>
     <string name="lock_database_back_root_summary">Blokeatu datu-basea erabiltzaileak atzera botoia sakatzen duenean hasierako pantailan</string>

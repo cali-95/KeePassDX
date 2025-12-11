@@ -186,8 +186,6 @@
     <string name="list_password_generator_options_title">Символы пароля</string>
     <string name="list_password_generator_options_summary">Настройка набора разрешённых символов для создания пароля</string>
     <string name="clipboard">Буфер обмена</string>
-    <string name="clipboard_notifications_title">Уведомления буфера обмена</string>
-    <string name="clipboard_notifications_summary">Показывать уведомления буфера обмена для копирования полей при просмотре записи</string>
     <string name="clipboard_warning">Если автоматическая очистка буфера обмена недоступна, очистите историю буфера обмена вручную.</string>
     <string name="lock">Блокировка</string>
     <string name="lock_database_screen_off_title">Блокировка экрана</string>
@@ -298,8 +296,6 @@
     <string name="do_not_kill_app">Не закрывайте приложение…</string>
     <string name="lock_database_back_root_title">Блокировка нажатием \"Назад\"</string>
     <string name="lock_database_back_root_summary">Блокировка базы нажатием кнопки \"Назад\", если открыт её корневой раздел</string>
-    <string name="clear_clipboard_notification_title">Очищать при закрытии</string>
-    <string name="clear_clipboard_notification_summary">Блокировать базу при закрытии уведомления после использования или истечения времени ожидания</string>
     <string name="recycle_bin">Корзина</string>
     <string name="keyboard_selection_entry_title">Выбор записи</string>
     <string name="keyboard_selection_entry_summary">При отображении записи в KeePassDX подставлять её данные в Magikeyboard</string>

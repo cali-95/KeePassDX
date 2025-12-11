@@ -64,7 +64,8 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveReg
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestShowUnprotectField
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -81,7 +82,6 @@ import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CREATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.getNewEntry
@@ -195,7 +195,6 @@ class EntryEditActivity : DatabaseLockActivity(),
             ))
         }
 
-        stopService(Intent(this, ClipboardEntryNotificationService::class.java))
         stopService(Intent(this, KeyboardEntryNotificationService::class.java))
 
         // Entry is retrieve, it's an entry to update
@@ -388,8 +387,8 @@ class EntryEditActivity : DatabaseLockActivity(),
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mEntryEditViewModel.entryEditState.collect { uiState ->
-                    when (uiState) {
+                mEntryEditViewModel.entryEditState.collect { entryEditState ->
+                    when (entryEditState) {
                         is EntryEditViewModel.EntryEditState.Loading -> {}
                         is EntryEditViewModel.EntryEditState.ShowOverwriteMessage -> {
                             AlertDialog.Builder(this@EntryEditActivity)
@@ -403,16 +402,28 @@ class EntryEditActivity : DatabaseLockActivity(),
                                 .create().show()
                             mEntryEditViewModel.actionPerformed()
                         }
-                        is EntryEditViewModel.EntryEditState.RequestUnprotectField -> {
+                        is EntryEditViewModel.EntryEditState.OnChangeFieldProtectionRequested -> {
                             mDatabase?.let { database ->
-                                requestShowUnprotectField(
-                                    userVerificationViewModel = mUserVerificationViewModel,
-                                    database = database,
-                                    protectedFieldView = uiState.protectedFieldView
-                                )
+                                val fieldProtection = entryEditState.fieldProtection
+                                if (fieldProtection.isCurrentlyProtected) {
+                                    checkUserVerification(
+                                        userVerificationViewModel = mUserVerificationViewModel,
+                                        dataToVerify = UserVerificationData(
+                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                            database = database,
+                                            fieldProtection = fieldProtection
+                                        )
+                                    )
+                                    mEntryEditViewModel.actionPerformed()
+                                } else {
+                                    mEntryEditViewModel.updateFieldProtection(
+                                        fieldProtection = fieldProtection,
+                                        value = true
+                                    )
+                                }
                             }
-                            mEntryEditViewModel.actionPerformed()
                         }
+                        is EntryEditViewModel.EntryEditState.OnFieldProtectionUpdated -> {}
                     }
                 }
             }
@@ -429,7 +440,12 @@ class EntryEditActivity : DatabaseLockActivity(),
                         is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
                             when (uVState.dataToVerify.actionType) {
                                 UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
-                                    uVState.dataToVerify.protectedFieldView?.unprotect()
+                                    uVState.dataToVerify.fieldProtection?.let { fieldProtection ->
+                                        mEntryEditViewModel.updateFieldProtection(
+                                            fieldProtection = fieldProtection,
+                                            value = false
+                                        )
+                                    }
                                 }
                                 else -> {}
                             }

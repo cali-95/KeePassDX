@@ -113,6 +113,24 @@ inline fun <reified T> Parcel.readListCompat(outVal: MutableList<T>) {
     }
 }
 
+inline fun <reified T> Parcel.writeListCompat(list: List<T>) {
+    writeList(list)
+}
+
+inline fun <reified T> Parcel.readListCompat(): List<T> {
+    val outVal = mutableListOf<T>()
+    readListCompat(outVal)
+    return outVal
+}
+
+inline fun <reified T> Parcel.writeSetCompat(set: Set<T>) {
+    writeList(set.toList())
+}
+
+inline fun <reified T> Parcel.readSetCompat(): Set<T> {
+    return readListCompat<T>().toSet()
+}
+
 // For writing to a Parcel
 fun <K : Parcelable, V : Parcelable> Parcel.writeParcelableMap(map: Map<K, V>, flags: Int) {
     writeInt(map.size)

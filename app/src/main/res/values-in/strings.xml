@@ -256,8 +256,6 @@
     <string name="lock_database_screen_off_title">Kunci layar</string>
     <string name="lock">Kunci</string>
     <string name="clipboard_warning">Jika penghapusan otomatis papan klip gagal, hapus riwayatnya secara manual.</string>
-    <string name="clipboard_notifications_summary">Tampilkan pemberitahuan papan klip untuk menyalin bidang saat melihat entri</string>
-    <string name="clipboard_notifications_title">Pemberitahuan papan klip</string>
     <string name="clipboard_explanation_summary">Salin kolom entri menggunakan papan klip perangkat Anda</string>
     <string name="clipboard">Papan klip</string>
     <string name="database_opened">Basis data dibuka</string>
@@ -483,7 +481,6 @@
 \n\"Bisa dimodifikasi\" memungkinkan Anda untuk menambah, menghapus, atau menyunting semua elemen yang Anda inginkan.</string>
     <string name="show_otp_token_summary">Tampilkan token OTP dalam daftar entri</string>
     <string name="html_text_buy_pro">Dengan membeli versi pro, Anda akan mendapatkan akses ke &lt;strong&gt;gaya visual &lt;/strong&gt; ini dan Anda akan terutama membantu &lt;strong&gt;realisasi proyek komunitas.&lt;/strong&gt;</string>
-    <string name="clear_clipboard_notification_summary">Kunci basis data ketika durasi papan klip kedaluwarsa atau notifikasi ditutup setelah Anda mulai menggunakannya</string>
     <string name="allow_copy_password_warning">Peringatan: Papan klip dipakai oleh semua aplikasi. Jika data sensitif disalin, perangkat lunak lain mungkin dapat mendapatkannya.</string>
     <string name="education_lock_summary">Kunci basis data Anda dengan cepat, Anda bisa mengatur aplikasi untuk mengunci sendiri setelah beberapa saat dan ketika layar berubah mati.</string>
     <string name="education_sort_summary">Pilih bagaimana entri dan grup diurut.</string>
@@ -498,7 +495,6 @@
     <string name="enable">Aktifkan</string>
     <string name="disable">Nonaktfikan</string>
     <string name="notification">Notifikasi</string>
-    <string name="clear_clipboard_notification_title">Bersihkan saat menutup</string>
     <string name="database_name_title">Nama basis data</string>
     <string name="database_description_title">Deskripsi basis data</string>
     <string name="database_default_username_title">Nama pengguna baku</string>

@@ -190,8 +190,6 @@
     <string name="list_password_generator_options_title">Wachtwoordtekens</string>
     <string name="list_password_generator_options_summary">Toegestane wachtwoordtekens instellen</string>
     <string name="clipboard">Klembord</string>
-    <string name="clipboard_notifications_title">Klembordmeldingen</string>
-    <string name="clipboard_notifications_summary">Schakel klembordmeldingen in om velden te kopiëren bij het bekijken van een item</string>
     <string name="clipboard_warning">Als automatisch wissen van het klembord mislukt, doe dit dan handmatig.</string>
     <string name="lock">Vergrendelen</string>
     <string name="lock_database_screen_off_title">Schermvergrendeling</string>
@@ -303,8 +301,6 @@
     <string name="do_not_kill_app">App niet afsluiten…</string>
     <string name="lock_database_back_root_title">Druk \'Terug\' om te vergrendelen</string>
     <string name="lock_database_back_root_summary">Druk in het hoofdscherm van de database op \'Terug\' om de database te vergrendelen</string>
-    <string name="clear_clipboard_notification_title">Wissen bij afsluiten</string>
-    <string name="clear_clipboard_notification_summary">Vergrendel de database wanneer het klembord verlopen is of wanneer de melding wordt gesloten nadat u deze hebt gebruikt</string>
     <string name="recycle_bin">Prullenbak</string>
     <string name="keyboard_selection_entry_title">Itemselectie</string>
     <string name="keyboard_selection_entry_summary">Vul, bij het bekijken van een item in KeePassDX, Magikeyboard met dat item</string>

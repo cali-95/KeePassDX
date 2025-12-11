@@ -137,7 +137,6 @@
     <string name="database_default_username_title">Nom d\'usuari per defecte</string>
     <string name="database_description_title">Descripció de la base de dades</string>
     <string name="database_name_title">Nom de la base de dades</string>
-    <string name="clear_clipboard_notification_title">Neteja al tancar</string>
     <string name="disable">Desactiva</string>
     <string name="enable">Activa</string>
     <string name="settings_database_force_changing_master_key_summary">Força a canviar la clau mestra (dies)</string>
@@ -161,7 +160,6 @@
     <string name="lock_database_screen_off_summary">Bloqueja la base de dades després d\'uns segons de desactivar la pantalla</string>
     <string name="lock">Bloca</string>
     <string name="clipboard_warning">Si la supressió automàtica del porta-retalls falla, suprimiu-ne la història manualment.</string>
-    <string name="clipboard_notifications_title">Notificacions del porta-retalls</string>
     <string name="clipboard">Porta-retalls</string>
     <string name="database_opened">S\'ha obert la base de dades</string>
     <string name="list_password_generator_options_summary">Estableix els caràcters admesos pel generador de contrasenyes</string>
@@ -354,7 +352,6 @@
     <string name="content_description_nav_header">Títol de navegació</string>
     <string name="navigation_drawer_close">Tancar calaix de navegació</string>
     <string name="properties">Propietats</string>
-    <string name="clear_clipboard_notification_summary">Bloca la base de dades quan la duració del porta-retalls caduca o la notificació es tanca un cop s\'ha començat a utilitzar</string>
     <string name="html_about_privacy">&lt;strong&gt;No s\'agafa cap dada d\'usuari&lt;/strong&gt;, aquesta aplicació no connecta a cap servidor, només treballa localment i respecta la privacitat dels usuaris en la seva totalitat.</string>
     <string name="notification">Notificació</string>
     <string name="content_description_entry_foreground_color">Color de primer pla d\'entrada</string>
@@ -610,7 +607,6 @@
     <string name="device_unlock_prompt_not_initialized">No s\'ha pogut inicialitzar l\'indicador de desbloqueig del dispositiu.</string>
     <string name="credential_before_click_device_unlock_button">Escriviu la contrasenya i, a continuació, feu clic en aquest botó.</string>
     <string name="menu_appearance_settings_summary">Temes, colors, atributs</string>
-    <string name="clipboard_notifications_summary">Mostra les notificacions del porta-retalls per a copiar camps en visualitzar una entrada</string>
     <string name="content">Contingut</string>
     <string name="device_credential_unlock_enable_title">Desbloqueig de les credencials del dispositiu</string>
     <string name="unavailable_feature_text">No s\'ha pogut iniciar aquesta característica.</string>

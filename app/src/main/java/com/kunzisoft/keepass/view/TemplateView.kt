@@ -12,6 +12,7 @@ import com.kunzisoft.keepass.database.element.template.TemplateField
 import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.database.helper.isPasskeyLabel
 import com.kunzisoft.keepass.database.helper.isStandardPasswordName
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.model.OtpModel
 import com.kunzisoft.keepass.model.Passkey
 import com.kunzisoft.keepass.model.PasskeyEntryFields.PASSKEY_FIELD
@@ -25,17 +26,17 @@ class TemplateView @JvmOverloads constructor(context: Context,
     : TemplateAbstractView<TextFieldView, TextFieldView, DateTimeFieldView>
         (context, attrs, defStyle) {
 
-    private var mOnUnprotectClickListener: ((ProtectedFieldView) -> Unit)? = null
-    fun setOnUnprotectClickListener(listener: ((ProtectedFieldView) -> Unit)?) {
-        this.mOnUnprotectClickListener = listener
+    private var mOnChangeFieldProtectionClickListener: ((FieldProtection) -> Unit)? = null
+    fun setOnChangeFieldProtectionClickListener(listener: ((FieldProtection) -> Unit)?) {
+        this.mOnChangeFieldProtectionClickListener = listener
     }
 
     private var mOnAskCopySafeClickListener: (() -> Unit)? = null
     fun setOnAskCopySafeClickListener(listener: (() -> Unit)? = null) {
         this.mOnAskCopySafeClickListener = listener
     }
-    private var mOnCopyActionClickListener: ((Field, ProtectedFieldView) -> Unit)? = null
-    fun setOnCopyActionClickListener(listener: ((Field, ProtectedFieldView) -> Unit)? = null) {
+    private var mOnCopyActionClickListener: ((FieldProtection) -> Unit)? = null
+    fun setOnCopyActionClickListener(listener: ((FieldProtection) -> Unit)? = null) {
         this.mOnCopyActionClickListener = listener
     }
 
@@ -67,7 +68,9 @@ class TemplateView @JvmOverloads constructor(context: Context,
                     protection = field.protectedValue.isProtected,
                     isCurrentlyProtected = mUnprotectedFields.contains(field).not()
                 ) {
-                    mOnUnprotectClickListener?.invoke(this)
+                    mOnChangeFieldProtectionClickListener?.invoke(
+                        FieldProtection(field, isCurrentlyProtected())
+                    )
                 }
                 // Trick to bypass the onSaveInstanceState in rebuild child
                 onSaveInstanceState = {
@@ -91,16 +94,18 @@ class TemplateView @JvmOverloads constructor(context: Context,
                         if (mAllowCopyProtectedFields) {
                             setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                             setCopyButtonClickListener { label, value ->
-                                mOnCopyActionClickListener
-                                    ?.invoke(
-                                        Field(
+                                mOnCopyActionClickListener?.invoke(
+                                    FieldProtection(
+                                        field = Field(
                                             name = label,
                                             value = ProtectedString(
                                                 enableProtection = true,
                                                 string = value
                                             )
-                                        ), this
+                                        ),
+                                        isCurrentlyProtected = isCurrentlyProtected()
                                     )
+                                )
                             }
                         } else {
                             setCopyButtonState(TextFieldView.ButtonState.GONE)
@@ -110,18 +115,21 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 } else {
                     setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                     setCopyButtonClickListener { label, value ->
-                        mOnCopyActionClickListener
-                            ?.invoke(
-                                Field(
+                        mOnCopyActionClickListener?.invoke(
+                            FieldProtection(
+                                field = Field(
                                     name = label,
                                     value = ProtectedString(
                                         enableProtection = false,
                                         string = value
                                     )
-                                ), this
+                                ),
+                                isCurrentlyProtected = isCurrentlyProtected()
                             )
+                        )
                     }
                 }
+                mFields[field] = this
             }
         }
     }
@@ -208,13 +216,16 @@ class TemplateView @JvmOverloads constructor(context: Context,
                 setCopyButtonState(TextFieldView.ButtonState.ACTIVATE)
                 setCopyButtonClickListener { _, _ ->
                     mOnCopyActionClickListener?.invoke(
-                        Field(
-                            name = otpElement.type.name,
-                            value = ProtectedString(
-                                enableProtection = false,
-                                string = otpElement.token
-                            )
-                        ), this
+                        FieldProtection(
+                            field = Field(
+                                name = otpElement.type.name,
+                                value = ProtectedString(
+                                    enableProtection = false,
+                                    string = otpElement.token
+                                )
+                            ),
+                            isCurrentlyProtected = false
+                        )
                     )
                 }
                 textDirection = TEXT_DIRECTION_LTR

@@ -196,10 +196,6 @@ class MainCredentialView @JvmOverloads constructor(context: Context,
         }
     }
 
-    fun changeConditionToStoreCredential(credentialStorage: CredentialStorage) {
-        this.mCredentialStorage = credentialStorage
-    }
-
     fun conditionToStoreCredential(): Boolean {
         // TODO HARDWARE_KEY
         return when (mCredentialStorage) {
@@ -230,6 +226,10 @@ class MainCredentialView @JvmOverloads constructor(context: Context,
 
     fun requestPasswordFocus() {
         passwordTextView.requestFocusFromTouch()
+        onConditionToStoreCredentialChanged?.invoke(
+            mCredentialStorage,
+            conditionToStoreCredential()
+        )
     }
 
     // Auto select the password field and open keyboard

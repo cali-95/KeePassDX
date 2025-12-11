@@ -26,6 +26,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
@@ -41,6 +44,7 @@ import com.kunzisoft.keepass.database.element.template.Template
 import com.kunzisoft.keepass.model.AttachmentState
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.model.EntryInfo
+import com.kunzisoft.keepass.model.FieldProtection
 import com.kunzisoft.keepass.model.StreamDirection
 import com.kunzisoft.keepass.utils.getParcelableList
 import com.kunzisoft.keepass.utils.putParcelableList
@@ -51,6 +55,7 @@ import com.kunzisoft.keepass.view.expand
 import com.kunzisoft.keepass.view.showByFading
 import com.kunzisoft.keepass.viewmodels.EntryEditViewModel
 import com.tokenautocomplete.FilteredArrayAdapter
+import kotlinx.coroutines.launch
 
 
 class EntryEditFragment: DatabaseFragment() {
@@ -116,8 +121,8 @@ class EntryEditFragment: DatabaseFragment() {
             setOnForegroundColorClickListener {
                 mEntryEditViewModel.requestForegroundColorSelection(templateView.getForegroundColor())
             }
-            setOnUnprotectClickListener { _, textEditFieldView ->
-                mEntryEditViewModel.requestUnprotectField(textEditFieldView)
+            setOnChangeFieldProtectionClickListener { fieldProtection ->
+                mEntryEditViewModel.requestChangeFieldProtection(fieldProtection)
             }
             setOnCustomEditionActionClickListener { field ->
                 mEntryEditViewModel.requestCustomFieldEdition(field)
@@ -274,6 +279,22 @@ class EntryEditFragment: DatabaseFragment() {
                 else -> {}
             }
         }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mEntryEditViewModel.entryEditState.collect { entryEditState ->
+                    when (entryEditState) {
+                        is EntryEditViewModel.EntryEditState.Loading -> {}
+                        is EntryEditViewModel.EntryEditState.ShowOverwriteMessage -> {}
+                        is EntryEditViewModel.EntryEditState.OnChangeFieldProtectionRequested -> {}
+                        is EntryEditViewModel.EntryEditState.OnFieldProtectionUpdated -> {
+                            updateFieldProtection(entryEditState.fieldProtection)
+                            mEntryEditViewModel.actionPerformed()
+                        }
+                    }
+                }
+            }
+        }
     }
 
     override fun onDatabaseRetrieved(database: ContextualDatabase) {
@@ -322,6 +343,10 @@ class EntryEditFragment: DatabaseFragment() {
         entryInfo.tags = tagsCompletionView.getTags()
         entryInfo.attachments = getAttachments().toMutableList()
         return entryInfo
+    }
+
+    private fun updateFieldProtection(fieldProtection: FieldProtection) {
+        templateView.setFieldProtection(fieldProtection)
     }
 
     /* -------------

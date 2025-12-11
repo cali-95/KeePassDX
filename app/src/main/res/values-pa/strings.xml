@@ -19,7 +19,6 @@
     <string name="keyboard_appearance_category">ਦਿੱਖ</string>
     <string name="keyboard_notification_entry_title">ਨੋਟੀਫਿਕੇਸ਼ਨ ਜਾਣਕਾਰੀ</string>
     <string name="compression_none">ਕੋਈ ਨਹੀਂ</string>
-    <string name="clear_clipboard_notification_title">ਬੰਦ ਕਰਨ ਉੱਤੇ ਸਾਫ਼ ਕਰੋ</string>
     <string name="disable">ਅਸਮਰੱਥ</string>
     <string name="enable">ਸਮਰੱਥ</string>
     <string name="assign_master_key">ਮਾਸਟਰ ਕੁੰਜੀ ਦਿਓ</string>
@@ -262,7 +261,6 @@
     <string name="lock_database_show_button_title">ਲਾਕ ਬਟਨ ਵੇਖੋ</string>
     <string name="lock_database_back_root_title">ਲਾਕ ਕਰਨ ਲਈ \'ਪਿੱਛੇ\' ਨੂੰ ਦਬਾਓ</string>
     <string name="lock_database_screen_off_summary">ਜਦੋਂ ਸਕਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਡਾਟਾਬੇਸ ਨੂੰ ਲਾਕ ਕਰੋ</string>
-    <string name="clipboard_notifications_title">ਕਲਿੱਪਬੋਰਡ ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
     <string name="set_credential_provider_service_title">ਮੂਲ ਆਪੇ-ਭਰਨ ਸੇਵਾ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="configure_biometric">ਕੋਈ ਬਾਇਓਮੈਟਰਿਕ ਜਾਂ ਡਿਵਾਈਸ ਸਨਦ ਦਾਖਲ ਨਹੀਂ ਕੀਤੀ ਹੈ।</string>
     <string name="warning_sure_remove_data">ਇਹ ਡਾਟਾ ਕਿਵੇਂ ਵੀ ਹਟਾਉਣਾ ਹੈ\?</string>

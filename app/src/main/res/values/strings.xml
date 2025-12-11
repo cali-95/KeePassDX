@@ -400,9 +400,9 @@
     <string name="keystore_not_accessible">The keystore is not properly initialized.</string>
     <string name="unlock_and_link_biometric">Device unlock link</string>
     <string name="device_unlock_prompt_store_credential_title">Link to device unlocking</string>
-    <string name="device_unlock_prompt_store_credential_message">You still need to remember your vault main credential if you use device unlock recognition.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Device unlock recognition</string>
-    <string name="device_unlock_prompt_extract_credential_message">Extract database credential with device unlock data</string>
+    <string name="device_unlock_prompt_store_credential_message">WARNING: You still need to remember your vault main credential</string>
+    <string name="device_unlock_prompt_extract_credential_title">Device unlocking</string>
+    <string name="device_unlock_prompt_extract_credential_message">Open database with device credential</string>
     <string name="encrypted_value_stored">Encrypted password stored</string>
     <string name="device_unlock_invalid_key">Cannot read the device unlock key. Please delete it and repeat the unlock recognition procedure.</string>
     <string name="device_unlock_not_recognized">Could not recognize device unlock print</string>
@@ -444,7 +444,7 @@
     <string name="autofill_explanation_summary">Configure autofilling to quickly fill out forms in other apps</string>
     <string name="autofill_select_entry">Select entry…</string>
     <string name="autofill_preference_title">Autofill settings</string>
-    <string name="user_verification_device_credential_title">Device credential</string>
+    <string name="user_verification_device_credential_title">User Verification credential</string>
     <string name="user_verification_device_credential_summary">Use the device credential as user verification if available</string>
     <string name="user_verification_preferred_title">Preferred User Verification</string>
     <string name="user_verification_preferred_summary">Perform a user verification when the relying party requests \"preferred\"</string>
@@ -455,8 +455,6 @@
     <string name="database_opened">Database opened</string>
     <string name="clipboard">Clipboard</string>
     <string name="clipboard_explanation_summary">Copy entry fields using the clipboard of your device</string>
-    <string name="clipboard_notifications_title">Clipboard notifications</string>
-    <string name="clipboard_notifications_summary">Show clipboard notifications to copy fields when viewing an entry</string>
     <string name="clipboard_warning">If automatic deletion of clipboard fails, delete its history manually.</string>
     <string name="lock">Lock</string>
     <string name="lock_database_screen_off_title">Screen lock</string>
@@ -520,8 +518,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="notification">Notification</string>
-    <string name="clear_clipboard_notification_title">Clear at closing</string>
-    <string name="clear_clipboard_notification_summary">Lock the database when the clipboard duration expires or the notification is closed after you start using it</string>
     <string name="database_name_title">Database name</string>
     <string name="database_description_title">Database description</string>
     <string name="database_default_username_title">Default username</string>

@@ -223,8 +223,6 @@
     <string name="lock_database_screen_off_summary">Lukitse tietokanta muutama sekunti näytön sammusen jälkeen</string>
     <string name="lock_database_screen_off_title">Näytön lukitus</string>
     <string name="lock">Lukko</string>
-    <string name="clipboard_notifications_summary">Ota käyttöön leikepöytäilmoitukset kopioidaksesi kenttiä, kun katsot tietuetta</string>
-    <string name="clipboard_notifications_title">Leikepöytäilmoitukset</string>
     <string name="list_password_generator_options_summary">Aseta sallitut salasanageneraattorin merkit</string>
     <string name="list_password_generator_options_title">Salasanamerkit</string>
     <string name="password_size_summary">Asettaa oletuspituuden generoiduille salasanoille</string>

@@ -60,7 +60,6 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.requestShowUnprotectField
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -70,7 +69,6 @@ import com.kunzisoft.keepass.education.EntryActivityEducation
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.otp.OtpType
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_DELETE_ENTRY_HISTORY
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_RESTORE_ENTRY_HISTORY
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -258,8 +256,6 @@ class EntryActivity : DatabaseLockActivity() {
                 val entryInfo = entryInfoHistory.entryInfo
                 // Manage entry copy to start notification if allowed (at the first start)
                 if (savedInstanceState == null) {
-                    // Manage entry to launch copying notification if allowed
-                    ClipboardEntryNotificationService.checkAndLaunchNotification(this, entryInfo)
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
                         MagikeyboardService.addEntry(this, entryInfo)
@@ -330,16 +326,28 @@ class EntryActivity : DatabaseLockActivity() {
                 mEntryViewModel.entryState.collect { entryState ->
                     when (entryState) {
                         is EntryViewModel.EntryState.Loading -> {}
-                        is EntryViewModel.EntryState.RequestUnprotectField -> {
+                        is EntryViewModel.EntryState.OnChangeFieldProtectionRequested -> {
                             mDatabase?.let { database ->
-                                requestShowUnprotectField(
-                                    userVerificationViewModel = mUserVerificationViewModel,
-                                    database = database,
-                                    protectedFieldView = entryState.protectedFieldView
-                                )
+                                val fieldProtection = entryState.fieldProtection
+                                if (fieldProtection.isCurrentlyProtected) {
+                                    checkUserVerification(
+                                        userVerificationViewModel = mUserVerificationViewModel,
+                                        dataToVerify = UserVerificationData(
+                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                            database = database,
+                                            fieldProtection = fieldProtection
+                                        )
+                                    )
+                                    mEntryViewModel.actionPerformed()
+                                } else {
+                                    mEntryViewModel.updateProtectionField(
+                                        fieldProtection = fieldProtection,
+                                        value = true
+                                    )
+                                }
                             }
-                            mEntryViewModel.actionPerformed()
                         }
+                        is EntryViewModel.EntryState.OnFieldProtectionUpdated -> {}
                         is EntryViewModel.EntryState.RequestCopyProtectedField -> {
                             mDatabase?.let { database ->
                                 checkUserVerification(
@@ -347,7 +355,7 @@ class EntryActivity : DatabaseLockActivity() {
                                     dataToVerify = UserVerificationData(
                                         actionType = UserVerificationActionType.COPY_PROTECTED_FIELD,
                                         database = database,
-                                        field = entryState.field,
+                                        fieldProtection = entryState.fieldProtection,
                                     )
                                 )
                             }
@@ -371,11 +379,16 @@ class EntryActivity : DatabaseLockActivity() {
                             when (data.actionType) {
                                 UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
                                     // Unprotect field by its view
-                                    data.protectedFieldView?.unprotect()
+                                    data.fieldProtection?.let { field ->
+                                        mEntryViewModel.updateProtectionField(
+                                            fieldProtection = field,
+                                            value = false
+                                        )
+                                    }
                                 }
                                 UserVerificationActionType.COPY_PROTECTED_FIELD -> {
                                     // Copy field value
-                                    data.field?.let {
+                                    data.fieldProtection?.field?.let {
                                         mEntryViewModel.copyToClipboard(it)
                                     }
                                 }
