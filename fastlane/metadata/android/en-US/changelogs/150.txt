@@ -1,6 +1,6 @@
  * Manual change of app language #1884 #1990
  * Add Passkey User Verification #2283
- * Share URL/Entry from Autofill to Magikeyboard #920 #2024
+ * Share URL/Entry from Autofill to Magikeyboard #920 #995 #2024
  * Improve Magikeyboard switch #311 #643
  * Remove Clipboard notifications #2301
  * Fix autofill username detection #2276

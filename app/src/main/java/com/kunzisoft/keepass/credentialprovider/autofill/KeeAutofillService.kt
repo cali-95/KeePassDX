@@ -71,6 +71,8 @@ class KeeAutofillService : AutofillService() {
     private var webDomainBlocklist: Set<String>? = null
     private var askToSaveData: Boolean = false
     private var autofillInlineSuggestionsEnabled: Boolean = false
+    private var autofillSharedToMagikeyboard: Boolean = false
+    private var switchToMagikeyboard: Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -95,6 +97,8 @@ class KeeAutofillService : AutofillService() {
         webDomainBlocklist = PreferencesUtil.webDomainBlocklist(this)
         askToSaveData = PreferencesUtil.askToSaveAutofillData(this)
         autofillInlineSuggestionsEnabled = PreferencesUtil.isAutofillInlineSuggestionsEnable(this)
+        autofillSharedToMagikeyboard = PreferencesUtil.isAutofillSharedToMagikeyboardEnable(this)
+        switchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(this)
     }
 
     override fun onFillRequest(
@@ -149,12 +153,15 @@ class KeeAutofillService : AutofillService() {
                         database = mDatabase,
                         searchInfo = searchInfo,
                         onItemsFound = { openedDatabase, items ->
-                            /* TODO Share context #1465
-                            MagikeyboardService.addEntries(
-                                context = this,
-                                entryList = items,
-                                toast = true
-                            )*/
+                            // Add Autofill entries to Magic Keyboard #2024 #995
+                            if (autofillSharedToMagikeyboard) {
+                                MagikeyboardService.addEntries(
+                                    context = this,
+                                    entryList = items,
+                                    toast = true,
+                                    autoSwitchKeyboard = switchToMagikeyboard
+                                )
+                            }
                             callback.onSuccess(
                                 AutofillHelper.buildResponse(
                                     context = this,

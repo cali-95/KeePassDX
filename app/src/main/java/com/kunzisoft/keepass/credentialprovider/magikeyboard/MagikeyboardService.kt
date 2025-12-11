@@ -514,25 +514,29 @@ class MagikeyboardService : InputMethodService(),
         ) {
             // Add a new entry if keyboard activated
             if (context.isMagikeyboardActivated()) {
+                // TODO add support for multiple entries #2305
                 val entry = entryList[0]
-                this.entryUUID.value = entry.id
-                // Launch notification if allowed
-                KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
-                // Auto switch to the Magikeyboard
-                val magikeyboardIntent = buildSwitchMagikeyboardIntent(context)
-                if (autoSwitchKeyboard
-                    && magikeyboardIntent.resolveActivity(context.packageManager) != null) {
-                    context.startActivity(magikeyboardIntent)
-                } else if (toast) {
-                    // Show the message
-                    Toast.makeText(
-                        context,
-                        context.getString(
-                            R.string.keyboard_notification_entry_content_title,
-                            entry.getVisualTitle()
-                        ),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                if (this.entryUUID.value != entry.id) {
+                    this.entryUUID.value = entry.id
+                    // Launch notification if allowed
+                    KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
+                    // Auto switch to the Magikeyboard
+                    if (autoSwitchKeyboard
+                        && isAutoSwitchMagikeyboardAllowed(context)
+                        && currentDefaultKeyboard(context) != getMagikeyboardId(context)
+                    ) {
+                        context.startActivity(getSwitchMagikeyboardIntent(context))
+                    } else if (toast) {
+                        // Show the message
+                        Toast.makeText(
+                            context,
+                            context.getString(
+                                R.string.keyboard_notification_entry_content_title,
+                                entry.getVisualTitle()
+                            ),
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
             } else {
                 removeEntryInfo()
@@ -543,11 +547,23 @@ class MagikeyboardService : InputMethodService(),
             return "${context.packageName}/${MagikeyboardService::class.java.canonicalName}"
         }
 
-        fun buildSwitchMagikeyboardIntent(context: Context): Intent {
+        fun getSwitchMagikeyboardIntent(context: Context): Intent {
             return Intent(SWITCH_KEYBOARD_ACTION).apply {
                 addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 putExtra(KEYBOARD_ID, getMagikeyboardId(context))
             }
+        }
+
+        fun isAutoSwitchMagikeyboardAllowed(context: Context): Boolean {
+            return getSwitchMagikeyboardIntent(context)
+                .resolveActivity(context.packageManager) != null
+        }
+
+        fun currentDefaultKeyboard(context: Context): String {
+            return Settings.Secure.getString(
+                context.contentResolver,
+                Settings.Secure.DEFAULT_INPUT_METHOD
+            )
         }
 
         fun performSelection(

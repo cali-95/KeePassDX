@@ -27,8 +27,9 @@ import android.util.Log
 import androidx.preference.PreferenceManager
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
-import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.buildSwitchMagikeyboardIntent
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.getSwitchMagikeyboardIntent
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.isMagikeyboardActivated
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService.Companion.isAutoSwitchMagikeyboardAllowed
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.timeout.TimeoutHelper
@@ -107,10 +108,9 @@ class KeyboardEntryNotificationService : LockNotificationService() {
             }
         )
 
-        val switchKeyboardIntent = buildSwitchMagikeyboardIntent(this)
         val pendingIntent: PendingIntent? =
-            if (switchKeyboardIntent.resolveActivity(packageManager) != null) {
-                buildPendingIntent(switchKeyboardIntent)
+            if (isAutoSwitchMagikeyboardAllowed(this)) {
+                buildPendingIntent(getSwitchMagikeyboardIntent(this))
             } else null
         val builder = buildNewNotification()
                 .setSmallIcon(R.drawable.notification_ic_keyboard_key_24dp)
