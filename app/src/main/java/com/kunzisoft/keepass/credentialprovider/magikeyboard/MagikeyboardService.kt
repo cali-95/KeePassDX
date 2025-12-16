@@ -61,6 +61,7 @@ import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.otp.OtpEntryFields.OTP_TOKEN_FIELD
 import com.kunzisoft.keepass.services.KeyboardEntryNotificationService
 import com.kunzisoft.keepass.settings.PreferencesUtil
+import com.kunzisoft.keepass.utils.AppUtil.isWebBrowserPackage
 import com.kunzisoft.keepass.utils.KeyboardUtil.showKeyboardPicker
 import com.kunzisoft.keepass.utils.KeyboardUtil.switchToPreviousKeyboard
 import com.kunzisoft.keepass.utils.LOCK_ACTION
@@ -243,12 +244,15 @@ class MagikeyboardService : InputMethodService(),
     }
 
     private fun assignKeyboardView() {
-        val searchString = mSearchInfo?.toString()
-        if (searchString != null && searchString.isNotEmpty()) {
-            if (mSearchInfo?.isDomainSearch == true) {
+        val searchInfo: SearchInfo? = mSearchInfo
+        val searchString = searchInfo?.toString()
+        if (searchInfo != null
+            && searchString.isNullOrEmpty().not()
+            ) {
+            if (searchInfo.isDomainSearch) {
                 appIdIcon?.visibility = View.GONE
                 webDomainIcon?.visibility = View.VISIBLE
-            } else if (mSearchInfo?.isAppIdSearch == true) {
+            } else if (searchInfo.isAppIdSearch) {
                 appIdIcon?.visibility = View.VISIBLE
                 webDomainIcon?.visibility = View.GONE
             } else {
@@ -350,7 +354,12 @@ class MagikeyboardService : InputMethodService(),
                 showKeyboardPicker()
             }
             KEY_ENTRY -> {
-                actionKeyEntry(mSearchInfo ?: SearchInfo())
+                // Filter browser to prevent unwanted auto save
+                var searchInfo: SearchInfo = mSearchInfo ?: SearchInfo()
+                if (isWebBrowserPackage(searchInfo.applicationId)) {
+                    searchInfo = SearchInfo()
+                }
+                actionKeyEntry(searchInfo)
             }
             KEY_ENTRY_ALT -> {
                 actionKeyEntry(SearchInfo())
