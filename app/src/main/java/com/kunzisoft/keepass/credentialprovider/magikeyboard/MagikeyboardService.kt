@@ -290,6 +290,12 @@ class MagikeyboardService : InputMethodService(),
         assignKeyboardView()
     }
 
+    override fun onUnbindInput() {
+        super.onUnbindInput()
+        searchInfo.value = null
+        mSearchInfo = null
+    }
+
     override fun onEvaluateFullscreenMode(): Boolean {
         return resources.getBoolean(R.bool.magikeyboard_allow_fullscreen_mode)
                 && super.onEvaluateFullscreenMode()
