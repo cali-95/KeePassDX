@@ -333,7 +333,6 @@
     <string name="keyboard_notification_entry_clear_close_title">נקה בסגירה</string>
     <string name="keyboard_notification_entry_content_title_text">רשומה</string>
     <string name="keyboard_notification_entry_content_title">%1$s זמין ב־Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_summary">סגור את מסד הנתונים כאשר נסגרת ההתראה</string>
     <string name="keyboard_key_sound_title">לחיצות מקשים קוליות</string>
     <string name="reset_education_screens_title">אפס רמזים לימודיים</string>

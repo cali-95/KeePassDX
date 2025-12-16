@@ -503,7 +503,6 @@
     <string name="keyboard_entry_timeout_summary">Тайм-аўт для ачысткі запісу клавіятуры</string>
     <string name="keyboard_notification_entry_content_title_text">Запіс</string>
     <string name="keyboard_notification_entry_content_title">%1$s даступны на магічнай клавіятуры</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Знешні выгляд</string>
     <string name="keyboard_theme_title">Тэма клавіятуры</string>
     <string name="keyboard_keys_category">Клавішы</string>

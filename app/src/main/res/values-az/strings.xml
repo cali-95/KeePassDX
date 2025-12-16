@@ -241,7 +241,6 @@
     <string name="settings_database_force_changing_master_key_summary">Ana açarın dəyişdirilməsini tələb et (gün)</string>
     <string name="settings_database_force_changing_master_key_next_time_summary">Bir sonrakı səfərə ana açarın dəyişdirilməsini tələb et (tək səfərlik)</string>
     <string name="keyboard_notification_entry_summary">Şifrə mövcud olanda bildirişi göstər</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Görünüş</string>
     <string name="keyboard_theme_title">Klaviatura teması</string>
     <string name="keyboard_change">Klaviaturanı dəyişdir</string>

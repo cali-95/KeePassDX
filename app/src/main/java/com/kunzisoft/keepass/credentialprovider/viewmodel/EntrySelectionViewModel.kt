@@ -13,7 +13,6 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveNod
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
-import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.exception.RegisterInReadOnlyDatabaseException
 import com.kunzisoft.keepass.database.helper.SearchHelper
@@ -145,20 +144,16 @@ class EntrySelectionViewModel(application: Application): CredentialLauncherViewM
                         )
                     }
                 } else if (searchShareForMagikeyboard) {
-                    // TODO Manage multiple entries in Magikeyboard #2305
-                    MagikeyboardService.performSelection(
-                        items = items,
-                        actionPopulateKeyboard = { entryInfo ->
-                            populateKeyboard(entryInfo)
-                        },
-                        actionEntrySelection = { _ ->
-                            mCredentialUiState.value = CredentialState.LaunchGroupActivityForSelection(
+                    if (searchInfo.manualSelection) {
+                        mCredentialUiState.value =
+                            CredentialState.LaunchGroupActivityForSelection(
                                 database = openedDatabase,
                                 searchInfo = searchInfo,
                                 typeMode = TypeMode.MAGIKEYBOARD
                             )
-                        }
-                    )
+                    } else {
+                        populateKeyboard(items)
+                    }
                 } else {
                     mUiState.value = UIState.LaunchGroupActivityForSearch(
                         database = openedDatabase,
@@ -215,9 +210,9 @@ class EntrySelectionViewModel(application: Application): CredentialLauncherViewM
         )
     }
 
-    private fun populateKeyboard(entryInfo: EntryInfo) {
+    private fun populateKeyboard(entryInfoList: List<EntryInfo>) {
         // Automatically populate keyboard
-        mUiState.value = UIState.PopulateKeyboard(entryInfo)
+        mUiState.value = UIState.PopulateKeyboard(entryInfoList)
         setResult(Intent(), lockDatabase = mLockDatabaseAfterSelection)
     }
 
@@ -240,9 +235,7 @@ class EntrySelectionViewModel(application: Application): CredentialLauncherViewM
                         val entries = intent.retrieveAndRemoveEntries(database)
                         withContext(Dispatchers.Main) {
                             // Populate Magikeyboard with entry
-                            entries.firstOrNull()?.let { entryInfo ->
-                                populateKeyboard(entryInfo)
-                            } // TODO Manage multiple entries in Magikeyboard
+                            populateKeyboard(entries)
                         }
                     }
                 }
@@ -281,7 +274,7 @@ class EntrySelectionViewModel(application: Application): CredentialLauncherViewM
     sealed class UIState {
         object Loading: UIState()
         data class PopulateKeyboard(
-            val entryInfo: EntryInfo
+            val entryInfoList: List<EntryInfo>
         ): UIState()
         data class LaunchFileDatabaseSelectForSearch(
             val searchInfo: SearchInfo

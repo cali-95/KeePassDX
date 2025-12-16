@@ -227,7 +227,6 @@
     <string name="keyboard_notification_entry_summary">Értesítés megjelenítése, ha egy bejegyzés elérhető</string>
     <string name="keyboard_notification_entry_content_title_text">Bejegyzés</string>
     <string name="keyboard_notification_entry_content_title">%1$s elérhető a Mágikus billentyűzeten</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Törlés bezáráskor</string>
     <string name="keyboard_notification_entry_clear_close_summary">Az adatbázis bezárása az értesítés bezárásakor</string>
     <string name="keyboard_appearance_category">Megjelenés</string>

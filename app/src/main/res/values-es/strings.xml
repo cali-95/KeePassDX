@@ -276,7 +276,6 @@
     <string name="keyboard_notification_entry_summary">Muestra una notificación cuando esté disponible un apunte</string>
     <string name="keyboard_notification_entry_content_title_text">Apunte</string>
     <string name="keyboard_notification_entry_content_title">%1$s disponible en Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Vaciar al cerrar</string>
     <string name="keyboard_notification_entry_clear_close_summary">Cierra la base de datos al cerrar la notificación</string>
     <string name="keyboard_appearance_category">Apariencia</string>

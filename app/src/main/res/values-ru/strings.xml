@@ -285,7 +285,6 @@
     <string name="keyboard_notification_entry_summary">Показывать уведомление, когда запись доступна</string>
     <string name="keyboard_notification_entry_content_title_text">Запись</string>
     <string name="keyboard_notification_entry_content_title">%1$s доступно в Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Очищать при закрытии</string>
     <string name="keyboard_notification_entry_clear_close_summary">Закрывать базу при закрытии уведомления</string>
     <string name="keyboard_appearance_category">Внешний вид</string>

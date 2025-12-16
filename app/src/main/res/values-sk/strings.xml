@@ -303,7 +303,6 @@
     <string name="education_device_unlock_title">Odomykanie databázy zariadenia</string>
     <string name="html_text_feature_generosity">Tento &lt;strong&gt;vizuálny štýl&lt;/strong&gt; je dostupný vďaka vašej štedrosti.</string>
     <string name="keyboard_notification_entry_content_title">%1$s dostupných v Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_theme_title">Vzhľad klávesnice</string>
     <string name="keyboard_previous_database_credentials_title">Obrazovka overovacích údajov databázy</string>
     <string name="keyboard_previous_fill_in_summary">Automaticky prepnúť späť na predchádzajúcu klávesnicu po vykonaní \"Akcia automatického klávesu\"</string>

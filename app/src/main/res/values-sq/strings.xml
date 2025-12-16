@@ -294,7 +294,6 @@
     <string name="keyboard_selection_entry_title">Përzgjedhje zërash</string>
     <string name="keyboard_notification_entry_summary">Shfaq një njoftim, kur ka një zë</string>
     <string name="keyboard_entry_timeout_title">Mbarim kohe</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Dukje</string>
     <string name="keyboard_keys_category">Kyçe</string>
     <string name="keyboard_key_sound_title">Shtypje të dëgjueshme tastesh</string>

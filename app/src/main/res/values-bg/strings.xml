@@ -348,7 +348,6 @@
     <string name="keyboard_setting_label">Настройки на Magikeyboard</string>
     <string name="keyboard_selection_entry_title">Избор на записи</string>
     <string name="allow_no_password_title">Разрешаване без главна парола</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title">Записът %1$s е достъпен в Magikeyboard</string>
     <string name="keyboard_notification_entry_content_title_text">Запис</string>
     <string name="enter">Enter</string>

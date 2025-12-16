@@ -275,7 +275,6 @@
     <string name="keyboard_notification_entry_summary">Vis en merknad når en oppføring er tilgjengelig</string>
     <string name="keyboard_notification_entry_content_title_text">Oppføring</string>
     <string name="keyboard_notification_entry_content_title">%1$s tilgjengelig på Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Tøm ved lukking</string>
     <string name="keyboard_notification_entry_clear_close_summary">Lukk databasen når du lukker varselet</string>
     <string name="keyboard_appearance_category">Utseende</string>

@@ -294,7 +294,6 @@
     <string name="keyboard_notification_entry_summary">Visa en avisering när en post är tillgänglig</string>
     <string name="keyboard_notification_entry_content_title_text">Post</string>
     <string name="keyboard_notification_entry_content_title">%1$s finns tillgänglig på Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Rensa vid stängning</string>
     <string name="keyboard_notification_entry_clear_close_summary">Stäng databasen när aviseringen stängs</string>
     <string name="keyboard_appearance_category">Utseende</string>

@@ -320,7 +320,6 @@
     <string name="keyboard_keys_category">Кнопки</string>
     <string name="keyboard_theme_title">Тема клавіатури</string>
     <string name="keyboard_appearance_category">Зовнішній вигляд</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title">%1$s доступне на Magikeyboard</string>
     <string name="keyboard_notification_entry_content_title_text">Запис</string>
     <string name="keyboard_entry_timeout_summary">Час очікування до очищення клавіатури від запису</string>

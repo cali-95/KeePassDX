@@ -292,7 +292,6 @@
     <string name="keyboard_notification_entry_clear_close_summary">Zatvori bazu podataka nakon zatvaranja obavijesti</string>
     <string name="keyboard_notification_entry_content_title_text">Unos</string>
     <string name="keyboard_notification_entry_content_title">%1$s je na Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Izgled</string>
     <string name="keyboard_theme_title">Tema tipkovnice</string>
     <string name="keyboard_keys_category">Tipke</string>

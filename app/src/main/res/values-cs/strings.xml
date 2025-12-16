@@ -283,7 +283,6 @@
     <string name="keyboard_notification_entry_summary">Zobrazit oznámení, když je záznam dostupný</string>
     <string name="keyboard_notification_entry_content_title_text">Záznam</string>
     <string name="keyboard_notification_entry_content_title">%1$s dostupné v Magikeyboardu</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Vymazat při zavření</string>
     <string name="keyboard_notification_entry_clear_close_summary">Zavřít databázi při zavření oznámení</string>
     <string name="keyboard_appearance_category">Vzhled</string>

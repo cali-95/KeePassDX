@@ -289,7 +289,6 @@
     <string name="keyboard_notification_entry_summary">Toon een melding wanneer een item beschikbaar is</string>
     <string name="keyboard_notification_entry_content_title_text">Item</string>
     <string name="keyboard_notification_entry_content_title">%1$s beschikbaar op Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Wissen bij het sluiten</string>
     <string name="keyboard_notification_entry_clear_close_summary">Sluit de database tegelijk met de melding</string>
     <string name="keyboard_appearance_category">Uiterlijk</string>

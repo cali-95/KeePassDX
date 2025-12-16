@@ -48,8 +48,8 @@ import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.kunzisoft.keepass.R
-import com.kunzisoft.keepass.adapters.FieldsAdapter
-import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper
+import com.kunzisoft.keepass.adapters.KeyboardEntriesAdapter
+import com.kunzisoft.keepass.adapters.KeyboardFieldsAdapter
 import com.kunzisoft.keepass.credentialprovider.activity.EntrySelectionLauncherActivity
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.DatabaseTaskProvider
@@ -79,19 +79,18 @@ class MagikeyboardService : InputMethodService(),
 
     private var keyboardView: KeyboardView? = null
     private var entryContainer: View? = null
-    private var entryText: TextView? = null
     private var databaseText: TextView? = null
     private var databaseColorView: ImageView? = null
     private var packageText: TextView? = null
     private var keyboard: Keyboard? = null
     private var keyboardEntry: Keyboard? = null
+    private var entryListView: RecyclerView? = null
     private var popupCustomKeys: PopupWindow? = null
-    private var fieldsAdapter: FieldsAdapter? = null
+    private var entriesAdapter: KeyboardEntriesAdapter? = null
+    private var fieldsAdapter: KeyboardFieldsAdapter? = null
     private var playSoundDuringCLick: Boolean = false
 
     private var lockReceiver: LockReceiver? = null
-
-    private var mEntryId: UUID? = null
     private var mSearchInfo: SearchInfo? = null
 
     private val lifecycleDispatcher = ServiceLifecycleDispatcher(this)
@@ -118,16 +117,43 @@ class MagikeyboardService : InputMethodService(),
             switchToPreviousKeyboard()
         }
 
-        fieldsAdapter = FieldsAdapter(this)
-        fieldsAdapter?.onItemClickListener = object : FieldsAdapter.OnItemClickListener {
+        entriesAdapter = KeyboardEntriesAdapter(this)
+        entriesAdapter?.entrySelectionListener = object  : KeyboardEntriesAdapter.EntrySelectionListener {
+            override fun onEntrySelected(item: KeyboardEntriesAdapter.KeyboardEntry) {
+                KeyboardEntryNotificationService.launchNotificationIfAllowed(
+                    this@MagikeyboardService,
+                    item.title
+                )
+                assignKeyboardView()
+            }
+        }
+
+        fieldsAdapter = KeyboardFieldsAdapter(this)
+        fieldsAdapter?.onItemClickListener = object : KeyboardFieldsAdapter.OnItemClickListener {
             override fun onItemClick(item: Field) {
                 currentInputConnection.commitText(getEntryInfo()?.getGeneratedFieldValue(item.name) , 1)
                 actionTabAutomatically()
             }
         }
 
-        entryUUID.observe(this) { entryId ->
-            mEntryId = entryId
+        entryUUIDList.observe(this) { entryIdList ->
+            entryIdList?.let {
+                if (entryIdList.isNotEmpty()) {
+                    entriesAdapter?.setEntries(
+                        entryIdList.mapNotNull {
+                            getEntryInfo(it)?.let { entry ->
+                                KeyboardEntriesAdapter.KeyboardEntry(
+                                    id = entry.id,
+                                    title = entry.getVisualTitle(),
+                                    subtitle = entry.username
+                                )
+                            }
+                        }
+                    )
+                } else {
+                    entriesAdapter?.clear()
+                }
+            } ?: entriesAdapter?.clear()
             assignKeyboardView()
         }
 
@@ -148,7 +174,7 @@ class MagikeyboardService : InputMethodService(),
 
         val rootKeyboardView = layoutInflater.inflate(R.layout.keyboard_container, null)
         entryContainer = rootKeyboardView.findViewById(R.id.magikeyboard_entry_container)
-        entryText = rootKeyboardView.findViewById(R.id.magikeyboard_entry_text)
+        entryListView = rootKeyboardView.findViewById(R.id.magikeyboard_entry_list)
         databaseText = rootKeyboardView.findViewById(R.id.magikeyboard_database_text)
         databaseColorView = rootKeyboardView.findViewById(R.id.magikeyboard_database_color)
         packageText = rootKeyboardView.findViewById(R.id.magikeyboard_package_text)
@@ -159,6 +185,16 @@ class MagikeyboardService : InputMethodService(),
             keyboardEntry = Keyboard(this, R.xml.keyboard_password_entry)
 
             val context = baseContext
+
+            entryListView?.apply {
+                layoutManager = LinearLayoutManager(
+                    this@MagikeyboardService,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+                adapter = entriesAdapter
+            }
+
             val popupFieldsView = LayoutInflater.from(context)
                     .inflate(R.layout.keyboard_popup_fields, FrameLayout(context))
 
@@ -169,9 +205,14 @@ class MagikeyboardService : InputMethodService(),
                 contentView = popupFieldsView
             }
 
-            val recyclerView = popupFieldsView.findViewById<RecyclerView>(R.id.keyboard_popup_fields_list)
-            recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true)
-            recyclerView.adapter = fieldsAdapter
+            popupFieldsView.findViewById<RecyclerView>(R.id.keyboard_popup_fields_list)?.apply {
+                layoutManager = LinearLayoutManager(
+                    this@MagikeyboardService,
+                    LinearLayoutManager.HORIZONTAL,
+                    true
+                )
+                adapter = fieldsAdapter
+            }
 
             val closeView = popupFieldsView.findViewById<View>(R.id.keyboard_popup_close)
             closeView.setOnClickListener { popupCustomKeys?.dismiss() }
@@ -185,9 +226,9 @@ class MagikeyboardService : InputMethodService(),
         return rootKeyboardView
     }
 
-    private fun getEntryInfo(): EntryInfo? {
+    private fun getEntryInfo(entryId: UUID? = entriesAdapter?.selectedEntry?.id): EntryInfo? {
         var entryInfoRetrieved: EntryInfo? = null
-        mEntryId?.let { entryId ->
+        entryId?.let {
             entryInfoRetrieved = mDatabase
                 ?.getEntryById(NodeIdUUID(entryId))
                 ?.getEntryInfo(mDatabase)
@@ -205,23 +246,23 @@ class MagikeyboardService : InputMethodService(),
         }
         dismissCustomKeys()
         if (keyboardView != null) {
-            val entryInfo = getEntryInfo()
-            populateEntryInfoInView(entryInfo)
-            if (entryInfo != null) {
-                if (keyboardEntry != null) {
-                    keyboardView?.keyboard = keyboardEntry
-                }
-            } else {
+            if (entriesAdapter?.isEmpty() != false) {
+                entryListView?.visibility = View.GONE
                 if (keyboard != null) {
                     keyboardView?.keyboard = keyboard
                 }
+            } else {
+                entryListView?.visibility = View.VISIBLE
+                if (keyboardEntry != null) {
+                    keyboardView?.keyboard = keyboardEntry
+                }
             }
-
             // Define preferences
             keyboardView?.isHapticFeedbackEnabled = PreferencesUtil.isKeyboardVibrationEnable(this)
             playSoundDuringCLick = PreferencesUtil.isKeyboardSoundEnable(this)
         }
         setDatabaseViews()
+        entriesAdapter?.notifyDataSetChanged()
     }
 
     private fun setDatabaseViews() {
@@ -238,16 +279,6 @@ class MagikeyboardService : InputMethodService(),
             databaseColorView?.visibility = View.VISIBLE
         } else {
             databaseColorView?.visibility = View.GONE
-        }
-    }
-
-    private fun populateEntryInfoInView(entryInfo: EntryInfo?) {
-        if (entryInfo == null) {
-            entryText?.text = ""
-            entryText?.visibility = View.GONE
-        } else {
-            entryText?.text = entryInfo.getVisualTitle()
-            entryText?.visibility = View.VISIBLE
         }
     }
 
@@ -297,10 +328,10 @@ class MagikeyboardService : InputMethodService(),
                 showKeyboardPicker()
             }
             KEY_ENTRY -> {
-                actionKeyEntry(mSearchInfo)
+                actionKeyEntry(mSearchInfo ?: SearchInfo())
             }
             KEY_ENTRY_ALT -> {
-                actionKeyEntry()
+                actionKeyEntry(SearchInfo())
             }
             KEY_LOCK -> {
                 removeEntryInfo()
@@ -368,27 +399,26 @@ class MagikeyboardService : InputMethodService(),
         }
     }
 
-    private fun actionKeyEntry(searchInfo: SearchInfo? = null) {
+    private fun actionKeyEntry(searchInfo: SearchInfo) {
         SearchHelper.checkAutoSearchInfo(
             context = this,
             database = mDatabase,
             searchInfo = searchInfo,
             onItemsFound = { _, items ->
-                performSelection(
-                    items = items,
-                    actionPopulateKeyboard = {
-                        // Automatically populate keyboard
-                        addEntry(
-                            this,
-                            items[0],
-                            true
-                        )
-                        assignKeyboardView()
-                    },
-                    actionEntrySelection = {
-                        launchEntrySelection(searchInfo)
-                    }
-                )
+                // Force manual selection if items already retrieved
+                if (entriesAlreadyRetrieved(items.map { it.id })) {
+                    launchEntrySelection(
+                        SearchInfo(searchInfo).apply { manualSelection = true }
+                    )
+                } else {
+                    // Automatically populate keyboard
+                    addEntries(
+                        context = this,
+                        entryList = items,
+                        toast = true
+                    )
+                    assignKeyboardView()
+                }
             },
             onItemNotFound = {
                 // Select if not found
@@ -474,13 +504,13 @@ class MagikeyboardService : InputMethodService(),
         const val KEY_FIELDS = 530
 
         private val searchInfo = MutableLiveData<SearchInfo?>()
-        private val entryUUID = MutableLiveData<UUID?>()
+        private val entryUUIDList = MutableLiveData<List<UUID>?>()
 
         private const val SWITCH_KEYBOARD_ACTION = "com.android.keyboard.SWITCH_KEYBOARD"
         private const val KEYBOARD_ID = "KEYBOARD_ID"
 
         private fun removeEntryInfo() {
-            this.entryUUID.value = null
+            this.entryUUIDList.value = null
         }
 
         fun removeEntry(context: Context) {
@@ -496,6 +526,12 @@ class MagikeyboardService : InputMethodService(),
             this.searchInfo.value = null
         }
 
+        private fun entriesAlreadyRetrieved(entries: List<UUID>): Boolean {
+            if (entryUUIDList.value == null || entries.isEmpty())
+                return false
+            return entryUUIDList.value?.equals(entries) == true
+        }
+
         fun addEntry(
             context: Context,
             entry: EntryInfo,
@@ -503,7 +539,12 @@ class MagikeyboardService : InputMethodService(),
             autoSwitchKeyboard: Boolean = false
         ) {
             // Launch notification if allowed
-            addEntries(context, listOf(entry), toast, autoSwitchKeyboard)
+            addEntries(
+                context = context,
+                entryList = listOf(entry),
+                toast = toast,
+                autoSwitchKeyboard = autoSwitchKeyboard
+            )
         }
 
         fun addEntries(
@@ -514,12 +555,9 @@ class MagikeyboardService : InputMethodService(),
         ) {
             // Add a new entry if keyboard activated
             if (context.isMagikeyboardActivated()) {
-                // TODO add support for multiple entries #2305
-                val entry = entryList[0]
-                if (this.entryUUID.value != entry.id) {
-                    this.entryUUID.value = entry.id
-                    // Launch notification if allowed
-                    KeyboardEntryNotificationService.launchNotificationIfAllowed(context, entry)
+                val newList = entryList.map { it.id }
+                if (entriesAlreadyRetrieved(newList).not()) {
+                    this.entryUUIDList.value = newList
                     // Auto switch to the Magikeyboard
                     if (autoSwitchKeyboard
                         && isAutoSwitchMagikeyboardAllowed(context)
@@ -527,12 +565,13 @@ class MagikeyboardService : InputMethodService(),
                     ) {
                         context.startActivity(getSwitchMagikeyboardIntent(context))
                     } else if (toast) {
-                        // Show the message
+                        // Show the message for the first entry
                         Toast.makeText(
                             context,
                             context.getString(
                                 R.string.keyboard_notification_entry_content_title,
-                                entry.getVisualTitle()
+                                entryList.getOrNull(0)?.getVisualTitle()
+                                    ?: context.getString(R.string.keyboard_notification_entry_content_title_text)
                             ),
                             Toast.LENGTH_SHORT
                         ).show()
@@ -563,25 +602,6 @@ class MagikeyboardService : InputMethodService(),
             return Settings.Secure.getString(
                 context.contentResolver,
                 Settings.Secure.DEFAULT_INPUT_METHOD
-            )
-        }
-
-        fun performSelection(
-            items: List<EntryInfo>,
-            actionPopulateKeyboard: (entryInfo: EntryInfo) -> Unit,
-            actionEntrySelection: (autoSearch: Boolean) -> Unit
-        ) {
-            EntrySelectionHelper.performSelection(
-                items = items,
-                actionPopulateCredentialProvider = { itemFound ->
-                    if (this.entryUUID.value != itemFound.id) {
-                        actionPopulateKeyboard.invoke(itemFound)
-                    } else {
-                        // Force selection if magikeyboard already populated
-                        actionEntrySelection.invoke(false)
-                    }
-                },
-                actionEntrySelection = actionEntrySelection
             )
         }
 

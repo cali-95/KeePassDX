@@ -220,7 +220,6 @@
     <string name="keyboard_notification_entry_summary">Bir girdi kullanılabilir olduğunda bildirim göster</string>
     <string name="keyboard_notification_entry_content_title_text">Girdi</string>
     <string name="keyboard_notification_entry_content_title">%1$s Magikeyboard\'da kullanılabilir</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Kapanışta temizle</string>
     <string name="keyboard_notification_entry_clear_close_summary">Bildirimi kapatırken veri tabanını kapat</string>
     <string name="keyboard_appearance_category">Görünüm</string>

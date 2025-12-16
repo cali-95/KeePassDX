@@ -551,7 +551,6 @@
     <string name="keyboard_entry_timeout_summary">Timeout to clear the keyboard entry</string>
     <string name="keyboard_notification_entry_content_title_text">Entry</string>
     <string name="keyboard_notification_entry_content_title">%1$s available on Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Appearance</string>
     <string name="keyboard_theme_title">Keyboard theme</string>
     <string name="keyboard_keys_category">Keys</string>

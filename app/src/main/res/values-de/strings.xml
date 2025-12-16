@@ -289,7 +289,6 @@
     <string name="keyboard_notification_entry_summary">Benachrichtigung anzeigen, wenn ein Eintrag abrufbar ist</string>
     <string name="keyboard_notification_entry_content_title_text">Eintrag</string>
     <string name="keyboard_notification_entry_content_title">%1$s über Magikeyboard abrufbar</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Beim Schließen löschen</string>
     <string name="keyboard_notification_entry_clear_close_summary">Datenbank schließen, wenn die Benachrichtigung geschlossen wird</string>
     <string name="keyboard_appearance_category">Erscheinungsbild</string>

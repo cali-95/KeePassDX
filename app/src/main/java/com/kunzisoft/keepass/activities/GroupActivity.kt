@@ -79,7 +79,6 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
-import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.DateInstant
@@ -931,15 +930,13 @@ class GroupActivity : DatabaseLockActivity(),
                         when (typeMode) {
                             TypeMode.DEFAULT -> {}
                             TypeMode.MAGIKEYBOARD -> {
-                                if (!database.isReadOnly
-                                    && searchInfo != null
+                                if (entryVersioned.allowedToSaveSearchInfo(database, searchInfo)
                                     && PreferencesUtil.isKeyboardSaveSearchInfoEnable(this@GroupActivity)
-                                    && entryVersioned.containsSearchInfo(database, searchInfo).not()
                                 ) {
                                     updateEntryWithRegisterInfo(
                                         database,
                                         entryVersioned,
-                                        searchInfo.toRegisterInfo()
+                                        searchInfo!!.toRegisterInfo()
                                     )
                                 } else {
                                     entrySelectedForSelection(database, entryVersioned)
@@ -949,15 +946,13 @@ class GroupActivity : DatabaseLockActivity(),
                                 entrySelectedForPasskeySelection(database, entryVersioned)
                             }
                             TypeMode.AUTOFILL -> {
-                                if (!database.isReadOnly
-                                    && searchInfo != null
+                                if (entryVersioned.allowedToSaveSearchInfo(database, searchInfo)
                                     && PreferencesUtil.isAutofillSaveSearchInfoEnable(this@GroupActivity)
-                                    && entryVersioned.containsSearchInfo(database, searchInfo).not()
                                 ) {
                                     updateEntryWithRegisterInfo(
                                         database,
                                         entryVersioned,
-                                        searchInfo.toRegisterInfo()
+                                        searchInfo!!.toRegisterInfo()
                                     )
                                 } else {
                                     entrySelectedForSelection(database, entryVersioned)
@@ -1041,15 +1036,19 @@ class GroupActivity : DatabaseLockActivity(),
         updateEntry(entry, newEntry)
     }
 
-    private fun Entry.containsSearchInfo(
+    private fun Entry.allowedToSaveSearchInfo(
         database: ContextualDatabase,
-        searchInfo: SearchInfo
+        searchInfo: SearchInfo?
     ): Boolean {
-        return getEntryInfo(
+        if (database.isReadOnly)
+            return false
+        if (searchInfo == null || searchInfo.toString().isEmpty())
+            return false
+        return !(getEntryInfo(
             database,
             raw = true,
             removeTemplateConfiguration = false
-        ).containsSearchInfo(searchInfo)
+        ).containsSearchInfo(searchInfo))
     }
 
     private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
@@ -1711,25 +1710,8 @@ class GroupActivity : DatabaseLockActivity(),
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> {
-                                    // TODO Multiple entries in Magikeyboard #2305
-                                    MagikeyboardService.performSelection(
-                                        items = items,
-                                        actionPopulateKeyboard = { _ ->
-                                            activity.buildSpecialModeResponseAndSetResult(items)
-                                            onValidateSpecialMode()
-                                        },
-                                        actionEntrySelection = { autoSearch ->
-                                            launchForSelection(
-                                                context = activity,
-                                                database = database,
-                                                typeMode = TypeMode.MAGIKEYBOARD,
-                                                searchInfo = searchInfo,
-                                                activityResultLauncher = activityResultLauncher,
-                                                autoSearch = autoSearch
-                                            )
-                                            onLaunchActivitySpecialMode()
-                                        }
-                                    )
+                                    activity.buildSpecialModeResponseAndSetResult(items)
+                                    onValidateSpecialMode()
                                 }
                                 TypeMode.PASSKEY -> {
                                     // Response is build
