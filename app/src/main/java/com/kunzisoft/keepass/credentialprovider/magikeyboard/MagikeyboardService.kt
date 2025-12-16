@@ -81,7 +81,10 @@ class MagikeyboardService : InputMethodService(),
     private var entryContainer: View? = null
     private var databaseText: TextView? = null
     private var databaseColorView: ImageView? = null
+    private var containerPackageText: View? = null
     private var packageText: TextView? = null
+    private var appIdIcon: ImageView? = null
+    private var webDomainIcon: ImageView? = null
     private var keyboard: Keyboard? = null
     private var keyboardEntry: Keyboard? = null
     private var entryListView: RecyclerView? = null
@@ -177,7 +180,10 @@ class MagikeyboardService : InputMethodService(),
         entryListView = rootKeyboardView.findViewById(R.id.magikeyboard_entry_list)
         databaseText = rootKeyboardView.findViewById(R.id.magikeyboard_database_text)
         databaseColorView = rootKeyboardView.findViewById(R.id.magikeyboard_database_color)
+        containerPackageText = rootKeyboardView.findViewById(R.id.magikeyboard_container_package)
         packageText = rootKeyboardView.findViewById(R.id.magikeyboard_package_text)
+        appIdIcon = rootKeyboardView.findViewById(R.id.magikeyboard_app_id_icon)
+        webDomainIcon = rootKeyboardView.findViewById(R.id.magikeyboard_web_domain_icon)
         keyboardView = rootKeyboardView.findViewById(R.id.magikeyboard_view)
 
         if (keyboardView != null) {
@@ -237,12 +243,22 @@ class MagikeyboardService : InputMethodService(),
     }
 
     private fun assignKeyboardView() {
-        val searchString = mSearchInfo.toString()
-        if (searchString.isNotEmpty()) {
+        val searchString = mSearchInfo?.toString()
+        if (searchString != null && searchString.isNotEmpty()) {
+            if (mSearchInfo?.isDomainSearch == true) {
+                appIdIcon?.visibility = View.GONE
+                webDomainIcon?.visibility = View.VISIBLE
+            } else if (mSearchInfo?.isAppIdSearch == true) {
+                appIdIcon?.visibility = View.VISIBLE
+                webDomainIcon?.visibility = View.GONE
+            } else {
+                appIdIcon?.visibility = View.GONE
+                webDomainIcon?.visibility = View.GONE
+            }
             packageText?.text = searchString
-            packageText?.visibility = View.VISIBLE
+            containerPackageText?.visibility = View.VISIBLE
         } else {
-            packageText?.visibility = View.GONE
+            containerPackageText?.visibility = View.GONE
         }
         dismissCustomKeys()
         if (keyboardView != null) {
