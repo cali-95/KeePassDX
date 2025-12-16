@@ -49,6 +49,7 @@ import androidx.core.net.toUri
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.activity.AutofillLauncherActivity
 import com.kunzisoft.keepass.credentialprovider.autofill.StructureParser.Companion.APPLICATION_ID_POPUP_WINDOW
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.DatabaseTaskProvider
 import com.kunzisoft.keepass.database.helper.SearchHelper
@@ -70,6 +71,8 @@ class KeeAutofillService : AutofillService() {
     private var webDomainBlocklist: Set<String>? = null
     private var askToSaveData: Boolean = false
     private var autofillInlineSuggestionsEnabled: Boolean = false
+    private var autofillSharedToMagikeyboard: Boolean = false
+    private var switchToMagikeyboard: Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -94,6 +97,8 @@ class KeeAutofillService : AutofillService() {
         webDomainBlocklist = PreferencesUtil.webDomainBlocklist(this)
         askToSaveData = PreferencesUtil.askToSaveAutofillData(this)
         autofillInlineSuggestionsEnabled = PreferencesUtil.isAutofillInlineSuggestionsEnable(this)
+        autofillSharedToMagikeyboard = PreferencesUtil.isAutofillSharedToMagikeyboardEnable(this)
+        switchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(this)
     }
 
     override fun onFillRequest(
@@ -111,7 +116,17 @@ class KeeAutofillService : AutofillService() {
 
         // Check user's settings for authenticating Responses and Datasets.
         val latestStructure = request.fillContexts.last().structure
-        StructureParser(latestStructure).parse()?.let { parseResult ->
+        StructureParser(latestStructure).parse(saveValue = false)?.let { parseResult ->
+
+            // Build the search info from the parser
+            val searchInfo = SearchInfo().apply {
+                applicationId = parseResult.applicationId
+                webScheme = parseResult.webScheme
+                webDomain = parseResult.webDomain
+            }
+            // Add the search info to the magikeyboard service
+            // TODO Filter #1465
+            MagikeyboardService.addSearchInfo(searchInfo)
 
             // Build search info only if applicationId or webDomain are not blocked
             if (autofillAllowedFor(
@@ -120,53 +135,60 @@ class KeeAutofillService : AutofillService() {
                     webDomain = parseResult.webDomain,
                     webDomainBlocklist = webDomainBlocklist)
                 ) {
-                val searchInfo = SearchInfo().apply {
-                    applicationId = parseResult.applicationId
-                    webDomain = parseResult.webDomain
-                    webScheme = parseResult.webScheme
-                }
-                val inlineSuggestionsRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-                        && autofillInlineSuggestionsEnabled) {
-                    CompatInlineSuggestionsRequest(request)
-                } else {
-                    null
-                }
-                val autofillComponent = AutofillComponent(
-                    latestStructure,
-                    inlineSuggestionsRequest
-                )
-                SearchHelper.checkAutoSearchInfo(
-                    context = this,
-                    database = mDatabase,
-                    searchInfo = searchInfo,
-                    onItemsFound = { openedDatabase, items ->
-                        /* TODO Share context
-                        MagikeyboardService.addEntries(
-                            context = this,
-                            entryList = items,
-                            toast = true
-                        )*/
-                        callback.onSuccess(
-                            AutofillHelper.buildResponse(
-                                context = this,
-                                database = openedDatabase,
-                                entriesInfo = items,
-                                parseResult = parseResult,
-                                autofillComponent = autofillComponent
+
+                if (parseResult.isValid()) {
+                    val inlineSuggestionsRequest =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                            && autofillInlineSuggestionsEnabled
+                        ) {
+                            CompatInlineSuggestionsRequest(request)
+                        } else {
+                            null
+                        }
+                    val autofillComponent = AutofillComponent(
+                        latestStructure,
+                        inlineSuggestionsRequest
+                    )
+                    SearchHelper.checkAutoSearchInfo(
+                        context = this,
+                        database = mDatabase,
+                        searchInfo = searchInfo,
+                        onItemsFound = { openedDatabase, items ->
+                            // Add Autofill entries to Magic Keyboard #2024 #995
+                            if (autofillSharedToMagikeyboard) {
+                                MagikeyboardService.addEntries(
+                                    context = this,
+                                    entryList = items,
+                                    toast = true,
+                                    autoSwitchKeyboard = switchToMagikeyboard
+                                )
+                            }
+                            callback.onSuccess(
+                                AutofillHelper.buildResponse(
+                                    context = this,
+                                    database = openedDatabase,
+                                    entriesInfo = items,
+                                    parseResult = parseResult,
+                                    autofillComponent = autofillComponent
+                                )
                             )
-                        )
-                    },
-                    onItemNotFound = { openedDatabase ->
-                        // Show UI if no search result
-                        showUIForEntrySelection(parseResult, openedDatabase,
-                            searchInfo, autofillComponent, callback)
-                    },
-                    onDatabaseClosed = {
-                        // Show UI if database not open
-                        showUIForEntrySelection(parseResult, null,
-                            searchInfo, autofillComponent, callback)
-                    }
-                )
+                        },
+                        onItemNotFound = { openedDatabase ->
+                            // Show UI if no search result
+                            showUIForEntrySelection(
+                                parseResult, openedDatabase,
+                                searchInfo, autofillComponent, callback
+                            )
+                        },
+                        onDatabaseClosed = {
+                            // Show UI if database not open
+                            showUIForEntrySelection(
+                                parseResult, null,
+                                searchInfo, autofillComponent, callback
+                            )
+                        }
+                    )
+                }
             }
         }
     }
@@ -372,9 +394,9 @@ class KeeAutofillService : AutofillService() {
         var success = false
         if (askToSaveData && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val latestStructure = request.fillContexts.last().structure
-            StructureParser(latestStructure).parse(true)?.let { parseResult ->
+            StructureParser(latestStructure).parse(saveValue = true)?.let { parseResult ->
 
-                if (autofillAllowedFor(
+                if (parseResult.isValid() && autofillAllowedFor(
                         applicationId = parseResult.applicationId,
                         applicationIdBlocklist = applicationIdBlocklist,
                         webDomain = parseResult.webDomain,

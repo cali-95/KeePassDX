@@ -624,7 +624,6 @@
     <string name="keyboard_entry_category">Entrada</string>
     <string name="keyboard_notification_entry_title">Informació de la notificació</string>
     <string name="keyboard_notification_entry_content_title_text">Entrada</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_theme_title">Tema del teclat</string>
     <string name="keyboard_key_sound_title">Prémer les tecles amb so</string>
     <string name="keyboard_save_search_info_summary">Això intenta desar la informació compartida en fer una selecció d\'entrada manual per a usos futurs més fàcils</string>

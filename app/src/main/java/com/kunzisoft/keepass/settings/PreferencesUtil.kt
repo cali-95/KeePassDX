@@ -648,6 +648,12 @@ object PreferencesUtil {
             context.resources.getBoolean(R.bool.keyboard_key_sound_default))
     }
 
+    fun isAutoSwitchToMagikeyboardEnable(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.keyboard_auto_switch_key),
+            context.resources.getBoolean(R.bool.keyboard_auto_switch_default))
+    }
+
     fun isKeyboardPreviousDatabaseCredentialsEnable(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.keyboard_previous_database_credentials_key),
@@ -726,6 +732,12 @@ object PreferencesUtil {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.autofill_manual_selection_key),
             context.resources.getBoolean(R.bool.autofill_manual_selection_default))
+    }
+
+    fun isAutofillSharedToMagikeyboardEnable(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.autofill_share_magikeyboard_key),
+            context.resources.getBoolean(R.bool.autofill_share_magikeyboard_default))
     }
 
     fun isAutofillSaveSearchInfoEnable(context: Context): Boolean {
@@ -852,6 +864,7 @@ object PreferencesUtil {
                 context.getString(R.string.keyboard_auto_go_action_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_key_vibrate_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_key_sound_key) -> editor.putBoolean(name, value.toBoolean())
+                context.getString(R.string.keyboard_auto_switch_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_previous_database_credentials_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_previous_search_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.keyboard_previous_fill_in_key) -> editor.putBoolean(name, value.toBoolean())
@@ -864,6 +877,7 @@ object PreferencesUtil {
                 context.getString(R.string.autofill_close_database_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.autofill_inline_suggestions_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.autofill_manual_selection_key) -> editor.putBoolean(name, value.toBoolean())
+                context.getString(R.string.autofill_share_magikeyboard_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.autofill_save_search_info_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.autofill_ask_to_save_data_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.autofill_application_id_blocklist_key) -> editor.putStringSet(name, getStringSetFromProperties(value))

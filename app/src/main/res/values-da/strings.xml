@@ -280,7 +280,6 @@
     <string name="keyboard_notification_entry_summary">Vis en notifikation, når en post er til rådighed</string>
     <string name="keyboard_notification_entry_content_title_text">Post</string>
     <string name="keyboard_notification_entry_content_title">%1$s til rådighed på Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Ryd ved lukning</string>
     <string name="keyboard_notification_entry_clear_close_summary">Luk databasen, når notifikation lukkes</string>
     <string name="keyboard_appearance_category">Udseende</string>

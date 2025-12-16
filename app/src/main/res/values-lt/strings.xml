@@ -553,7 +553,6 @@
     <string name="keyboard_entry_timeout_summary">Laukimo laikas klaviatūros įrašui išvalyti</string>
     <string name="keyboard_notification_entry_content_title_text">Įrašas</string>
     <string name="keyboard_notification_entry_content_title">%1$s prieinamas Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Išvaizda</string>
     <string name="keyboard_theme_title">Klaviatūros tema</string>
     <string name="keyboard_keys_category">Klavišai</string>

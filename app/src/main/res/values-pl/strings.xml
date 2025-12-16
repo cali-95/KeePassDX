@@ -281,7 +281,6 @@
     <string name="keyboard_notification_entry_summary">Pokaż powiadomienie, gdy wpis jest dostępny</string>
     <string name="keyboard_notification_entry_content_title_text">Wpis</string>
     <string name="keyboard_notification_entry_content_title">%1$s dostępne na Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Wyczyść przy zamykaniu</string>
     <string name="keyboard_notification_entry_clear_close_summary">Zamknij bazę danych podczas zamykania powiadomienia</string>
     <string name="keyboard_appearance_category">Wygląd</string>

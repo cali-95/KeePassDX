@@ -360,7 +360,6 @@
     <string name="keyboard_entry_timeout_summary">キーボードのエントリーを消去するまでの時間</string>
     <string name="keyboard_notification_entry_content_title_text">エントリー</string>
     <string name="keyboard_notification_entry_content_title">%1$s が Magikeyboard で利用可能</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">デザイン</string>
     <string name="keyboard_theme_title">キーボードのテーマ</string>
     <string name="keyboard_keys_category">キー</string>

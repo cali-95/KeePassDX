@@ -20,18 +20,15 @@
 package com.kunzisoft.keepass.adapters
 
 import android.content.Context
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-
+import androidx.recyclerview.widget.RecyclerView
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.database.element.Field
 
-import java.util.ArrayList
-
-class FieldsAdapter(context: Context) : RecyclerView.Adapter<FieldsAdapter.FieldViewHolder>() {
+class KeyboardFieldsAdapter(context: Context) : RecyclerView.Adapter<KeyboardFieldsAdapter.FieldViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     private var fields: MutableList<Field> = ArrayList()

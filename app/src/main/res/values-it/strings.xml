@@ -288,7 +288,6 @@
     <string name="keyboard_notification_entry_summary">Mostra una notifica quando un elemento è disponibile</string>
     <string name="keyboard_notification_entry_content_title_text">Elemento</string>
     <string name="keyboard_notification_entry_content_title">%1$s disponibile nella Magitastiera</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Pulisci alla chiusura</string>
     <string name="keyboard_notification_entry_clear_close_summary">Chiudere il database alla chiusura della notifica</string>
     <string name="keyboard_appearance_category">Aspetto</string>

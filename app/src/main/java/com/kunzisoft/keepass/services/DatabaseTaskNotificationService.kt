@@ -68,7 +68,6 @@ import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.tasks.ProgressTaskUpdater
 import com.kunzisoft.keepass.timeout.TimeoutHelper
-import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.utils.DATABASE_START_TASK_ACTION
 import com.kunzisoft.keepass.utils.DATABASE_STOP_TASK_ACTION
 import com.kunzisoft.keepass.utils.LOCK_ACTION
@@ -550,15 +549,8 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
                 if (database.loaded) {
                     // Build Intents for notification action
                     // Open the start of the database workflow
-                    val pendingDatabaseIntent = PendingIntent.getActivity(
-                        this,
-                        randomRequestCode(),
-                        Intent(this, FileDatabaseSelectActivity::class.java),
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                        } else {
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                        }
+                    val pendingDatabaseIntent = buildPendingIntent(
+                        Intent(this, FileDatabaseSelectActivity::class.java)
                     )
                     val pendingDeleteIntent = PendingIntent.getBroadcast(
                         this,
@@ -952,7 +944,7 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
             .deleteKeyFileByDatabaseUri(databaseUri)
     }
 
-    private inner class AfterActionNodesRunnable : AfterActionNodesFinish() {
+    private class AfterActionNodesRunnable : AfterActionNodesFinish() {
         override fun onActionNodesFinish(
             result: ActionRunnable.Result,
             actionNodesValues: ActionNodesValues,

@@ -169,7 +169,6 @@
     <string name="recycle_bin">ถึงขยะ</string>
     <string name="templates">แม่แบบ</string>
     <string name="keyboard_name">เมจิคีย์บอร์ด</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_change">เปลี่ยนแป้นพิมพ์</string>
     <string name="backspace">Backspace</string>
     <string name="enter">Enter</string>

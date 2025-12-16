@@ -551,7 +551,6 @@
     <string name="keyboard_entry_timeout_summary">Timeout to clear the keyboard entry</string>
     <string name="keyboard_notification_entry_content_title_text">Entry</string>
     <string name="keyboard_notification_entry_content_title">%1$s available on Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Appearance</string>
     <string name="keyboard_theme_title">Keyboard theme</string>
     <string name="keyboard_keys_category">Keys</string>
@@ -560,6 +559,8 @@
     <string name="keyboard_key_vibrate_title">Vibratory keypresses</string>
     <string name="keyboard_key_sound_title">Audible keypresses</string>
     <string name="keyboard_change">Switch keyboard</string>
+    <string name="keyboard_auto_switch_title">Auto Magikeyboard switch</string>
+    <string name="keyboard_auto_switch_summary">Try to automatically switch to the Magikeyboard when entries are populated</string>
     <string name="keyboard_previous_database_credentials_title">Database credentials screen</string>
     <string name="keyboard_previous_database_credentials_summary">Automatically switch back to the previous keyboard on the database credentials screen</string>
     <string name="keyboard_previous_search_title">Search screen</string>
@@ -579,6 +580,8 @@
     <string name="autofill_inline_suggestions_summary">Attempt to display autofill suggestions directly from a compatible keyboard</string>
     <string name="autofill_manual_selection_title">Manual selection</string>
     <string name="autofill_manual_selection_summary">Display option to let the user select database entry</string>
+    <string name="autofill_share_magikeyboard_title">Share to Magikeyboard</string>
+    <string name="autofill_share_magikeyboard_summary">Share entries retrieved from autofill to Magikeyboard</string>
     <string name="autofill_save_search_info_title">Save search info</string>
     <string name="autofill_save_search_info_summary">Try to save search information when making a manual entry selection for easier future uses</string>
     <string name="autofill_ask_to_save_data_title">Ask to save data</string>

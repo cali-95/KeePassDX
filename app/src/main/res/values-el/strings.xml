@@ -275,7 +275,6 @@
     <string name="keyboard_notification_entry_summary">Εμφάνιση ειδοποίησης όταν είναι διαθέσιμη μια καταχώρηση</string>
     <string name="keyboard_notification_entry_content_title_text">Καταχώριση</string>
     <string name="keyboard_notification_entry_content_title">%1$s είναι διαθέσιμο στο Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Καθαρισμός στο κλείσιμο</string>
     <string name="keyboard_notification_entry_clear_close_summary">Κλείσιμο της βάση δεδομένων κατά το κλείσιμο της ειδοποίησης</string>
     <string name="keyboard_appearance_category">Εμφάνιση</string>

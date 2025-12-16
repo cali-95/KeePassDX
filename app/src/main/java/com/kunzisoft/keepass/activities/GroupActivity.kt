@@ -79,7 +79,6 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
-import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.DateInstant
@@ -760,13 +759,13 @@ class GroupActivity : DatabaseLockActivity(),
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> entry?.let {
-                                    entrySelectedForKeyboardSelection(database, it)
+                                    entrySelectedForSelection(database, it)
                                 }
                                 TypeMode.PASSKEY -> entry?.let {
                                     entrySelectedForPasskeySelection(database, it)
                                 }
                                 TypeMode.AUTOFILL -> entry?.let {
-                                    entrySelectedForAutofillSelection(database, it)
+                                    entrySelectedForSelection(database, it)
                                 }
                             }
                         },
@@ -931,36 +930,32 @@ class GroupActivity : DatabaseLockActivity(),
                         when (typeMode) {
                             TypeMode.DEFAULT -> {}
                             TypeMode.MAGIKEYBOARD -> {
-                                if (!database.isReadOnly
-                                    && searchInfo != null
+                                if (entryVersioned.allowedToSaveSearchInfo(database, searchInfo)
                                     && PreferencesUtil.isKeyboardSaveSearchInfoEnable(this@GroupActivity)
-                                    && entryVersioned.containsSearchInfo(database, searchInfo).not()
                                 ) {
                                     updateEntryWithRegisterInfo(
                                         database,
                                         entryVersioned,
-                                        searchInfo.toRegisterInfo()
+                                        searchInfo!!.toRegisterInfo()
                                     )
                                 } else {
-                                    entrySelectedForKeyboardSelection(database, entryVersioned)
+                                    entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
                             TypeMode.PASSKEY -> {
                                 entrySelectedForPasskeySelection(database, entryVersioned)
                             }
                             TypeMode.AUTOFILL -> {
-                                if (!database.isReadOnly
-                                    && searchInfo != null
+                                if (entryVersioned.allowedToSaveSearchInfo(database, searchInfo)
                                     && PreferencesUtil.isAutofillSaveSearchInfoEnable(this@GroupActivity)
-                                    && entryVersioned.containsSearchInfo(database, searchInfo).not()
                                 ) {
                                     updateEntryWithRegisterInfo(
                                         database,
                                         entryVersioned,
-                                        searchInfo.toRegisterInfo()
+                                        searchInfo!!.toRegisterInfo()
                                     )
                                 } else {
-                                    entrySelectedForAutofillSelection(database, entryVersioned)
+                                    entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
                         }
@@ -986,19 +981,10 @@ class GroupActivity : DatabaseLockActivity(),
         }
     }
 
-    private fun entrySelectedForKeyboardSelection(database: ContextualDatabase, entry: Entry) {
+    private fun entrySelectedForSelection(database: ContextualDatabase, entry: Entry) {
         removeSearch()
         // Build response with the entry selected
         this.buildSpecialModeResponseAndSetResult(entry.getEntryInfo(database))
-        onValidateSpecialMode()
-    }
-
-    private fun entrySelectedForAutofillSelection(database: ContextualDatabase, entry: Entry) {
-        removeSearch()
-        // Build response with the entry selected
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            this.buildSpecialModeResponseAndSetResult(entry.getEntryInfo(database))
-        }
         onValidateSpecialMode()
     }
 
@@ -1050,15 +1036,19 @@ class GroupActivity : DatabaseLockActivity(),
         updateEntry(entry, newEntry)
     }
 
-    private fun Entry.containsSearchInfo(
+    private fun Entry.allowedToSaveSearchInfo(
         database: ContextualDatabase,
-        searchInfo: SearchInfo
+        searchInfo: SearchInfo?
     ): Boolean {
-        return getEntryInfo(
+        if (database.isReadOnly)
+            return false
+        if (searchInfo == null || searchInfo.toString().isEmpty())
+            return false
+        return !(getEntryInfo(
             database,
             raw = true,
             removeTemplateConfiguration = false
-        ).containsSearchInfo(searchInfo)
+        ).containsSearchInfo(searchInfo))
     }
 
     private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
@@ -1720,24 +1710,8 @@ class GroupActivity : DatabaseLockActivity(),
                             when (typeMode) {
                                 TypeMode.DEFAULT -> {}
                                 TypeMode.MAGIKEYBOARD -> {
-                                    MagikeyboardService.performSelection(
-                                        items = items,
-                                        actionPopulateKeyboard = { _ ->
-                                            activity.buildSpecialModeResponseAndSetResult(items)
-                                            onValidateSpecialMode()
-                                        },
-                                        actionEntrySelection = { autoSearch ->
-                                            launchForSelection(
-                                                context = activity,
-                                                database = database,
-                                                typeMode = TypeMode.MAGIKEYBOARD,
-                                                searchInfo = searchInfo,
-                                                activityResultLauncher = activityResultLauncher,
-                                                autoSearch = autoSearch
-                                            )
-                                            onLaunchActivitySpecialMode()
-                                        }
-                                    )
+                                    activity.buildSpecialModeResponseAndSetResult(items)
+                                    onValidateSpecialMode()
                                 }
                                 TypeMode.PASSKEY -> {
                                     // Response is build

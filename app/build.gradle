@@ -131,7 +131,8 @@ dependencies {
     implementation 'androidx.media:media:1.6.0'
     // Lifecycle - LiveData - ViewModel - Coroutines
     implementation "androidx.core:core-ktx:$android_core_version"
-    implementation "androidx.lifecycle:lifecycle-process:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-process:$android_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-service:$android_lifecycle"
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
     implementation "com.google.android.material:material:$android_material_version"
     // Token auto complete

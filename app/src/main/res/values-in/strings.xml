@@ -339,7 +339,6 @@
     <string name="keyboard_auto_go_action_summary">Tindakan tombol \"Go\" setelah menekan tombol \"Field\"</string>
     <string name="keyboard_theme_title">Tema papan tik</string>
     <string name="keyboard_appearance_category">Tampilan</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title">%1$s tersedia di Magikeyboard</string>
     <string name="keyboard_notification_entry_content_title_text">Entri</string>
     <string name="keyboard_entry_timeout_summary">Waktu habis untuk menghapus entri papan tik</string>

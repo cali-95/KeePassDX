@@ -236,7 +236,6 @@
     <string name="keyboard_notification_entry_summary">在条目可用时显示通知</string>
     <string name="keyboard_notification_entry_content_title_text">条目</string>
     <string name="keyboard_notification_entry_content_title">%1$s 在魔法键盘中可用</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">关闭时清空</string>
     <string name="keyboard_notification_entry_clear_close_summary">在关闭通知时锁定数据库</string>
     <string name="keyboard_appearance_category">外观</string>

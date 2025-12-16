@@ -351,7 +351,6 @@
     <string name="keyboard_name">魔法鍵盤</string>
     <string name="keyboard_notification_entry_clear_close_summary">關閉通知時也關閉資料庫</string>
     <string name="keyboard_notification_entry_clear_close_title">關閉時清除</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title">%1$s 在魔法鍵盤中可用</string>
     <string name="keyboard_notification_entry_content_title_text">條目</string>
     <string name="keyboard_notification_entry_summary">在條目可用時顯示通知</string>

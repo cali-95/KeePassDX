@@ -287,7 +287,6 @@
     <string name="keyboard_notification_entry_summary">Mostrar uma notificação quando uma entrada estiver disponível</string>
     <string name="keyboard_notification_entry_content_title_text">Entrada</string>
     <string name="keyboard_notification_entry_content_title">%1$s disponível no Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Limpar ao fechar</string>
     <string name="keyboard_notification_entry_clear_close_summary">Fechar o banco de dados ao dispensar a notificação</string>
     <string name="keyboard_appearance_category">Aparência</string>

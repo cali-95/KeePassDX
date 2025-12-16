@@ -451,7 +451,6 @@
     <string name="keyboard_entry_timeout_title">Itxarote-denbora</string>
     <string name="keyboard_entry_timeout_summary">Teklatuaren sarrera hustutzeko itxarote-denbora</string>
     <string name="keyboard_notification_entry_content_title_text">Sarrera</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Itxura</string>
     <string name="keyboard_theme_title">Teklatuaren itxura</string>
     <string name="keyboard_keys_category">Teklak</string>

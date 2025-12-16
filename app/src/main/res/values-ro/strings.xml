@@ -316,7 +316,6 @@
     <string name="keyboard_entry_timeout_summary">Timpul de așteptare pentru a șterge intrarea de la tastatură</string>
     <string name="keyboard_notification_entry_content_title_text">Intrare</string>
     <string name="keyboard_notification_entry_content_title">%1$s disponibil pe Tastatura magică</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Aspect</string>
     <string name="keyboard_theme_title">Tema tastaturii</string>
     <string name="keyboard_keys_category">Chei</string>

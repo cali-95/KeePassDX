@@ -515,7 +515,6 @@
     <string name="keyboard_entry_timeout_summary">Hết thời gian chờ để xóa mục bàn phím</string>
     <string name="keyboard_notification_entry_content_title_text">Mục nhập</string>
     <string name="keyboard_notification_entry_content_title">%1$s có sẵn trên Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Ngoại hình</string>
     <string name="keyboard_theme_title">Chủ đề bàn phím</string>
     <string name="keyboard_keys_category">Phím</string>
