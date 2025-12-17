@@ -4,6 +4,7 @@ KeePassDX(4.3.0)
  * Share URL/Entry from Autofill to Magikeyboard #920 #995 #2024 #1347 #1465
  * Improve keyboard switch #311 #643 #2305
  * Remove Clipboard notifications #2301
+ * Field reference placeholders S: #2270 (@thegards)
  * Fix autofill username detection #2276
  * Fix Passkey in passwordless mode #2282
  * Fix Magikeyboard notification #2288

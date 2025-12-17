@@ -3,6 +3,7 @@
  * Partage d'URL/Entrée depuis le remplissage Auto vers le Magiclavier #920 #995 #2024 #1347 #1465
  * Amélioration du changement de clavier #311 #643 #2305
  * Suppression des notifications de copie dans le presse-papier #2301
+ * Référence de champ S: #2270 (@thegards)
  * Correction de la détection du nom d'utilisateur pour le remplissage auto #2276
  * Correction de Passkey en mode passwordless #2282
  * Correction de la notification du Magiclavier #2288
