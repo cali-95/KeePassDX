@@ -257,7 +257,6 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
     }
 
     override fun manageRegistrationResult(activityResult: ActivityResult) {
-        isResultLauncherRegistered = false
         viewModelScope.launch(CoroutineExceptionHandler { _, e ->
             Log.e(TAG, "Unable to create registration response for autofill", e)
             showError(e)
@@ -277,7 +276,6 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                 }
             }
         }
-
     }
 
     sealed class UIState {
