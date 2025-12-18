@@ -53,7 +53,7 @@
     <string name="autofill_block_restart">重新啟動包含該表單的應用程式以啟用攔截。</string>
     <string name="autofill_close_database_summary">自動填充寫入後，關閉資料庫</string>
     <string name="autofill_close_database_title">關閉資料庫</string>
-    <string name="autofill_explanation_summary">啟用自動填入功能以快速填寫其他應用程式中的用戶名和密碼</string>
+    <string name="autofill_explanation_summary">配置自動填入功能以快速填寫其他應用程式中的用戶名和密碼</string>
     <string name="autofill_inline_suggestions_keyboard">已添加自動填充建議。</string>
     <string name="autofill_inline_suggestions_summary">嘗試直接從相容的鍵盤顯示自動填充建議</string>
     <string name="autofill_inline_suggestions_title">內聯建議</string>
@@ -660,7 +660,7 @@
     <string name="ask">詢問</string>
     <string name="merge_success">合併成功</string>
     <string name="configure">配置</string>
-    <string name="menu_appearance_settings_summary">主題、顏色、屬性</string>
+    <string name="menu_appearance_settings_summary">主題、顏色、圖示、字體、屬性</string>
     <string name="unlock">解鎖</string>
     <string name="at_least_one_char">從每組中選擇字完</string>
     <string name="consider_chars_filter">可以包含</string>
@@ -696,4 +696,28 @@
     <string name="recursive_number_entries_summary">遞歸計算群組中的項目數</string>
     <string name="warning_large_keyfile">不建議增加較大的密鑰檔案，這可能會阻止資料庫開啟。</string>
     <string name="error_otp_secret_length">密鑰必須包含至少%1$d個字元。</string>
+    <string name="entry_application_id">應用程式 Id</string>
+    <string name="warning_overwrite_data_title">要覆蓋現有數據嗎？</string>
+    <string name="warning_overwrite_data_description">此操作將取代條目中的現有數據，如果啟用了歷史記錄，則可以檢索舊數據。</string>
+    <string name="credential_provider">憑證提供者</string>
+    <string name="passkeys"></string>
+    <string name="passkeys_explanation_summary">設定 Passkey，實現快速安全的無密碼登入</string>
+    <string name="passkeys_preference_title">Passkey 設定</string>
+    <string name="passkeys_close_database_title">關閉數據庫</string>
+    <string name="passkeys_close_database_summary">選擇密碼後關閉數據庫</string>
+    <string name="passkeys_privileged_apps_ask_title">應用無法識別</string>
+    <string name="passkeys_missing_signature_app_ask_title">簽名缺失</string>
+    <string name="passkeys_auto_select_title">自動選擇</string>
+    <string name="passkeys_auto_select_summary">如果只有一個條目且資料庫已打開，並且請求的應用程式相容，則自動選擇</string>
+    <string name="passkeys_backup_eligibility_summary">在創建時確定是否允許備份公鑰憑證來源</string>
+    <string name="passkeys_backup_state_title">備份狀態</string>
+    <string name="passkey_service_name">KeePassDX 憑證提供者</string>
+    <string name="passkey_creation_description">將密碼儲存到新條目中</string>
+    <string name="passkey_update_description">在 %1$s 中更新密碼</string>
+    <string name="passkey_selection_username">未找到 passkey</string>
+    <string name="passkey_selection_description">選擇現有 passkey</string>
+    <string name="passkey_database_username">KeePassDX 數據庫</string>
+    <string name="passkey_locked_database_description">選擇解鎖</string>
+    <string name="passkey_username">Passkey 使用者名稱</string>
+    <string name="passkey_private_key">Passkey 私鑰</string>
 </resources>
