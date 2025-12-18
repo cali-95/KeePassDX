@@ -725,13 +725,13 @@
     <string name="passkeys_backup_state_summary">Indica che le credenziali sono dietro backup e protette contro la perdita di un singolo dispositivo</string>
     <string name="credential_provider_service_subtitle">Passkey, fornitore di autocompletamento credenziali</string>
     <string name="passkey">Passkey</string>
-    <string name="passkey_service_name">Fornitore di credenziali KeePassDX</string>
+    <string name="credential_provider_service_name">Fornitore di credenziali KeePassDX</string>
     <string name="passkey_creation_description">Salva la passkey in una nuova voce</string>
     <string name="passkey_update_description">Aggiorna la passkey in %1$s</string>
     <string name="passkey_selection_username">Nessuna passkey trovata</string>
     <string name="passkey_selection_description">Seleziona una passkey esistente</string>
-    <string name="passkey_database_username">Database di KeePassDX</string>
-    <string name="passkey_locked_database_description">Seleziona per sbloccare</string>
+    <string name="credential_provider_database_username">Database di KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Seleziona per sbloccare</string>
     <string name="passkey_username">Nome utente passkey</string>
     <string name="passkey_private_key">Chiave privata passkey</string>
     <string name="passkey_credential_id">ID credenziali passkey</string>

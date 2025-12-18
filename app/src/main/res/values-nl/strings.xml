@@ -703,7 +703,7 @@
     <string name="warning_overwrite_data_description">Deze actie vervangt de bestaande gegevens van het item. Je kunt de oude gegevens ophalen als de geschiedenis is ingeschakeld.</string>
     <string name="credential_provider">Dienst Automatisch aanvullen</string>
     <string name="credential_provider_service_subtitle">Passkeys, Dienst Automatisch aanvullen</string>
-    <string name="passkey_service_name">KeePassDX Dienst Automatisch aanvullen</string>
+    <string name="credential_provider_service_name">KeePassDX Dienst Automatisch aanvullen</string>
     <string name="passkeys">Passkeys</string>
     <string name="passkeys_explanation_summary">Configureer Passkeys voor snelle en veilige wachtwoordloze login</string>
     <string name="passkeys_preference_title">Instellingen voor passkeys</string>
@@ -727,8 +727,8 @@
     <string name="passkey_update_description">Passkey in %1$s bijwerken</string>
     <string name="passkey_selection_username">Geen passkey gevonden</string>
     <string name="passkey_selection_description">Bestaande passkey selecteren</string>
-    <string name="passkey_database_username">KeePassDX-database</string>
-    <string name="passkey_locked_database_description">Selecteren voor ontgrendeling</string>
+    <string name="credential_provider_database_username">KeePassDX-database</string>
+    <string name="credential_provider_locked_database_description">Selecteren voor ontgrendeling</string>
     <string name="passkey_username">Passkey Gebruikersnaam</string>
     <string name="passkey_private_key">Passkey Privésleutel</string>
     <string name="passkey_credential_id">Passkey Inlog-ID</string>

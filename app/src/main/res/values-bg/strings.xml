@@ -698,13 +698,13 @@
     <string name="passkeys_backup_state_summary">Указва дали регистрацията е включена в резервно копие и е защитена от загуба на едно устройство</string>
     <string name="credential_provider_service_subtitle">Услуга за автоматично попълване на ключове за достъп и регистрации</string>
     <string name="passkey">Ключ за достъп</string>
-    <string name="passkey_service_name">Доставчик на регистрации на KeePassDX</string>
+    <string name="credential_provider_service_name">Доставчик на регистрации на KeePassDX</string>
     <string name="passkey_creation_description">Запазване ключа за достъп в друг запис</string>
     <string name="passkey_update_description">Обновяване ключа за достъп в/ъв %1$s</string>
     <string name="passkey_selection_username">Ключ за достъп не е намерен</string>
     <string name="passkey_selection_description">Изберете съществуващ ключ за достъп</string>
-    <string name="passkey_database_username">Хранилище на KeePassDX</string>
-    <string name="passkey_locked_database_description">Изберете за отключване</string>
+    <string name="credential_provider_database_username">Хранилище на KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Изберете за отключване</string>
     <string name="passkey_username">Потребител на ключа за достъп</string>
     <string name="passkey_private_key">Частен ключ на ключа за достъп</string>
     <string name="passkey_credential_id">Идент. на регистрация на ключа за достъп</string>

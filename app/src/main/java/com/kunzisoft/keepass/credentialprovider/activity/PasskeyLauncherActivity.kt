@@ -53,8 +53,8 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAppOrigin
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.addAuthCode
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PassHelper.addAppOrigin
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PassHelper.addAuthCode
 import com.kunzisoft.keepass.credentialprovider.viewmodel.CredentialLauncherViewModel
 import com.kunzisoft.keepass.credentialprovider.viewmodel.PasskeyLauncherViewModel
 import com.kunzisoft.keepass.database.ContextualDatabase

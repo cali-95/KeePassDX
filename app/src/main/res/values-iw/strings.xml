@@ -698,8 +698,8 @@
     <string name="passkey_update_description">עדכן מפתח גישה ב-%1$s</string>
     <string name="passkey_selection_username">לא נמצא מפתח גישה</string>
     <string name="passkey_selection_description">בחר מפתח גישה קיים</string>
-    <string name="passkey_database_username">KeePassDX מסד נתונים</string>
-    <string name="passkey_locked_database_description">בחר בשביל לפתוח</string>
+    <string name="credential_provider_database_username">KeePassDX מסד נתונים</string>
+    <string name="credential_provider_locked_database_description">בחר בשביל לפתוח</string>
     <string name="passkey_username">שם משתמש למפתח גישה</string>
     <string name="passkey_private_key">מפתח פרטי למפתח גישה</string>
     <string name="passkey_credential_id">מזהה ייחודי של מפתח גישה</string>

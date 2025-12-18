@@ -80,6 +80,7 @@ object AppUtil {
     /**
      * Indicates whether the [packageName] is a web browser.
      */
+    @RequiresApi(Build.VERSION_CODES.P)
     fun Context.isWebBrowserPackage(packageName: String?): Boolean {
         if (packageName == null || packageName.isEmpty())
             return false

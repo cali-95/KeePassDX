@@ -723,13 +723,13 @@
     <string name="passkeys_backup_state_summary">Uvést, že přihlašovací údaje jsou zálohovány a chráněny proti ztrátě jednoho zařízení</string>
     <string name="credential_provider_service_subtitle">Přístupové klíče, poskytovatel automatického vyplnění</string>
     <string name="passkey">Přístupový klíč</string>
-    <string name="passkey_service_name">Poskytovatel údajů KeePassDX</string>
+    <string name="credential_provider_service_name">Poskytovatel údajů KeePassDX</string>
     <string name="passkey_creation_description">Uložit přístupový klíč do nového záznamu</string>
     <string name="passkey_update_description">Aktualizovat přístupový klíč v %1$s</string>
     <string name="passkey_selection_username">Nenalezeny žádné přístupové klíče</string>
     <string name="passkey_selection_description">Vyberte existující přístupový klíč</string>
-    <string name="passkey_database_username">Databáze KeePassDX</string>
-    <string name="passkey_locked_database_description">Vyberte k odemčení</string>
+    <string name="credential_provider_database_username">Databáze KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Vyberte k odemčení</string>
     <string name="passkey_username">Uživatelské jméno přístupového klíče</string>
     <string name="passkey_private_key">Soukromý klíč přístupového klíče</string>
     <string name="passkey_credential_id">ID údaje přístupového klíče</string>

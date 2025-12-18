@@ -710,7 +710,7 @@
     <string name="passkey_update_description">在 %1$s 中更新通行密钥‌</string>
     <string name="passkey_selection_username">未找到通行密钥‌</string>
     <string name="passkey_selection_description">选择现有通行密钥‌</string>
-    <string name="passkey_database_username">KeePassDX 数据库</string>
+    <string name="credential_provider_database_username">KeePassDX 数据库</string>
     <string name="passkey_username">通行密钥用户名</string>
     <string name="passkey_private_key">通行密钥私钥‌</string>
     <string name="passkey_credential_id">通行密钥凭据 ID‌</string>
@@ -723,9 +723,9 @@
     <string name="passkeys_auto_select_title">自动选择</string>
     <string name="passkeys_missing_signature_app_ask_title">签名缺失</string>
     <string name="passkey_user_handle">通行密钥用户句柄‌</string>
-    <string name="passkey_locked_database_description">选择以解锁</string>
+    <string name="credential_provider_locked_database_description">选择以解锁</string>
     <string name="credential_provider">凭据提供程序</string>
-    <string name="passkey_service_name">KeePassDX 凭据提供程序</string>
+    <string name="credential_provider_service_name">KeePassDX 凭据提供程序</string>
     <string name="credential_provider_service_subtitle">通行密钥、自动填充凭据提供程序‌</string>
     <string name="passkeys_privileged_apps_summary">管理自定义特权应用列表中的浏览器</string>
     <string name="passkeys_privileged_apps_ask_title">应用未被识别</string>

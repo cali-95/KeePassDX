@@ -708,13 +708,13 @@
     <string name="passkeys_backup_state_summary">Indique que las credenciales están respaldadas y protegidas contra la pérdida de un solo dispositivo</string>
     <string name="credential_provider_service_subtitle">Claves de acceso, proveedor de credenciales de autocompletar</string>
     <string name="passkey">Claves de acceso</string>
-    <string name="passkey_service_name">Proveedor de credenciales KeePassDX</string>
+    <string name="credential_provider_service_name">Proveedor de credenciales KeePassDX</string>
     <string name="passkey_creation_description">Guardar clave de acceso en nuevo apunte</string>
     <string name="passkey_update_description">Actualizar clave de acceso en %1$s</string>
     <string name="passkey_selection_username">No se ha encontrado ninguna clave de acceso</string>
     <string name="passkey_selection_description">Seleccionar una clave de acceso existente</string>
-    <string name="passkey_database_username">Base de datos KeePassDX</string>
-    <string name="passkey_locked_database_description">Seleccionar para desbloquear</string>
+    <string name="credential_provider_database_username">Base de datos KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Seleccionar para desbloquear</string>
     <string name="passkey_username">Nombre de usuario de clave de acceso</string>
     <string name="passkey_private_key">Clave privada clave de acceso</string>
     <string name="passkey_credential_id">Identificador de credencial de clave de acceso</string>

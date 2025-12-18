@@ -62,11 +62,12 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecialModeResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasswordHelper.buildPasswordResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
 import com.kunzisoft.keepass.database.element.DateInstant
@@ -503,6 +504,8 @@ class EntryEditActivity : DatabaseLockActivity(),
                                         TypeMode.DEFAULT -> {}
                                         TypeMode.MAGIKEYBOARD ->
                                             entryValidatedForKeyboardSelection(database, entry)
+                                        TypeMode.PASSWORD ->
+                                            entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
                                         TypeMode.AUTOFILL ->
@@ -514,6 +517,8 @@ class EntryEditActivity : DatabaseLockActivity(),
                                         TypeMode.DEFAULT ->
                                             entryValidatedForSave(entry)
                                         TypeMode.MAGIKEYBOARD -> {}
+                                        TypeMode.PASSWORD ->
+                                            entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
                                         TypeMode.AUTOFILL ->
@@ -549,6 +554,16 @@ class EntryEditActivity : DatabaseLockActivity(),
         // Build Autofill response with the entry selected
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             this.buildSpecialModeResponseAndSetResult(
+                entryInfo = entry.getEntryInfo(database),
+                extras = buildEntryResult(entry)
+            )
+        }
+        onValidateSpecialMode()
+    }
+
+    private fun entryValidatedForPassword(database: ContextualDatabase, entry: Entry) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            this.buildPasswordResponseAndSetResult(
                 entryInfo = entry.getEntryInfo(database),
                 extras = buildEntryResult(entry)
             )

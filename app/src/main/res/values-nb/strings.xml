@@ -715,14 +715,14 @@
     <string name="passkey_update_description">Oppdater passnøkkel i %1$s</string>
     <string name="passkey_selection_username">Ingen passnøkkel funnet</string>
     <string name="passkey_selection_description">Velg en eksisterende passnøkkel</string>
-    <string name="passkey_database_username">KeePassDX-database</string>
-    <string name="passkey_locked_database_description">Velg for å låse opp</string>
+    <string name="credential_provider_database_username">KeePassDX-database</string>
+    <string name="credential_provider_locked_database_description">Velg for å låse opp</string>
     <string name="passkey_username">Passnøkkel-brukernavn</string>
     <string name="passkey_private_key">Passnøkkel-privatnøkkel</string>
     <string name="passkey_user_handle">Passnøkkel-brukernavn</string>
     <string name="error_passkey_result">Kunne ikke returnere passnøkkelen</string>
     <string name="credential_provider">Påloggingsinformasjons-leverandør</string>
-    <string name="passkey_service_name">Påloggingsleverandør til KeePassDX</string>
+    <string name="credential_provider_service_name">Påloggingsleverandør til KeePassDX</string>
     <string name="passkey_credential_id">Passnøkkel-ID</string>
     <string name="passkey_relying_party">Passnøkkelens tillitspart</string>
     <string name="passkey_backup_eligibility">Mulighet for sikkerhetskopiering av passnøkkelen</string>

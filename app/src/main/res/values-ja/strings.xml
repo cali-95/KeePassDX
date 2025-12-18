@@ -713,13 +713,13 @@
     <string name="passkeys_backup_state_summary">認証情報がバックアップされ単一デバイスの紛失から保護されている事を示します</string>
     <string name="credential_provider_service_subtitle">パスキー、自動入力認証情報プロバイダー</string>
     <string name="passkey">パスキー</string>
-    <string name="passkey_service_name">KeePassDX 認証情報プロバイダー</string>
+    <string name="credential_provider_service_name">KeePassDX 認証情報プロバイダー</string>
     <string name="passkey_creation_description">新しいエントリにパスキーを保存</string>
     <string name="passkey_update_description">%1$s のパスキーを更新</string>
     <string name="passkey_selection_username">パスキーが見つかりません</string>
     <string name="passkey_selection_description">既存のパスキーを選択</string>
-    <string name="passkey_database_username">KeePassDX データベース</string>
-    <string name="passkey_locked_database_description">選択してロックを解除</string>
+    <string name="credential_provider_database_username">KeePassDX データベース</string>
+    <string name="credential_provider_locked_database_description">選択してロックを解除</string>
     <string name="passkey_username">パスキーのユーザー名</string>
     <string name="passkey_private_key">パスキーのプライベートキー</string>
     <string name="passkey_credential_id">パスキーの認証ID</string>

@@ -722,13 +722,13 @@
     <string name="passkeys_backup_state_summary">Указывает, резервируются ли учётные данные и защищены ли они от потери одного устройства</string>
     <string name="credential_provider_service_subtitle">Ключи доступа, поставщик учётных данных для автозаполнения</string>
     <string name="passkey">Ключ доступа</string>
-    <string name="passkey_service_name">Поставщик учётных данных KeePassDX</string>
+    <string name="credential_provider_service_name">Поставщик учётных данных KeePassDX</string>
     <string name="passkey_creation_description">Сохранить ключ доступа в новой записи</string>
     <string name="passkey_update_description">Обновить ключ доступа в %1$s</string>
     <string name="passkey_selection_username">Ключ доступа не найден</string>
     <string name="passkey_selection_description">Выберите существующий ключ доступа</string>
-    <string name="passkey_database_username">База KeePassDX</string>
-    <string name="passkey_locked_database_description">Выберите для разблокировки</string>
+    <string name="credential_provider_database_username">База KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Выберите для разблокировки</string>
     <string name="passkey_username">Пользователь ключа доступа</string>
     <string name="passkey_private_key">Закрытый ключ доступа</string>
     <string name="passkey_credential_id">ID учётных данных ключа доступа</string>

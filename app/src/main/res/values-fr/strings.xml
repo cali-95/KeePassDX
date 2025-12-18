@@ -720,13 +720,13 @@
     <string name="passkeys_backup_state_summary">Indiquer que les informations d\'authentification sont sauvegardées et protégées contre la perte d\'un seul appareil</string>
     <string name="credential_provider_service_subtitle">Clés d\'accès, Remplissage automatique fournisseur d\'authentification</string>
     <string name="passkey">Clé d\'accès</string>
-    <string name="passkey_service_name">KeePassDX Fournisseur d\'Authentification</string>
+    <string name="credential_provider_service_name">KeePassDX Fournisseur d\'Authentification</string>
     <string name="passkey_creation_description">Enregistrer la clé d\'accès dans la nouvelle entrée</string>
     <string name="passkey_update_description">Mettre à jour la clé d\'accès dans %1$s</string>
     <string name="passkey_selection_username">Aucune clé d\'accès trouvée</string>
     <string name="passkey_selection_description">Sélectionner une clé d\'accès existante</string>
-    <string name="passkey_database_username">Base de données KeePassDX</string>
-    <string name="passkey_locked_database_description">Sélectionner pour déverrouiller</string>
+    <string name="credential_provider_database_username">Base de données KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Sélectionner pour déverrouiller</string>
     <string name="passkey_username">Nom d\'Utilisateur de Clé d\'Accès</string>
     <string name="passkey_private_key">Clé Privée de Clé d\'Accès</string>
     <string name="passkey_credential_id">Identifiant d\'Authentification de Clé d\'Accès</string>

@@ -722,13 +722,13 @@
     <string name="passkeys_backup_state_summary">Показувати, що облікові дані резервно копіюються та захищені від втрати одного пристрою</string>
     <string name="credential_provider_service_subtitle">Ключі доступу, постачальник даних для автозаповнення</string>
     <string name="passkey">Ключ доступу</string>
-    <string name="passkey_service_name">Постачальник облікових даних KeePassDX</string>
+    <string name="credential_provider_service_name">Постачальник облікових даних KeePassDX</string>
     <string name="passkey_creation_description">Зберегти ключ доступу у новому записі</string>
     <string name="passkey_update_description">Оновити ключ доступу в %1$s</string>
     <string name="passkey_selection_username">Ключ доступу не знайдено</string>
     <string name="passkey_selection_description">Вибрати наявний ключ доступу</string>
-    <string name="passkey_database_username">База даних KeePassDX</string>
-    <string name="passkey_locked_database_description">Виберіть, щоб розблокувати</string>
+    <string name="credential_provider_database_username">База даних KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Виберіть, щоб розблокувати</string>
     <string name="passkey_username">Ім\'я користувача ключа доступу</string>
     <string name="passkey_private_key">Приватний ключ ключа доступу</string>
     <string name="passkey_credential_id">Ідентифікатор облікового запису ключа доступу</string>

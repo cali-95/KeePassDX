@@ -702,5 +702,5 @@
     <string name="passkeys_auto_select_title">Selectare automată</string>
     <string name="passkeys_auto_select_summary">Selectare automată dacă există o singură intrare și baza de date este deschisă, doar dacă aplicația solicitantă este compatibilă</string>
     <string name="passkeys_backup_eligibility_title">Eligibilitate pentru copia de siguranță</string>
-    <string name="passkey_locked_database_description">Selectează ca să deblochezi</string>
+    <string name="credential_provider_locked_database_description">Selectează ca să deblochezi</string>
 </resources>

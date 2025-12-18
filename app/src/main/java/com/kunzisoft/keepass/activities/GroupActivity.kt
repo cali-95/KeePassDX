@@ -73,13 +73,14 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecia
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.removeModes
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasswordHelper.buildPasswordResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.database.element.Entry
@@ -764,6 +765,9 @@ class GroupActivity : DatabaseLockActivity(),
                                 TypeMode.PASSKEY -> entry?.let {
                                     entrySelectedForPasskeySelection(database, it)
                                 }
+                                TypeMode.PASSWORD -> entry?.let {
+                                    entrySelectedForPasswordSelection(database, it)
+                                }
                                 TypeMode.AUTOFILL -> entry?.let {
                                     entrySelectedForSelection(database, it)
                                 }
@@ -942,6 +946,9 @@ class GroupActivity : DatabaseLockActivity(),
                                     entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
+                            TypeMode.PASSWORD -> {
+                                entrySelectedForPasswordSelection(database, entryVersioned)
+                            }
                             TypeMode.PASSKEY -> {
                                 entrySelectedForPasskeySelection(database, entryVersioned)
                             }
@@ -985,6 +992,17 @@ class GroupActivity : DatabaseLockActivity(),
         removeSearch()
         // Build response with the entry selected
         this.buildSpecialModeResponseAndSetResult(entry.getEntryInfo(database))
+        onValidateSpecialMode()
+    }
+
+    private fun entrySelectedForPasswordSelection(database: ContextualDatabase, entry: Entry) {
+        removeSearch()
+        // Build response with the entry selected
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            buildPasswordResponseAndSetResult(
+                entryInfo = entry.getEntryInfo(database)
+            )
+        }
         onValidateSpecialMode()
     }
 
@@ -1712,6 +1730,28 @@ class GroupActivity : DatabaseLockActivity(),
                                 TypeMode.MAGIKEYBOARD -> {
                                     activity.buildSpecialModeResponseAndSetResult(items)
                                     onValidateSpecialMode()
+                                }
+                                TypeMode.PASSWORD -> {
+                                    EntrySelectionHelper.performSelection(
+                                        items = items,
+                                        actionPopulateCredentialProvider = { entryInfo ->
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                                                activity.buildPasswordResponseAndSetResult(entryInfo)
+                                            }
+                                            onValidateSpecialMode()
+                                        },
+                                        actionEntrySelection = {
+                                            launchForSelection(
+                                                context = activity,
+                                                database = database,
+                                                typeMode = TypeMode.PASSWORD,
+                                                searchInfo = searchInfo,
+                                                activityResultLauncher = activityResultLauncher,
+                                                autoSearch = true
+                                            )
+                                            onLaunchActivitySpecialMode()
+                                        }
+                                    )
                                 }
                                 TypeMode.PASSKEY -> {
                                     // Response is build

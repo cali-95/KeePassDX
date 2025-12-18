@@ -713,7 +713,7 @@
     <string name="passkey_creation_description">Passkey in neuem Eintrag speichern</string>
     <string name="passkey_update_description">Passkey in %1$s aktualisieren</string>
     <string name="passkey_selection_description">Vorhandenen Passkey auswählen</string>
-    <string name="passkey_database_username">KeePassDX-Datenbank</string>
+    <string name="credential_provider_database_username">KeePassDX-Datenbank</string>
     <string name="passkey_username">Passkey-Benutzername</string>
     <string name="passkey_backup_state">Passkey-Backup-Status</string>
     <string name="passkey_backup_eligibility">Passkey-Backup-Erlaubnis</string>
@@ -730,8 +730,8 @@
     <string name="passkeys_backup_eligibility_summary">Bei der Erstellung festlegen, ob die Quelle für öffentliche Schlüssel-Anmeldeinformationen gesichert werden darf</string>
     <string name="passkeys_backup_state_summary">Anzeigen, dass Anmeldedaten gesichert und gegen den Verlust eines einzelnen Geräts geschützt sind</string>
     <string name="credential_provider_service_subtitle">Passkeys, Anbieter für das automatische Ausfüllen von Anmeldedaten</string>
-    <string name="passkey_service_name">KeePassDX-Anmeldeungsdatenanbieter</string>
-    <string name="passkey_locked_database_description">Zum Entsperren auswählen</string>
+    <string name="credential_provider_service_name">KeePassDX-Anmeldeungsdatenanbieter</string>
+    <string name="credential_provider_locked_database_description">Zum Entsperren auswählen</string>
     <string name="passkey_private_key">Passkey Privater Schlüssel</string>
     <string name="passkey_credential_id">Passkey-Anmeldeinformation</string>
     <string name="error_passkey_result">Passkey kann nicht zurückgegeben werden</string>

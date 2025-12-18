@@ -712,13 +712,13 @@
     <string name="passkeys_backup_state_summary">Oznaczaj, że dane uwierzytelniające są tworzone w kopii zapasowej i chronione przed utratą na pojedynczym urządzeniu</string>
     <string name="credential_provider_service_subtitle">Dostawca poświadczeń automatycznego wypełniania, kluczy dostępu</string>
     <string name="passkey">Klucz dostępu</string>
-    <string name="passkey_service_name">Dostawca poświadczeń KeePassDX</string>
+    <string name="credential_provider_service_name">Dostawca poświadczeń KeePassDX</string>
     <string name="passkey_creation_description">Zapisz klucz dostępu w nowym wpisie</string>
     <string name="passkey_update_description">Zaktualizuj klucz dostępu w %1$s</string>
     <string name="passkey_selection_username">Nie znaleziono klucza dostępu</string>
     <string name="passkey_selection_description">Wybierz istniejący klucz dostępu</string>
-    <string name="passkey_database_username">Baza danych KeePassDX</string>
-    <string name="passkey_locked_database_description">Wybierz, aby odblokować</string>
+    <string name="credential_provider_database_username">Baza danych KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Wybierz, aby odblokować</string>
     <string name="passkey_username">Nazwa użytkownika klucza dostępu</string>
     <string name="passkey_private_key">Klucz prywatny klucza dostępu</string>
     <string name="passkey_credential_id">Identyfikator poświadczenia klucza dostępu</string>

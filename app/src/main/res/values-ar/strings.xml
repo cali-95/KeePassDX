@@ -709,13 +709,13 @@
     <string name="passkeys_backup_state_summary">أشر إلى أن بيانات الاعتماد مدعومة ومحمية ضد فقدان جهاز واحد</string>
     <string name="credential_provider_service_subtitle">مفاتيح المرور، موفّر بيانات اعتماد الملء التلقائي</string>
     <string name="passkey">مفتاح المرور</string>
-    <string name="passkey_service_name">موفّر بيانات اعتماد KeePassDX</string>
+    <string name="credential_provider_service_name">موفّر بيانات اعتماد KeePassDX</string>
     <string name="passkey_creation_description">احفظ مفتاح المرور في مدخل جديد</string>
     <string name="passkey_update_description">حدِّث مفتاح المرور في %1$s</string>
     <string name="passkey_selection_username">لم يُعثر على مفتاح مرور</string>
     <string name="passkey_selection_description">حدّد مفتاح مرور موجود</string>
-    <string name="passkey_database_username">قاعدة بيانات KeePassDX</string>
-    <string name="passkey_locked_database_description">حدّد لفتح القفل</string>
+    <string name="credential_provider_database_username">قاعدة بيانات KeePassDX</string>
+    <string name="credential_provider_locked_database_description">حدّد لفتح القفل</string>
     <string name="passkey_username">اسم مستخدم مفتاح المرور</string>
     <string name="passkey_private_key">المفتاح الخاص لمفتاح المرور</string>
     <string name="passkey_credential_id">معرّف بيانات مفتاح المرور</string>

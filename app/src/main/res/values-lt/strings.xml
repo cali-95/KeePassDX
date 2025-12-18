@@ -692,13 +692,13 @@
     <string name="hide_templates_title">Slėpti šablonus</string>
     <string name="hide_templates_summary">Šablonai nėra rodomi</string>
     <string name="passkey">Prieigos raktas</string>
-    <string name="passkey_service_name">KeePassDX kredencialų teikėjas</string>
+    <string name="credential_provider_service_name">KeePassDX kredencialų teikėjas</string>
     <string name="passkey_creation_description">Išsaugoti prieigos raktą naujame įraše</string>
     <string name="passkey_update_description">Atnaujinti prieigos raktą %1$s</string>
     <string name="passkey_selection_username">Prieigos raktas nerastas</string>
     <string name="passkey_selection_description">Pasirinkti esamą prieigos raktą</string>
-    <string name="passkey_database_username">KeePassDX duomenų bazė</string>
-    <string name="passkey_locked_database_description">Pasirinkti atrakinti</string>
+    <string name="credential_provider_database_username">KeePassDX duomenų bazė</string>
+    <string name="credential_provider_locked_database_description">Pasirinkti atrakinti</string>
     <string name="passkey_username">Prieigos rakto vartotojo vardas</string>
     <string name="passkey_private_key">Prieigos rakto privatus raktas</string>
     <string name="passkey_credential_id">Prieigos rakto kredencialo ID</string>

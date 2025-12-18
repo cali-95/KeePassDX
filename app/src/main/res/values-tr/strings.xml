@@ -702,9 +702,9 @@
     <string name="passkeys_backup_eligibility_summary">Oluşturma sırasında, ortak anahtar kimlik bilgisi kaynağının yedeklenmesine izin verilip verilmeyeceğini belirleyin</string>
     <string name="passkeys_backup_state_title">Yedekleme Durumu</string>
     <string name="passkeys_backup_state_summary">Kimlik bilgilerinin yedeklendiğini ve tek bir aygıtın kaybolmasına karşı korunduğunu belirtir</string>
-    <string name="passkey_service_name">KeePassDX Kimlik Bilgisi Sağlayıcısı</string>
-    <string name="passkey_database_username">KeePassDX Veri Tabanı</string>
-    <string name="passkey_locked_database_description">Kilidini açmak için seçin</string>
+    <string name="credential_provider_service_name">KeePassDX Kimlik Bilgisi Sağlayıcısı</string>
+    <string name="credential_provider_database_username">KeePassDX Veri Tabanı</string>
+    <string name="credential_provider_locked_database_description">Kilidini açmak için seçin</string>
     <string name="passkeys">Geçiş anahtarları</string>
     <string name="passkeys_explanation_summary">Hızlı ve güvenli parolasız oturum açma için geçiş anahtarlarını yapılandırın</string>
     <string name="passkeys_preference_title">Geçiş anahtarı ayarları</string>

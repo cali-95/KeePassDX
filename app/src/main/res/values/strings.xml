@@ -760,13 +760,13 @@
     <string name="hide_templates_title">Hide templates</string>
     <string name="hide_templates_summary">Templates are not shown</string>
     <string name="passkey">Passkey</string>
-    <string name="passkey_service_name">KeePassDX Credential Provider</string>
+    <string name="credential_provider_service_name">KeePassDX Credential Provider</string>
+    <string name="credential_provider_database_username">KeePassDX Database</string>
+    <string name="credential_provider_locked_database_description">Select to unlock</string>
     <string name="passkey_creation_description">Save passkey in new entry</string>
     <string name="passkey_update_description">Update passkey in "%1$s"</string>
     <string name="passkey_selection_username">No passkey found</string>
     <string name="passkey_selection_description">Select an existing passkey</string>
-    <string name="passkey_database_username">KeePassDX Database</string>
-    <string name="passkey_locked_database_description">Select to unlock</string>
     <string name="passkey_username">Passkey Username</string>
     <string name="passkey_private_key">Passkey Private Key</string>
     <string name="passkey_credential_id">Passkey Credential Id</string>
@@ -776,6 +776,9 @@
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
     <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialIds %2$s</string>
+    <string name="password_creation_description">Save password in new entry</string>
+    <string name="password_selection_description">Select an existing password</string>
+    <string name="error_password_result">Unable to return the password</string>
     <string name="content_description_user_verification_information">User verification info</string>
     <string name="user_verification_required_title">User Verification</string>
     <string name="user_verification_required_description">Access to this data requires verification</string>

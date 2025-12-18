@@ -716,13 +716,13 @@
     <string name="passkeys_backup_state_summary">Jelzi, hogy a hitelesítési adatokról biztonsági másolat lett létrehozva, és azok egyetlen eszköz elvesztése esetén is védve vannak</string>
     <string name="credential_provider_service_subtitle">Biztonsági kulcsok, automatikus kitöltés hitelesítési adat szolgáltató</string>
     <string name="passkey">Hozzáférési kulcs</string>
-    <string name="passkey_service_name">KeePassDX hitelesítési adatok szolgáltató</string>
+    <string name="credential_provider_service_name">KeePassDX hitelesítési adatok szolgáltató</string>
     <string name="passkey_creation_description">Hozzáférési kulcs mentése új bejegyzésben</string>
     <string name="passkey_update_description">Hozzáférési kulcs frissítése a(z) %1$s fájlban</string>
     <string name="passkey_selection_username">Nem található hozzáférési kulcs</string>
     <string name="passkey_selection_description">Válasszon egy meglévő hozzáférési kulcsot</string>
-    <string name="passkey_database_username">KeePassDX adatbázis</string>
-    <string name="passkey_locked_database_description">Válassza a feloldáshoz</string>
+    <string name="credential_provider_database_username">KeePassDX adatbázis</string>
+    <string name="credential_provider_locked_database_description">Válassza a feloldáshoz</string>
     <string name="passkey_username">Hozzáférési kulcs felhasználóneve</string>
     <string name="passkey_private_key">Hozzáférési kulcs privát kulcsa</string>
     <string name="passkey_credential_id">Hozzáférési kulcs hitelesítési azonosítója</string>

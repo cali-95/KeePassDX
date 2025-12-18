@@ -38,15 +38,17 @@ data class RegisterInfo(
     }
 
     override fun getName(resources: Resources): String {
-        return username
-            ?: passkey?.relyingParty
+        if (username != null)
+            return "$username (${searchInfo.getName(resources)})"
+        return passkey?.relyingParty
             ?: appOrigin?.toName()
             ?: searchInfo.getName(resources)
     }
 
     override fun toString(): String {
-        return username
-            ?: passkey?.relyingParty
+        if (username != null)
+            return "$username ($searchInfo)"
+        return passkey?.relyingParty
             ?: appOrigin?.toName()
             ?: searchInfo.toString()
     }

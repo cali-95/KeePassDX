@@ -714,7 +714,7 @@
     <string name="passkeys_backup_eligibility_summary">Determine no tempo de criação se é permitido que seja feito o backup da fonte da credencial de chaves públicas</string>
     <string name="passkeys_backup_state_title">Estado do Backup</string>
     <string name="passkey">Chave de acesso</string>
-    <string name="passkey_service_name">Provedor de Credenciais KeePassDX</string>
+    <string name="credential_provider_service_name">Provedor de Credenciais KeePassDX</string>
     <string name="passkeys">Chaves de acesso</string>
     <string name="passkeys_explanation_summary">Configure Chaves de Acesso para um login rápido e seguro sem senha</string>
     <string name="passkeys_preference_title">Configurações de chaves de acesso</string>
@@ -727,8 +727,8 @@
     <string name="passkey_update_description">Atualizar chave de acesso em %1$s</string>
     <string name="passkey_selection_username">Nenhuma chave de acesso encontrada</string>
     <string name="passkey_selection_description">Selecione uma chave de acesso existente</string>
-    <string name="passkey_database_username">Banco de dados KeePassDX</string>
-    <string name="passkey_locked_database_description">Selecione para desbloquear</string>
+    <string name="credential_provider_database_username">Banco de dados KeePassDX</string>
+    <string name="credential_provider_locked_database_description">Selecione para desbloquear</string>
     <string name="passkey_username">Nome da chave de acesso</string>
     <string name="passkey_private_key">Chavde de acesso privada</string>
     <string name="passkey_credential_id">ID de credencial de chave de acesso</string>
