@@ -570,7 +570,7 @@ class PasskeyProviderService : CredentialProviderService() {
             context = this,
             database = mDatabase,
             searchInfo = searchInfo,
-            onItemsFound = { database, items ->
+            onItemsFound = { database, _ ->
                 if (database.isReadOnly) {
                     throw RegisterInReadOnlyDatabaseException()
                 } else {
@@ -580,28 +580,6 @@ class PasskeyProviderService : CredentialProviderService() {
                         searchInfo = searchInfo,
                         userVerification = userVerification
                     )
-                    /* TODO Overwrite
-                    // To select an existing entry and permit an overwrite
-                    Log.w(TAG, "Passkey already registered")
-                    for (entryInfo in items) {
-                        PasskeyHelper.getPendingIntent(
-                            context = applicationContext,
-                            specialMode = SpecialMode.REGISTRATION,
-                            searchInfo = searchInfo,
-                            passkeyEntryNodeId = entryInfo.id
-                        )?.let { createPendingIntent ->
-                            createEntries.add(
-                                CreateEntry(
-                                    accountName = accountName,
-                                    pendingIntent = createPendingIntent,
-                                    description = getString(
-                                        R.string.passkey_update_description,
-                                        entryInfo.passkey?.displayName
-                                    )
-                                )
-                            )
-                        }
-                    }*/
                 }
                 callback(createEntries)
             },

@@ -172,7 +172,7 @@ object PasskeyHelper {
         passkeyCreated: suspend (Passkey, AppOrigin?, PublicKeyCredentialCreationParameters) -> Unit
     ) {
         val createCredentialRequest =
-            PendingIntentHandler.Companion.retrieveProviderCreateCredentialRequest(intent)
+            PendingIntentHandler.retrieveProviderCreateCredentialRequest(intent)
                 ?: throw CreateCredentialUnknownException("could not retrieve request from intent")
         val callingAppInfo = createCredentialRequest.callingAppInfo
         val creationOptions = createCredentialRequest.retrievePasskeyCreationComponent()
@@ -194,8 +194,8 @@ object PasskeyHelper {
         val passkey = Passkey(
             username = username,
             privateKeyPem = privateKeyPem,
-            credentialId = Base64Helper.Companion.b64Encode(credentialId),
-            userHandle = Base64Helper.Companion.b64Encode(userHandle),
+            credentialId = Base64Helper.b64Encode(credentialId),
+            userHandle = Base64Helper.b64Encode(userHandle),
             relyingParty = relyingParty,
             backupEligibility = defaultBackupEligibility,
             backupState = defaultBackupState
@@ -251,7 +251,7 @@ object PasskeyHelper {
         val keyPair = publicKeyCredentialCreationParameters.signatureKey.first
         val keyTypeId = publicKeyCredentialCreationParameters.signatureKey.second
         val responseJson = FidoPublicKeyCredential(
-            id = Base64Helper.Companion.b64Encode(publicKeyCredentialCreationParameters.credentialId),
+            id = Base64Helper.b64Encode(publicKeyCredentialCreationParameters.credentialId),
             response = AuthenticatorAttestationResponse(
                 requestOptions = publicKeyCredentialCreationParameters.publicKeyCredentialCreationOptions,
                 credentialId = publicKeyCredentialCreationParameters.credentialId,
@@ -288,7 +288,7 @@ object PasskeyHelper {
         result: suspend (PublicKeyCredentialUsageParameters) -> Unit
     ) {
         val getCredentialRequest =
-            PendingIntentHandler.Companion.retrieveProviderGetCredentialRequest(intent)
+            PendingIntentHandler.retrieveProviderGetCredentialRequest(intent)
                 ?: throw CreateCredentialUnknownException("could not retrieve request from intent")
         val callingAppInfo = getCredentialRequest.callingAppInfo
         val credentialOption = getCredentialRequest.retrievePasskeyUsageComponent()
