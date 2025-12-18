@@ -24,6 +24,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StrikethroughSpan
 import android.util.AttributeSet
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -145,6 +146,11 @@ class DateTimeFieldView @JvmOverloads constructor(context: Context,
             mDateTime = try {
                 DateInstant(value)
             } catch (e: Exception) {
+                Log.e(
+                    DateTimeFieldView::class.simpleName,
+                    "Unable to parse date $value",
+                    e
+                )
                 mDefault
             }
         }
@@ -155,6 +161,11 @@ class DateTimeFieldView @JvmOverloads constructor(context: Context,
             mDefault = try {
                 DateInstant(value)
             } catch (e: Exception) {
+                Log.e(
+                    DateTimeFieldView::class.simpleName,
+                    "Unable to parse date $value",
+                    e
+                )
                 mDefault
             }
         }

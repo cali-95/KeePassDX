@@ -7,7 +7,7 @@ KeePassDX(4.3.0)
  * Field reference placeholders S: #2270 (@thegards)
  * Password Credential Provider API #2139
  * Fix Passkey in passwordless mode #2282
- * Small fixes #2289 #2277 #2068 #2288 #2276
+ * Small fixes #2289 #2277 #2068 #2288 #2276 #1793
 
 KeePassDX(4.2.4)
  * Fix remembering database location #2262

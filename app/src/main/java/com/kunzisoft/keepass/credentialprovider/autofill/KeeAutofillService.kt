@@ -52,6 +52,7 @@ import com.kunzisoft.keepass.credentialprovider.autofill.StructureParser.Compani
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.DatabaseTaskProvider
+import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.CreditCard
 import com.kunzisoft.keepass.model.RegisterInfo
@@ -60,6 +61,7 @@ import com.kunzisoft.keepass.settings.AutofillSettingsActivity
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import org.joda.time.DateTime
+import org.joda.time.Instant
 
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -427,12 +429,12 @@ class KeeAutofillService : AutofillService() {
                         searchInfo = searchInfo,
                         username = parseResult.usernameValue?.textValue?.toString(),
                         password = parseResult.passwordValue?.textValue?.toString(),
+                        expiration = DateInstant(Instant(expiration)),
                         creditCard = parseResult.creditCardNumber?.let { cardNumber ->
                             CreditCard(
-                                parseResult.creditCardHolder,
-                                cardNumber,
-                                expiration,
-                                parseResult.cardVerificationValue
+                                cardholder = parseResult.creditCardHolder,
+                                number = cardNumber,
+                                cvv = parseResult.cardVerificationValue
                             )
                         }
                     )

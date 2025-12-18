@@ -3,6 +3,7 @@ package com.kunzisoft.keepass.model
 import android.content.res.Resources
 import android.os.Parcel
 import android.os.Parcelable
+import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.utils.ObjectNameResource
 import com.kunzisoft.keepass.utils.readParcelableCompat
 
@@ -10,6 +11,7 @@ data class RegisterInfo(
     val searchInfo: SearchInfo,
     val username: String? = null,
     val password: String? = null,
+    val expiration: DateInstant? = null,
     val creditCard: CreditCard? = null,
     val passkey: Passkey? = null,
     val appOrigin: AppOrigin? = null
@@ -19,6 +21,7 @@ data class RegisterInfo(
         searchInfo = parcel.readParcelableCompat() ?: SearchInfo(),
         username = parcel.readString(),
         password = parcel.readString(),
+        expiration = parcel.readParcelableCompat(),
         creditCard = parcel.readParcelableCompat(),
         passkey = parcel.readParcelableCompat(),
         appOrigin = parcel.readParcelableCompat()
@@ -28,6 +31,7 @@ data class RegisterInfo(
         parcel.writeParcelable(searchInfo, flags)
         parcel.writeString(username)
         parcel.writeString(password)
+        parcel.writeParcelable(expiration, flags)
         parcel.writeParcelable(creditCard, flags)
         parcel.writeParcelable(passkey, flags)
         parcel.writeParcelable(appOrigin, flags)

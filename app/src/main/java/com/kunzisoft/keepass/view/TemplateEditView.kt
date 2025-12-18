@@ -19,6 +19,7 @@ import com.kunzisoft.keepass.database.element.template.TemplateField
 import com.kunzisoft.keepass.database.helper.getLocalizedName
 import com.kunzisoft.keepass.database.helper.isStandardPasswordName
 import com.kunzisoft.keepass.model.AppOriginEntryField
+import com.kunzisoft.keepass.model.CreditCardEntryFields
 import com.kunzisoft.keepass.model.DataDate
 import com.kunzisoft.keepass.model.DataTime
 import com.kunzisoft.keepass.model.FieldProtection
@@ -282,6 +283,7 @@ class TemplateEditView @JvmOverloads constructor(context: Context,
             getCustomFieldOrNull(key)?.protectedValue?.stringValue
         }
         mEntryInfo?.otpModel = OtpEntryFields.parseFields(getField)?.otpModel
+        mEntryInfo?.creditCard = CreditCardEntryFields.parseFields(getField)
         mEntryInfo?.passkey = PasskeyEntryFields.parseFields(getField)
         mEntryInfo?.appOrigin = AppOriginEntryField.parseFields(getField)
     }

@@ -35,6 +35,8 @@ import com.kunzisoft.keepass.database.element.node.NodeIdUUID
 import com.kunzisoft.keepass.database.element.node.Type
 import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.AppOriginEntryField
+import com.kunzisoft.keepass.model.CreditCard
+import com.kunzisoft.keepass.model.CreditCardEntryFields
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.model.Passkey
 import com.kunzisoft.keepass.model.PasskeyEntryFields
@@ -358,6 +360,15 @@ class Entry : Node, EntryVersionedInterface<Group> {
         return null
     }
 
+    fun getCreditCard(): CreditCard? {
+        entryKDBX?.let {
+            return CreditCardEntryFields.parseFields { key ->
+                it.getFieldValue(key)?.toString()
+            }
+        }
+        return null
+    }
+
     fun getPasskey(): Passkey? {
         entryKDBX?.let {
             return PasskeyEntryFields.parseFields { key ->
@@ -492,6 +503,8 @@ class Entry : Node, EntryVersionedInterface<Group> {
             entryInfo.customFields = getExtraFields().toMutableList()
             // Add otpElement to generate token
             entryInfo.otpModel = getOtpElement()?.otpModel
+            // Add Credit Card
+            entryInfo.creditCard = getCreditCard()
             // Add Passkey
             entryInfo.passkey = getPasskey()
             entryInfo.appOrigin = getAppOrigin()
@@ -533,6 +546,8 @@ class Entry : Node, EntryVersionedInterface<Group> {
         customData = newEntryInfo.customData
         autoType = newEntryInfo.autoType
         addExtraFields(newEntryInfo.customFields)
+        // WARNING : Custom objects like creditCard, passkey and appOrigin are not directly saved
+        // Priority to custom fields
         database?.attachmentPool?.let { binaryPool ->
             newEntryInfo.attachments.forEach { attachment ->
                 putAttachment(attachment, binaryPool)
