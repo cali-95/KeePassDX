@@ -25,7 +25,7 @@
     <string name="add_group">Csoport hozzáadása</string>
     <string name="encryption_algorithm">Titkosítási algoritmus</string>
     <string name="app_timeout">Időtúllépés</string>
-    <string name="app_timeout_summary">Tétlenség az adatbázis feloldása előtt</string>
+    <string name="app_timeout_summary">Tétlenség az adatbázis lezárása előtt</string>
     <string name="application">Alkalmazás</string>
     <string name="menu_app_settings">Alkalmazásbeállítások</string>
     <string name="brackets">Zárójelek</string>
@@ -37,7 +37,7 @@
     <string name="clipboard_timeout">Vágólap időkorlátja</string>
     <string name="clipboard_timeout_summary">A vágólapon való tárolás időtartama (ha támogatja az eszköz)</string>
     <string name="select_to_copy">%1$s másolása a vágólapra</string>
-    <string name="retrieving_db_key">Adatbázis létrehozása…</string>
+    <string name="retrieving_db_key">Adatbázis kulcsának lekérése…</string>
     <string name="database">Adatbázis</string>
     <string name="decrypting_db">Adatbázis-tartalom titkosításának feloldása…</string>
     <string name="default_checkbox">Használat alapértelmezett adatbázisként</string>
@@ -141,7 +141,7 @@
     </string-array>
     <string name="edit_entry">Bejegyzés szerkesztése</string>
     <string name="encryption">Titkosítás</string>
-    <string name="key_derivation_function">Kulcsváltozási függvény</string>
+    <string name="key_derivation_function">Kulcs-deriváló függvény</string>
     <string name="extended_ASCII">Bővített ASCII</string>
     <string name="allow">Engedélyezés</string>
     <string name="entry_not_found">A bejegyzésadatok nem találhatóak.</string>
@@ -328,12 +328,12 @@
     <string name="auto_focus_search_summary">Keresés kérése az adatbázis megnyitásakor</string>
     <string name="error_create_database">Az adatbázisfájl létrehozása sikertelen.</string>
     <string name="error_label_exists">Ez a címke már létezik.</string>
-    <string name="html_about_contribution">A <strong>szabadságunk megtartása</strong>, a <strong>hibák javítása</strong>, a <strong>funkciók hozzáadása</strong> és az <strong>állandó aktivitás</strong> érdekében számítunk a <strong>közreműködésére</strong>.</string>
+    <string name="html_about_contribution">A <strong>szabadságunk megtartása</strong>, a <strong>hibák javítása</strong>, a <strong>funkciók hozzáadása</strong> és az <strong>állandó aktivitásunk</strong> érdekében számítunk a <strong>közreműködésükre</strong>.</string>
     <string name="entry_add_attachment">Melléklet hozzáadása</string>
     <string name="entry_add_field">Mező hozzáadása</string>
     <string name="entry_password_generator">Jelszógenerátor</string>
     <string name="discard">Elvetés</string>
-    <string name="discard_changes">Elveti a változásokat\?</string>
+    <string name="discard_changes">Elveti a változtatásokat?</string>
     <string name="validate">Érvényesítés</string>
     <string name="auto_focus_search_title">Gyors keresés</string>
     <string name="contribution">Közreműködés</string>
@@ -418,7 +418,7 @@
     <string name="content_description_remove_field">Mező eltávolítása</string>
     <string name="content_description_password_length">Jelszó hossza</string>
     <string name="content_description_entry_icon">Bejegyzésikon</string>
-    <string name="content_description_repeat_toggle_password_visibility">Jelszó láthatóságának átváltásának megismétlése</string>
+    <string name="content_description_repeat_toggle_password_visibility">Jelszó láthatóság átváltásának megismétlése</string>
     <string name="content_description_node_children">Alárendelt csomópontok</string>
     <string name="delete_entered_password_summary">Törli a beírt jelszót az adatbázishoz való kapcsolódási kísérlet után</string>
     <string name="delete_entered_password_title">Jelszó törlése</string>
@@ -452,7 +452,7 @@
     <string name="search_mode">Keresési mód</string>
     <string name="subdomain_search_summary">Webdomainek keresése aldomain megszorításokkal</string>
     <string name="subdomain_search_title">Aldomain keresés</string>
-    <string name="error_registration_read_only">Az új elem mentése nem engedélyezett írásvédett adatbázisban.</string>
+    <string name="error_registration_read_only">Új elemek mentése nem engedélyezett írásvédett adatbázisokban.</string>
     <string name="error_string_type">A szöveg nem egyezik a kért elemmel.</string>
     <string name="content_description_credentials_information">Hitelesítési adatok információi</string>
     <string name="content_description_add_item">Elem hozzáadása</string>
