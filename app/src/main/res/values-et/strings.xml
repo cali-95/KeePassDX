@@ -677,7 +677,7 @@
     <string name="passkeys_privileged_apps_explanation">HOIATUS: Eesõigustega rakendus toimib lüüsina autentimise algallikaga suhtlemisel. Turvaprobleemide vältimiseks palun taga, et kasutad õiget rakendust.</string>
     <string name="passkeys_privileged_apps_ask_message">%1$s kaset pääsuvõtmega autentimiseks.\n\nKas lisame ta eesõigustega rakenduste loendisse?</string>
     <string name="passkeys_missing_signature_app_ask_title">Allkiri on puudu</string>
-    <string name="passkeys_missing_signature_app_ask_explanation">HOAITUS: See pääsuluba on loodud teise kliendi poolt või on allkiri kustutatud. Turvaprobleemide vältimiseks palun kontrolli rakendus, milles soovi end tuvastada on sama teenuse osa ning sisuliselt õige.\n\nKui rakendus on veebibrauser, siis ära lisa allkirja kirje juurde vaid seadistustes leiduva eesõigustega rakenduste loendisse.</string>
+    <string name="passkeys_missing_signature_app_ask_explanation">HOIATUS: See pääsuluba on loodud teise kliendi poolt või on allkiri kustutatud. Turvaprobleemide vältimiseks palun kontrolli, et rakendus, mida soovid autentida on osa samast teenusest ning legitiimne.\n\nKui rakendus on veebibrauser, siis ära lisa allkirja kirje juurde vaid seadistustes leiduva eesõigustega rakenduste loendisse.</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s on antud kontekstis tundmatu ja mittetunnustatud ning ta proovib autentimist olemasoleva pääsuvõtmega.</string>
     <string name="passkeys_missing_signature_app_ask_question">Kas soovid lisada rakenduse allkirja pääsuvõtme kirjele?</string>
     <string name="passkeys_auto_select_title">Automaatne valik</string>
