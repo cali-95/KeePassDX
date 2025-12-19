@@ -127,7 +127,6 @@ class KeeAutofillService : AutofillService() {
                 webDomain = parseResult.webDomain
             }
             // Add the search info to the magikeyboard service
-            // TODO Filter #1465
             MagikeyboardService.addSearchInfo(searchInfo)
 
             // Build search info only if applicationId or webDomain are not blocked
