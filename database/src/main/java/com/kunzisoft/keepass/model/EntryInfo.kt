@@ -111,6 +111,12 @@ class EntryInfo : NodeInfo {
         parcel.writeBooleanCompat(isTemplate)
     }
 
+    fun getOtpToken(): String? {
+        return otpModel?.let {
+            OtpElement(it).token
+        }
+    }
+
     fun getCustomFieldsForFilling(): List<Field> {
         return customFields.filter {
             !it.isOTP() && !it.isPasskey()

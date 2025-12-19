@@ -277,6 +277,25 @@ class StructureParser(private val structure: AssistStructure) {
                     result?.cardVerificationValueId = autofillId
                     result?.cardVerificationValue = node.autofillValue?.textValue?.toString()
                 }
+                it.contains("2fa", true)
+                        || it.contains("2fpin", true)
+                        || it.contains("auth", true)
+                        || it.contains("challenge", true)
+                        || it.contains("code", true)
+                        || it.contains("idvpin", true)
+                        || it.contains("mfa", true)
+                        || it.contains("one-time-code", true)
+                        || it.contains("one_time_password", true)
+                        || it.contains("otp", true)
+                        || it.contains("token", true)
+                        || it.contains("twofa", true)
+                        || it.contains("two-factor", true)
+                        || it.contains("twofactor", true)
+                        || it.contains("verification_pin", true) -> {
+                    Log.d(TAG, "Autofill OTP token")
+                    result?.otpTokenId = autofillId
+                    result?.otpTokenValue = node.autofillValue?.textValue?.toString()
+                }
                 // Ignore autocomplete="off"
                 // https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
                 it.equals("off", true) ||
@@ -499,9 +518,10 @@ class StructureParser(private val structure: AssistStructure) {
         var creditCardExpirationMonthId: AutofillId? = null
         var creditCardExpirationDayId: AutofillId? = null
         var cardVerificationValueId: AutofillId? = null
+        var otpTokenId: AutofillId? = null
 
         fun isValid(): Boolean {
-            return passwordId != null || creditCardNumberId != null
+            return passwordId != null || creditCardNumberId != null || otpTokenId != null
         }
 
         fun allAutofillIds(): Array<AutofillId> {
@@ -519,6 +539,9 @@ class StructureParser(private val structure: AssistStructure) {
                 all.add(it)
             }
             cardVerificationValueId?.let {
+                all.add(it)
+            }
+            otpTokenId?.let {
                 all.add(it)
             }
             return all.toTypedArray()
@@ -580,6 +603,13 @@ class StructureParser(private val structure: AssistStructure) {
 
         // the security code for the credit card (also called CVV)
         var cardVerificationValue: String? = null
+            set(value) {
+                if (allowSaveValues)
+                    field = value
+            }
+
+        // OTP Token
+        var otpTokenValue: String? = null
             set(value) {
                 if (allowSaveValues)
                     field = value

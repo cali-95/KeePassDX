@@ -324,6 +324,14 @@ object AutofillHelper {
             }
         }
 
+        // OTP
+        struct.otpTokenId?.let { otpTokenId ->
+            datasetBuilder.addValueToDatasetBuilder(
+                otpTokenId,
+                AutofillValue.forText(entryInfo.getOtpToken())
+            )
+        }
+
         val dataset = datasetBuilder.build()
         Log.d(TAG, "Autofill Dataset $dataset created")
         return dataset
