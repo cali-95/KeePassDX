@@ -131,6 +131,26 @@ class StructureParser(private val structure: AssistStructure) {
         val autofillId = node.autofillId
         node.autofillHints?.forEach {
             when {
+                // OTP recognition at first to prevent HINT_PASSWORD contained in name
+                it.contains("2fa", true)
+                        || it.contains("2fpin", true)
+                        || it.contains("auth", true)
+                        || it.contains("challenge", true)
+                        || it.contains("code", true)
+                        || it.contains("idvpin", true)
+                        || it.contains("mfa", true)
+                        || it.contains("one-time-code", true)
+                        || it.contains("one-time-password", true)
+                        || it.contains("otp", true)
+                        || it.contains("token", true)
+                        || it.contains("twofa", true)
+                        || it.contains("two-factor", true)
+                        || it.contains("twofactor", true)
+                        || it.contains("verification_pin", true) -> {
+                    Log.d(TAG, "Autofill OTP token")
+                    result?.otpTokenId = autofillId
+                    result?.otpTokenValue = node.autofillValue
+                }
                 it.contains(View.AUTOFILL_HINT_USERNAME, true)
                         || it.contains(View.AUTOFILL_HINT_EMAIL_ADDRESS, true)
                         || it.contains("email", true)
@@ -276,25 +296,6 @@ class StructureParser(private val structure: AssistStructure) {
                     Log.d(TAG, "Autofill card security code hint")
                     result?.cardVerificationValueId = autofillId
                     result?.cardVerificationValue = node.autofillValue
-                }
-                it.contains("2fa", true)
-                        || it.contains("2fpin", true)
-                        || it.contains("auth", true)
-                        || it.contains("challenge", true)
-                        || it.contains("code", true)
-                        || it.contains("idvpin", true)
-                        || it.contains("mfa", true)
-                        || it.contains("one-time-code", true)
-                        || it.contains("one_time_password", true)
-                        || it.contains("otp", true)
-                        || it.contains("token", true)
-                        || it.contains("twofa", true)
-                        || it.contains("two-factor", true)
-                        || it.contains("twofactor", true)
-                        || it.contains("verification_pin", true) -> {
-                    Log.d(TAG, "Autofill OTP token")
-                    result?.otpTokenId = autofillId
-                    result?.otpTokenValue = node.autofillValue
                 }
                 // Ignore autocomplete="off"
                 // https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
