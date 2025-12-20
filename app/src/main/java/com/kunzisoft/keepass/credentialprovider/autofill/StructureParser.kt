@@ -169,13 +169,13 @@ class StructureParser(private val structure: AssistStructure) {
                 it.equals("cc-name", true) -> {
                     Log.d(TAG, "Autofill credit card name hint")
                     result?.creditCardHolderId = autofillId
-                    result?.creditCardHolder = node.autofillValue?.textValue?.toString()
+                    result?.creditCardHolder = node.autofillValue
                 }
                 it.contains(View.AUTOFILL_HINT_CREDIT_CARD_NUMBER, true)
                         || it.equals("cc-number", true) -> {
                     Log.d(TAG, "Autofill credit card number hint")
                     result?.creditCardNumberId = autofillId
-                    result?.creditCardNumber = node.autofillValue?.textValue?.toString()
+                    result?.creditCardNumber = node.autofillValue
                 }
                 // expect date string as defined in https://html.spec.whatwg.org, e.g. 2014-12
                 it.equals("cc-exp", true) -> {
@@ -275,7 +275,7 @@ class StructureParser(private val structure: AssistStructure) {
                         || it.contains("cc-csc", true) -> {
                     Log.d(TAG, "Autofill card security code hint")
                     result?.cardVerificationValueId = autofillId
-                    result?.cardVerificationValue = node.autofillValue?.textValue?.toString()
+                    result?.cardVerificationValue = node.autofillValue
                 }
                 it.contains("2fa", true)
                         || it.contains("2fpin", true)
@@ -294,7 +294,7 @@ class StructureParser(private val structure: AssistStructure) {
                         || it.contains("verification_pin", true) -> {
                     Log.d(TAG, "Autofill OTP token")
                     result?.otpTokenId = autofillId
-                    result?.otpTokenValue = node.autofillValue?.textValue?.toString()
+                    result?.otpTokenValue = node.autofillValue
                 }
                 // Ignore autocomplete="off"
                 // https://developer.mozilla.org/en-US/docs/Web/Security/Securing_your_site/Turning_off_form_autocompletion
@@ -562,13 +562,13 @@ class StructureParser(private val structure: AssistStructure) {
                     field = value
             }
 
-        var creditCardHolder: String? = null
+        var creditCardHolder: AutofillValue? = null
             set(value) {
                 if (allowSaveValues)
                     field = value
             }
 
-        var creditCardNumber: String? = null
+        var creditCardNumber: AutofillValue? = null
             set(value) {
                 if (allowSaveValues)
                     field = value
@@ -602,14 +602,14 @@ class StructureParser(private val structure: AssistStructure) {
             }
 
         // the security code for the credit card (also called CVV)
-        var cardVerificationValue: String? = null
+        var cardVerificationValue: AutofillValue? = null
             set(value) {
                 if (allowSaveValues)
                     field = value
             }
 
         // OTP Token
-        var otpTokenValue: String? = null
+        var otpTokenValue: AutofillValue? = null
             set(value) {
                 if (allowSaveValues)
                     field = value
