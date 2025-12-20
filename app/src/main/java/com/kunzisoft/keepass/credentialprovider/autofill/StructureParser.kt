@@ -77,8 +77,8 @@ class StructureParser(private val structure: AssistStructure) {
     }
 
     private fun parseViewNode(node: AssistStructure.ViewNode): Boolean {
-        // remember this
-        if (node.className == "android.webkit.WebView") {
+        // WebView filter
+        if (node.className?.contains("webview", ignoreCase = true) == true) {
             result?.isWebView = true
         }
 
@@ -521,6 +521,8 @@ class StructureParser(private val structure: AssistStructure) {
         var otpTokenId: AutofillId? = null
 
         fun isValid(): Boolean {
+            if (isWebView)
+                return false
             return passwordId != null || creditCardNumberId != null || otpTokenId != null
         }
 
