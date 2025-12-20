@@ -316,6 +316,16 @@ class StructureParser(private val structure: AssistStructure) {
             "input" -> {
                 nodHtml.attributes?.forEach { pairAttribute ->
                     when (pairAttribute.first.lowercase(Locale.ENGLISH)) {
+                        "id", "name" -> {
+                            when (pairAttribute.second.lowercase(Locale.ENGLISH)) {
+                                "totppin" -> {
+                                    result?.otpTokenId = autofillId
+                                    result?.otpTokenValue = node.autofillValue
+                                    Log.d(TAG, "Autofill OTP token web id: ${node.htmlInfo?.tag} ${node.htmlInfo?.attributes}")
+                                    return true
+                                }
+                            }
+                        }
                         "type" -> {
                             when (pairAttribute.second.lowercase(Locale.ENGLISH)) {
                                 "tel", "email" -> {
