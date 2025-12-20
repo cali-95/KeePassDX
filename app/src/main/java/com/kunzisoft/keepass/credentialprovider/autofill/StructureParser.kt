@@ -318,8 +318,9 @@ class StructureParser(private val structure: AssistStructure) {
                     when (pairAttribute.first.lowercase(Locale.ENGLISH)) {
                         "id", "name" -> {
                             when (pairAttribute.second.lowercase(Locale.ENGLISH)) {
-                                "totppin",
-                                "mfacode" -> {
+                                "mfacode",
+                                "otpcode",
+                                "totppin", -> {
                                     result?.otpTokenId = autofillId
                                     result?.otpTokenValue = node.autofillValue
                                     Log.d(TAG, "Autofill OTP token web id: ${node.htmlInfo?.tag} ${node.htmlInfo?.attributes}")
