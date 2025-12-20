@@ -319,8 +319,12 @@ class StructureParser(private val structure: AssistStructure) {
                     when (pairAttribute.first.lowercase(Locale.ENGLISH)) {
                         "id", "name" -> {
                             when (pairAttribute.second.lowercase(Locale.ENGLISH)) {
+                                "app_otp",
+                                "app_totp",
+                                "code",
                                 "mfacode",
                                 "otpcode",
+                                "totp",
                                 "totppin", -> {
                                     result?.otpTokenId = autofillId
                                     result?.otpTokenValue = node.autofillValue
