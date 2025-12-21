@@ -429,11 +429,11 @@ class KeeAutofillService : AutofillService() {
                         username = parseResult.usernameValue?.textValue?.toString(),
                         password = parseResult.passwordValue?.textValue?.toString(),
                         expiration = DateInstant(Instant(expiration)),
-                        creditCard = parseResult.creditCardNumber?.let { cardNumber ->
+                        creditCard = parseResult.creditCardNumber?.textValue?.toString()?.let { cardNumber ->
                             CreditCard(
-                                cardholder = parseResult.creditCardHolder,
+                                cardholder = parseResult.creditCardHolder?.textValue?.toString(),
                                 number = cardNumber,
-                                cvv = parseResult.cardVerificationValue
+                                cvv = parseResult.cardVerificationValue?.textValue?.toString()
                             )
                         }
                     )

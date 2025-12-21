@@ -5,5 +5,5 @@
  * Suppression des notifications de copie dans le presse-papier #2301
  * Référence de champ S: #2270 (@thegards)
  * API du fournisseur d'identification par mot de passe #2139
- * Correction de Passkey en mode passwordless #2282
- * Petites corrections #2289 #2277 #2068 #2288 #2276 #1793
+ * Meilleure reconnaissance de formulaires #553
+ * Petites corrections #2289 #2277 #2068 #2288 #2276 #1793 #2282
