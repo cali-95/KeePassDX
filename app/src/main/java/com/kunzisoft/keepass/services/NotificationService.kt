@@ -87,12 +87,6 @@ abstract class NotificationService : Service() {
                 .setVisibility(NotificationCompat.VISIBILITY_SECRET)
     }
 
-    protected fun buildSummaryNotification(): NotificationCompat.Builder {
-        return buildNewNotification().apply {
-            setGroupSummary(true)
-        }
-    }
-
     protected fun startForegroundCompat(notificationId: Int,
                                         builder: NotificationCompat.Builder,
                                         type: NotificationServiceType
@@ -173,7 +167,22 @@ abstract class NotificationService : Service() {
         stopSelf()
     }
 
-    protected open fun buildPendingIntent(
+    protected open fun buildServicePendingIntent(
+        intent: Intent
+    ): PendingIntent {
+        return PendingIntent.getService(
+            this,
+            randomRequestCode(),
+            intent,
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+            } else {
+                PendingIntent.FLAG_UPDATE_CURRENT
+            }
+        )
+    }
+
+    protected open fun buildActivityPendingIntent(
         intent: Intent
     ): PendingIntent {
         return PendingIntent.getActivity(

@@ -25,6 +25,7 @@ import com.kunzisoft.keepass.database.exception.RegisterInReadOnlyDatabaseExcept
 import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
+import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -171,6 +172,11 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                                     entryList = entries,
                                     toast = true,
                                     autoSwitchKeyboard = mSwitchToMagikeyboard
+                                )
+                            } else {
+                                ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
+                                    context = getApplication(),
+                                    entries = entries
                                 )
                             }
                             AutofillHelper.buildResponse(

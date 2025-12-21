@@ -97,7 +97,7 @@ class KeyboardEntryNotificationService : LockNotificationService() {
 
         val pendingIntent: PendingIntent? =
             if (isAutoSwitchMagikeyboardAllowed(this)) {
-                buildPendingIntent(getSwitchMagikeyboardIntent(this))
+                buildActivityPendingIntent(getSwitchMagikeyboardIntent(this))
             } else null
 
         val entryTitle = title ?: getString(R.string.keyboard_notification_entry_content_title_text)

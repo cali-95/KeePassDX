@@ -549,7 +549,7 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
                 if (database.loaded) {
                     // Build Intents for notification action
                     // Open the start of the database workflow
-                    val pendingDatabaseIntent = buildPendingIntent(
+                    val pendingDatabaseIntent = buildActivityPendingIntent(
                         Intent(this, FileDatabaseSelectActivity::class.java)
                     )
                     val pendingDeleteIntent = PendingIntent.getBroadcast(

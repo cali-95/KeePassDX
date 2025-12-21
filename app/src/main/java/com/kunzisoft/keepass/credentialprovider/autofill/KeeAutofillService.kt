@@ -156,11 +156,6 @@ class KeeAutofillService : AutofillService() {
                         database = mDatabase,
                         searchInfo = searchInfo,
                         onItemsFound = { openedDatabase, items ->
-                            // Add OTP to clipboard notification #1347
-                            ClipboardEntryNotificationService.launchNotificationIfAllowed(
-                                context = this,
-                                otpList = items.mapNotNull { it.otpModel }
-                            )
                             // Add Autofill entries to Magic Keyboard #2024 #995
                             if (autofillSharedToMagikeyboard) {
                                 MagikeyboardService.addEntries(
@@ -168,6 +163,12 @@ class KeeAutofillService : AutofillService() {
                                     entryList = items,
                                     toast = true,
                                     autoSwitchKeyboard = switchToMagikeyboard
+                                )
+                            } else {
+                                // Add OTP to clipboard notification #1347
+                                ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
+                                    context = this,
+                                    entries = items
                                 )
                             }
                             callback.onSuccess(

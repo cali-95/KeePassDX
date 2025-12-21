@@ -452,6 +452,12 @@ object PreferencesUtil {
             ?: TimeoutHelper.DEFAULT_TIMEOUT
     }
 
+    fun isOtpNotificationEnable(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.clipboard_otp_notifications_key),
+            context.resources.getBoolean(R.bool.clipboard_otp_notifications_default))
+    }
+
     fun getDeviceUnlockTimeout(context: Context): Long {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getString(context.getString(R.string.temp_device_unlock_timeout_key),
@@ -844,6 +850,7 @@ object PreferencesUtil {
                 context.getString(R.string.lock_database_back_root_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.lock_database_show_button_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.allow_copy_password_key) -> editor.putBoolean(name, value.toBoolean())
+                context.getString(R.string.clipboard_otp_notifications_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.remember_database_locations_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.show_recent_files_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.hide_broken_locations_key) -> editor.putBoolean(name, value.toBoolean())

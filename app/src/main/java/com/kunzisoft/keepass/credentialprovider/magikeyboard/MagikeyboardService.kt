@@ -59,6 +59,7 @@ import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.otp.OtpEntryFields.OTP_TOKEN_FIELD
+import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.KeyboardEntryNotificationService
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.AppUtil.isWebBrowserPackage
@@ -584,6 +585,11 @@ class MagikeyboardService : InputMethodService(),
             toast: Boolean = false,
             autoSwitchKeyboard: Boolean = false
         ) {
+            // Open OTP notification
+            ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
+                context = context,
+                entries = entryList
+            )
             // Add a new entry if keyboard activated
             if (context.isMagikeyboardActivated()) {
                 val newList = entryList.map { it.id }

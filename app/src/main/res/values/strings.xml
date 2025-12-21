@@ -45,6 +45,8 @@
     <string name="clipboard_error_clear">Could not clear clipboard</string>
     <string name="clipboard_timeout">Clipboard timeout</string>
     <string name="clipboard_timeout_summary">Duration of storage in the clipboard (if supported by your device)</string>
+    <string name="clipboard_otp_notifications_title">OTP notification</string>
+    <string name="clipboard_otp_notifications_summary">Open a notification to copy the OTP from entries populated with autofill or magikeyboard</string>
     <string name="content_description_background">Background</string>
     <string name="content_description_open_file">Open file</string>
     <string name="content_description_node_children">Node children</string>

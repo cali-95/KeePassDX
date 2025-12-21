@@ -124,6 +124,8 @@
     <string name="clipboard_explanation_key" translatable="false">clipboard_explanation_key</string>
     <string name="clipboard_timeout_key" translatable="false">clip_timeout_key</string>
     <string name="clipboard_timeout_default" translatable="false">20000</string>
+    <string name="clipboard_otp_notifications_key" translatable="false">clipboard_otp_notifications_key</string>
+    <bool name="clipboard_otp_notifications_default" translatable="false">false</bool>
     <string name="credential_provider_key" translatable="false">credential_provider_key</string>
     <string name="settings_credential_provider_enable_key" translatable="false">settings_credential_provider_enable_key</string>
     <bool name="settings_credential_provider_enable_default" translatable="false">false</bool>

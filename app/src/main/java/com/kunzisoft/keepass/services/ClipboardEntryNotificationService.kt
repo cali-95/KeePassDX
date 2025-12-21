@@ -22,11 +22,13 @@ package com.kunzisoft.keepass.services
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import com.kunzisoft.keepass.R
+import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.model.OtpModel
 import com.kunzisoft.keepass.otp.OtpElement
+import com.kunzisoft.keepass.otp.OtpType
+import com.kunzisoft.keepass.settings.PreferencesUtil.isOtpNotificationEnable
 import com.kunzisoft.keepass.timeout.ClipboardHelper
 import com.kunzisoft.keepass.utils.getParcelableExtraCompat
 import com.kunzisoft.keepass.utils.getParcelableList
@@ -67,7 +69,7 @@ class ClipboardEntryNotificationService : LockNotificationService() {
                 otpModelToCopy?.let {
                     copyToClipboard(OtpElement(otpModelToCopy).token)
                 }
-                stopSelf()
+                stopService()
             }
             else -> {}
         }
@@ -77,16 +79,12 @@ class ClipboardEntryNotificationService : LockNotificationService() {
     private fun newNotification(otpModels: List<OtpModel>) {
         // Retrieve the first OTP
         val firstOtpModel = otpModels[0]
+        val otpElement = OtpElement(firstOtpModel)
         val builder = buildNewNotification()
                 .setSmallIcon(R.drawable.notification_ic_clipboard_key_24dp)
                 .setContentTitle(firstOtpModel.toString())
                 .setAutoCancel(false)
-        builder.setContentText(
-            getString(
-            R.string.select_to_copy,
-            firstOtpModel.toString()
-            )
-        )
+        builder.setContentText(otpElement.token)
         builder.setContentIntent(buildCopyPendingIntent(firstOtpModel))
         // Add others OTP
         if (otpModels.size > 1) {
@@ -94,28 +92,42 @@ class ClipboardEntryNotificationService : LockNotificationService() {
                 builder.addAction(
                     R.drawable.notification_ic_clipboard_key_24dp,
                     otpModels[i].toString(),
-                    buildCopyPendingIntent(otpModels[i])
+                    buildChangeOtpPendingIntent(otpModels[i])
                 )
             }
         }
-
+        if (otpElement.type == OtpType.TOTP) {
+            defineTimerJob(
+                builder,
+                type = NotificationServiceType.CLIPBOARD,
+                timeoutMilliseconds = otpElement.period * 1000L
+            ) {
+                stopService()
+            }
+        }
         notificationManager?.notify(notificationId, builder.build())
     }
 
+    private fun buildChangeOtpPendingIntent(otpToOpen: OtpModel): PendingIntent {
+        return buildServicePendingIntent(
+            Intent(
+                this,
+                ClipboardEntryNotificationService::class.java
+            ).apply {
+                action = ACTION_NEW_NOTIFICATION
+                putParcelableList(EXTRA_LIST_OTP, listOf(otpToOpen))
+            }
+        )
+    }
+
     private fun buildCopyPendingIntent(otpToCopy: OtpModel): PendingIntent {
-        return PendingIntent.getService(
-            this, 0,
+        return buildServicePendingIntent(
             Intent(
                 this,
                 ClipboardEntryNotificationService::class.java
             ).apply {
                 action = ACTION_COPY_CLIPBOARD
                 putExtra(EXTRA_OTP_TO_COPY, otpToCopy)
-            },
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-            } else {
-                PendingIntent.FLAG_UPDATE_CURRENT
             }
         )
     }
@@ -138,13 +150,17 @@ class ClipboardEntryNotificationService : LockNotificationService() {
         const val ACTION_NEW_NOTIFICATION = "com.kunzisoft.keepass.ACTION_NEW_NOTIFICATION"
         const val ACTION_COPY_CLIPBOARD = "com.kunzisoft.keepass.ACTION_COPY_CLIPBOARD"
 
-        fun launchNotificationIfAllowed(context: Context, otpList: List<OtpModel>) {
+        fun launchOtpNotificationIfAllowed(
+            context: Context,
+            entries: List<EntryInfo>
+        ) {
             var startService = false
             val intent = Intent(
                 context,
                 ClipboardEntryNotificationService::class.java
             )
-            if (otpList.isNotEmpty()) {
+            val otpList = entries.mapNotNull { it.otpModel }
+            if (otpList.isNotEmpty() && isOtpNotificationEnable(context)) {
                 checkNotificationsPermission(context, showError = false) {
                     startService = true
                     context.startService(intent.apply {
