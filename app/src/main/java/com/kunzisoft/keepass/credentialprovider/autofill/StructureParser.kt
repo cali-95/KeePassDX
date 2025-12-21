@@ -34,7 +34,10 @@ import java.util.Locale
  * Parse AssistStructure and guess username and password fields.
  */
 @RequiresApi(api = Build.VERSION_CODES.O)
-class StructureParser(private val structure: AssistStructure) {
+class StructureParser(
+    private val structure: AssistStructure,
+    private val webViewDenied: Boolean = true
+) {
     private var result: Result? = null
     private var usernameIdCandidate: AutofillId? = null
     private var usernameValueCandidate: AutofillValue? = null
@@ -77,9 +80,11 @@ class StructureParser(private val structure: AssistStructure) {
     }
 
     private fun parseViewNode(node: AssistStructure.ViewNode): Boolean {
-        // remember this
-        if (node.className == "android.webkit.WebView") {
+        // WebView filter
+        if (node.className?.contains("webview", ignoreCase = true) == true) {
             result?.isWebView = true
+            if (webViewDenied)
+                return false
         }
 
         // Get the domain of a web app
