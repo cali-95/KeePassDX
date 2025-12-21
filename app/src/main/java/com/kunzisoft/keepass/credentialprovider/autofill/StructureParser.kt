@@ -132,7 +132,9 @@ class StructureParser(private val structure: AssistStructure) {
         node.autofillHints?.forEach {
             when {
                 // OTP recognition at first to prevent HINT_PASSWORD contained in name
-                it.contains("one-time-code", true)
+                // https://developer.android.com/reference/androidx/autofill/HintConstants#AUTOFILL_HINT_2FA_APP_OTP()
+                it.contains("2faAppOTPCode", true)
+                        || it.contains("one-time-code", true)
                         || it.contains("one-time-password", true) -> {
                     Log.d(TAG, "Autofill OTP token")
                     result?.otpTokenId = autofillId
