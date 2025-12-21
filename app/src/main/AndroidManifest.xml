@@ -233,6 +233,11 @@
             android:enabled="true"
             android:exported="false" />
         <service
+            android:name="com.kunzisoft.keepass.services.ClipboardEntryNotificationService"
+            android:foregroundServiceType="specialUse"
+            android:enabled="true"
+            android:exported="false" />
+        <service
             android:name="com.kunzisoft.keepass.services.KeyboardEntryNotificationService"
             android:foregroundServiceType="specialUse"
             android:enabled="true"

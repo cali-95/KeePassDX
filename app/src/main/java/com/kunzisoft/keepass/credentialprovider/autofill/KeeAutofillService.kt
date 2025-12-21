@@ -57,6 +57,7 @@ import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.CreditCard
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
+import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.settings.AutofillSettingsActivity
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
@@ -155,6 +156,11 @@ class KeeAutofillService : AutofillService() {
                         database = mDatabase,
                         searchInfo = searchInfo,
                         onItemsFound = { openedDatabase, items ->
+                            // Add OTP to clipboard notification #1347
+                            ClipboardEntryNotificationService.launchNotificationIfAllowed(
+                                context = this,
+                                otpList = items.mapNotNull { it.otpModel }
+                            )
                             // Add Autofill entries to Magic Keyboard #2024 #995
                             if (autofillSharedToMagikeyboard) {
                                 MagikeyboardService.addEntries(
