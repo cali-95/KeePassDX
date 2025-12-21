@@ -132,21 +132,8 @@ class StructureParser(private val structure: AssistStructure) {
         node.autofillHints?.forEach {
             when {
                 // OTP recognition at first to prevent HINT_PASSWORD contained in name
-                it.contains("2fa", true)
-                        || it.contains("2fpin", true)
-                        || it.contains("auth", true)
-                        || it.contains("challenge", true)
-                        || it.contains("code", true)
-                        || it.contains("idvpin", true)
-                        || it.contains("mfa", true)
-                        || it.contains("one-time-code", true)
-                        || it.contains("one-time-password", true)
-                        || it.contains("otp", true)
-                        || it.contains("token", true)
-                        || it.contains("twofa", true)
-                        || it.contains("two-factor", true)
-                        || it.contains("twofactor", true)
-                        || it.contains("verification_pin", true) -> {
+                it.contains("one-time-code", true)
+                        || it.contains("one-time-password", true) -> {
                     Log.d(TAG, "Autofill OTP token")
                     result?.otpTokenId = autofillId
                     result?.otpTokenValue = node.autofillValue
@@ -319,13 +306,25 @@ class StructureParser(private val structure: AssistStructure) {
                     when (pairAttribute.first.lowercase(Locale.ENGLISH)) {
                         "id", "name" -> {
                             when (pairAttribute.second.lowercase(Locale.ENGLISH)) {
+                                "2fa",
+                                "2fpin",
                                 "app_otp",
                                 "app_totp",
+                                "auth",
+                                "challenge",
                                 "code",
+                                "idvpin",
+                                "mfa",
                                 "mfacode",
+                                "otp",
                                 "otpcode",
+                                "token",
                                 "totp",
-                                "totppin", -> {
+                                "totppin",
+                                "two-factor",
+                                "twofa",
+                                "twofactor",
+                                "verification_pin" -> {
                                     result?.otpTokenId = autofillId
                                     result?.otpTokenValue = node.autofillValue
                                     Log.d(TAG, "Autofill OTP token web id: ${node.htmlInfo?.tag} ${node.htmlInfo?.attributes}")
