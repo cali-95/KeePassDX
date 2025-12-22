@@ -73,7 +73,7 @@
     <string name="error_no_name">Namen eingeben.</string>
     <string name="error_nokeyfile">Schlüsseldatei auswählen.</string>
     <string name="error_out_of_memory">Zu wenig Speicher, um die gesamte Datenbank zu laden.</string>
-    <string name="error_pass_gen_type">Mindestens eine Art der Passwortgenerierung muss ausgewählt sein.</string>
+    <string name="error_pass_gen_type">Mindestens eine Art der Passwortgenerierung muss ausgewählt werden.</string>
     <string name="error_pass_match">Die Passwörter stimmen nicht überein.</string>
     <string name="error_rounds_too_large">Zu viele „Verschlüsselungsrunden“. Wird auf 2147483648 eingestellt.</string>
     <string name="error_string_key">Jeder Text braucht einen Feldnamen.</string>
@@ -138,7 +138,7 @@
     <string name="unsupported_db_version">Nicht unterstützte Datenbankversion.</string>
     <string name="uppercase">Großbuchstaben</string>
     <string name="warning">Warnung</string>
-    <string name="warning_password_encoding">Passwortzeichen in der Datenbank vermeiden, die kein Textkodierungsformat besitzen (nicht erkannte Zeichen werden in denselben Buchstaben umgewandelt).</string>
+    <string name="warning_password_encoding">Passwortzeichen in der Datenbank vermeiden, die kein Textcodierungsformat besitzen (nicht erkannte Zeichen werden in denselben Buchstaben umgewandelt).</string>
     <string name="version_label">Version %1$s</string>
     <string name="education_unlock_summary">Das Passwort bzw. die Schlüsseldatei eingeben, um die Datenbank zu öffnen.
 \n
@@ -196,7 +196,7 @@
     <string name="sort_last_access_time">Zugriffsdatum</string>
     <string name="autofill">Automatisches Ausfüllen</string>
     <string name="autofill_sign_in_prompt">Mit KeePassDX anmelden</string>
-    <string name="set_credential_provider_service_title">Standard-Autofill-Service festlegen</string>
+    <string name="set_credential_provider_service_title">Anbieterdienst für Anmeldeinformationen</string>
     <string name="autofill_explanation_summary">Automatisches Ausfüllen konfigurieren, um Formulare in anderen Apps schnell auszufüllen</string>
     <string name="autofill_select_entry">Eintrag auswählen …</string>
     <string name="clipboard">Zwischenablage</string>
@@ -227,13 +227,13 @@
     <string name="education_select_database_title">Vorhandene Datenbank öffnen</string>
     <string name="education_select_database_summary">Öffnet über den Dateimanager eine früher erstellte Datenbankdatei, um sie weiterzuverwenden.</string>
     <string name="education_new_node_title">Datenbankelemente hinzufügen</string>
-    <string name="education_new_node_summary">Einträge helfen dabei die digitalen Identitäten zu verwalten.\n\nGruppen/Ordner gliedern die Einträge innerhalb der Datenbank.</string>
+    <string name="education_new_node_summary">Einträge helfen dabei, die digitalen Identitäten zu verwalten.\n\nGruppen/Ordner gliedern die Einträge innerhalb der Datenbank.</string>
     <string name="education_search_title">Einträge durchsuchen</string>
     <string name="education_search_summary">Titel, Benutzernamen oder Inhalt anderer Felder eingeben, um Passwörter zu finden.</string>
     <string name="education_entry_edit_title">Eintrag bearbeiten</string>
     <string name="education_entry_edit_summary">Dem Eintrag eigene Felder hinzufügen. Die Felder können mit Querverweisen aus anderen Einträgen ergänzt werden.</string>
     <string name="education_generate_password_title">Ein starkes Passwort erstellen</string>
-    <string name="education_generate_password_summary">Ein starkes Passwort, das mit dem Eintrag verbunden wird, kann einfach anhand von Formularkriterien festgelegt werden und bitte nicht vergessen dieses Passwort zu sichern.</string>
+    <string name="education_generate_password_summary">Ein starkes Passwort, das mit dem Eintrag verbunden wird, kann einfach anhand von Formularkriterien festgelegt werden und bitte nicht vergessen, dieses Passwort zu sichern.</string>
     <string name="education_entry_new_field_title">Eigene Felder hinzufügen</string>
     <string name="education_entry_new_field_summary">Ein zusätzliches Feld einfügen, einen Wert hinzufügen und diesen optional schützen.</string>
     <string name="education_unlock_title">Datenbank entsperren</string>
@@ -247,10 +247,10 @@
     <string name="education_sort_summary">Wählen, wie Einträge und Gruppen sortiert werden.</string>
     <string name="education_donation_title">Mitmachen</string>
     <string name="education_donation_summary">Mithelfen, um Stabilität und Sicherheit zu verbessern sowie weitere Funktionen zu ermöglichen.</string>
-    <string name="html_text_ad_free">Anders als viele Passwortmanager ist dieser &lt;strong&gt;werbefrei&lt;/strong&gt;, &lt;strong&gt;quelloffen&lt;/strong&gt;, &lt;strong&gt;freie Copyleft-Software&lt;/strong&gt; und keine persönlichen Daten werden auf Servern gesammelt, egal welche Version man verwendet.</string>
+    <string name="html_text_ad_free">Anders als viele Passwortmanager ist dieser <strong>werbefrei</strong>, <strong>quelloffen</strong>, <strong>freie Copyleft-Software</strong>. Es werden keine persönlichen Daten auf Servern gesammelt, egal, welche Version man verwendet.</string>
     <string name="html_text_buy_pro">Mit dem Kauf der Pro-Version erhältst du Zugriff auf diesen &lt;strong&gt;visuellen Stil&lt;/strong&gt; und unterstützt insbesondere &lt;strong&gt;die Umsetzung gemeinschaftlicher Projekte.&lt;/strong&gt;</string>
     <string name="html_text_feature_generosity">Dieser &lt;strong&gt;visuelle Stil&lt;/strong&gt; ist dank deiner Großzügigkeit verfügbar.</string>
-    <string name="html_text_donation">Mit &lt;strong&gt;Beitragen&lt;/strong&gt; zum Projekt &lt;i&gt;(finanziell, Code, Übersetzung)&lt;/i&gt; wird sichergestellt, dass es weiterlebt und gedeiht, und außerdem berechtigt das für den Vorgang der &lt;strong&gt;Design&lt;/strong&gt;-Freischaltung.</string>
+    <string name="html_text_donation">Mit <strong>Beitragen</strong> zum Projekt <i>(finanziell, Code, Übersetzung)</i> wird sichergestellt, dass es weiterlebt und gedeiht, und außerdem berechtigt es für den Vorgang der <strong>Design</strong>-Freischaltung.</string>
     <string name="html_text_dev_feature">Diese Funktion ist &lt;strong&gt;in Entwicklung&lt;/strong&gt; und erfordert &lt;strong&gt;deinen Beitrag&lt;/strong&gt;, um bald verfügbar zu sein.</string>
     <string name="html_text_dev_feature_buy_pro">Durch den Kauf der &lt;strong&gt;Pro-Version&lt;/strong&gt;,</string>
     <string name="html_text_dev_feature_contibute">Durch deinen &lt;strong&gt;Beitrag&lt;/strong&gt;,</string>
@@ -534,7 +534,7 @@
     <string name="error_upload_file">Beim Hochladen der Datei ist ein Fehler aufgetreten.</string>
     <string name="import_app_properties_title">App-Einstellungen importieren</string>
     <string name="error_start_database_action">Beim Ausführen einer Aktion in der Datenbank ist ein Fehler aufgetreten.</string>
-    <string name="error_otp_type">Der vorhandene OTP-Typ wird von diesem Formular nicht erkannt, und seine Validierung kann Token möglicherweise nicht mehr korrekt erzeugen.</string>
+    <string name="error_otp_type">Der vorhandene OTP-Typ wird von diesem Formular nicht erkannt und seine Validierung kann Token möglicherweise nicht mehr korrekt erzeugen.</string>
     <string name="content_description_otp_information">Informationen zu Einmalpasswörtern</string>
     <string name="warning_database_revoked">Auf die Datei kann nicht zugegriffen werden. Bitte die Datenbank schließen und von ihrem Speicherort aus erneut öffnen.</string>
     <string name="error_export_app_properties">Fehler beim Exportieren der App-Einstellungen.</string>
@@ -723,7 +723,7 @@
     <string name="passkey_username">Passkey-Benutzername</string>
     <string name="passkey_backup_state">Passkey-Backup-Status</string>
     <string name="passkey_backup_eligibility">Passkey-Backup-Erlaubnis</string>
-    <string name="passkeys_close_database_summary">Datenbank nach der Passwortauswahl schließen</string>
+    <string name="passkeys_close_database_summary">Datenbank nach der Passkey-Auswahl schließen</string>
     <string name="credential_provider">Anmeldeinformationsanbieter</string>
     <string name="passkeys_explanation_summary">Passkeys für eine schnelle und sichere Anmeldung ohne Passwort konfigurieren</string>
     <string name="passkeys_privileged_apps_summary">Browser in der benutzerdefinierten Liste privilegierter Apps verwalten</string>
@@ -732,11 +732,11 @@
     <string name="passkeys_missing_signature_app_ask_explanation">WARNUNG: Der Passkey wurde von einem anderen Client erstellt oder die Signatur wurde gelöscht. Um Sicherheitsrisiken zu vermeiden, sollte die zu authentifizierende App zum selben Dienst gehören und legitimiert sein.\nWenn es sich bei der App um einen Browser handelt, dann die Signatur nicht zum Eintrag, sondern zur Liste der privilegierten Apps in den Einstellungen hinzufügen.</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s wird nicht erkannt und versucht, sich mit einem vorhandenen Passkey zu authentifizieren.</string>
     <string name="passkeys_missing_signature_app_ask_question">App-Signatur zum Passkey-Eintrag hinzufügen?</string>
-    <string name="passkeys_auto_select_summary">Automatische Auswahl, wenn nur ein Eintrag vorhanden und die Datenbank geöffnet ist, und nur, wenn die anfragende App kompatibel ist</string>
+    <string name="passkeys_auto_select_summary">Automatische Auswahl, wenn nur ein Eintrag vorhanden und die Datenbank geöffnet ist, jedoch nur, wenn die anfragende App kompatibel ist</string>
     <string name="passkeys_backup_eligibility_summary">Bei der Erstellung festlegen, ob die Quelle für öffentliche Schlüssel-Anmeldeinformationen gesichert werden darf</string>
     <string name="passkeys_backup_state_summary">Anzeigen, dass Anmeldedaten gesichert und gegen den Verlust eines einzelnen Geräts geschützt sind</string>
     <string name="credential_provider_service_subtitle">Passkeys, Anbieter für das automatische Ausfüllen von Anmeldedaten</string>
-    <string name="passkey_service_name">KeePassDX-Anmeldeungsdatenanbieter</string>
+    <string name="passkey_service_name">KeePassDX-Anmeldedatenanbieter</string>
     <string name="passkey_locked_database_description">Zum Entsperren auswählen</string>
     <string name="passkey_private_key">Passkey Privater Schlüssel</string>
     <string name="passkey_credential_id">Passkey-Anmeldeinformation</string>
