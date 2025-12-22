@@ -347,7 +347,7 @@
     <string name="enable">Aktivieren</string>
     <string name="disable">Deaktivieren</string>
     <string name="biometric_auto_open_prompt_title">Abfrage automatisch öffnen</string>
-    <string name="biometric_auto_open_prompt_summary">Die Geräteentsperrung automatisch abfragen, falls die Datenbank dafür eingerichtet ist</string>
+    <string name="biometric_auto_open_prompt_summary">Die Geräteentsperrung automatisch anfordern, wenn die Datenbank dafür eingerichtet ist</string>
     <string name="master_key">Hauptschlüssel</string>
     <string name="security">Sicherheit</string>
     <string name="entry_history">Verlauf</string>
@@ -496,7 +496,7 @@
     <string name="keyboard_save_search_info_title">Geteilte Informationen speichern</string>
     <string name="warning_empty_recycle_bin">Alle Knoten unwiderruflich aus dem Papierkorb löschen\?</string>
     <string name="error_field_name_already_exists">Der Feldname existiert bereits.</string>
-    <string name="device_unlock_prompt_store_credential_message">Falls die Geräteentsperrung verwendet wird, ist es immer noch notwendig, sich die Hauptzugangsdaten für den Tresor zu merken.</string>
+    <string name="device_unlock_prompt_store_credential_message">Wenn die Geräteentsperrungserkennung verwendet wird, ist es immer noch notwendig, sich die Hauptzugangsdaten für den Tresor zu merken.</string>
     <string name="menu_keystore_remove_key">Schlüssel für Geräteentsperrung löschen</string>
     <string name="device_unlock_prompt_store_credential_title">Verknüpfung mit Geräteentsperrung</string>
     <string name="education_device_unlock_summary">Eigenes Passwort mit Biometrie- oder Geräteanmeldedaten verknüpfen, um die Datenbank schnell zu entsperren.</string>
@@ -557,7 +557,7 @@
     <string name="unit_byte">B</string>
     <string name="download_canceled">Abgebrochen!</string>
     <string name="autofill_inline_suggestions_keyboard">Vorschläge zum automatischen Ausfüllen hinzugefügt.</string>
-    <string name="autofill_inline_suggestions_summary">Falls möglich, Vorschläge zum automatischen Ausfüllen direkt auf kompatibler Tastatur anzeigen</string>
+    <string name="autofill_inline_suggestions_summary">Wenn möglich, Vorschläge zum automatischen Ausfüllen direkt auf kompatibler Tastatur anzeigen</string>
     <string name="properties">Eigenschaften</string>
     <string name="description_app_properties">KeePassDX-Eigenschaften zur Verwaltung der App-Einstellungen</string>
     <string name="secure_note">Sicherer Hinweis</string>
@@ -738,7 +738,7 @@
     <string name="credential_provider_service_subtitle">Passkeys, Anbieter für das automatische Ausfüllen von Anmeldedaten</string>
     <string name="passkey_service_name">KeePassDX-Anmeldedatenanbieter</string>
     <string name="passkey_locked_database_description">Zum Entsperren auswählen</string>
-    <string name="passkey_private_key">Passkey Privater Schlüssel</string>
+    <string name="passkey_private_key">Privater Schlüssel für Passkey</string>
     <string name="passkey_credential_id">Passkey-Anmeldeinformation</string>
     <string name="error_passkey_result">Passkey kann nicht zurückgegeben werden</string>
     <string name="passkey_user_handle">Passkey-Benutzerkennung</string>
