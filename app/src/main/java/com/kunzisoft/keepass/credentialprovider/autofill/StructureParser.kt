@@ -83,8 +83,12 @@ class StructureParser(
         // WebView filter
         if (node.className?.contains("webview", ignoreCase = true) == true) {
             result?.isWebView = true
-            if (webViewDenied)
+            if (webViewDenied) {
+                Log.w(TAG, "Blocking webview Autofill for ${node.className}")
                 return false
+            } else {
+                Log.d(TAG, "Enabling webview Autofill for ${node.className}")
+            }
         }
 
         // Get the domain of a web app
