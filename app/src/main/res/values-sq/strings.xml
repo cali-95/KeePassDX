@@ -389,7 +389,7 @@
     <string name="success_export_app_properties">Rregullimet e aplikacionit u eksportuan</string>
     <string name="encryption_explanation">Algoritëm fshehtëzimi të dhënash i përdorur për krejt të dhënat</string>
     <string name="rounds_explanation">Më tepër raunde fshehtëzimi furnizojnë mbrojtje më të madhe kundër sulmesh hyrjeje me zor, por mund të ngadalësojnë vërtet ngarkimin dhe ruajtjen e gjërave.</string>
-    <string name="parallelism_explanation">Shkallë paralelizmi (d.m.th. numër rrjedhash) të përdorur nga funksionimi i derivimit të kyçeve.</string>
+    <string name="parallelism_explanation">Shkallë paralelizmi (d.m.th. numër rrjedhash) të përdorur nga funksioni i përftimit të kyçeve.</string>
     <string name="filter">Filtër</string>
     <string name="sort_db">Në rend natyror</string>
     <string name="warning_database_info_changed_options_read_only">Ringarko bazën e të dhënave me ndryshimet më të reja.</string>
@@ -481,7 +481,7 @@
     <string name="file_not_found_content">S’u gjet kartelë</string>
     <string name="show_otp_token_summary">Bën shfaqjen e token-ëve OTP te lista e zërave</string>
     <string name="menu_database_settings_summary">Tejtëdhëna, kosh ricklimesh, gjedhe, historik</string>
-    <string name="menu_security_settings_summary">Fshehtëzim, funksion derivimi kyçesh</string>
+    <string name="menu_security_settings_summary">Fshehtëzim, funksion përftimi kyçesh</string>
     <string name="master_key_settings_summary">Ndryshojeni, rinovim</string>
     <string name="menu_move">Lëvize</string>
     <string name="menu_merge_database">Përzieni të dhëna</string>
@@ -490,7 +490,7 @@
     <string name="read_only_warning">Në varësi të përgjegjësit tuaj të kartelave, KeePassDX-i mund të mos lejojë të shkruhet në depozitën tuaj.</string>
     <string name="remember_database_locations_summary">Ndjek se ku depozitohen bazat e të dhënave</string>
     <string name="error_export_app_properties">Gabim gjatë eksportimit të rregullimeve të aplikacionit.</string>
-    <string name="memory_usage_explanation">Sasi kujtese për t’u përdorur nga funksioni i derivimit të kyçeve.</string>
+    <string name="memory_usage_explanation">Sasi kujtese për t’u përdorur nga funksioni i përftimit të kyçeve.</string>
     <string name="command_execution">Po përmbushet urdhri…</string>
     <string name="sort_ascending">Më i ulti së pari ↓</string>
     <string name="sort_recycle_bin_bottom">Koshi i riciklimeve në fund</string>
@@ -697,4 +697,5 @@
     <string name="user_verification_required_description">Hyrja në këto të dhëna lyp verifikim</string>
     <string name="user_verification_database_credential">Jepni katër shenjat e para të fjalëkalimit të bazës suaj të të dhënave</string>
     <string name="first_chars">Shenja e parë</string>
+    <string name="clipboard_otp_notifications_summary">Hap një njoftim të kopjohet OTP nga zëra të populluar me vetëplotësim, ose me Magikeyboard</string>
 </resources>
