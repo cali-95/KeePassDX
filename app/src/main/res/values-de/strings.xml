@@ -247,7 +247,7 @@
     <string name="education_sort_summary">Wählen, wie Einträge und Gruppen sortiert werden.</string>
     <string name="education_donation_title">Mitmachen</string>
     <string name="education_donation_summary">Mithelfen, um Stabilität und Sicherheit zu verbessern sowie weitere Funktionen zu ermöglichen.</string>
-    <string name="html_text_ad_free">Anders als viele Passwortmanager ist dieser <strong>werbefrei</strong>, <strong>quelloffen</strong>, <strong>freie Copyleft-Software</strong>. Es werden keine persönlichen Daten auf Servern gesammelt, egal, welche Version man verwendet.</string>
+    <string name="html_text_ad_free">Anders als viele Passwortmanager ist dieser <strong>werbefrei</strong>, <strong>quelloffen</strong> und <strong>freie Copyleft-Software</strong>. Es werden keine persönlichen Daten auf Servern gesammelt, egal, welche Version man verwendet.</string>
     <string name="html_text_buy_pro">Mit dem Kauf der Pro-Version erhältst du Zugriff auf diesen &lt;strong&gt;visuellen Stil&lt;/strong&gt; und unterstützt insbesondere &lt;strong&gt;die Umsetzung gemeinschaftlicher Projekte.&lt;/strong&gt;</string>
     <string name="html_text_feature_generosity">Dieser &lt;strong&gt;visuelle Stil&lt;/strong&gt; ist dank deiner Großzügigkeit verfügbar.</string>
     <string name="html_text_donation">Mit <strong>Beitragen</strong> zum Projekt <i>(finanziell, Code, Übersetzung)</i> wird sichergestellt, dass es weiterlebt und gedeiht, und außerdem berechtigt es für den Vorgang der <strong>Design</strong>-Freischaltung.</string>
