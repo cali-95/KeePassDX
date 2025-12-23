@@ -81,7 +81,7 @@
     <string name="error_nokeyfile">Избиране на файл с ключ.</string>
     <string name="entry_keyfile">Файл с ключ</string>
     <string name="error_no_hardware_key">Изберете хардуерен ключ.</string>
-    <string name="device_unlock_prompt_store_credential_message">Въпреки че използвате разпознаване на отключването на устройството ще трябва да запомните главната парола на хранилището.</string>
+    <string name="device_unlock_prompt_store_credential_message">ВНИМАНИЕ: Трябва да запомните главната парола на хранилището</string>
     <string name="create_keepass_file">Ново хранилище</string>
     <string name="recycle_bin">Кошче</string>
     <string name="default_checkbox">Използване като хранилище по подразбиране</string>
@@ -275,7 +275,7 @@
     <string name="rounds">Брой преобразувания</string>
     <string name="sort_ascending">Възходящо ↓</string>
     <string name="delete_entered_password_title">Премахване на парола</string>
-    <string name="file_not_found_content">Файлът не е намерен. Пробвайте да го отворите от приложението за управление на файлове.</string>
+    <string name="file_not_found_content">Файлът не е намерен</string>
     <string name="unit_byte">Б</string>
     <string name="search">Търсене</string>
     <string name="uppercase">Горен регистър</string>
@@ -519,7 +519,7 @@
     <string name="unavailable_feature_text">Тази възможност не може да бъде използвана.</string>
     <string name="unavailable_feature_version">Устройството разполага с Андроид %1$s, но е необходим %2$s или по-нов.</string>
     <string name="templates_group_enable_title">Използване на шаблони</string>
-    <string name="device_unlock_prompt_extract_credential_title">Разпознаване на отключване на устройството</string>
+    <string name="device_unlock_prompt_extract_credential_title">Отключване на устройството</string>
     <string name="credential_before_click_device_unlock_button">Въведете паролата и докоснете бутона.</string>
     <string name="lock_database_screen_off_summary">Заключва хранилището нколко секунди след изключване на екрана</string>
     <string name="temp_device_unlock_enable_summary">За да се възползвате от отключване на устройството не пазете шифровано съдържание</string>
@@ -536,7 +536,7 @@
     <string name="device_unlock_explanation_summary">За по-лесно отключване на хранилището използвайте отключване на устройството</string>
     <string name="recycle_bin_group_title">Група „Кошче“</string>
     <string name="templates_group_uuid_title">Група „Шаблони“</string>
-    <string name="device_unlock_prompt_extract_credential_message">Извличане на главната парола на хранилището при отключване на устройството</string>
+    <string name="device_unlock_prompt_extract_credential_message">Отключване на хранилището при отключване на устройството</string>
     <string name="device_unlock_invalid_key">Ключът за отключване на устройството не може да бъде прочетен. Премахнете го и повторете процедурата по разпознаване.</string>
     <string name="device_unlock_keystore_warning">Това свойство на приложението ще пази шифровани данни за достъп в защитеното хранилище за ключове на устройството.
 \n
@@ -714,4 +714,6 @@
     <string name="error_passkey_result">Грешка при връщане на ключ за достъп</string>
     <string name="passkey_relying_party">Доверяваща страна на ключа за достъп</string>
     <string name="passkeys_missing_signature_app_ask_explanation">ВНИМАНИЕ: Ключът за достъп е създаден от друг клиент или подписът е премахнат. За да избегнете проблеми със сигурността се уверете, че приложението, което удостоверявате е част от същата услуга и е автентично.\nАко приложението е мрежов четец не добавяйте подписа му към записа, а в настройките го добавете в списъка на приложенията с допълнителни права.</string>
+    <string name="clipboard_otp_notifications_title">Известие за еднократна парола</string>
+    <string name="clipboard_otp_notifications_summary">Отваряне на известието за копиране на еднократна парола от записите с настроени автоматично попълване или клавиатура за регистрации</string>
 </resources>
