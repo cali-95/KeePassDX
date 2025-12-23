@@ -548,6 +548,8 @@ class StructureParser(
         var otpTokenId: AutofillId? = null
 
         fun isValid(): Boolean {
+            if (isWebView)
+                return false
             return passwordId != null || creditCardNumberId != null || otpTokenId != null
         }
 
