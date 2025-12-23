@@ -713,4 +713,7 @@
     <string name="passkeys_auto_select_title">בחירה אוטומטית</string>
     <string name="passkeys_auto_select_summary">בחר אוטומטית אם רק רשומה אחת מתאימה ומסד הנתונים פתוח, ורק אם היישום המבקש מתאים</string>
     <string name="passkeys_privileged_apps_ask_message">%1$s מנסה לבצע פעולה עם מפתח גישה.\n\nלהוסיך אותו לרשימת יישומים מורשים?</string>
+    <string name="passkeys_privileged_apps_explanation">אזהרה: יישום עם הרשאות מוגברות פועלת כשער כדי לאחזר את מקור האימות. ודא את הלגיטימיות שלה כדי למנוע בעיות אבטחה.</string>
+    <string name="passkeys_missing_signature_app_ask_explanation">אזהרה: מפתח גישה נוצר מתוכנה אחרת או שהחתימה נמחקה. ודא כי היישום המתואמת הוא חלק מאותו יישום ושהוא לגיטימי בשביל להימנע מבעיות אבטחה.\nאם היישום הוא דפדפן, אל תוסיף את החתימה שלו לרשומה, אלה לרשימת היישום המוגדרים בהגדרות.</string>
+    <string name="passkeys_missing_signature_app_ask_message">%1$s אינו מוכר ומנסה להתאמת עם מפתח גישה קיים.</string>
 </resources>
