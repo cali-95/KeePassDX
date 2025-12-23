@@ -79,7 +79,7 @@
     <string name="error_autofill_enable_service">Impossible d’activer le service de remplissage automatique.</string>
     <string name="field_name">Nom du champ</string>
     <string name="field_value">Valeur du champ</string>
-    <string name="file_not_found_content">Impossible de trouver le fichier. Veuillez essayer de le rouvrir depuis votre gestionnaire de fichiers.</string>
+    <string name="file_not_found_content">Impossible de trouver le fichier</string>
     <string name="file_browser">Gestionnaire de fichiers</string>
     <string name="generate_password">Générer un mot de passe</string>
     <string name="hint_conf_pass">Confirmer le mot de passe</string>
@@ -499,9 +499,9 @@
     <string name="device_unlock_prompt_not_initialized">Impossible d\'initialiser l\'invite de déverrouillage avancé.</string>
     <string name="device_unlock_not_recognized">Impossible de reconnaître l\'empreinte de déverrouillage de l\'appareil</string>
     <string name="device_unlock_invalid_key">Impossible de lire la clé de déverrouillage de l\'appareil. Veuillez la supprimer et répéter la procédure de reconnaissance de déverrouillage.</string>
-    <string name="device_unlock_prompt_extract_credential_message">Extraire les identifiants de la base de données avec des données de déverrouillage de l\'appareil</string>
-    <string name="device_unlock_prompt_extract_credential_title">Reconnaissance du déverrouillage de l\'appareil</string>
-    <string name="device_unlock_prompt_store_credential_message">Vous devez toujours vous souvenir de l\'identifiant principal du coffre-fort si vous utilisez le déverrouillage de l\'appareil.</string>
+    <string name="device_unlock_prompt_extract_credential_message">Ouvrir la base de données avec le déverrouillage de l\'appareil</string>
+    <string name="device_unlock_prompt_extract_credential_title">Déverrouillage de l\'appareil</string>
+    <string name="device_unlock_prompt_store_credential_message">ATTENTION : Vous devez toujours vous souvenir de l\'identifiant principal du coffre-fort</string>
     <string name="device_unlock_prompt_store_credential_title">Liaison vers le déverrouillage de l\'appareil</string>
     <string name="menu_keystore_remove_key">Supprimer la clé de déverrouillage avancée</string>
     <string name="enter">Entrer</string>
@@ -735,4 +735,24 @@
     <string name="passkey_backup_eligibility">Admissibilité à la Sauvegarde de Clé d\'Accès</string>
     <string name="passkey_backup_state">État de la Sauvegarde de Clé d\'Accès</string>
     <string name="error_passkey_result">Impossible de restituer la clé d\'accès</string>
+    <string name="clipboard_otp_notifications_title">Notification OTP</string>
+    <string name="clipboard_otp_notifications_summary">Ouvre une notification pour copier l\'OTP à partir des entrées du remplissage automatique ou du magiclavier</string>
+    <string name="user_verification_device_credential_title">Identifiant de Vérification Utilisateur</string>
+    <string name="user_verification_device_credential_summary">Utiliser l\'identification de l\'appareil comme Vérification Utilisateur si disponible</string>
+    <string name="user_verification_preferred_title">Vérification Utilisateur Privilégiée</string>
+    <string name="user_verification_preferred_summary">Effectuer une Vérification Utilisateur lorsque la partie utilisatrice demande \"preferred\"</string>
+    <string name="keyboard_auto_switch_title">Changement auto du Magiclavier</string>
+    <string name="keyboard_auto_switch_summary">Essaye de passer automatiquement au Magiclavier lorsque les entrées sont remplies</string>
+    <string name="autofill_share_magikeyboard_title">Partager vers le Magiclavier</string>
+    <string name="autofill_share_magikeyboard_summary">Partage les entrées récupérées à partir du remplissage automatique vers le Magiclavier</string>
+    <string name="error_passkey_credential_id">Aucune clé d\'accès trouvée avec la partie de confiance %1$s et les identifiants %2$s</string>
+    <string name="password_creation_description">Enregistre le mot de passe dans la nouvelle entrée</string>
+    <string name="password_selection_description">Sélectionne un mot de passe existant</string>
+    <string name="error_password_result">Impossible de retourner le mot de passe</string>
+    <string name="content_description_user_verification_information">Info de Vérification Utilisateur</string>
+    <string name="user_verification_required_title">Vérification Utilisateur</string>
+    <string name="user_verification_required_description">L\'accès à cette donnée nécessite une vérification</string>
+    <string name="user_verification_database_credential">Entrez les quatre premiers caractères de votre mot de passe de base de données</string>
+    <string name="first_chars">Premiers caractères</string>
+    <string name="check">Vérifier</string>
 </resources>
