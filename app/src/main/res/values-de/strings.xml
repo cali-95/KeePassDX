@@ -225,8 +225,8 @@
     <string name="education_create_database_title">Datenbankdatei erstellen</string>
     <string name="education_create_database_summary">Eine erste Datei zur Passwortverwaltung erstellen.</string>
     <string name="education_select_database_title">Vorhandene Datenbank öffnen</string>
-    <string name="education_select_database_summary">Öffnet über den Dateimanager eine früher erstellte Datenbankdatei, um sie weiterzuverwenden.</string>
-    <string name="education_new_node_title">Datenbankelemente hinzufügen</string>
+    <string name="education_select_database_summary">Öffnet über den Dateimanager eine frühere Datenbankdatei, um sie weiterhin zu verwenden.</string>
+    <string name="education_new_node_title">Datenbankeinträge hinzufügen</string>
     <string name="education_new_node_summary">Einträge helfen dabei, die digitalen Identitäten zu verwalten.\n\nGruppen/Ordner gliedern die Einträge innerhalb der Datenbank.</string>
     <string name="education_search_title">Einträge durchsuchen</string>
     <string name="education_search_summary">Titel, Benutzernamen oder Inhalt anderer Felder eingeben, um Passwörter zu finden.</string>
