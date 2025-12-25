@@ -712,7 +712,7 @@
     <string name="passkeys_privileged_apps_summary">Gestisci i browser nell\'elenco personalizzato di app privilegiate</string>
     <string name="passkeys_privileged_apps_explanation">ATTENZIONE: Un\'app privilegiata funge da gateway per recuperare l\'origine di un\'autenticazione. Assicurati della sua legittimità per evitare problemi di sicurezza.</string>
     <string name="passkeys_privileged_apps_ask_title">App non riconosciuta</string>
-    <string name="passkeys_privileged_apps_ask_message">%1$s tentativi di eseguire un\'azione passkey.\n\nAggiungerla alla lista delle app privilegiate?</string>
+    <string name="passkeys_privileged_apps_ask_message">%1$s tenta di eseguire un\'azione passkey.\n\nAggiungerla alla lista delle app privilegiate?</string>
     <string name="passkeys_missing_signature_app_ask_title">Firma mancante</string>
     <string name="passkeys_missing_signature_app_ask_explanation">ATTENZIONE: la passkey è stata creata da un altro client o la firma è stata eliminata. Assicurati che l\'app che vuoi autenticare sia parte dello stesso servizio e che sia legittima per evitare problemi di sicurezza.\nSe l\'app è un browser, non aggiungere la sua firma alla voce, ma all\'elenco delle app privilegiate nelle impostazioni.</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s non è riconosciuto e tenta di autenticarsi con un passkey esistente.</string>
