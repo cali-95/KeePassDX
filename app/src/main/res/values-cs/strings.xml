@@ -754,8 +754,9 @@
     <string name="error_password_result">Nepodařilo se vrátit heslo</string>
     <string name="content_description_user_verification_information">Ověřovací informace uživatele</string>
     <string name="user_verification_required_title">Ověření uživatele</string>
-    <string name="user_verification_required_description">Přístup k těmto datům vyžaduje ověření</string>
+    <string name="user_verification_required_description">Přístup k těmto datům vyžaduje ověření, abychom se ujistili, že jste to opravdu vy.</string>
     <string name="user_verification_database_credential">Zadejte první čtyři znaky vašeho hesla k databázi</string>
     <string name="first_chars">První znaky</string>
     <string name="check">Zkontrolovat</string>
+    <string name="user_verification_required_description_precise">%1$s chce ověřit, že jste to opravdu vy.</string>
 </resources>
