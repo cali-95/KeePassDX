@@ -732,11 +732,12 @@
     <string name="error_password_result">לא ניתן להחזיר את הסיסמה</string>
     <string name="content_description_user_verification_information">מידע על אימות משתמש</string>
     <string name="user_verification_required_title">אימות משתמש</string>
-    <string name="user_verification_required_description">גישה לנתונים אלה דורשת אימות</string>
+    <string name="user_verification_required_description">גישה לנתונים אלה דורשת אימות כדי להבטיח שזה אכן אתה.</string>
     <string name="user_verification_database_credential">הזן את ארבעת התווים הראשונים של סיסמת מסד הנתונים שלך</string>
     <string name="first_chars">תווים ראשונים</string>
     <string name="check">בדיקה</string>
     <string name="credential_provider">ספק אישורים</string>
     <string name="credential_provider_service_name">ספק אישורים KeePassDX</string>
     <string name="error_passkey_credential_id">לא נמצא מפתח גישה עבור גורם %1$s ופרטי אימות %2$s</string>
+    <string name="user_verification_required_description_precise">%1$s דורש לוודא שזה אכן אתה.</string>
 </resources>
