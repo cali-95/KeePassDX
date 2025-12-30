@@ -783,8 +783,8 @@
     <string name="error_password_result">Unable to return the password</string>
     <string name="content_description_user_verification_information">User verification info</string>
     <string name="user_verification_required_title">User Verification</string>
-    <string name="user_verification_required_description">Access to this data requires that it is indeed you.</string>
-    <string name="user_verification_required_description_precise">%1$s requires that it is indeed you.</string>
+    <string name="user_verification_required_description">Access to this data requires verification that it is indeed you.</string>
+    <string name="user_verification_required_description_precise">%1$s requires verification that it is indeed you.</string>
     <string name="user_verification_database_credential">Enter the first four characters of your database password</string>
     <string name="first_chars">First chars</string>
     <string name="check">Check</string>
