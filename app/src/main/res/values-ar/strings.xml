@@ -133,7 +133,7 @@
     <string name="error_string_key">يجب أن يكون لكل سلسلة اسم حقل.</string>
     <string name="error_wrong_length">أدخل عددًا صحيحًا موجبًا في حقل «الطول».</string>
     <string name="error_autofill_enable_service">تعذر تمكين خدمة الملء التلقائي.</string>
-    <string name="file_not_found_content">تعذر إيجاد الملف. جرِّب فتحه من متصفح ملفات.</string>
+    <string name="file_not_found_content">تعذر إيجاد الملف</string>
     <string name="file_browser">مدير الملفات</string>
     <string name="invalid_credentials">تعذر قراءة الإعتمادات.</string>
     <string name="invalid_db_sig">تعذر تمييز نسق قاعدة البيانات.</string>
@@ -624,11 +624,11 @@
 \nإذا لم تنشط هذا الإذن، فلن تكون قاعدة البيانات المفتوحة في الخلفية مرئية إذا كان هناك تطبيق آخر في المقدمة.</string>
     <string name="warning_copy_permission">مطلوب إذن الإشعار لاستخدام ميزة إشعار الحافظة.</string>
     <string name="merge_success">اكتمل الدمج بنجاح</string>
-    <string name="device_unlock_prompt_store_credential_message">ما زلت بحاجة إلى تذكر بيانات الاعتماد الرئيسية في مخزنك إذا كنت تستخدم التعرّف على فتح الجهاز.</string>
-    <string name="device_unlock_prompt_extract_credential_title">التعرف على فتح الجهاز</string>
+    <string name="device_unlock_prompt_store_credential_message">تحذير: لا يزال يتعين عليك تذكر بيانات الاعتماد الرئيسية للخزنة</string>
+    <string name="device_unlock_prompt_extract_credential_title">فتح الجهاز</string>
     <string name="later">لاحقًا</string>
     <string name="configure">تضبيط</string>
-    <string name="device_unlock_prompt_extract_credential_message">استخراج بيانات اعتماد قاعدة البيانات مع بيانات فتح الجهاز</string>
+    <string name="device_unlock_prompt_extract_credential_message">افتح قاعدة البيانات باستخدام بيانات اعتماد الجهاز</string>
     <string name="ask">إسأل</string>
     <string name="configure_biometric">لم تسجل بيانات اعتماد المقاييس الحيوية أو الجهاز.</string>
     <string name="show_uuid_title">أظهر \"المعرّف العام المميز\" UUID</string>
@@ -724,4 +724,24 @@
     <string name="passkey_backup_eligibility">أهلية النسخ الاحتياطي لمفتاح المرور</string>
     <string name="passkey_backup_state">حالة النسخ الاحتياطي لمفتاح المرور</string>
     <string name="error_passkey_result">تعذر إرجاع مفتاح المرور</string>
+    <string name="clipboard_otp_notifications_title">إشعار كلمة سر لمرة واحدة</string>
+    <string name="clipboard_otp_notifications_summary">افتح إشعارًا لنسخ رمز كلمة سر لمرة واحدة من الإدخالات المملوءة تلقائيًا أو بواسطة magikeyboard</string>
+    <string name="user_verification_device_credential_title">بيانات اعتماد التحقق من المستخدم</string>
+    <string name="user_verification_device_credential_summary">استخدم بيانات اعتماد الجهاز للتحقق من المستخدم إذا كانت متاحة</string>
+    <string name="user_verification_preferred_title">التحقق المفضل من المستخدم</string>
+    <string name="user_verification_preferred_summary">أجري التحقق من المستخدم عندما يطلب الطرف المعتمد \"المفضل\"</string>
+    <string name="keyboard_auto_switch_title">تبديل Magikeyboard التلقائي</string>
+    <string name="keyboard_auto_switch_summary">حاول التبديل تلقائيًا إلى Magikeyboard عند تعبئة الإدخالات</string>
+    <string name="autofill_share_magikeyboard_title">شارك إلى Magikeyboard</string>
+    <string name="autofill_share_magikeyboard_summary">شارك الإدخالات المسترجعة من الملء التلقائي إلى Magikeyboard</string>
+    <string name="error_passkey_credential_id">لم يُعثور على مفتاح مرور مع الطرف المعتمد %1$s ومعرفات الاعتماد %2$s</string>
+    <string name="password_creation_description">احفظ كلمة السر في مدخل جديد</string>
+    <string name="password_selection_description">حدّد كلمة سر موجودة</string>
+    <string name="error_password_result">غير قادر على إعادة كلمة السر</string>
+    <string name="content_description_user_verification_information">معلومات التحقق من المستخدم</string>
+    <string name="user_verification_required_title">تحقق المستخدم</string>
+    <string name="user_verification_required_description">الوصول إلى هذه البيانات يتطلب التحقق</string>
+    <string name="user_verification_database_credential">أدخل الأحرف الأربعة الأولى من كلمة سر قاعدة بياناتك</string>
+    <string name="first_chars">الأحرف الأولى</string>
+    <string name="check">تحقق</string>
 </resources>
