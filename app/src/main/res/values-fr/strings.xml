@@ -751,8 +751,9 @@
     <string name="error_password_result">Impossible de retourner le mot de passe</string>
     <string name="content_description_user_verification_information">Info de Vérification Utilisateur</string>
     <string name="user_verification_required_title">Vérification Utilisateur</string>
-    <string name="user_verification_required_description">L\'accès à cette donnée nécessite une vérification</string>
+    <string name="user_verification_required_description">L\'accès à cette donnée nécessite de vérifier qu\'il s\'agit bien de vous.</string>
     <string name="user_verification_database_credential">Entrez les quatre premiers caractères de votre mot de passe de base de données</string>
     <string name="first_chars">Premiers caractères</string>
     <string name="check">Vérifier</string>
+    <string name="user_verification_required_description_precise">%1$s doit s\'assurer qu\'il s\'agit bien de vous.</string>
 </resources>
