@@ -747,8 +747,9 @@
     <string name="error_password_result">Nem lehetséges visszaadni a jelszót</string>
     <string name="content_description_user_verification_information">Felhasználói ellenőrzési információk</string>
     <string name="user_verification_required_title">Felhasználói ellenőrzés</string>
-    <string name="user_verification_required_description">Az adatok eléréséhez ellenőrzés szükséges</string>
+    <string name="user_verification_required_description">Az adatokhoz való hozzáféréshez meg kell győződni arról, hogy valóban Ön az.</string>
     <string name="user_verification_database_credential">Írja be az adatbázis jelszavának első négy karakterét</string>
     <string name="first_chars">Első karakterek</string>
     <string name="check">Ellenőrzés</string>
+    <string name="user_verification_required_description_precise">A(z) %1$s alkalmazásnak meg kell bizonyosodnia arról, hogy valóban Ön az.</string>
 </resources>
