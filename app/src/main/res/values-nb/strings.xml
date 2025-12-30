@@ -80,7 +80,7 @@
     <string name="error_autofill_enable_service">Autofyll-tjenesten kan ikke skrus på.</string>
     <string name="field_name">Feltnavn</string>
     <string name="field_value">Feltverdi</string>
-    <string name="file_not_found_content">Fant ikke filen. Prøv å åpne den fra din innholdsleverandør.</string>
+    <string name="file_not_found_content">Kunne ikke finne filen</string>
     <string name="file_browser">Filbehandler</string>
     <string name="generate_password">Opprett passord</string>
     <string name="hint_conf_pass">Bekreft passord</string>
@@ -516,7 +516,7 @@
     <string name="permission">Tilgang</string>
     <string name="biometric_security_update_required">Biometrisk sikkerhetsoppdatering kreves.</string>
     <string name="warning_exact_alarm">Du har ikke tillat programmet å bruke en eksakt alarm. Som resultat vil funksjoner som krever et tidsur ikke gjøres til eksakt tid.</string>
-    <string name="device_unlock_prompt_store_credential_message">Du må fortsatt huske hovedlegitimasjonen for hvelvet selv om du bruker enhetens opplåsingsgjenkjenning.</string>
+    <string name="device_unlock_prompt_store_credential_message">ADVARSEL: Du må fortsatt huske hovedlegitimasjonen for hvelvet</string>
     <string name="device_unlock_not_recognized">Kunne ikke gjenkjenne enhetens oppåsningsmetode</string>
     <string name="credential_before_click_device_unlock_button">Skriv inn passordet, og klikk deretter på denne knappen.</string>
     <string name="device_credential">Enhetens påloggingsinformasjon</string>
@@ -727,4 +727,5 @@
     <string name="passkey_relying_party">Passnøkkelens tillitspart</string>
     <string name="passkey_backup_eligibility">Mulighet for sikkerhetskopiering av passnøkkelen</string>
     <string name="passkey_backup_state">Tilstand til sikkerhetskopien til passnøkkelen</string>
+    <string name="clipboard_otp_notifications_title">Varsel med engangskode</string>
 </resources>

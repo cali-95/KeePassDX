@@ -139,7 +139,7 @@
     <string name="error_autofill_enable_service">De dienst automatisch aanvullen kan niet worden ingeschakeld.</string>
     <string name="field_name">Veldnaam</string>
     <string name="field_value">Veldwaarde</string>
-    <string name="file_not_found_content">Bestand niet gevonden. Probeer het opnieuw te openen via bestandsbeheer.</string>
+    <string name="file_not_found_content">Bestand niet gevonden</string>
     <string name="invalid_algorithm">Ongeldig algoritme.</string>
     <string name="keyfile_is_empty">Het sleutelbestand is leeg.</string>
     <string name="list_entries_show_username_title">Gebruikersnamen tonen</string>
@@ -498,9 +498,9 @@
     <string name="device_unlock_prompt_not_initialized">Kan apparaatontgrendeling niet initialiseren.</string>
     <string name="device_unlock_not_recognized">Vingerafdruk niet herkent bij apparaatontgrendeling</string>
     <string name="device_unlock_invalid_key">Kan de sleutel voor apparaatontgrendeling niet lezen. Verwijder deze en herhaal de herkenningsprocedure voor het ontgrendelen.</string>
-    <string name="device_unlock_prompt_extract_credential_message">Database uitpakken met gegevens voor apparaatontgrendeling</string>
+    <string name="device_unlock_prompt_extract_credential_message">Database openen met apparaatontgrendeling</string>
     <string name="device_unlock_prompt_extract_credential_title">Apparaatontgrendeling</string>
-    <string name="device_unlock_prompt_store_credential_message">Je moet nog steeds je hoofdwachtwoord onthouden als je apparaatontgrendeling gebruikt.</string>
+    <string name="device_unlock_prompt_store_credential_message">WAARSCHUWING: Je moet nog steeds je hoofdwachtwoord onthouden</string>
     <string name="device_unlock_prompt_store_credential_title">Koppeling naar apparaatontgrendeling</string>
     <string name="menu_keystore_remove_key">Sleutel voor apparaatontgrendeling verwijderen</string>
     <string name="error_field_name_already_exists">De veldnaam bestaat al.</string>
@@ -739,4 +739,24 @@
     <string name="error_passkey_result">Kan de passkey niet retourneren</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s wordt niet herkend en probeert te authenticeren met een bestaande passkey.</string>
     <string name="passkeys_missing_signature_app_ask_explanation">WAARSCHUWING: De passkey is aangemaakt door een andere client of de handtekening is verwijderd. Zorg ervoor dat de app die je wilt authenticeren deel uitmaakt van dezelfde service en legitiem is om beveiligingsproblemen te voorkomen.\nAls de app een browser is, voeg dan niet de handtekening toe aan het item, maar aan de lijst met bevoorrechte apps in de instellingen.</string>
+    <string name="clipboard_otp_notifications_title">OTP-melding</string>
+    <string name="clipboard_otp_notifications_summary">Open een melding om de OTP te kopiëren uit items die automatisch zijn gevuld of met magikeyboard</string>
+    <string name="user_verification_device_credential_title">Gebruikersverificatiegegevens</string>
+    <string name="user_verification_device_credential_summary">Gebruik de apparaatontgrendeling als gebruikersverificatie, indien beschikbaar</string>
+    <string name="user_verification_preferred_title">Voorkeur gebruikersverificatie</string>
+    <string name="user_verification_preferred_summary">Voer een gebruikersverificatie uit wanneer de vertrouwende partij \"voorkeur\" vraagt</string>
+    <string name="keyboard_auto_switch_title">Auto Magikeyboard schakelaar</string>
+    <string name="keyboard_auto_switch_summary">Probeer automatisch over te schakelen naar het Magikeyboard wanneer invoer wordt ingevuld</string>
+    <string name="autofill_share_magikeyboard_title">Delen met Magikeyboard</string>
+    <string name="autofill_share_magikeyboard_summary">Deel items die zijn opgehaald van automatisch aanvullen met Magikeyboard</string>
+    <string name="error_passkey_credential_id">Geen passkey gevonden met vertrouwende partij %1$s en credentialIds %2$s</string>
+    <string name="password_creation_description">Wachtwoord opslaan in nieuw item</string>
+    <string name="password_selection_description">Kies een bestaand wachtwoord</string>
+    <string name="error_password_result">Kan het wachtwoord niet retourneren</string>
+    <string name="content_description_user_verification_information">Gebruikersverificatieinfo</string>
+    <string name="user_verification_required_title">Gebruikersverificatie</string>
+    <string name="user_verification_required_description">Toegang tot deze gegevens vereist verificatie</string>
+    <string name="user_verification_database_credential">Voer de eerste vier tekens van het databasewachtwoord in</string>
+    <string name="first_chars">Eerste tekens</string>
+    <string name="check">Controleren</string>
 </resources>
