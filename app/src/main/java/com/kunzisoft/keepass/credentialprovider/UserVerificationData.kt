@@ -9,7 +9,8 @@ data class UserVerificationData(
     val database: ContextualDatabase? = null,
     val entryId: NodeId<*>? = null,
     val fieldProtection: FieldProtection? = null,
-    val preferenceKey: String? = null
+    val preferenceKey: String? = null,
+    val originName: String? = null
 )
 
 enum class UserVerificationActionType {

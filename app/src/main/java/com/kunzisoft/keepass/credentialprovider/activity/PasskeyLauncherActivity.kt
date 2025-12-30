@@ -42,6 +42,7 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addNodeId
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addSearchInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addSpecialMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
+import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
@@ -216,7 +217,8 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
                 userVerificationViewModel = userVerificationViewModel,
                 dataToVerify = UserVerificationData(
                     actionType = UserVerificationActionType.LAUNCH_PASSKEY_CEREMONY,
-                    database = database
+                    database = database,
+                    originName = intent.retrieveSearchInfo()?.toString()
                 )
             )
         } else {

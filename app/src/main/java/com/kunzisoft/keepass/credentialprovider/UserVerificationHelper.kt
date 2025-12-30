@@ -158,12 +158,17 @@ class UserVerificationHelper {
                         userVerificationViewModel.onUserVerificationFailed(dataToVerify)
                     }
                 }).authenticate(
-                BiometricPrompt.PromptInfo.Builder()
-                    .setTitle(getString(R.string.user_verification_required_title))
-                    .setSubtitle(getString(R.string.user_verification_required_description))
-                    .setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
-                    .setConfirmationRequired(false)
-                    .build()
+                BiometricPrompt.PromptInfo.Builder().run {
+                    setTitle(getString(R.string.user_verification_required_title))
+                    setSubtitle(
+                        dataToVerify.originName?.let {
+                            getString(R.string.user_verification_required_description_precise, it)
+                        } ?: getString(R.string.user_verification_required_description)
+                    )
+                    setAllowedAuthenticators(ALLOWED_AUTHENTICATORS)
+                    setConfirmationRequired(false)
+                    build()
+                }
             )
         }
 

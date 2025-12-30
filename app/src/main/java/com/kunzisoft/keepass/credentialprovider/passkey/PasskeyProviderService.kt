@@ -436,6 +436,7 @@ class PasskeyProviderService : CredentialProviderService() {
                         context = applicationContext,
                         specialMode = SpecialMode.SELECTION,
                         nodeId = passkeyEntry.id,
+                        searchInfo = searchInfo,
                         appOrigin = passkeyEntry.appOrigin,
                         userVerification = userVerification,
                         userVerifiedWithAuth = false
