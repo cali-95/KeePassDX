@@ -41,6 +41,9 @@ import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
 import androidx.core.graphics.ColorUtils
 import androidx.core.view.ViewCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.appbar.AppBarLayout
@@ -53,6 +56,10 @@ import com.kunzisoft.keepass.activities.helpers.ExternalFileHelper
 import com.kunzisoft.keepass.activities.legacy.DatabaseLockActivity
 import com.kunzisoft.keepass.adapters.TagsAdapter
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -62,7 +69,6 @@ import com.kunzisoft.keepass.education.EntryActivityEducation
 import com.kunzisoft.keepass.model.EntryAttachmentState
 import com.kunzisoft.keepass.otp.OtpType
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_DELETE_ENTRY_HISTORY
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_RESTORE_ENTRY_HISTORY
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -78,7 +84,10 @@ import com.kunzisoft.keepass.view.changeTitleColor
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.viewmodels.EntryViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
+import kotlinx.coroutines.launch
 import java.util.EnumSet
 import java.util.UUID
 
@@ -100,13 +109,9 @@ class EntryActivity : DatabaseLockActivity() {
     private var loadingView: ProgressBar? = null
 
     private val mEntryViewModel: EntryViewModel by viewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private val mEntryActivityEducation = EntryActivityEducation(this)
-
-    private var mMainEntryId: NodeId<UUID>? = null
-    private var mHistoryPosition: Int = -1
-    private var mEntryIsHistory: Boolean = false
-    private var mEntryLoaded = false
 
     private var mAttachmentFileBinderManager: AttachmentFileBinderManager? = null
     private var mExternalFileHelper: ExternalFileHelper? = null
@@ -210,7 +215,7 @@ class EntryActivity : DatabaseLockActivity() {
 
                 mEntryViewModel.loadEntry(mDatabase, mainEntryId, historyPosition)
             }
-        } catch (e: ClassCastException) {
+        } catch (_: ClassCastException) {
             Log.e(TAG, "Unable to retrieve the entry key")
         }
 
@@ -238,13 +243,9 @@ class EntryActivity : DatabaseLockActivity() {
 
         mEntryViewModel.entryInfoHistory.observe(this) { entryInfoHistory ->
             if (entryInfoHistory != null) {
-                this.mMainEntryId = entryInfoHistory.mainEntryId
-
                 // Manage history position
                 val historyPosition = entryInfoHistory.historyPosition
-                this.mHistoryPosition = historyPosition
                 val entryIsHistory = historyPosition > -1
-                this.mEntryIsHistory = entryIsHistory
                 // Assign history dedicated view
                 historyView?.visibility = if (entryIsHistory) View.VISIBLE else View.GONE
                 // TODO History badge
@@ -255,11 +256,9 @@ class EntryActivity : DatabaseLockActivity() {
                 val entryInfo = entryInfoHistory.entryInfo
                 // Manage entry copy to start notification if allowed (at the first start)
                 if (savedInstanceState == null) {
-                    // Manage entry to launch copying notification if allowed
-                    ClipboardEntryNotificationService.checkAndLaunchNotification(this, entryInfo)
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
-                        MagikeyboardService.addEntryAndLaunchNotificationIfAllowed(this, entryInfo)
+                        MagikeyboardService.addEntry(this, entryInfo)
                     }
                 }
                 // Assign title icon
@@ -279,7 +278,6 @@ class EntryActivity : DatabaseLockActivity() {
                 mForegroundColor = if (showEntryColors) entryInfo.foregroundColor else null
 
                 loadingView?.hideByFading()
-                mEntryLoaded = true
             } else {
                 finish()
             }
@@ -320,6 +318,90 @@ class EntryActivity : DatabaseLockActivity() {
                     historyPosition = historySelected.historyPosition,
                     activityResultLauncher = mEntryActivityResultLauncher
                 )
+            }
+        }
+
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mEntryViewModel.entryState.collect { entryState ->
+                    when (entryState) {
+                        is EntryViewModel.EntryState.Loading -> {}
+                        is EntryViewModel.EntryState.OnChangeFieldProtectionRequested -> {
+                            mDatabase?.let { database ->
+                                val fieldProtection = entryState.fieldProtection
+                                if (fieldProtection.isCurrentlyProtected) {
+                                    checkUserVerification(
+                                        userVerificationViewModel = mUserVerificationViewModel,
+                                        dataToVerify = UserVerificationData(
+                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                            database = database,
+                                            fieldProtection = fieldProtection
+                                        )
+                                    )
+                                    mEntryViewModel.actionPerformed()
+                                } else {
+                                    mEntryViewModel.updateProtectionField(
+                                        fieldProtection = fieldProtection,
+                                        value = true
+                                    )
+                                }
+                            }
+                        }
+                        is EntryViewModel.EntryState.OnFieldProtectionUpdated -> {}
+                        is EntryViewModel.EntryState.RequestCopyProtectedField -> {
+                            mDatabase?.let { database ->
+                                checkUserVerification(
+                                    userVerificationViewModel = mUserVerificationViewModel,
+                                    dataToVerify = UserVerificationData(
+                                        actionType = UserVerificationActionType.COPY_PROTECTED_FIELD,
+                                        database = database,
+                                        fieldProtection = entryState.fieldProtection,
+                                    )
+                                )
+                            }
+                            mEntryViewModel.actionPerformed()
+                        }
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                mUserVerificationViewModel.userVerificationState.collect { uVState ->
+                    when (uVState) {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uVState.error)
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
+                            val data = uVState.dataToVerify
+                            when (data.actionType) {
+                                UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
+                                    // Unprotect field by its view
+                                    data.fieldProtection?.let { field ->
+                                        mEntryViewModel.updateProtectionField(
+                                            fieldProtection = field,
+                                            value = false
+                                        )
+                                    }
+                                }
+                                UserVerificationActionType.COPY_PROTECTED_FIELD -> {
+                                    // Copy field value
+                                    data.fieldProtection?.field?.let {
+                                        mEntryViewModel.copyToClipboard(it)
+                                    }
+                                }
+                                UserVerificationActionType.EDIT_ENTRY -> {
+                                    // Edit Entry
+                                    editEntry(data.database, data.entryId)
+                                }
+                                else -> {}
+                            }
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                    }
+                }
             }
         }
     }
@@ -410,13 +492,13 @@ class EntryActivity : DatabaseLockActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         super.onCreateOptionsMenu(menu)
-        if (mEntryLoaded) {
+        if (mEntryViewModel.entryLoaded) {
             val inflater = menuInflater
 
             inflater.inflate(R.menu.entry, menu)
             inflater.inflate(R.menu.database, menu)
 
-            if (mEntryIsHistory && !mDatabaseReadOnly) {
+            if (mEntryViewModel.entryIsHistory && !mDatabaseReadOnly) {
                 inflater.inflate(R.menu.entry_history, menu)
             }
 
@@ -429,7 +511,7 @@ class EntryActivity : DatabaseLockActivity() {
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        if (mEntryIsHistory || mDatabaseReadOnly) {
+        if (mEntryViewModel.entryIsHistory || mDatabaseReadOnly) {
             menu?.findItem(R.id.menu_save_database)?.isVisible = false
             menu?.findItem(R.id.menu_merge_database)?.isVisible = false
             menu?.findItem(R.id.menu_edit)?.isVisible = false
@@ -474,34 +556,53 @@ class EntryActivity : DatabaseLockActivity() {
         }
     }
 
+    private fun editEntry(database: ContextualDatabase?, entryId: NodeId<*>?) {
+        database?.let { database ->
+            entryId?.let { entryId ->
+                EntryEditActivity.launch(
+                    activity = this@EntryActivity,
+                    database = database,
+                    registrationType = EntryEditActivity.RegistrationType.UPDATE,
+                    nodeId = entryId,
+                    activityResultLauncher = mEntryActivityResultLauncher
+                )
+            }
+        }
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_edit -> {
-                mDatabase?.let { database ->
-                    mMainEntryId?.let { entryId ->
-                        EntryEditActivity.launch(
-                            activity = this,
-                            database = database,
-                            registrationType = EntryEditActivity.RegistrationType.UPDATE,
-                            nodeId = entryId,
-                            activityResultLauncher = mEntryActivityResultLauncher
+                if (mEntryViewModel.entryInfo?.isUserVerificationNeeded() == true) {
+                    mDatabase?.let { database ->
+                        checkUserVerification(
+                            userVerificationViewModel = mUserVerificationViewModel,
+                            dataToVerify = UserVerificationData(
+                                actionType = UserVerificationActionType.EDIT_ENTRY,
+                                database = database,
+                                entryId = mEntryViewModel.mainEntryId
+                            )
                         )
                     }
+                } else {
+                    editEntry(mDatabase, mEntryViewModel.mainEntryId)
                 }
                 return true
             }
             R.id.menu_restore_entry_history -> {
-                mMainEntryId?.let { mainEntryId ->
+                mEntryViewModel.mainEntryId?.let { mainEntryId ->
                     restoreEntryHistory(
                         mainEntryId,
-                        mHistoryPosition)
+                        mEntryViewModel.historyPosition
+                    )
                 }
             }
             R.id.menu_delete_entry_history -> {
-                mMainEntryId?.let { mainEntryId ->
+                mEntryViewModel.mainEntryId?.let { mainEntryId ->
                     deleteEntryHistory(
                         mainEntryId,
-                        mHistoryPosition)
+                        mEntryViewModel.historyPosition
+                    )
                 }
             }
             R.id.menu_save_database -> {
@@ -521,7 +622,7 @@ class EntryActivity : DatabaseLockActivity() {
     override fun finish() {
         // Transit data in previous Activity after an update
         Intent().apply {
-            putExtra(EntryEditActivity.ADD_OR_UPDATE_ENTRY_KEY, mMainEntryId)
+            putExtra(EntryEditActivity.ADD_OR_UPDATE_ENTRY_KEY, mEntryViewModel.mainEntryId)
             setResult(RESULT_OK, this)
         }
         super.finish()

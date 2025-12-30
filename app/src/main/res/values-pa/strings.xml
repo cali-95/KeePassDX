@@ -19,7 +19,6 @@
     <string name="keyboard_appearance_category">ਦਿੱਖ</string>
     <string name="keyboard_notification_entry_title">ਨੋਟੀਫਿਕੇਸ਼ਨ ਜਾਣਕਾਰੀ</string>
     <string name="compression_none">ਕੋਈ ਨਹੀਂ</string>
-    <string name="clear_clipboard_notification_title">ਬੰਦ ਕਰਨ ਉੱਤੇ ਸਾਫ਼ ਕਰੋ</string>
     <string name="disable">ਅਸਮਰੱਥ</string>
     <string name="enable">ਸਮਰੱਥ</string>
     <string name="assign_master_key">ਮਾਸਟਰ ਕੁੰਜੀ ਦਿਓ</string>
@@ -87,7 +86,6 @@
     <string name="menu_open">ਖੋਲ੍ਹੋ</string>
     <string name="menu_save_database">ਡਾਟਾਬੇਸ ਸੰਭਾਲੋ</string>
     <string name="menu_lock">ਡਾਟਾਬੇਸ ਲਾਕ ਕਰੋ</string>
-    <string name="menu_hide_password">ਪਾਸਵਰਡ ਲੁਕਾਓ</string>
     <string name="menu_cancel">ਰੱਦ ਕਰੋ</string>
     <string name="menu_delete">ਹਟਾਓ</string>
     <string name="menu_paste">ਚੇਪੋ</string>
@@ -105,8 +103,6 @@
     <string name="copy_field">%1$s ਦੀ ਕਾਪੀ</string>
     <string name="menu_change_key_settings">ਮਾਸਟਰ ਕੁੰਜੀ ਬਦਲੋ</string>
     <string name="about">ਇਸ ਬਾਰੇ</string>
-    <string name="hide_password_summary">ਪਾਸਵਰਡਾਂ ਨੂੰ ਮੂਲ ਰੂਪ ਵਿੱਚ ਲੁਕਾਓ (***)</string>
-    <string name="hide_password_title">ਪਾਸਵਰਡ ਲੁਕਾਓ</string>
     <string name="lowercase">ਛੋਟੇ ਅੱਖਰ (ਅੰਗਰੇਜ਼ੀ)</string>
     <string name="loading_database">…ਡਾਟਾਬੇਸ ਲੋਡ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ</string>
     <string name="creating_database">…ਡਾਟਾਬੇਸ ਬਣਾਇਆ ਜਾ ਰਿਹਾ ਹੈ</string>
@@ -265,7 +261,6 @@
     <string name="lock_database_show_button_title">ਲਾਕ ਬਟਨ ਵੇਖੋ</string>
     <string name="lock_database_back_root_title">ਲਾਕ ਕਰਨ ਲਈ \'ਪਿੱਛੇ\' ਨੂੰ ਦਬਾਓ</string>
     <string name="lock_database_screen_off_summary">ਜਦੋਂ ਸਕਰੀਨ ਬੰਦ ਹੋ ਜਾਵੇ ਤਾਂ ਡਾਟਾਬੇਸ ਨੂੰ ਲਾਕ ਕਰੋ</string>
-    <string name="clipboard_notifications_title">ਕਲਿੱਪਬੋਰਡ ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
     <string name="set_credential_provider_service_title">ਮੂਲ ਆਪੇ-ਭਰਨ ਸੇਵਾ ਵਜੋਂ ਸੈੱਟ ਕਰੋ</string>
     <string name="configure_biometric">ਕੋਈ ਬਾਇਓਮੈਟਰਿਕ ਜਾਂ ਡਿਵਾਈਸ ਸਨਦ ਦਾਖਲ ਨਹੀਂ ਕੀਤੀ ਹੈ।</string>
     <string name="warning_sure_remove_data">ਇਹ ਡਾਟਾ ਕਿਵੇਂ ਵੀ ਹਟਾਉਣਾ ਹੈ\?</string>
@@ -326,7 +321,6 @@
     <string name="notification">ਨੋਟੀਫਿਕੇਸ਼ਨ</string>
     <string name="keyboard_keys_category">ਸਵਿੱਚਾਂ</string>
     <string name="keyboard_theme_title">ਕੀਬੋਰਡ ਥੀਮ</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title_text">ਐਂਟਰੀ</string>
     <string name="keyboard_entry_category">ਐਂਟਰੀ</string>
     <string name="autofill_close_database_title">ਡਾਟਾਬੇਸ ਬੰਦ ਕਰੋ</string>

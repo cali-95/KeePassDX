@@ -62,8 +62,12 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecialModeResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
-import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
+import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasswordHelper.buildPasswordResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
 import com.kunzisoft.keepass.database.element.DateInstant
@@ -79,7 +83,6 @@ import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.services.AttachmentFileNotificationService
-import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_CREATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.getNewEntry
@@ -98,9 +101,11 @@ import com.kunzisoft.keepass.view.asError
 import com.kunzisoft.keepass.view.hideByFading
 import com.kunzisoft.keepass.view.setTransparentNavigationBar
 import com.kunzisoft.keepass.view.showActionErrorIfNeeded
+import com.kunzisoft.keepass.view.showError
 import com.kunzisoft.keepass.view.updateLockPaddingStart
 import com.kunzisoft.keepass.viewmodels.ColorPickerViewModel
 import com.kunzisoft.keepass.viewmodels.EntryEditViewModel
+import com.kunzisoft.keepass.viewmodels.UserVerificationViewModel
 import kotlinx.coroutines.launch
 import java.util.EnumSet
 import java.util.UUID
@@ -129,6 +134,7 @@ class EntryEditActivity : DatabaseLockActivity(),
     private var mTemplatesSelectorAdapter: TemplatesSelectorAdapter? = null
 
     private val mColorPickerViewModel: ColorPickerViewModel by viewModels()
+    private val mUserVerificationViewModel: UserVerificationViewModel by viewModels()
 
     private var mAllowCustomFields = false
     private var mAllowOTP = false
@@ -190,7 +196,6 @@ class EntryEditActivity : DatabaseLockActivity(),
             ))
         }
 
-        stopService(Intent(this, ClipboardEntryNotificationService::class.java))
         stopService(Intent(this, KeyboardEntryNotificationService::class.java))
 
         // Entry is retrieve, it's an entry to update
@@ -383,23 +388,69 @@ class EntryEditActivity : DatabaseLockActivity(),
 
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                mEntryEditViewModel.uiState.collect { uiState ->
-                    when (uiState) {
-                        EntryEditViewModel.UIState.Loading -> {}
-                        EntryEditViewModel.UIState.ShowOverwriteMessage -> {
-                            if (mEntryEditViewModel.warningOverwriteDataAlreadyApproved.not()) {
-                                AlertDialog.Builder(this@EntryEditActivity)
-                                    .setTitle(R.string.warning_overwrite_data_title)
-                                    .setMessage(R.string.warning_overwrite_data_description)
-                                    .setNegativeButton(android.R.string.cancel) { _, _ ->
-                                        mEntryEditViewModel.backPressedAlreadyApproved = true
-                                        onCancelSpecialMode()
-                                    }
-                                    .setPositiveButton(android.R.string.ok) { _, _ ->
-                                        mEntryEditViewModel.warningOverwriteDataAlreadyApproved = true
-                                    }
-                                    .create().show()
+                mEntryEditViewModel.entryEditState.collect { entryEditState ->
+                    when (entryEditState) {
+                        is EntryEditViewModel.EntryEditState.Loading -> {}
+                        is EntryEditViewModel.EntryEditState.ShowOverwriteMessage -> {
+                            AlertDialog.Builder(this@EntryEditActivity)
+                                .setTitle(R.string.warning_overwrite_data_title)
+                                .setMessage(R.string.warning_overwrite_data_description)
+                                .setNegativeButton(android.R.string.cancel) { _, _ ->
+                                    mEntryEditViewModel.backPressedAlreadyApproved = true
+                                    onCancelSpecialMode()
+                                }
+                                .setPositiveButton(android.R.string.ok) { _, _ -> }
+                                .create().show()
+                            mEntryEditViewModel.actionPerformed()
+                        }
+                        is EntryEditViewModel.EntryEditState.OnChangeFieldProtectionRequested -> {
+                            mDatabase?.let { database ->
+                                val fieldProtection = entryEditState.fieldProtection
+                                if (fieldProtection.isCurrentlyProtected) {
+                                    checkUserVerification(
+                                        userVerificationViewModel = mUserVerificationViewModel,
+                                        dataToVerify = UserVerificationData(
+                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                            database = database,
+                                            fieldProtection = fieldProtection
+                                        )
+                                    )
+                                    mEntryEditViewModel.actionPerformed()
+                                } else {
+                                    mEntryEditViewModel.updateFieldProtection(
+                                        fieldProtection = fieldProtection,
+                                        value = true
+                                    )
+                                }
                             }
+                        }
+                        is EntryEditViewModel.EntryEditState.OnFieldProtectionUpdated -> {}
+                    }
+                }
+            }
+        }
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                mUserVerificationViewModel.userVerificationState.collect { uVState ->
+                    when (uVState) {
+                        is UserVerificationViewModel.UVState.Loading -> {}
+                        is UserVerificationViewModel.UVState.OnUserVerificationCanceled -> {
+                            coordinatorLayout?.showError(uVState.error)
+                            mUserVerificationViewModel.onUserVerificationReceived()
+                        }
+                        is UserVerificationViewModel.UVState.OnUserVerificationSucceeded -> {
+                            when (uVState.dataToVerify.actionType) {
+                                UserVerificationActionType.SHOW_PROTECTED_FIELD -> {
+                                    uVState.dataToVerify.fieldProtection?.let { fieldProtection ->
+                                        mEntryEditViewModel.updateFieldProtection(
+                                            fieldProtection = fieldProtection,
+                                            value = false
+                                        )
+                                    }
+                                }
+                                else -> {}
+                            }
+                            mUserVerificationViewModel.onUserVerificationReceived()
                         }
                     }
                 }
@@ -448,11 +499,13 @@ class EntryEditActivity : DatabaseLockActivity(),
                                 searchAction = {
                                     // Nothing when search retrieved
                                 },
-                                selectionAction = { intentSender, typeMode, searchInfo ->
+                                selectionAction = { _, typeMode, _ ->
                                     when(typeMode) {
                                         TypeMode.DEFAULT -> {}
                                         TypeMode.MAGIKEYBOARD ->
                                             entryValidatedForKeyboardSelection(database, entry)
+                                        TypeMode.PASSWORD ->
+                                            entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
                                         TypeMode.AUTOFILL ->
@@ -464,6 +517,8 @@ class EntryEditActivity : DatabaseLockActivity(),
                                         TypeMode.DEFAULT ->
                                             entryValidatedForSave(entry)
                                         TypeMode.MAGIKEYBOARD -> {}
+                                        TypeMode.PASSWORD ->
+                                            entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
                                         TypeMode.AUTOFILL ->
@@ -499,6 +554,16 @@ class EntryEditActivity : DatabaseLockActivity(),
         // Build Autofill response with the entry selected
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             this.buildSpecialModeResponseAndSetResult(
+                entryInfo = entry.getEntryInfo(database),
+                extras = buildEntryResult(entry)
+            )
+        }
+        onValidateSpecialMode()
+    }
+
+    private fun entryValidatedForPassword(database: ContextualDatabase, entry: Entry) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            this.buildPasswordResponseAndSetResult(
                 entryInfo = entry.getEntryInfo(database),
                 extras = buildEntryResult(entry)
             )

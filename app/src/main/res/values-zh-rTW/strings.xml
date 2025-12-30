@@ -53,7 +53,7 @@
     <string name="autofill_block_restart">重新啟動包含該表單的應用程式以啟用攔截。</string>
     <string name="autofill_close_database_summary">自動填充寫入後，關閉資料庫</string>
     <string name="autofill_close_database_title">關閉資料庫</string>
-    <string name="autofill_explanation_summary">啟用自動填入功能以快速填寫其他應用程式中的用戶名和密碼</string>
+    <string name="autofill_explanation_summary">配置自動填入功能以快速填寫其他應用程式中的用戶名和密碼</string>
     <string name="autofill_inline_suggestions_keyboard">已添加自動填充建議。</string>
     <string name="autofill_inline_suggestions_summary">嘗試直接從相容的鍵盤顯示自動填充建議</string>
     <string name="autofill_inline_suggestions_title">內聯建議</string>
@@ -83,16 +83,12 @@
     <string name="brackets">括弧</string>
     <string name="build_label">版本號 %1$s</string>
     <string name="card_verification_value">安全碼</string>
-    <string name="clear_clipboard_notification_summary">剪貼簿過期或通知被關閉時，鎖定資料庫</string>
-    <string name="clear_clipboard_notification_title">關閉時清除</string>
     <string name="clipboard">剪貼簿</string>
     <string name="clipboard_cleared">剪貼簿已清除</string>
     <string name="clipboard_error">部份裝置不容許應用程式使用剪貼簿。</string>
     <string name="clipboard_error_clear">無法清除剪貼簿</string>
     <string name="clipboard_error_title">剪貼簿錯誤</string>
     <string name="clipboard_explanation_summary">使用裝置的剪貼簿複製項目欄位</string>
-    <string name="clipboard_notifications_summary">顯示剪貼簿通知，以便在查看項目時複製欄位</string>
-    <string name="clipboard_notifications_title">剪貼簿通知</string>
     <string name="clipboard_timeout">剪貼簿超時</string>
     <string name="clipboard_timeout_summary">剪貼簿的留存時間（如果裝置支援）</string>
     <string name="clipboard_warning">如自動清空剪貼簿失敗，則請手動清空。</string>
@@ -181,22 +177,15 @@
     <string name="education_entry_edit_title">編輯此條目</string>
     <string name="education_entry_new_field_summary">添加一個新的欄位並添加為其添加一個值，此時可以選擇是否保護該欄位及其值。</string>
     <string name="education_entry_new_field_title">添加自定義欄位</string>
-    <string name="education_field_copy_summary">已複製的欄位可以貼到任何地方。
-\n
-\n選擇需要的表格填寫方式。</string>
+    <string name="education_field_copy_summary">已複製的欄位可以貼到任何地方。\n\n選擇需要的表格填寫方式。</string>
     <string name="education_field_copy_title">複製欄位</string>
     <string name="education_generate_password_summary">依據表單中的標準進行簡單的定義，隨機為該條目生成一個強密碼，不在擔心忘記安全密碼。</string>
     <string name="education_generate_password_title">建立一個強密碼</string>
     <string name="education_lock_summary">可以設置在無操作和螢幕關閉的時候，鎖定資料庫。</string>
     <string name="education_lock_title">鎖定資料庫</string>
-    <string name="education_new_node_summary">這些條目幫助管理數位化身份。
-\n
-\n還可以使用群組來管理資料庫中的條目。</string>
+    <string name="education_new_node_summary">這些條目幫助管理數位化身份。\n\n還可以使用群組來管理資料庫中的條目。</string>
     <string name="education_new_node_title">向資料庫添加項目</string>
-    <string name="education_read_only_summary">更改此會話的開啟模式。
-\n
-\n「寫入保護」（「唯讀」）可防止對資料庫的意外更改。
-\n「可編輯」將你允許隨心所欲地添加、刪除或者修改所有元素。</string>
+    <string name="education_read_only_summary">更改此會話的開啟模式。\n\n「寫入保護」(「唯讀」)可防止對資料庫的意外更改。\n「可編輯」將你允許隨心所欲地添加、刪除或者修改所有元素。</string>
     <string name="education_read_only_title">資料庫啟用寫入保護（唯讀）</string>
     <string name="education_search_summary">輸入標題、用戶名或其他欄位的內容來搜尋密碼。</string>
     <string name="education_search_title">搜尋條目</string>
@@ -206,9 +195,7 @@
     <string name="education_setup_OTP_title">設置一次性密碼</string>
     <string name="education_sort_summary">選擇條目和群組的排序方式。</string>
     <string name="education_sort_title">條目排序</string>
-    <string name="education_unlock_summary">輸入密碼和/或一個密鑰檔來解鎖你的資料庫。
-\n
-\n每次更改后，將資料庫檔備份到安全的地方。</string>
+    <string name="education_unlock_summary">輸入密碼和/或一個密鑰檔來解鎖你的資料庫。\n\n每次更改后，將資料庫檔備份到安全的地方。</string>
     <string name="education_unlock_title">解鎖資料庫</string>
     <string name="email">電子郵件</string>
     <string name="email_address">電子郵件地址</string>
@@ -250,7 +237,7 @@
     <string name="error_copy_group_here">不能在此處複製群組。</string>
     <string name="error_create_database">無法建立資料庫。</string>
     <string name="error_create_database_file">無法使用此密碼和密鑰檔創建資料庫。</string>
-    <string name="error_database_uri_null">無法取回資料庫 URI。</string>
+    <string name="error_database_uri_null">無法檢索資料庫 URI。</string>
     <string name="error_disallow_no_credentials">至少需要設置一個憑證。</string>
     <string name="error_duplicate_file">該檔案已存在。</string>
     <string name="error_export_app_properties">導出應用程式設定時發生錯誤。</string>
@@ -272,7 +259,7 @@
     <string name="error_otp_digits">令牌需含有 %1$d 到 %2$d 個數字。</string>
     <string name="error_otp_period">時段必須介於 %1$d 和 %2$d 秒之間。</string>
     <string name="error_otp_secret_key">密鑰必須採用 Base32 格式。</string>
-    <string name="error_otp_type">現有的 OTP 類型未被此表單所辨識，其驗證可能不再正確生成令牌。</string>
+    <string name="error_otp_type">此表單無法辨識現有的 OTP 類型，其驗證可能無法再正確產生令牌。</string>
     <string name="error_out_of_memory">記憶體不足，無法解析資料庫。</string>
     <string name="error_pass_gen_type">必須至少選擇一個密碼生成類型。</string>
     <string name="error_pass_match">密碼不正確。</string>
@@ -304,8 +291,6 @@
     <string name="hide_broken_locations_title">隱藏已損壞的資料庫路徑</string>
     <string name="hide_expired_entries_summary">過期條目將被隱藏</string>
     <string name="hide_expired_entries_title">隱藏過期的條目</string>
-    <string name="hide_password_summary">預設隱藏密碼</string>
-    <string name="hide_password_title">密碼遮罩</string>
     <string name="hint_conf_pass">確認密碼</string>
     <string name="hint_generated_password">生成密碼</string>
     <string name="hint_group_name">群組名</string>
@@ -357,7 +342,6 @@
     <string name="keyboard_name">魔法鍵盤</string>
     <string name="keyboard_notification_entry_clear_close_summary">關閉通知時也關閉資料庫</string>
     <string name="keyboard_notification_entry_clear_close_title">關閉時清除</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_content_title">%1$s 在魔法鍵盤中可用</string>
     <string name="keyboard_notification_entry_content_title_text">條目</string>
     <string name="keyboard_notification_entry_summary">在條目可用時顯示通知</string>
@@ -392,7 +376,7 @@
     <string name="list_size_title">群列表尺寸</string>
     <string name="loading_database">載入資料庫中…</string>
     <string name="lock">鎖上</string>
-    <string name="lock_database_back_root_summary">當使用返回鍵退出應用時，鎖定資料庫</string>
+    <string name="lock_database_back_root_summary">如果您位於資料庫的頂端，請按「返回」鍵鎖定資料庫</string>
     <string name="lock_database_back_root_title">按返回鍵時鎖定資料庫</string>
     <string name="lock_database_screen_off_summary">螢幕鎖定時鎖定資料庫</string>
     <string name="lock_database_screen_off_title">鎖定螢幕</string>
@@ -424,7 +408,6 @@
     <string name="menu_external_icon">外部圖示</string>
     <string name="menu_file_selection_read_only">唯讀</string>
     <string name="menu_form_filling_settings">表格填入</string>
-    <string name="menu_hide_password">隱藏密碼</string>
     <string name="menu_keystore_remove_key">刪除裝置解鎖密鑰</string>
     <string name="menu_lock">鎖定資料庫</string>
     <string name="menu_master_key_settings">主密鑰設定</string>
@@ -509,7 +492,7 @@
     <string name="settings_database_recommend_changing_master_key_title">建議更新</string>
     <string name="show_otp_token_summary">在項目清單中顯示 OTP 令牌</string>
     <string name="show_otp_token_title">顯示 OTP 令牌</string>
-    <string name="show_recent_files_summary">顯示最近使用的儲存庫位置</string>
+    <string name="show_recent_files_summary">顯示最近使用的資料庫位置</string>
     <string name="show_recent_files_title">最近開啟的檔案</string>
     <string name="show_uuid_summary">顯示與項目或群組相連接的 UUID</string>
     <string name="show_uuid_title">顯示 UUID</string>
@@ -660,26 +643,24 @@
     <string name="ask">詢問</string>
     <string name="merge_success">合併成功</string>
     <string name="configure">配置</string>
-    <string name="menu_appearance_settings_summary">主題、顏色、屬性</string>
+    <string name="menu_appearance_settings_summary">主題、顏色、圖示、字體、屬性</string>
     <string name="unlock">解鎖</string>
     <string name="at_least_one_char">從每組中選擇字完</string>
     <string name="consider_chars_filter">可以包含</string>
     <string name="ignore_chars_filter">不要包括</string>
     <string name="title_case">標題大小寫</string>
     <string name="content_description_nav_header">導航列標題</string>
-    <string name="education_validate_entry_summary">記得驗證和儲存你的資料庫。
-\n
-\n如果自動鎖定已啓用，而你又忘記你在更改資料，你可能會失去你的資料。</string>
-    <string name="style_name_forest">Forest</string>
-    <string name="style_name_divine">神聖</string>
-    <string name="style_name_simple">簡單</string>
-    <string name="style_name_moon">Moon</string>
-    <string name="style_name_sun">Sun</string>
+    <string name="education_validate_entry_summary">記得驗證和儲存你的資料庫。\n\n如果自動鎖定已啓用，而你又忘記你在更改資料，你可能會失去你的資料。</string>
+    <string name="style_name_forest">綠意盎然</string>
+    <string name="style_name_divine">神秘聖域</string>
+    <string name="style_name_simple">簡單純淨</string>
+    <string name="style_name_moon">皎潔月光</string>
+    <string name="style_name_sun">燦爛陽光</string>
     <string name="style_name_kunzite">紫孔賽</string>
     <string name="style_name_follow_system">遵循系統</string>
     <string name="style_name_light">淺色</string>
     <string name="style_name_dark">黑暗</string>
-    <string name="style_name_classic">Classic</string>
+    <string name="style_name_classic">經典雅緻</string>
     <string name="style_name_reply">回覆</string>
     <string name="remember_hardware_key_summary">追蹤使用的硬體密鑰</string>
     <string name="warning_database_notification_permission">通知權限讓您在資料庫運作於背景時，透過通知欄查看其狀態並使用方便的按鈕將其鎖住。
@@ -696,4 +677,27 @@
     <string name="recursive_number_entries_summary">遞歸計算群組中的項目數</string>
     <string name="warning_large_keyfile">不建議增加較大的密鑰檔案，這可能會阻止資料庫開啟。</string>
     <string name="error_otp_secret_length">密鑰必須包含至少%1$d個字元。</string>
+    <string name="entry_application_id">應用程式 Id</string>
+    <string name="warning_overwrite_data_title">要覆蓋現有數據嗎？</string>
+    <string name="warning_overwrite_data_description">此操作將取代條目中的現有數據，如果啟用了歷史記錄，則可以檢索舊數據。</string>
+    <string name="credential_provider">憑證提供者</string>
+    <string name="passkeys">通行密鑰</string>
+    <string name="passkeys_explanation_summary">設定 Passkey，實現快速安全的無密碼登入</string>
+    <string name="passkeys_preference_title">Passkey 設定</string>
+    <string name="passkeys_close_database_title">關閉資料庫</string>
+    <string name="passkeys_close_database_summary">選擇密碼後關閉資料庫</string>
+    <string name="passkeys_privileged_apps_ask_title">應用無法識別</string>
+    <string name="passkeys_missing_signature_app_ask_title">簽名缺失</string>
+    <string name="passkeys_auto_select_title">自動選擇</string>
+    <string name="passkeys_auto_select_summary">如果只有一個條目且資料庫已打開，並且請求的應用程式相容，則自動選擇</string>
+    <string name="passkeys_backup_eligibility_summary">在創建時確定是否允許備份公鑰憑證來源</string>
+    <string name="passkeys_backup_state_title">備份狀態</string>
+    <string name="passkey_creation_description">將密碼儲存到新條目中</string>
+    <string name="passkey_update_description">在 %1$s 中更新密碼</string>
+    <string name="passkey_selection_username">未找到 passkey</string>
+    <string name="passkey_selection_description">選擇現有 passkey</string>
+    <string name="passkey_username">Passkey 使用者名稱</string>
+    <string name="passkey_private_key">Passkey 私鑰</string>
+    <string name="passkeys_missing_signature_app_ask_message">%1$s 無法識別，並嘗試使用現有 passkey 進行身份驗證。</string>
+    <string name="passkey_backup_state">通行金鑰備份狀態</string>
 </resources>

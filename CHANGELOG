@@ -1,3 +1,14 @@
+KeePassDX(4.3.0)
+ * Manual change of app language #1884 #1990
+ * Add Passkey User Verification #2283
+ * Share URL/Entry from Autofill to Magikeyboard #920 #995 #2024 #1465
+ * Improve keyboard switch #311 #643 #2305
+ * OTP notification #2301 #1347 #1558 #2316
+ * Field reference placeholders S: #2270 (@thegards)
+ * Password Credential Provider API #2139
+ * Improve Autofill recognition #553
+ * Small fixes #2289 #2277 #2068 #2288 #2276 #1793 #2282
+
 KeePassDX(4.2.4)
  * Fix remembering database location #2262
 

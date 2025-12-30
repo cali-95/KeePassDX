@@ -100,8 +100,6 @@
     <string name="list_size_summary">요소 목록 텍스트 크기</string>
     <string name="loading_database">데이터베이스 로딩 중…</string>
     <string name="lowercase">소문자</string>
-    <string name="hide_password_title">비밀번호 숨기기</string>
-    <string name="hide_password_summary">기본 비밀번호를 (***) 로 가리기</string>
     <string name="about">정보</string>
     <string name="menu_change_key_settings">마스터 키 바꾸기</string>
     <string name="copy_field">%1$s의 사본</string>
@@ -116,7 +114,6 @@
     <string name="menu_paste">붙여넣기</string>
     <string name="menu_delete">삭제</string>
     <string name="menu_cancel">취소</string>
-    <string name="menu_hide_password">비밀번호 숨기기</string>
     <string name="menu_lock">데이터베이스 잠그기</string>
     <string name="menu_open">열기</string>
     <string name="menu_search">검색</string>
@@ -371,7 +368,6 @@
     <string name="biometric_security_update_required">등록된 생체정보를 업데이트해 주세요.</string>
     <string name="autofill_select_entry">항목 선택…</string>
     <string name="clipboard">클립보드</string>
-    <string name="clipboard_notifications_title">클립보드 알림</string>
     <string name="lock_database_screen_off_summary">화면이 꺼지면 몇 초 후에 데이터베이스를 잠급니다</string>
     <string name="lock_database_back_root_title">\'­뒤로가기\'를 눌러 잠금</string>
     <string name="unavailable_feature_text">이 기능을 사용할 수 없습니다.</string>

@@ -11,8 +11,8 @@ android {
         applicationId "com.kunzisoft.keepass"
         minSdkVersion 19
         targetSdkVersion 35
-        versionCode = 149
-        versionName = "4.2.4"
+        versionCode = 151
+        versionName = "4.3.0"
         multiDexEnabled true
 
         testApplicationId = "com.kunzisoft.keepass.tests"
@@ -110,6 +110,10 @@ android {
         // Bouncy castle bug https://github.com/bcgit/bc-java/issues/1685
         resources.pickFirsts.add('META-INF/versions/9/OSGI-INF/MANIFEST.MF')
     }
+
+    androidResources {
+        generateLocaleConfig true
+    }
 }
 
 def room_version = "2.5.1"
@@ -127,7 +131,8 @@ dependencies {
     implementation 'androidx.media:media:1.6.0'
     // Lifecycle - LiveData - ViewModel - Coroutines
     implementation "androidx.core:core-ktx:$android_core_version"
-    implementation "androidx.lifecycle:lifecycle-process:2.6.2"
+    implementation "androidx.lifecycle:lifecycle-process:$android_lifecycle"
+    implementation "androidx.lifecycle:lifecycle-service:$android_lifecycle"
     implementation 'androidx.fragment:fragment-ktx:1.6.0'
     implementation "com.google.android.material:material:$android_material_version"
     // Token auto complete

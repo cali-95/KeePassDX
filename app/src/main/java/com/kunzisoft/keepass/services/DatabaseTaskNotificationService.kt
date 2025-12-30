@@ -30,9 +30,10 @@ import android.util.Log
 import androidx.annotation.StringRes
 import androidx.media.app.NotificationCompat
 import com.kunzisoft.keepass.R
-import com.kunzisoft.keepass.activities.GroupActivity
+import com.kunzisoft.keepass.activities.FileDatabaseSelectActivity
 import com.kunzisoft.keepass.app.database.CipherDatabaseAction
 import com.kunzisoft.keepass.app.database.FileDatabaseHistoryAction
+import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.MainCredential
 import com.kunzisoft.keepass.database.ProgressMessage
@@ -61,14 +62,12 @@ import com.kunzisoft.keepass.database.element.node.Node
 import com.kunzisoft.keepass.database.element.node.NodeId
 import com.kunzisoft.keepass.database.element.node.Type
 import com.kunzisoft.keepass.hardware.HardwareKey
-import com.kunzisoft.keepass.credentialprovider.activity.HardwareKeyActivity
 import com.kunzisoft.keepass.model.CipherEncryptDatabase
 import com.kunzisoft.keepass.model.SnapFileDatabaseInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.tasks.ProgressTaskUpdater
 import com.kunzisoft.keepass.timeout.TimeoutHelper
-import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.utils.DATABASE_START_TASK_ACTION
 import com.kunzisoft.keepass.utils.DATABASE_STOP_TASK_ACTION
 import com.kunzisoft.keepass.utils.LOCK_ACTION
@@ -549,15 +548,9 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
                 // Database is normally open
                 if (database.loaded) {
                     // Build Intents for notification action
-                    val pendingDatabaseIntent = PendingIntent.getActivity(
-                        this,
-                        randomRequestCode(),
-                        Intent(this, GroupActivity::class.java),
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
-                        } else {
-                            PendingIntent.FLAG_UPDATE_CURRENT
-                        }
+                    // Open the start of the database workflow
+                    val pendingDatabaseIntent = buildActivityPendingIntent(
+                        Intent(this, FileDatabaseSelectActivity::class.java)
                     )
                     val pendingDeleteIntent = PendingIntent.getBroadcast(
                         this,
@@ -917,7 +910,7 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
 
     private fun buildDatabaseAssignCredentialActionTask(
         intent: Intent,
-        database: ContextualDatabase,
+        database: ContextualDatabase
     ): ActionRunnable? {
         return if (intent.hasExtra(DATABASE_URI_KEY)
             && intent.hasExtra(MAIN_CREDENTIAL_KEY)
@@ -951,7 +944,7 @@ open class DatabaseTaskNotificationService : LockNotificationService(), Progress
             .deleteKeyFileByDatabaseUri(databaseUri)
     }
 
-    private inner class AfterActionNodesRunnable : AfterActionNodesFinish() {
+    private class AfterActionNodesRunnable : AfterActionNodesFinish() {
         override fun onActionNodesFinish(
             result: ActionRunnable.Result,
             actionNodesValues: ActionNodesValues,

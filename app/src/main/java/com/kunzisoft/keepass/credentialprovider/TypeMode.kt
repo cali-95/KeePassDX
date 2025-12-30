@@ -1,5 +1,5 @@
 package com.kunzisoft.keepass.credentialprovider
 
 enum class TypeMode {
-    DEFAULT, MAGIKEYBOARD, PASSKEY, AUTOFILL
+    DEFAULT, MAGIKEYBOARD, PASSWORD, PASSKEY, AUTOFILL
 }

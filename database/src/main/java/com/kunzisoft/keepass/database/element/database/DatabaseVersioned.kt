@@ -34,7 +34,7 @@ import com.kunzisoft.keepass.database.exception.DuplicateUuidDatabaseException
 import java.io.InputStream
 import java.io.UnsupportedEncodingException
 import java.nio.charset.Charset
-import java.util.*
+import java.util.UUID
 
 abstract class DatabaseVersioned<
         GroupId,
@@ -57,6 +57,8 @@ abstract class DatabaseVersioned<
     var finalKey: ByteArray? = null
         protected set
     var transformSeed: ByteArray? = null
+
+    var checkKey = ByteArray(32)
 
     abstract val version: String
     abstract val defaultFileExtension: String
@@ -89,10 +91,6 @@ abstract class DatabaseVersioned<
         return getGroupIndexes().filter { it != rootGroup }
     }
 
-    protected open fun loadXmlKeyFile(keyInputStream: InputStream): ByteArray? {
-        return null
-    }
-
     open fun isValidCredential(password: String?, containsKeyFile: Boolean): Boolean {
         if (password == null && !containsKeyFile)
             return false
@@ -105,14 +103,14 @@ abstract class DatabaseVersioned<
         val bKey: ByteArray
         try {
             bKey = password.toByteArray(encoding)
-        } catch (e: UnsupportedEncodingException) {
+        } catch (_: UnsupportedEncodingException) {
             return false
         }
 
         val reEncoded: String
         try {
             reEncoded = String(bKey, encoding)
-        } catch (e: UnsupportedEncodingException) {
+        } catch (_: UnsupportedEncodingException) {
             return false
         }
         return password == reEncoded
@@ -121,6 +119,7 @@ abstract class DatabaseVersioned<
     fun copyMasterKeyFrom(databaseVersioned: DatabaseVersioned<GroupId, EntryId, Group, Entry>) {
         this.masterKey = databaseVersioned.masterKey
         this.transformSeed = databaseVersioned.transformSeed
+        this.checkKey = databaseVersioned.checkKey
     }
 
     /*

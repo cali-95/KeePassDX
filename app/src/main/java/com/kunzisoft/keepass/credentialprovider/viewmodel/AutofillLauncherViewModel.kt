@@ -19,11 +19,13 @@ import com.kunzisoft.keepass.credentialprovider.autofill.AutofillComponent
 import com.kunzisoft.keepass.credentialprovider.autofill.AutofillHelper
 import com.kunzisoft.keepass.credentialprovider.autofill.AutofillHelper.retrieveAutofillComponent
 import com.kunzisoft.keepass.credentialprovider.autofill.KeeAutofillService
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.exception.RegisterInReadOnlyDatabaseException
 import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
+import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -39,12 +41,16 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
     private var mAutofillComponent: AutofillComponent? = null
 
     private var mLockDatabaseAfterSelection: Boolean = false
+    private var mAutofillSharedToMagikeyboard: Boolean = false
+    private var mSwitchToMagikeyboard: Boolean = false
 
     private val mUiState = MutableStateFlow<UIState>(UIState.Loading)
     val uiState: StateFlow<UIState> = mUiState
 
     fun initialize() {
         mLockDatabaseAfterSelection = PreferencesUtil.isAutofillCloseDatabaseEnable(getApplication())
+        mAutofillSharedToMagikeyboard = PreferencesUtil.isAutofillSharedToMagikeyboardEnable(getApplication())
+        mSwitchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(getApplication())
     }
 
     override fun onResult() {
@@ -60,18 +66,18 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
         // Retrieve selection mode
         when (intent.retrieveSpecialMode()) {
             SpecialMode.SELECTION -> {
-                val searchInfo = intent.retrieveSearchInfo()
-                if (searchInfo == null)
-                    throw IOException("Search info is null")
+                val searchInfo =
+                    intent.retrieveSearchInfo()
+                        ?: throw IOException("Search info is null")
                 mAutofillComponent = intent.retrieveAutofillComponent()
                 // Build search param
                 launchSelection(database, mAutofillComponent, searchInfo)
             }
             SpecialMode.REGISTRATION -> {
                 // To register info
-                val registerInfo = intent.retrieveRegisterInfo()
-                if (registerInfo == null)
-                    throw IOException("Register info is null")
+                val registerInfo =
+                    intent.retrieveRegisterInfo()
+                        ?: throw IOException("Register info is null")
                 launchRegistration(database, registerInfo)
             }
             else -> {
@@ -157,9 +163,22 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                             throw IOException("Intent is null")
                         val entries = intent.retrieveAndRemoveEntries(database)
                         val autofillComponent = mAutofillComponent
-                        if (autofillComponent == null)
-                            throw IOException("Autofill component is null")
+                                ?: throw IOException("Autofill component is null")
                         withContext(Dispatchers.Main) {
+                            // Add Autofill entries to Magic Keyboard #2024 #995
+                            if (mAutofillSharedToMagikeyboard) {
+                                MagikeyboardService.addEntries(
+                                    context = getApplication(),
+                                    entryList = entries,
+                                    toast = true,
+                                    autoSwitchKeyboard = mSwitchToMagikeyboard
+                                )
+                            } else {
+                                ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
+                                    context = getApplication(),
+                                    entries = entries
+                                )
+                            }
                             AutofillHelper.buildResponse(
                                 context = getApplication(),
                                 autofillComponent = autofillComponent,
@@ -244,7 +263,6 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
     }
 
     override fun manageRegistrationResult(activityResult: ActivityResult) {
-        isResultLauncherRegistered = false
         viewModelScope.launch(CoroutineExceptionHandler { _, e ->
             Log.e(TAG, "Unable to create registration response for autofill", e)
             showError(e)
@@ -264,7 +282,6 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                 }
             }
         }
-
     }
 
     sealed class UIState {

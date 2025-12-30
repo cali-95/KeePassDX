@@ -20,45 +20,27 @@
 package com.kunzisoft.keepass.activities.dialogs
 
 import android.app.Dialog
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.helpers.ExternalFileHelper
 import com.kunzisoft.keepass.database.MainCredential
+import com.kunzisoft.keepass.database.exception.FileNotFoundDatabaseException
 import com.kunzisoft.keepass.utils.UriUtil.getDocumentFile
 import com.kunzisoft.keepass.utils.getParcelableCompat
 import com.kunzisoft.keepass.view.MainCredentialView
+import com.kunzisoft.keepass.viewmodels.MainCredentialViewModel
 
 class MainCredentialDialogFragment : DatabaseDialogFragment() {
 
     private var mainCredentialView: MainCredentialView? = null
 
-    private var mListener: AskMainCredentialDialogListener? = null
-
     private var mExternalFileHelper: ExternalFileHelper? = null
 
-    interface AskMainCredentialDialogListener {
-        fun onAskMainCredentialDialogPositiveClick(databaseUri: Uri?, mainCredential: MainCredential)
-        fun onAskMainCredentialDialogNegativeClick(databaseUri: Uri?, mainCredential: MainCredential)
-    }
-
-    override fun onAttach(activity: Context) {
-        super.onAttach(activity)
-        try {
-            mListener = activity as AskMainCredentialDialogListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(activity.toString()
-                    + " must implement " + AskMainCredentialDialogListener::class.java.name)
-        }
-    }
-
-    override fun onDetach() {
-        mListener = null
-        super.onDetach()
-    }
+    private val mMainCredentialViewModel: MainCredentialViewModel by activityViewModels()
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         activity?.let { activity ->
@@ -76,30 +58,35 @@ class MainCredentialDialogFragment : DatabaseDialogFragment() {
             databaseUri?.let {
                 root.findViewById<TextView>(R.id.title_database)?.text =
                     it.getDocumentFile(requireContext())?.name
-            }
-            builder.setView(root)
+
+                builder.setView(root)
                     // Add action buttons
                     .setPositiveButton(android.R.string.ok) { _, _ ->
-                        mListener?.onAskMainCredentialDialogPositiveClick(
-                            databaseUri,
-                            retrieveMainCredential()
+                        mMainCredentialViewModel.validateMainCredential(
+                            databaseUri = databaseUri,
+                            mainCredential = retrieveMainCredential()
                         )
                     }
                     .setNegativeButton(android.R.string.cancel) { _, _ ->
-                        mListener?.onAskMainCredentialDialogNegativeClick(
-                            databaseUri,
-                            retrieveMainCredential()
+                        mMainCredentialViewModel.cancelMainCredential(
+                            databaseUri = databaseUri
                         )
                     }
 
-
-            mExternalFileHelper = ExternalFileHelper(this)
-            mExternalFileHelper?.buildOpenDocument { uri ->
-                if (uri != null) {
-                    mainCredentialView?.populateKeyFileView(uri)
+                mExternalFileHelper = ExternalFileHelper(this)
+                mExternalFileHelper?.buildOpenDocument { uri ->
+                    if (uri != null) {
+                        mainCredentialView?.populateKeyFileView(uri)
+                    }
                 }
+                mainCredentialView?.setOpenKeyfileClickListener(mExternalFileHelper)
+            } ?: run {
+                mMainCredentialViewModel.cancelMainCredential(
+                    databaseUri = null,
+                    error = FileNotFoundDatabaseException()
+                )
+                dismissAllowingStateLoss()
             }
-            mainCredentialView?.setOpenKeyfileClickListener(mExternalFileHelper)
 
             return builder.create()
         }

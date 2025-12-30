@@ -238,15 +238,13 @@ fun View.updateLockPaddingStart() {
     }
 }
 
-fun Context.toastError(e: Throwable) {
-    Toast.makeText(
-        applicationContext,
-        if (e is LocalizedException)
-            e.getLocalizedMessage(resources)
-        else
-            e.localizedMessage,
-        Toast.LENGTH_LONG
-    ).show()
+fun Context.toastError(e: Throwable?) {
+    val message = if (e is LocalizedException)
+        e.getLocalizedMessage(resources)
+    else e?.localizedMessage
+    message?.let {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_LONG).show()
+    }
 }
 
 fun Context.showActionErrorIfNeeded(result: ActionRunnable.Result) {
@@ -256,6 +254,15 @@ fun Context.showActionErrorIfNeeded(result: ActionRunnable.Result) {
         } ?: result.message?.let { message ->
             Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         }
+    }
+}
+
+fun CoordinatorLayout.showError(error: Throwable?) {
+    val message = if (error is LocalizedException) {
+        error.getLocalizedMessage(resources) ?: error.message
+    } else error?.message
+    message?.let {
+        Snackbar.make(this, message, Snackbar.LENGTH_LONG).asError().show()
     }
 }
 

@@ -83,8 +83,6 @@
     <string name="list_size_summary">Veľkosť textu v zozname prvkov</string>
     <string name="loading_database">Načítava sa databáza…</string>
     <string name="lowercase">Malé písmená</string>
-    <string name="hide_password_title">Skryť heslá</string>
-    <string name="hide_password_summary">Predvolene maskovať heslá (***)</string>
     <string name="about">O Programe</string>
     <string name="menu_change_key_settings">Zmeniť hlavný Kľúč</string>
     <string name="settings">Nastavenia</string>
@@ -92,7 +90,6 @@
     <string name="menu_delete">Zmazať</string>
     <string name="menu_donate">Darovať</string>
     <string name="menu_edit">Upraviť</string>
-    <string name="menu_hide_password">Skryť heslo</string>
     <string name="menu_lock">Zamknúť databázu</string>
     <string name="menu_open">Otvoriť</string>
     <string name="menu_search">Hľadať</string>
@@ -181,7 +178,6 @@
     <string name="device_unlock_prompt_store_credential_title">Prepojenie s odomykaním zariadenia</string>
     <string name="education_donation_summary">Pomôžte zvýšiť stabilitu, bezpečnosť a pridať ďalšie funkcie.</string>
     <string name="database_opened">Databáza otvorená</string>
-    <string name="clipboard_notifications_summary">Zobrazovať upozornenia schránky na kopírovanie polí pri prezeraní záznamu</string>
     <string name="device_credential_unlock_enable_summary">Umožňuje vám použiť heslo vášho zariadenia na otvorenie databázy</string>
     <string name="biometric_auto_open_prompt_summary">Automaticky požiadať o odomykanie zariadením, ak je databáza nastavená na jeho používanie</string>
     <string name="html_text_ad_free">Na rozdiel od mnohých aplikácií na správu hesiel je táto &lt;strong&gt;bez reklám&lt;/strong&gt;, &lt;strong&gt;kopírovatelný bezplatný softvér&lt;/strong&gt; a nezhromažďuje osobné údaje na svojich serveroch bez ohľadu na to, akú verziu používate.</string>
@@ -218,7 +214,6 @@
     <string name="general">Obecné</string>
     <string name="clipboard">Schránka</string>
     <string name="clipboard_explanation_summary">Skopírujte vstupné polia pomocou schránky vášho zariadenia</string>
-    <string name="clipboard_notifications_title">Upozornenia schránky</string>
     <string name="clipboard_warning">Ak automatické vymazanie schránky zlyhá, vymažte jej históriu manuálne.</string>
     <string name="lock_database_screen_off_summary">Uzamknite databázu po niekoľkých sekundách, keď je obrazovka vypnutá</string>
     <string name="biometric_unlock_enable_title">Biometrické odomknutie</string>
@@ -240,7 +235,6 @@
     <string name="allow_copy_password_title">Dôverovať schránke</string>
     <string name="disable">Vypnúť</string>
     <string name="notification">Oznámenie</string>
-    <string name="clear_clipboard_notification_title">Pri zatváraní vymazať</string>
     <string name="database_description_title">Popis databázy</string>
     <string name="text_appearance">Text</string>
     <string name="compression">Kompresia</string>
@@ -309,7 +303,6 @@
     <string name="education_device_unlock_title">Odomykanie databázy zariadenia</string>
     <string name="html_text_feature_generosity">Tento &lt;strong&gt;vizuálny štýl&lt;/strong&gt; je dostupný vďaka vašej štedrosti.</string>
     <string name="keyboard_notification_entry_content_title">%1$s dostupných v Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_theme_title">Vzhľad klávesnice</string>
     <string name="keyboard_previous_database_credentials_title">Obrazovka overovacích údajov databázy</string>
     <string name="keyboard_previous_fill_in_summary">Automaticky prepnúť späť na predchádzajúcu klávesnicu po vykonaní \"Akcia automatického klávesu\"</string>
@@ -366,7 +359,6 @@
     <string name="settings_database_recommend_changing_master_key_title">Odporučiť obnovenie</string>
     <string name="settings_database_recommend_changing_master_key_summary">Odporučiť zmeniť hlavný kľúč (dni)</string>
     <string name="settings_database_force_changing_master_key_title">Vynútiť zmenu</string>
-    <string name="clear_clipboard_notification_summary">Uzamknite databázu, keď uplynie doba trvania schránky alebo keď sa po použití zatvorí upozornenie</string>
     <string name="application_appearance">Rozhranie</string>
     <string name="compression_none">Žiadna</string>
     <string name="other">Ostatné</string>

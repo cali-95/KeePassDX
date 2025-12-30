@@ -90,8 +90,6 @@
     <string name="list_size_summary">גודל טקסט ברשימת הרכיבים</string>
     <string name="loading_database">טוען מסד נתונים…</string>
     <string name="lowercase">אות קטנה</string>
-    <string name="hide_password_title">הסתר סיסמאות</string>
-    <string name="hide_password_summary">הסווה סיסמאות (***) כברירת מחדל</string>
     <string name="about">אודות</string>
     <string name="menu_change_key_settings">שנה מפתח ראשי</string>
     <string name="settings">העדפות</string>
@@ -99,7 +97,6 @@
     <string name="menu_delete">מחק</string>
     <string name="menu_donate">תרום</string>
     <string name="menu_edit">ערוך</string>
-    <string name="menu_hide_password">הסתר סיסמה</string>
     <string name="menu_lock">נעל מסד נתונים</string>
     <string name="menu_open">פתח</string>
     <string name="menu_search">חיפוש</string>
@@ -206,7 +203,7 @@
     <string name="error_unable_merge_database_kdb">לא ניתן למזג עם קובץ מסד נתונים kdb.</string>
     <string name="error_hardware_key_unsupported">מפתח חומרה אינו נתמך.</string>
     <string name="error_empty_key">המפתח לא יכול להיות ריק.</string>
-    <string name="file_not_found_content">לא ניתן למצוא את הקובץ. נסה לפתוח אותו מחדש מסייר הקבצים שלך.</string>
+    <string name="file_not_found_content">לא ניתן למצוא את הקובץ</string>
     <string name="corrupted_file">קובץ פגום.</string>
     <string name="template_group_name">תבניות</string>
     <string name="entry_setup_otp">הגדר סיסמה חד-פעמית</string>
@@ -336,7 +333,6 @@
     <string name="keyboard_notification_entry_clear_close_title">נקה בסגירה</string>
     <string name="keyboard_notification_entry_content_title_text">רשומה</string>
     <string name="keyboard_notification_entry_content_title">%1$s זמין ב־Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_summary">סגור את מסד הנתונים כאשר נסגרת ההתראה</string>
     <string name="keyboard_key_sound_title">לחיצות מקשים קוליות</string>
     <string name="reset_education_screens_title">אפס רמזים לימודיים</string>
@@ -349,8 +345,6 @@
     <string name="remember_database_locations_summary">עוקב אחר המיקום שבו מאוחסנים מסדי הנתונים</string>
     <string name="remember_keyfile_locations_title">זכור מיקומי קובץ מפתח</string>
     <string name="command_execution">מריץ את הפקודה…</string>
-    <string name="clipboard_notifications_title">התראות לוח העתקה</string>
-    <string name="clipboard_explanation_summary">העתק שדות רשומה בעזרת לוח ההעתקה של המכשיר שלך</string>
     <string name="max_history_size_summary">הגבל את גודל ההיסטוריה לכל רשומה</string>
     <string name="device_unlock">בטל נעילת מכשיר</string>
     <string name="database_version_title">גרסת מסד הנתונים</string>
@@ -372,7 +366,6 @@
     <string name="menu_device_unlock_settings_summary">ביומטרי, אישור מכשיר</string>
     <string name="menu_database_settings_summary">מטא-נתונים, סל מחזור, תבניות, היסטוריה</string>
     <string name="sort_last_access_time">גישה</string>
-    <string name="clipboard_notifications_summary">הצג התראות לוח העתקה כדי להעתיק שדות בעת צפייה ברשומה</string>
     <string name="assign_master_key">הקצה מפתח ראשי</string>
     <string name="contains_duplicate_uuid_procedure">האם לפתור את הבעיה על ידי יצירת מזהים ייחודיים אוניברסליים עבור כפילויות כדי להמשיך?</string>
     <string name="remember_keyfile_locations_summary">עוקב אחר המיקום שבו מאוחסנים קבצי מפתח</string>
@@ -381,7 +374,6 @@
     <string name="parallelism">מקבילות</string>
     <string name="parallelism_explanation">מידת המקבילות (כלומר מספר התהליכונים) המשמשת את פונקציית גזירת המפתח.</string>
     <string name="menu_appearance_settings">מראה</string>
-    <string name="clear_clipboard_notification_title">נקה בסגירה</string>
     <string name="kdf_explanation">על מנת לייצר את המפתח עבור אלגוריתם ההצפנה, המפתח הראשי עובר טרנספורמציה באמצעות פונקציית גזירת מפתח מלוחה באקראיות.</string>
     <string name="other">אחר</string>
     <string name="education_sort_title">מיון פריטים</string>
@@ -498,7 +490,7 @@
     <string name="warning_database_read_only">הענק גישת כתיבה לקובץ כדי לשמור שינויי מסד נתונים</string>
     <string name="warning_database_link_revoked">בוטלה הגישה לקובץ על ידי מנהל הקבצים</string>
     <string name="warning_database_info_changed">המידע שבתוך קובץ מסד הנתונים שלך השתנה מחוץ ליישום זה.</string>
-    <string name="device_unlock_prompt_store_credential_message">אתה עדיין צריך לזכור את אישור הכספת הראשי שלך אם אתה משתמש בזיהוי ביטול נעילת המכשיר.</string>
+    <string name="device_unlock_prompt_store_credential_message">אזהרה: אתה עדיין צריך לזכור את פרטי האימות מול הכספת הראשי שלך</string>
     <string name="keyboard_previous_lock_title">נעל מסד נתונים</string>
     <string name="keyboard_save_search_info_title">שמור מידע משותף</string>
     <string name="upload_attachment">העלה %1$s</string>
@@ -531,8 +523,8 @@
     <string name="warning_empty_keyfile">זה לא מומלץ להוסיף קובץ מפתח ריק.</string>
     <string name="warning_empty_keyfile_explanation">תוכן קובץ המפתח לעולם לא אמור להשתנות, ועדיף שיכיל נתונים שיוצרו רנדומלית.</string>
     <string name="warning_empty_recycle_bin">למחוק לצמיתות את כל הצמתים מסל המחזור?</string>
-    <string name="device_unlock_prompt_extract_credential_title">זיהוי ביטול נעילת מכשיר</string>
-    <string name="device_unlock_prompt_extract_credential_message">חלץ אישור מסד נתונים עם נתוני ביטול נעילת מכשיר</string>
+    <string name="device_unlock_prompt_extract_credential_title">פתיחת נעילת המכשיר</string>
+    <string name="device_unlock_prompt_extract_credential_message">פתיחת מסד נתונים עם אישורי מכשיר</string>
     <string name="device_unlock_invalid_key">לא ניתן לקרוא את מפתח ביטול נעילת המכשיר. נא למחוק אותו ולחזור על התהליך לזיהוי ביטול נעילה.</string>
     <string name="device_unlock_not_recognized">לא היה ניתן לזהות טביעת ביטול נעילת מכשיר</string>
     <string name="credential_before_click_device_unlock_button">הקלד את הסיסמה, ואז לחץ על הכפתור הזה.</string>
@@ -672,7 +664,6 @@
     <string name="temp_device_unlock_timeout_title">תפוגת ביטול נעילת מכשיר</string>
     <string name="temp_device_unlock_timeout_summary">משך השימוש בביטול נעילת מכשיר לפני מחיקת התוכן שלו</string>
     <string name="device_unlock_keystore_warning">תכונה זו תאחסן נתוני אישור מוצפנים במאגר המפתחות של המכשיר שלך.\n\nבהתאם ליישום ה-API המקורי של מערכת ההפעלה, זה עשוי להיות לא פונקציונלי לחלוטין.\n\nבדוק את התאימות והאבטחה של מאגר המפתחות עם היצרן של המכשיר שלך והיוצר של ה-ROM בו אתה משתמש.</string>
-    <string name="clear_clipboard_notification_summary">נעל את מסד הנתונים כאשר משך זמן לוח ההעתקה פג או ההתראה נסגרה לאחר שהתחלת להשתמש בו</string>
     <string name="magic_keyboard_explanation_summary">הפעל מקלדת מותאמת אישית המאכלסת את הסיסמאות שלך ואת כל שדות הזהות</string>
     <string name="keyboard_auto_go_action_summary">פעולת מקש \"עבור\" לאחר לחיצה על מקש \"שדה\"</string>
     <string name="autofill_save_search_info_summary">נסה לשמור מידע חיפוש כשעושים בחירת ערך ידנית בשביל שימושים עתידיים קלים יותר</string>
@@ -707,8 +698,8 @@
     <string name="passkey_update_description">עדכן מפתח גישה ב-%1$s</string>
     <string name="passkey_selection_username">לא נמצא מפתח גישה</string>
     <string name="passkey_selection_description">בחר מפתח גישה קיים</string>
-    <string name="passkey_database_username">KeePassDX מסד נתונים</string>
-    <string name="passkey_locked_database_description">בחר בשביל לפתוח</string>
+    <string name="credential_provider_database_username">KeePassDX מסד נתונים</string>
+    <string name="credential_provider_locked_database_description">בחר בשביל לפתוח</string>
     <string name="passkey_username">שם משתמש למפתח גישה</string>
     <string name="passkey_private_key">מפתח פרטי למפתח גישה</string>
     <string name="passkey_credential_id">מזהה ייחודי של מפתח גישה</string>
@@ -722,4 +713,31 @@
     <string name="passkeys_auto_select_title">בחירה אוטומטית</string>
     <string name="passkeys_auto_select_summary">בחר אוטומטית אם רק רשומה אחת מתאימה ומסד הנתונים פתוח, ורק אם היישום המבקש מתאים</string>
     <string name="passkeys_privileged_apps_ask_message">%1$s מנסה לבצע פעולה עם מפתח גישה.\n\nלהוסיך אותו לרשימת יישומים מורשים?</string>
+    <string name="passkeys_privileged_apps_explanation">אזהרה: יישום עם הרשאות מוגברות פועלת כשער כדי לאחזר את מקור האימות. ודא את הלגיטימיות שלה כדי למנוע בעיות אבטחה.</string>
+    <string name="passkeys_missing_signature_app_ask_explanation">אזהרה: מפתח גישה נוצר מתוכנה אחרת או שהחתימה נמחקה. ודא כי היישום המתואמת הוא חלק מאותו יישום ושהוא לגיטימי בשביל להימנע מבעיות אבטחה.\nאם היישום הוא דפדפן, אל תוסיף את החתימה שלו לרשומה, אלה לרשימת היישום המוגדרים בהגדרות.</string>
+    <string name="passkeys_missing_signature_app_ask_message">%1$s אינו מוכר ומנסה להתאמת עם מפתח גישה קיים.</string>
+    <string name="clipboard_otp_notifications_title">התראת קוד OTP</string>
+    <string name="clipboard_otp_notifications_summary">פתח התראה כדי להעתיק את הקוד OTP מערכים המאוכלסים באמצעות מילוי אוטומטי או מקלדת מג\'יק</string>
+    <string name="user_verification_device_credential_title">פרטי אימות משתמש</string>
+    <string name="user_verification_device_credential_summary">השתמש באישורי המכשיר כאימות משתמש אם זמינים</string>
+    <string name="user_verification_preferred_title">אימות משתמש מועדף</string>
+    <string name="user_verification_preferred_summary">בצע אימות משתמש כאשר הצד המסתמך מבקש \"מועדף\"</string>
+    <string name="clipboard_explanation_summary">העתק שדות רשומה בעזרת לוח ההעתקה של המכשיר שלך</string>
+    <string name="keyboard_auto_switch_title">מתג אוטומטי של Magikeyboard</string>
+    <string name="keyboard_auto_switch_summary">נסה לעבור אוטומטית ללוח המקשים Magikeyboard כאשר הערכים מאוכלסים</string>
+    <string name="autofill_share_magikeyboard_title">שתף ב-Magikeyboard</string>
+    <string name="autofill_share_magikeyboard_summary">שתף ערכים שאוחזרו מהמילוי האוטומטי עם Magikeyboard</string>
+    <string name="password_creation_description">שמור סיסמה ברשומה חדשה</string>
+    <string name="password_selection_description">בחר סיסמה קיימת</string>
+    <string name="error_password_result">לא ניתן להחזיר את הסיסמה</string>
+    <string name="content_description_user_verification_information">מידע על אימות משתמש</string>
+    <string name="user_verification_required_title">אימות משתמש</string>
+    <string name="user_verification_required_description">גישה לנתונים אלה דורשת אימות כדי להבטיח שזה אכן אתה.</string>
+    <string name="user_verification_database_credential">הזן את ארבעת התווים הראשונים של סיסמת מסד הנתונים שלך</string>
+    <string name="first_chars">תווים ראשונים</string>
+    <string name="check">בדיקה</string>
+    <string name="credential_provider">ספק אישורים</string>
+    <string name="credential_provider_service_name">ספק אישורים KeePassDX</string>
+    <string name="error_passkey_credential_id">לא נמצא מפתח גישה עבור גורם %1$s ופרטי אימות %2$s</string>
+    <string name="user_verification_required_description_precise">%1$s דורש לוודא שזה אכן אתה.</string>
 </resources>

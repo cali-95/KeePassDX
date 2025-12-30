@@ -24,7 +24,6 @@
     <string name="warning_replace_file">இந்த கோப்பைப் பதிவேற்றுவது தற்போதுள்ள ஒன்றை மாற்றும்.</string>
     <string name="database_history">வரலாறு</string>
     <string name="database_opened">தரவுத்தளம் திறக்கப்பட்டது</string>
-    <string name="clipboard_notifications_title">இடைநிலைப்பலகை அறிவிப்புகள்</string>
     <string name="device_unlock_timeout">சாதனம் திறத்தல் நேரம் முடிந்தது</string>
     <string name="templates_group_uuid_title">வார்ப்புருக்கள் குழு</string>
     <string name="monospace_font_fields_enable_summary">சிறந்த எழுத்து தெரிவுநிலைக்கு புலங்களில் பயன்படுத்தப்படும் எழுத்துருவை மாற்றவும்</string>
@@ -73,7 +72,7 @@
     <string name="biometric_security_update_required">பயோமெட்ரிக் பாதுகாப்பு புதுப்பிப்பு தேவை.</string>
     <string name="keystore_not_accessible">கீச்டோர் சரியாக துவக்கப்படவில்லை.</string>
     <string name="menu_appearance_settings">தோற்றம்</string>
-    <string name="set_credential_provider_service_title">இயல்புநிலை ஆட்டோஃபில் சேவையை அமைக்கவும்</string>
+    <string name="set_credential_provider_service_title">நுழைவுச்சான்றிதழ் வழங்கும் சேவை</string>
     <string name="autofill_preference_title">ஆட்டோஃபில் அமைப்புகள்</string>
     <string name="lock_database_screen_off_title">திரை பூட்டு</string>
     <string name="content">உள்ளடக்கம்</string>
@@ -278,8 +277,6 @@
     <string name="hint_group_name">குழு பெயர்</string>
     <string name="invalid_db_same_uuid">அதே uuid %2$s உடன் %1$s ஏற்கனவே உள்ளது.</string>
     <string name="invalid_db_sig">தரவுத்தள வடிவமைப்பை அடையாளம் காண முடியவில்லை.</string>
-    <string name="hide_password_title">கடவுச்சொற்களை மறைக்கவும்</string>
-    <string name="hide_password_summary">இயல்புநிலையாக கடவுச்சொற்களை (***) மறைக்கவும்</string>
     <string name="colorize_password_title">கடவுச்சொற்களை வண்ணமயமாக்குங்கள்</string>
     <string name="colorize_password_summary">தட்டச்சு மூலம் கடவுச்சொல் எழுத்துக்களை வண்ணமயமாக்குங்கள்</string>
     <string name="list_groups_show_number_entries_summary">ஒரு குழுவில் உள்ளீடுகளின் எண்ணிக்கையைக் காட்டுகிறது</string>
@@ -298,7 +295,6 @@
     <string name="menu_security_settings_summary">குறியாக்கம், முக்கிய வழித்தோன்றல் செயல்பாடு</string>
     <string name="menu_master_key_settings">முதன்மை விசை அமைப்புகள்</string>
     <string name="menu_paste">ஒட்டு</string>
-    <string name="menu_hide_password">கடவுச்சொல்லை மறைக்கவும்</string>
     <string name="menu_merge_database">தேதி செல்கிறது</string>
     <string name="menu_open_file_read_and_write">மாற்றியமைக்கக்கூடிய</string>
     <string name="menu_restore_entry_history">வரலாற்றை மீட்டமை</string>
@@ -392,7 +388,7 @@
     <string name="parallelism">இணையானவாதம்</string>
     <string name="sort_last_modify_time">மாற்றம்</string>
     <string name="ask">கேளுங்கள்</string>
-    <string name="biometric">பயோமெட்ரிக்</string>
+    <string name="biometric">உயிரியளவியல்</string>
     <string name="general">பொது</string>
     <string name="device_unlock_delete_all_key_warning">சாதன திறத்தல் ஏற்பு தொடர்பான அனைத்து குறியாக்க விசைகளையும் நீக்கவா?</string>
     <string name="recycle_bin_title">மறுசுழற்சி பின் பயன்பாடு</string>
@@ -404,7 +400,6 @@
     <string name="keyboard_notification_entry_title">அறிவிப்பு செய்தி</string>
     <string name="keyboard_notification_entry_clear_close_summary">அறிவிப்பை மூடும்போது தரவுத்தளத்தை மூடு</string>
     <string name="keyboard_notification_entry_content_title">Magikeyboard இல் %1$s கிடைக்கிறது</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">தோற்றம்</string>
     <string name="keyboard_keys_category">விசைகள்</string>
     <string name="autofill_save_search_info_summary">எளிதான எதிர்கால பயன்பாடுகளுக்கு கையேடு நுழைவு தேர்வைச் செய்யும்போது தேடல் தகவலைச் சேமிக்க முயற்சிக்கவும்</string>
@@ -420,7 +415,7 @@
     <string name="download">பதிவிறக்கம்</string>
     <string name="permission">இசைவு</string>
     <string name="device_unlock_prompt_not_initialized">சாதன திறத்தல் வரியில் துவக்க முடியவில்லை.</string>
-    <string name="device_credential">சாதன நற்சான்றிதழ்</string>
+    <string name="device_credential">சாதன நுழைவுச்சான்றிதழ்</string>
     <string name="database_data_compression_title">தரவு சுருக்க</string>
     <string name="info">தகவல்</string>
     <string name="content_description_otp_information">ஒரு முறை கடவுச்சொல் செய்தி</string>
@@ -489,7 +484,6 @@
     <string name="templates_group_enable_title">வார்ப்புருக்கள் பயன்பாடு</string>
     <string name="settings_database_force_changing_master_key_next_time_summary">மாச்டர் விசையை அடுத்த முறை (ஒரு முறை) மாற்ற வேண்டும்</string>
     <string name="allow_copy_password_title">இடைநிலைப்பலகை டிரச்ட்</string>
-    <string name="clear_clipboard_notification_summary">இடைநிலைப்பலகை காலம் காலாவதியாகும்போது அல்லது நீங்கள் அதைப் பயன்படுத்தத் தொடங்கிய பின் அறிவிப்பு மூடப்படும் போது தரவுத்தளத்தைப் பூட்டுங்கள்</string>
     <string name="database_name_title">தரவுத்தள பெயர்</string>
     <string name="compression">சுருக்க</string>
     <string name="other">மற்றொன்று</string>
@@ -597,7 +591,6 @@
     <string name="list_password_generator_options_summary">அனுமதிக்கப்பட்ட கடவுச்சொல் செனரேட்டர் எழுத்துக்களை அமைக்கவும்</string>
     <string name="clipboard">இடைநிலைப் பலகை</string>
     <string name="clipboard_explanation_summary">உங்கள் சாதனத்தின் கிளிப்போர்டைப் பயன்படுத்தி நுழைவு புலங்களை நகலெடுக்கவும்</string>
-    <string name="clipboard_notifications_summary">உள்ளீட்டைப் பார்க்கும்போது புலங்களை நகலெடுக்க இடைநிலைப்பலகை அறிவிப்புகளைக் காட்டு</string>
     <string name="clipboard_warning">கிளிப்போர்டை தானாக நீக்குவது தோல்வியுற்றால், அதன் வரலாற்றை கைமுறையாக நீக்கவும்.</string>
     <string name="lock">பூட்டு</string>
     <string name="device_credential_unlock_enable_title">சாதன நற்சான்றிதழ் திறத்தல்</string>
@@ -612,7 +605,6 @@
     <string name="settings_database_force_changing_master_key_next_time_title">அடுத்த முறை புதுப்பிப்பை கட்டாயப்படுத்துங்கள்</string>
     <string name="allow_copy_password_summary">நுழைவு கடவுச்சொல் மற்றும் பாதுகாக்கப்பட்ட புலங்களை கிளிப்போர்டில் நகலெடுக்க அனுமதிக்கவும்</string>
     <string name="allow_copy_password_warning">எச்சரிக்கை: இடைநிலைப்பலகை அனைத்து பயன்பாடுகளாலும் பகிரப்படுகிறது. உணர்திறன் தரவு நகலெடுக்கப்பட்டால், பிற மென்பொருள்கள் அதை மீட்டெடுக்கலாம்.</string>
-    <string name="clear_clipboard_notification_title">மூடுவதில் தெளிவாக உள்ளது</string>
     <string name="database_description_title">தரவுத்தள விவரம்</string>
     <string name="database_default_username_title">இயல்புநிலை பயனர்பெயர்</string>
     <string name="database_version_title">தரவுத்தள பதிப்பு</string>
@@ -661,4 +653,17 @@
     <string name="upload_attachment">%1$s ஐ பதிவேற்றவும்</string>
     <string name="download_initialization">தொடங்குதல்…</string>
     <string name="download_progression">செயலில்:%1$d %%</string>
+    <string name="warning_overwrite_data_title">இருக்கும் தரவை மேலெழுத வேண்டுமா?</string>
+    <string name="warning_overwrite_data_description">இந்த செயல் உள்ளீட்டில் இருக்கும் தரவை மாற்றிவிடும், இதன் வரலாறு இயக்கத்தில் இருந்தால் அந்தப் பழைய தரவை மீட்க முடியும்</string>
+    <string name="credential_provider">அறிமுகச்சான்று வழங்குபவர்</string>
+    <string name="passkeys">கடவுத்திறவுகோல்கள்</string>
+    <string name="passkeys_explanation_summary">கடவுச்சொற்கள் அல்லாத உள்நுழைவிற்கு கடவுத்திறவுகோல்களை உள்ளமைக்கவும்</string>
+    <string name="passkeys_preference_title">கடவுத்திறவுகோல்களின் அமைப்புகள்</string>
+    <string name="passkeys_close_database_title">தரவுத்தளத்தை மூடு</string>
+    <string name="passkeys_close_database_summary">கடவுத்திறவுகோலை தேர்ந்தெடுத்த பின்பு தரவுத்தளத்தை மூடவும்</string>
+    <string name="passkeys_privileged_apps_title">சலுகை பெற்ற செயலிகள்</string>
+    <string name="passkeys_privileged_apps_explanation">ஒரு சலுகைபெற்ற செயலியானது உறுதிப்பாட்டின் தோற்றத்தை மீட்டெடுக்கும் நுழைவாயிலாக செயல்படும்.</string>
+    <string name="passkeys_privileged_apps_ask_title">ஏற்பு அற்ற செயலி</string>
+    <string name="passkeys_privileged_apps_ask_message">ஒரு கடவுத்திறவுகோலின் செயலை நிகழ்த்த %1$s முயல்கிறது.\n\nஇதைச் சலுகைபெற்ற செயலிகள் பட்டியலில் சேர்க்க வேண்டுமா?</string>
+    <string name="passkeys_missing_signature_app_ask_title">ஒப்பம் காணவில்லை</string>
 </resources>

@@ -59,6 +59,7 @@ class EntryInfo : NodeInfo {
     var attachments: MutableList<Attachment> = mutableListOf()
     var autoType: AutoType = AutoType()
     var otpModel: OtpModel? = null
+    var creditCard: CreditCard? = null
     var passkey: Passkey? = null
     var appOrigin: AppOrigin? = null
     var isTemplate: Boolean = false
@@ -80,6 +81,7 @@ class EntryInfo : NodeInfo {
         parcel.readListCompat(attachments)
         autoType = parcel.readParcelableCompat() ?: autoType
         otpModel = parcel.readParcelableCompat() ?: otpModel
+        creditCard = parcel.readParcelableCompat() ?: creditCard
         passkey = parcel.readParcelableCompat() ?: passkey
         appOrigin = parcel.readParcelableCompat() ?: appOrigin
         isTemplate = parcel.readBooleanCompat()
@@ -103,9 +105,16 @@ class EntryInfo : NodeInfo {
         parcel.writeList(attachments)
         parcel.writeParcelable(autoType, flags)
         parcel.writeParcelable(otpModel, flags)
+        parcel.writeParcelable(creditCard, flags)
         parcel.writeParcelable(passkey, flags)
         parcel.writeParcelable(appOrigin, flags)
         parcel.writeBooleanCompat(isTemplate)
+    }
+
+    fun getOtpToken(): String? {
+        return otpModel?.let {
+            OtpElement(it).token
+        }
     }
 
     fun getCustomFieldsForFilling(): List<Field> {
@@ -224,6 +233,10 @@ class EntryInfo : NodeInfo {
         saveSearchInfo(database, registerInfo.searchInfo)
         registerInfo.username?.let { username = it }
         registerInfo.password?.let { password = it }
+        registerInfo.expiration?.let {
+            expires = true
+            expiryTime = it
+        }
         setCreditCard(registerInfo.creditCard)
         val dataOverwrite: Boolean = setPasskey(registerInfo.passkey)
         saveAppOrigin(database, registerInfo.appOrigin)
@@ -265,6 +278,7 @@ class EntryInfo : NodeInfo {
         if (attachments != other.attachments) return false
         if (autoType != other.autoType) return false
         if (otpModel != other.otpModel) return false
+        if (creditCard != other.creditCard) return false
         if (passkey != other.passkey) return false
         if (appOrigin != other.appOrigin) return false
         if (isTemplate != other.isTemplate) return false
@@ -286,6 +300,7 @@ class EntryInfo : NodeInfo {
         result = 31 * result + attachments.hashCode()
         result = 31 * result + autoType.hashCode()
         result = 31 * result + (otpModel?.hashCode() ?: 0)
+        result = 31 * result + (creditCard?.hashCode() ?: 0)
         result = 31 * result + (passkey?.hashCode() ?: 0)
         result = 31 * result + (appOrigin?.hashCode() ?: 0)
         result = 31 * result + isTemplate.hashCode()

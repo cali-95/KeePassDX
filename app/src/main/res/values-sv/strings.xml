@@ -92,8 +92,6 @@
     <string name="list_size_summary">Textstorlek i grupplistan</string>
     <string name="loading_database">Laddar databas…</string>
     <string name="lowercase">Gemener</string>
-    <string name="hide_password_title">Dölj lösenord</string>
-    <string name="hide_password_summary">Döljer lösenord (***) som standard</string>
     <string name="about">Om</string>
     <string name="menu_change_key_settings">Byt huvudnyckel</string>
     <string name="settings">Inställningar</string>
@@ -101,7 +99,6 @@
     <string name="menu_delete">Radera</string>
     <string name="menu_donate">Donera</string>
     <string name="menu_edit">Redigera</string>
-    <string name="menu_hide_password">Dölj lösenord</string>
     <string name="menu_lock">Lås databas</string>
     <string name="menu_open">Öppna</string>
     <string name="menu_search">Sök</string>
@@ -193,8 +190,6 @@
     <string name="password_size_summary">Anger standardlängden för de genererade lösenorden</string>
     <string name="list_password_generator_options_title">Lösenordstecken</string>
     <string name="list_password_generator_options_summary">Ange tillåtna tecken för lösenordsgeneratorn</string>
-    <string name="clipboard_notifications_title">Urklipps-aviseringar</string>
-    <string name="clipboard_notifications_summary">Aktivera urklipps-aviseringar för att kopiera fält när en post visas</string>
     <string name="lock">Lås</string>
     <string name="lock_database_screen_off_title">Skärmlås</string>
     <string name="lock_database_screen_off_summary">Lås databasen när skärmen är av</string>
@@ -299,7 +294,6 @@
     <string name="keyboard_notification_entry_summary">Visa en avisering när en post är tillgänglig</string>
     <string name="keyboard_notification_entry_content_title_text">Post</string>
     <string name="keyboard_notification_entry_content_title">%1$s finns tillgänglig på Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Rensa vid stängning</string>
     <string name="keyboard_notification_entry_clear_close_summary">Stäng databasen när aviseringen stängs</string>
     <string name="keyboard_appearance_category">Utseende</string>
@@ -311,8 +305,6 @@
     <string name="do_not_kill_app">Stäng inte appen…</string>
     <string name="lock_database_back_root_title">Tryck på tillbaka-knappen för att låsa</string>
     <string name="lock_database_back_root_summary">Lås databasen när användaren klickar på tillbaka-knappen från startskärmen</string>
-    <string name="clear_clipboard_notification_title">Rensa vid stängning</string>
-    <string name="clear_clipboard_notification_summary">Stäng databasen när aviseringen stängs</string>
     <string name="recycle_bin">Papperskorg</string>
     <string name="keyboard_selection_entry_title">Val av post</string>
     <string name="keyboard_selection_entry_summary">Visa inmatningsfält i Magikeyboard när en post visas</string>

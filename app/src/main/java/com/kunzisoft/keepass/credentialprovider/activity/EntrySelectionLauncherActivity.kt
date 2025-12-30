@@ -67,10 +67,11 @@ class EntrySelectionLauncherActivity : DatabaseModeActivity() {
                 when (uiState) {
                     is EntrySelectionViewModel.UIState.Loading -> {}
                     is EntrySelectionViewModel.UIState.PopulateKeyboard -> {
-                        MagikeyboardService.addEntryAndLaunchNotificationIfAllowed(
+                        MagikeyboardService.addEntries(
                             context = this@EntrySelectionLauncherActivity,
-                            entry = uiState.entryInfo,
-                            toast = true
+                            entryList = uiState.entryInfoList,
+                            toast = true,
+                            autoSwitchKeyboard = true
                         )
                     }
                     is EntrySelectionViewModel.UIState.LaunchFileDatabaseSelectForSearch -> {

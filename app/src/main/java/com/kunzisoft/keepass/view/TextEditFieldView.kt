@@ -6,12 +6,13 @@ import android.text.InputFilter
 import android.text.InputType
 import android.text.Spannable
 import android.text.SpannableString
+import android.text.method.PasswordTransformationMethod
+import android.text.method.SingleLineTransformationMethod
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import androidx.annotation.DrawableRes
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.appcompat.widget.AppCompatImageButton
@@ -21,12 +22,11 @@ import androidx.core.view.isVisible
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.kunzisoft.keepass.R
-import com.kunzisoft.keepass.settings.PreferencesUtil
 
 open class TextEditFieldView @JvmOverloads constructor(context: Context,
                                                   attrs: AttributeSet? = null,
                                                   defStyle: Int = 0)
-    : RelativeLayout(context, attrs, defStyle), GenericTextFieldView {
+    : ProtectedTextFieldView(context, attrs, defStyle) {
 
     private var labelViewId = ViewCompat.generateViewId()
     private var valueViewId = ViewCompat.generateViewId()
@@ -169,14 +169,29 @@ open class TextEditFieldView @JvmOverloads constructor(context: Context,
         }
     }
 
-    fun setProtection(protection: Boolean) {
-        if (protection) {
+    override fun setProtection(
+        protection: Boolean,
+        isCurrentlyProtected: Boolean,
+        onUnprotectClickListener: OnClickListener?
+    ) {
+        super.setProtection(protection, isCurrentlyProtected, onUnprotectClickListener)
+        if (isProtected) {
             labelView.endIconMode = TextInputLayout.END_ICON_PASSWORD_TOGGLE
-            val visibilityTag = if (PreferencesUtil.hideProtectedValue(context))
-                InputType.TYPE_TEXT_VARIATION_PASSWORD
-            else
-                InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-            valueView.inputType = valueView.inputType or visibilityTag
+            // FIXME Called by itself during orientation change
+            /*
+            labelView.setEndIconOnClickListener {
+                onUnprotectClickListener?.onClick(this@TextEditFieldView)
+            }*/
+        }
+    }
+
+    override fun changeProtectedValueParameters() {
+        if (isCurrentlyProtected()) {
+            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            valueView.transformationMethod = PasswordTransformationMethod.getInstance()
+        } else {
+            valueView.inputType = valueView.inputType or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+            valueView.transformationMethod = SingleLineTransformationMethod.getInstance()
         }
     }
 

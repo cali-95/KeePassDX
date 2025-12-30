@@ -20,52 +20,42 @@
 package com.kunzisoft.keepass.credentialprovider.passkey.data
 
 import com.kunzisoft.encrypt.Base64Helper
+import com.kunzisoft.keepass.credentialprovider.passkey.data.AuthenticatorSelectionCriteria.Companion.getAuthenticatorSelectionCriteria
+import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialDescriptor.Companion.getPublicKeyCredentialDescriptorList
+import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialParameters.Companion.getPublicKeyCredentialParametersList
+import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialRpEntity.Companion.getPublicKeyCredentialRpEntity
+import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialUserEntity.Companion.getPublicKeyCredentialUserEntity
 import org.json.JSONObject
 
 class PublicKeyCredentialCreationOptions(
     requestJson: String,
     var clientDataHash: ByteArray?
 ) {
-    val json: JSONObject = JSONObject(requestJson)
+    private val json: JSONObject = JSONObject(requestJson)
 
-    val relyingPartyEntity: PublicKeyCredentialRpEntity
-    val userEntity: PublicKeyCredentialUserEntity
-    val challenge: ByteArray
-    val pubKeyCredParams: List<PublicKeyCredentialParameters>
+    val relyingPartyEntity: PublicKeyCredentialRpEntity =
+        json.getPublicKeyCredentialRpEntity("rp")
 
-    var timeout: Long
-    var excludeCredentials: List<PublicKeyCredentialDescriptor>
-    var authenticatorSelection: AuthenticatorSelectionCriteria
-    var attestation: String
+    val userEntity: PublicKeyCredentialUserEntity =
+        json.getPublicKeyCredentialUserEntity("user")
 
-    init {
-        val rpJson = json.getJSONObject("rp")
-        relyingPartyEntity = PublicKeyCredentialRpEntity(rpJson.getString("name"), rpJson.getString("id"))
-        val rpUser = json.getJSONObject("user")
-        val userId = Base64Helper.b64Decode(rpUser.getString("id"))
-        userEntity =
-            PublicKeyCredentialUserEntity(
-                rpUser.getString("name"),
-                userId,
-                rpUser.getString("displayName")
-            )
-        challenge = Base64Helper.b64Decode(json.getString("challenge"))
-        val pubKeyCredParamsJson = json.getJSONArray("pubKeyCredParams")
-        val pubKeyCredParamsTmp: MutableList<PublicKeyCredentialParameters> = mutableListOf()
-        for (i in 0 until pubKeyCredParamsJson.length()) {
-            val e = pubKeyCredParamsJson.getJSONObject(i)
-            pubKeyCredParamsTmp.add(
-                PublicKeyCredentialParameters(e.getString("type"), e.getLong("alg"))
-            )
-        }
-        pubKeyCredParams = pubKeyCredParamsTmp.toList()
+    val challenge: ByteArray =
+        Base64Helper.b64Decode(json.getString("challenge"))
 
-        timeout = json.optLong("timeout", 0)
-        // TODO: Fix excludeCredentials and authenticatorSelection
-        excludeCredentials = emptyList()
-        authenticatorSelection = AuthenticatorSelectionCriteria("platform", "required")
-        attestation = json.optString("attestation", "none")
-    }
+    val pubKeyCredParams: List<PublicKeyCredentialParameters> =
+        json.getPublicKeyCredentialParametersList("pubKeyCredParams")
+
+    var timeout: Long =
+        json.optLong("timeout", 0)
+
+    var excludeCredentials: List<PublicKeyCredentialDescriptor> =
+        json.getPublicKeyCredentialDescriptorList("excludeCredentials")
+
+    var authenticatorSelection: AuthenticatorSelectionCriteria =
+        json.getAuthenticatorSelectionCriteria("authenticatorSelection")
+
+    var attestation: String =
+        json.optString("attestation", "none")
 
     companion object {
         private val TAG = PublicKeyCredentialCreationOptions::class.simpleName

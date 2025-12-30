@@ -45,6 +45,8 @@
     <string name="clipboard_error_clear">Could not clear clipboard</string>
     <string name="clipboard_timeout">Clipboard timeout</string>
     <string name="clipboard_timeout_summary">Duration of storage in the clipboard (if supported by your device)</string>
+    <string name="clipboard_otp_notifications_title">OTP notification</string>
+    <string name="clipboard_otp_notifications_summary">Open a notification to copy the OTP from entries populated with autofill or magikeyboard</string>
     <string name="content_description_background">Background</string>
     <string name="content_description_open_file">Open file</string>
     <string name="content_description_node_children">Node children</string>
@@ -214,7 +216,7 @@
     <string name="error_empty_key">Key cannot be empty.</string>
     <string name="field_name">Field name</string>
     <string name="field_value">Field value</string>
-    <string name="file_not_found_content">Could not find file. Try reopening it from your file browser.</string>
+    <string name="file_not_found_content">Could not find file</string>
     <string name="corrupted_file">Corrupted file.</string>
     <string name="file_browser">File manager</string>
     <string name="generate_password">Generate password</string>
@@ -235,8 +237,6 @@
     <string name="keyfile_is_empty">The keyfile is empty.</string>
     <string name="length">Length</string>
     <string name="nodes">Nodes</string>
-    <string name="hide_password_title">Hide passwords</string>
-    <string name="hide_password_summary">Mask passwords (***) by default</string>
     <string name="colorize_password_title">Colorize passwords</string>
     <string name="colorize_password_summary">Colorize password characters by type</string>
     <string name="list_entries_show_username_title">Show usernames</string>
@@ -277,7 +277,6 @@
     <string name="menu_paste">Paste</string>
     <string name="menu_delete">Delete</string>
     <string name="menu_cancel">Cancel</string>
-    <string name="menu_hide_password">Hide password</string>
     <string name="menu_lock">Lock database</string>
     <string name="menu_save_database">Save data</string>
     <string name="menu_merge_database">Merge data</string>
@@ -403,9 +402,9 @@
     <string name="keystore_not_accessible">The keystore is not properly initialized.</string>
     <string name="unlock_and_link_biometric">Device unlock link</string>
     <string name="device_unlock_prompt_store_credential_title">Link to device unlocking</string>
-    <string name="device_unlock_prompt_store_credential_message">You still need to remember your vault main credential if you use device unlock recognition.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Device unlock recognition</string>
-    <string name="device_unlock_prompt_extract_credential_message">Extract database credential with device unlock data</string>
+    <string name="device_unlock_prompt_store_credential_message">WARNING: You still need to remember your vault main credential</string>
+    <string name="device_unlock_prompt_extract_credential_title">Device unlocking</string>
+    <string name="device_unlock_prompt_extract_credential_message">Open database with device credential</string>
     <string name="encrypted_value_stored">Encrypted password stored</string>
     <string name="device_unlock_invalid_key">Cannot read the device unlock key. Please delete it and repeat the unlock recognition procedure.</string>
     <string name="device_unlock_not_recognized">Could not recognize device unlock print</string>
@@ -447,6 +446,10 @@
     <string name="autofill_explanation_summary">Configure autofilling to quickly fill out forms in other apps</string>
     <string name="autofill_select_entry">Select entry…</string>
     <string name="autofill_preference_title">Autofill settings</string>
+    <string name="user_verification_device_credential_title">User Verification credential</string>
+    <string name="user_verification_device_credential_summary">Use the device credential as user verification if available</string>
+    <string name="user_verification_preferred_title">Preferred User Verification</string>
+    <string name="user_verification_preferred_summary">Perform a user verification when the relying party requests \"preferred\"</string>
     <string name="password_size_title">Generated password size</string>
     <string name="password_size_summary">Sets default size of the generated passwords</string>
     <string name="list_password_generator_options_title">Password characters</string>
@@ -454,8 +457,6 @@
     <string name="database_opened">Database opened</string>
     <string name="clipboard">Clipboard</string>
     <string name="clipboard_explanation_summary">Copy entry fields using the clipboard of your device</string>
-    <string name="clipboard_notifications_title">Clipboard notifications</string>
-    <string name="clipboard_notifications_summary">Show clipboard notifications to copy fields when viewing an entry</string>
     <string name="clipboard_warning">If automatic deletion of clipboard fails, delete its history manually.</string>
     <string name="lock">Lock</string>
     <string name="lock_database_screen_off_title">Screen lock</string>
@@ -519,8 +520,6 @@
     <string name="enable">Enable</string>
     <string name="disable">Disable</string>
     <string name="notification">Notification</string>
-    <string name="clear_clipboard_notification_title">Clear at closing</string>
-    <string name="clear_clipboard_notification_summary">Lock the database when the clipboard duration expires or the notification is closed after you start using it</string>
     <string name="database_name_title">Database name</string>
     <string name="database_description_title">Database description</string>
     <string name="database_default_username_title">Default username</string>
@@ -554,7 +553,6 @@
     <string name="keyboard_entry_timeout_summary">Timeout to clear the keyboard entry</string>
     <string name="keyboard_notification_entry_content_title_text">Entry</string>
     <string name="keyboard_notification_entry_content_title">%1$s available on Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Appearance</string>
     <string name="keyboard_theme_title">Keyboard theme</string>
     <string name="keyboard_keys_category">Keys</string>
@@ -563,6 +561,8 @@
     <string name="keyboard_key_vibrate_title">Vibratory keypresses</string>
     <string name="keyboard_key_sound_title">Audible keypresses</string>
     <string name="keyboard_change">Switch keyboard</string>
+    <string name="keyboard_auto_switch_title">Auto Magikeyboard switch</string>
+    <string name="keyboard_auto_switch_summary">Try to automatically switch to the Magikeyboard when entries are populated</string>
     <string name="keyboard_previous_database_credentials_title">Database credentials screen</string>
     <string name="keyboard_previous_database_credentials_summary">Automatically switch back to the previous keyboard on the database credentials screen</string>
     <string name="keyboard_previous_search_title">Search screen</string>
@@ -582,6 +582,8 @@
     <string name="autofill_inline_suggestions_summary">Attempt to display autofill suggestions directly from a compatible keyboard</string>
     <string name="autofill_manual_selection_title">Manual selection</string>
     <string name="autofill_manual_selection_summary">Display option to let the user select database entry</string>
+    <string name="autofill_share_magikeyboard_title">Share to Magikeyboard</string>
+    <string name="autofill_share_magikeyboard_summary">Share entries retrieved from autofill to Magikeyboard</string>
     <string name="autofill_save_search_info_title">Save search info</string>
     <string name="autofill_save_search_info_summary">Try to save search information when making a manual entry selection for easier future uses</string>
     <string name="autofill_ask_to_save_data_title">Ask to save data</string>
@@ -760,13 +762,13 @@
     <string name="hide_templates_title">Hide templates</string>
     <string name="hide_templates_summary">Templates are not shown</string>
     <string name="passkey">Passkey</string>
-    <string name="passkey_service_name">KeePassDX Credential Provider</string>
+    <string name="credential_provider_service_name">KeePassDX Credential Provider</string>
+    <string name="credential_provider_database_username">KeePassDX Database</string>
+    <string name="credential_provider_locked_database_description">Select to unlock</string>
     <string name="passkey_creation_description">Save passkey in new entry</string>
     <string name="passkey_update_description">Update passkey in "%1$s"</string>
     <string name="passkey_selection_username">No passkey found</string>
     <string name="passkey_selection_description">Select an existing passkey</string>
-    <string name="passkey_database_username">KeePassDX Database</string>
-    <string name="passkey_locked_database_description">Select to unlock</string>
     <string name="passkey_username">Passkey Username</string>
     <string name="passkey_private_key">Passkey Private Key</string>
     <string name="passkey_credential_id">Passkey Credential Id</string>
@@ -775,4 +777,15 @@
     <string name="passkey_backup_eligibility">Passkey Backup Eligibility</string>
     <string name="passkey_backup_state">Passkey Backup State</string>
     <string name="error_passkey_result">Unable to return the passkey</string>
+    <string name="error_passkey_credential_id">No passkey found with relying party %1$s and credentialIds %2$s</string>
+    <string name="password_creation_description">Save password in new entry</string>
+    <string name="password_selection_description">Select an existing password</string>
+    <string name="error_password_result">Unable to return the password</string>
+    <string name="content_description_user_verification_information">User verification info</string>
+    <string name="user_verification_required_title">User Verification</string>
+    <string name="user_verification_required_description">Access to this data requires verification that it is indeed you.</string>
+    <string name="user_verification_required_description_precise">%1$s requires verification that it is indeed you.</string>
+    <string name="user_verification_database_credential">Enter the first four characters of your database password</string>
+    <string name="first_chars">First chars</string>
+    <string name="check">Check</string>
 </resources>

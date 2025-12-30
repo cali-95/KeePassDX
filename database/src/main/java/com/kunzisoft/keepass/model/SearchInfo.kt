@@ -35,6 +35,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
             return if (webDomain == null) null else field
         }
     var relyingParty: String? = null
+    var credentialIds: List<String> = listOf()
     var otpString: String? = null
 
     constructor()
@@ -46,6 +47,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         webDomain = toCopy?.webDomain
         webScheme = toCopy?.webScheme
         relyingParty = toCopy?.relyingParty
+        credentialIds = toCopy?.credentialIds ?: listOf()
         otpString = toCopy?.otpString
     }
 
@@ -61,6 +63,9 @@ class SearchInfo : ObjectNameResource, Parcelable {
         webScheme = if (readScheme.isNullOrEmpty()) null else readScheme
         val readRelyingParty = parcel.readString()
         relyingParty = if (readRelyingParty.isNullOrEmpty()) null else readRelyingParty
+        val readCredentialIdList = mutableListOf<String>()
+        parcel.readStringList(readCredentialIdList)
+        credentialIds = readCredentialIdList.toList()
         val readOtp = parcel.readString()
         otpString = if (readOtp.isNullOrEmpty()) null else readOtp
     }
@@ -76,6 +81,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         parcel.writeString(webDomain ?: "")
         parcel.writeString(webScheme ?: "")
         parcel.writeString(relyingParty ?: "")
+        parcel.writeStringList(credentialIds)
         parcel.writeString(otpString ?: "")
     }
 
@@ -94,6 +100,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
                 && webDomain == null
                 && webScheme == null
                 && relyingParty == null
+                && credentialIds.isEmpty()
                 && otpString == null
     }
 
@@ -127,6 +134,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
         if (webDomain != other.webDomain) return false
         if (webScheme != other.webScheme) return false
         if (relyingParty != other.relyingParty) return false
+        if (credentialIds != other.credentialIds) return false
         if (otpString != other.otpString) return false
 
         return true
@@ -139,12 +147,17 @@ class SearchInfo : ObjectNameResource, Parcelable {
         result = 31 * result + (webDomain?.hashCode() ?: 0)
         result = 31 * result + (webScheme?.hashCode() ?: 0)
         result = 31 * result + (relyingParty?.hashCode() ?: 0)
+        result = 31 * result + (credentialIds.hashCode())
         result = 31 * result + (otpString?.hashCode() ?: 0)
         return result
     }
 
     override fun toString(): String {
         return otpString ?: webDomain ?: applicationId ?: relyingParty ?: tag ?: ""
+    }
+
+    fun optionsString(): List<String> {
+        return if (isPasskeySearch && credentialIds.isNotEmpty()) credentialIds else listOf()
     }
 
     fun toRegisterInfo(): RegisterInfo {
@@ -154,7 +167,7 @@ class SearchInfo : ObjectNameResource, Parcelable {
     companion object {
         // https://gist.github.com/rishabhmhjn/8663966
         const val APPLICATION_ID_REGEX = "^(?:[a-zA-Z]+(?:\\d*[a-zA-Z_]*)*)(?:\\.[a-zA-Z]+(?:\\d*[a-zA-Z_]*)*)+\$"
-        const val WEB_DOMAIN_REGEX = "^(?!://)([a-zA-Z0-9-_]+\\.)*[a-zA-Z0-9][a-zA-Z0-9-_]+\\.[a-zA-Z]{2,11}?\$"
+        const val WEB_DOMAIN_REGEX = "^(?!://)([a-zA-Z0-9-_]+\\.)*[a-zA-Z]{2,11}?\$"
         const val WEB_IP_REGEX = "^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\$"
 
         @JvmField

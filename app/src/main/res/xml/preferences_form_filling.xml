@@ -20,29 +20,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="@string/general">
-        <SwitchPreferenceCompat
-            android:key="@string/subdomain_search_key"
-            android:title="@string/subdomain_search_title"
-            android:summary="@string/subdomain_search_summary"
-            android:defaultValue="@bool/subdomain_search_default"/>
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:title="@string/keyboard">
-        <Preference
-            android:key="@string/magic_keyboard_explanation_key"
-            android:icon="@drawable/prefs_info_24dp"
-            android:summary="@string/magic_keyboard_explanation_summary"/>
-        <Preference
-            android:key="@string/magic_keyboard_key"
-            android:title="@string/device_keyboard_setting_title" />
-        <Preference
-            android:key="@string/magic_keyboard_preference_key"
-            android:title="@string/keyboard_setting_label" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
         android:key="@string/credential_provider_key"
         android:title="@string/credential_provider">
         <SwitchPreferenceCompat
@@ -55,6 +32,7 @@
             android:summary="@string/passkeys_explanation_summary"/>
         <Preference
             android:key="@string/settings_passkeys_key"
+            android:dependency="@string/settings_credential_provider_enable_key"
             android:title="@string/passkeys_preference_title" />
         <Preference
             android:key="@string/autofill_explanation_key"
@@ -62,7 +40,37 @@
             android:summary="@string/autofill_explanation_summary"/>
         <Preference
             android:key="@string/settings_autofill_key"
+            android:dependency="@string/settings_credential_provider_enable_key"
             android:title="@string/autofill_preference_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/keyboard">
+        <Preference
+            android:key="@string/magic_keyboard_explanation_key"
+            android:icon="@drawable/prefs_info_24dp"
+            android:summary="@string/magic_keyboard_explanation_summary"/>
+        <SwitchPreferenceCompat
+            android:key="@string/magic_keyboard_key"
+            android:title="@string/device_keyboard_setting_title" />
+        <Preference
+            android:key="@string/magic_keyboard_preference_key"
+            android:dependency="@string/magic_keyboard_key"
+            android:title="@string/keyboard_setting_label" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/general">
+        <SwitchPreferenceCompat
+            android:key="@string/subdomain_search_key"
+            android:title="@string/subdomain_search_title"
+            android:summary="@string/subdomain_search_summary"
+            android:defaultValue="@bool/subdomain_search_default"/>
+        <SwitchPreferenceCompat
+            android:key="@string/clipboard_otp_notifications_key"
+            android:title="@string/clipboard_otp_notifications_title"
+            android:defaultValue="@bool/clipboard_otp_notifications_default"
+            android:summary="@string/clipboard_otp_notifications_summary" />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -71,17 +79,6 @@
             android:key="@string/clipboard_explanation_key"
             android:icon="@drawable/prefs_info_24dp"
             android:summary="@string/clipboard_explanation_summary"/>
-        <SwitchPreferenceCompat
-            android:key="@string/clipboard_notifications_key"
-            android:title="@string/clipboard_notifications_title"
-            android:defaultValue="@bool/clipboard_notifications_default"
-            android:summary="@string/clipboard_notifications_summary" />
-        <SwitchPreferenceCompat
-            android:key="@string/clear_clipboard_notification_key"
-            android:title="@string/clear_clipboard_notification_title"
-            android:summary="@string/clear_clipboard_notification_summary"
-            android:dependency="@string/clipboard_notifications_key"
-            android:defaultValue="@bool/clear_clipboard_notification_default"/>
         <com.kunzisoft.keepass.settings.preference.DurationDialogPreference
             android:key="@string/clipboard_timeout_key"
             android:title="@string/clipboard_timeout"

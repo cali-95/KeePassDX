@@ -216,8 +216,6 @@
     <string name="keyfile_is_empty">Файл ключа пусты.</string>
     <string name="length">Даўжыня</string>
     <string name="nodes">Вузлы</string>
-    <string name="hide_password_title">Схаваць паролі</string>
-    <string name="hide_password_summary">Маскіраваць паролі (***) па змаўчанні</string>
     <string name="colorize_password_title">Размаляваць паролі</string>
     <string name="colorize_password_summary">Размаляваць сімвалы пароля па тыпу</string>
     <string name="list_entries_show_username_title">Паказаць імёны карыстальнікаў</string>
@@ -258,7 +256,6 @@
     <string name="menu_paste">Уставіць</string>
     <string name="menu_delete">Выдаліць</string>
     <string name="menu_cancel">Адмена</string>
-    <string name="menu_hide_password">Схаваць пароль</string>
     <string name="menu_lock">Заблакаваць базу дадзеных</string>
     <string name="menu_save_database">Захаваць дадзеныя</string>
     <string name="menu_merge_database">Аб\'яднаць дадзеныя</string>
@@ -410,8 +407,6 @@
     <string name="database_opened">База дадзеных адкрыта</string>
     <string name="clipboard">Буфер абмену</string>
     <string name="clipboard_explanation_summary">Капіюйце палі запісу, выкарыстоўваючы буфер абмену вашай прылады</string>
-    <string name="clipboard_notifications_title">Апавяшчэнні буфера абмену</string>
-    <string name="clipboard_notifications_summary">Паказваць апавяшчэнні буфера абмену, каб капіяваць палі пры праглядзе запісу</string>
     <string name="clipboard_warning">Калі аўтаматычнае выдаленне з буфера абмену не ўдаецца, выдаліце яго гісторыю ўручную.</string>
     <string name="lock">Блакаванне</string>
     <string name="lock_database_screen_off_title">Блакаванне экрана</string>
@@ -475,8 +470,6 @@
     <string name="enable">Уключыць</string>
     <string name="disable">Адключыць</string>
     <string name="notification">Апавяшчэнне</string>
-    <string name="clear_clipboard_notification_title">Ачысціць пры закрыцці</string>
-    <string name="clear_clipboard_notification_summary">Блакаваць базу дадзеных пасля заканчэння тэрміну дзеяння буфера абмену або закрыцця апавяшчэння пасля пачатку выкарыстання</string>
     <string name="database_name_title">Назва базы дадзеных</string>
     <string name="database_description_title">Апісанне базы дадзеных</string>
     <string name="database_default_username_title">Імя карыстальніка па змаўчанні</string>
@@ -510,7 +503,6 @@
     <string name="keyboard_entry_timeout_summary">Тайм-аўт для ачысткі запісу клавіятуры</string>
     <string name="keyboard_notification_entry_content_title_text">Запіс</string>
     <string name="keyboard_notification_entry_content_title">%1$s даступны на магічнай клавіятуры</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Знешні выгляд</string>
     <string name="keyboard_theme_title">Тэма клавіятуры</string>
     <string name="keyboard_keys_category">Клавішы</string>

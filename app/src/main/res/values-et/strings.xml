@@ -158,7 +158,7 @@
     <string name="error_hardware_key_unsupported">Raudvaraline võti pole toetatud.</string>
     <string name="field_name">Välja nimi</string>
     <string name="field_value">Välja väärtus</string>
-    <string name="file_not_found_content">Faili ei õnnestunud leida. Proovi teda avada failihalduriga.</string>
+    <string name="file_not_found_content">Faili ei õnnestunud leida</string>
     <string name="file_browser">Failihaldur</string>
     <string name="generate_password">Loo salasõna</string>
     <string name="hint_conf_pass">Kinnita salasõna</string>
@@ -197,8 +197,6 @@
     <string name="hint_keyfile">Võtmefail</string>
     <string name="hint_length">Pikkus</string>
     <string name="password">Salasõna</string>
-    <string name="hide_password_title">Peida salasõnad</string>
-    <string name="hide_password_summary">Vakimisi peida salasõnad (***) maski taha</string>
     <string name="colorize_password_title">Värvi salasõnad</string>
     <string name="error_registration_read_only">Uue kirje salvestamine pole võimalik andmebaasis, milles on vaid lugemisõigus.</string>
     <string name="error_database_uri_null">Andmebaasi ühtset ressursiidentifikaatorit ei õnnestu laadida.</string>
@@ -213,7 +211,6 @@
     <string name="list_groups_show_number_entries_title">Näita kirjete arvu</string>
     <string name="show_uuid_title">Näita UUID\'d</string>
     <string name="show_uuid_summary">Näita kirje või grupiga seotud UUID\'d</string>
-    <string name="menu_hide_password">Peida salasõna</string>
     <string name="menu_showpass">Näita salasõna</string>
     <string name="error_cancel_by_user">Katkestatud kasutaja poolt.</string>
     <string name="error_driver_required">%1$s draiver on vajalik.</string>
@@ -314,7 +311,7 @@
     <string name="sort_last_access_time">Viimati kasutamise aja alusel</string>
     <string name="version_label">Versioon: %1$s</string>
     <string name="configure">Seadista</string>
-    <string name="device_unlock_prompt_store_credential_message">Sa pead igal juhul oma salasõnalaeka salasõna meeles pidama - seda ka siis, kui kasutad muid seadmes leiduvaid lukustuse eemaldamise võimalusi.</string>
+    <string name="device_unlock_prompt_store_credential_message">HOIATUS: Sa pead igal juhul oma salasõnalaeka salasõna meeles pidama</string>
     <string name="file_name">Failinimi</string>
     <string name="path">Asukoht</string>
     <string name="assign_master_key">Seadista peavõti</string>
@@ -477,8 +474,6 @@
     <string name="database_opened">Andmebaas on avatud</string>
     <string name="clipboard">Lõikelaud</string>
     <string name="clipboard_explanation_summary">Kopeeri kirjeid kasutades oma nutiseadme lõikelauda</string>
-    <string name="clipboard_notifications_title">Lõikelaua teavitused</string>
-    <string name="clipboard_notifications_summary">Kirje vatamisel näita väljade kopeerimiseks lõikelaua teavitusi</string>
     <string name="lock">Lukk</string>
     <string name="clipboard_warning">Kui lõikelaua automaatne kustutamine ei toimi, siis palun kustuta tema sisu käsitsi.</string>
     <string name="lock_database_show_button_summary">Liideses kuvame luku ikooni</string>
@@ -505,10 +500,8 @@
     <string name="enable">Võta kasutusele</string>
     <string name="disable">Eemalda kasutuselt</string>
     <string name="notification">Teavitus</string>
-    <string name="clear_clipboard_notification_title">Kustuta sulgemisel</string>
     <string name="database_name_title">Salasõnade andmebaasi nimi</string>
     <string name="database_description_title">Salasõnade andmebaasi kirjeldus</string>
-    <string name="clear_clipboard_notification_summary">Kui lõikelaua jaoks lubatud kestus aegub või sulged teavituse kasutamiseks, siis lukusta andmebaas</string>
     <string name="database_default_username_title">Vakimisi kasutajanimi</string>
     <string name="database_custom_color_title">Sinu valitud värv aalasõnade andmebaasile</string>
     <string name="database_version_title">Salasõnade andmebaasi versioon</string>
@@ -598,7 +591,7 @@
     <string name="keystore_not_accessible">Võtmehoidla pole korrektselt valmendatud.</string>
     <string name="special">Eriteave</string>
     <string name="warning_remove_unlinked_attachment">Linkimata andmete eemaldamine võib vähendada andmebaasi suurust, aga samaga võivad kaduda ka andmed, mida kasutavad KeePassi lisamoodulid.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Seadmekohane lukustuse eemaldamine</string>
+    <string name="device_unlock_prompt_extract_credential_title">Seadmekohane lukustuse avamine</string>
     <string name="device_unlock_prompt_extract_credential_message">Ava andmebaas kasutades nutiseadme-põhist autentimist</string>
     <string name="device_unlock_invalid_key">Seadme lukustuse eemaldamise võtit ei õnnestu lugeda. Palun kustuta ta ja korda lukustuse eemaldamist tuvastamise alusel.</string>
     <string name="device_unlock">Nutiseadme-põhine lukustuse eemaldamine</string>
@@ -621,7 +614,6 @@
     <string name="keyboard_entry_timeout_title">Aegumine</string>
     <string name="keyboard_entry_timeout_summary">Aeg, peale mida kirje kustub klahvistikus</string>
     <string name="keyboard_notification_entry_content_title_text">Sisestus</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Välimus</string>
     <string name="keyboard_theme_title">Klahvistiku kujundus</string>
     <string name="keyboard_auto_go_action_title">Automaatne võtmetoiming</string>
@@ -677,7 +669,7 @@
     <string name="passkeys_privileged_apps_explanation">HOIATUS: Eesõigustega rakendus toimib lüüsina autentimise algallikaga suhtlemisel. Turvaprobleemide vältimiseks palun taga, et kasutad õiget rakendust.</string>
     <string name="passkeys_privileged_apps_ask_message">%1$s kaset pääsuvõtmega autentimiseks.\n\nKas lisame ta eesõigustega rakenduste loendisse?</string>
     <string name="passkeys_missing_signature_app_ask_title">Allkiri on puudu</string>
-    <string name="passkeys_missing_signature_app_ask_explanation">HOAITUS: See pääsuluba on loodud teise kliendi poolt või on allkiri kustutatud. Turvaprobleemide vältimiseks palun kontrolli rakendus, milles soovi end tuvastada on sama teenuse osa ning sisuliselt õige.\n\nKui rakendus on veebibrauser, siis ära lisa allkirja kirje juurde vaid seadistustes leiduva eesõigustega rakenduste loendisse.</string>
+    <string name="passkeys_missing_signature_app_ask_explanation">HOIATUS: See pääsuluba on loodud teise kliendi poolt või on allkiri kustutatud. Turvaprobleemide vältimiseks palun kontrolli, et rakendus, mida soovid autentida on osa samast teenusest ning legitiimne.\n\nKui rakendus on veebibrauser, siis ära lisa allkirja kirje juurde vaid seadistustes leiduva eesõigustega rakenduste loendisse.</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s on antud kontekstis tundmatu ja mittetunnustatud ning ta proovib autentimist olemasoleva pääsuvõtmega.</string>
     <string name="passkeys_missing_signature_app_ask_question">Kas soovid lisada rakenduse allkirja pääsuvõtme kirjele?</string>
     <string name="passkeys_auto_select_title">Automaatne valik</string>
@@ -688,13 +680,13 @@
     <string name="passkeys_backup_state_summary">Anna märku, kas autentimisandmed on varundatud ja kaitstud üksiku seadme kaotsimineku puhul</string>
     <string name="credential_provider_service_subtitle">Pääsuvõtmed - automaattäite teenusepakkuja</string>
     <string name="passkey">WebAuthn pääsuvõti</string>
-    <string name="passkey_service_name">KeePassDX autentimisteenusepakkuja</string>
+    <string name="credential_provider_service_name">KeePassDX autentimisteenusepakkuja</string>
     <string name="passkey_creation_description">Salvesta pääsuvõti uue kirjena</string>
     <string name="passkey_update_description">Uuenda pääsuvõtit: %1$s</string>
     <string name="passkey_selection_username">Pääsuvõtit ei leidu</string>
     <string name="passkey_selection_description">Vali olemasolev pääsuvõti</string>
-    <string name="passkey_database_username">KeePassDX-i andmebaas</string>
-    <string name="passkey_locked_database_description">Vali lukustuse eemaldamiseks</string>
+    <string name="credential_provider_database_username">KeePassDX-i andmebaas</string>
+    <string name="credential_provider_locked_database_description">Vali lukustuse eemaldamiseks</string>
     <string name="passkey_username">Pääsuvõtme kasutajanimi</string>
     <string name="passkey_private_key">Pääsuvõtme privaatvõti</string>
     <string name="passkey_credential_id">Pääsuvõtme autentimisühiku tunnus</string>
@@ -703,4 +695,25 @@
     <string name="passkey_backup_eligibility">Pääsuvõtme kõlblikkus varundamiseks</string>
     <string name="passkey_backup_state">Pääsuvõtme varunduse olek</string>
     <string name="error_passkey_result">Pääsuvõtme väljastamine vastuseks ei õnnestu</string>
+    <string name="clipboard_otp_notifications_title">OTP teavitus</string>
+    <string name="clipboard_otp_notifications_summary">Automaattäite ja maagilise klahvistiku lisatud OTP (ühekordse salasõna) kopeerimiseks ava teavitus</string>
+    <string name="autofill_share_magikeyboard_title">Jaga maagilisele klahvistikule</string>
+    <string name="autofill_share_magikeyboard_summary">Jaga automaattäite kirjed maagilisele klahvistikule</string>
+    <string name="keyboard_auto_switch_title">Võta maagiline klahvistik automaatselt kasutusele</string>
+    <string name="keyboard_auto_switch_summary">Peale kirjete lisamist proovi maagiline klahvistik võtta automaatselt kasutusele</string>
+    <string name="user_verification_database_credential">Sisesta oma andmebaasi salasõna neli esimest tähemärki</string>
+    <string name="check">Kontrolli</string>
+    <string name="first_chars">Esimesed tähemärgid</string>
+    <string name="user_verification_required_title">Kasutaja verifitseerimine</string>
+    <string name="user_verification_required_description">Ligipääs nendele andmetele eeldab tuvastamist, et tõesti on tegemist sinuga.</string>
+    <string name="content_description_user_verification_information">Kasutaja verifitseerimise teave</string>
+    <string name="password_selection_description">Vali olemasolev salasõna</string>
+    <string name="password_creation_description">Salvesta salasõna uues kirjes</string>
+    <string name="error_password_result">Ei õnnestu salasõna juurde tagasi pööduda</string>
+    <string name="user_verification_preferred_title">Kasutaja eelistatud verifitseerimine</string>
+    <string name="user_verification_device_credential_title">Kasutaja verifitseerimine allikas</string>
+    <string name="user_verification_device_credential_summary">Kui võimalik, siis pruugi kasutaja verifitseerimiseks nutiseadmepõhist tuvastamist</string>
+    <string name="user_verification_preferred_summary">Kui edastav osapool eeldab eelistatud tuvastamist, siis verifitseeri kasutaja</string>
+    <string name="error_passkey_credential_id">Pääsuvõtit ei leidu edastava osapoole „%1$s“ ja tuvastustunnuse (credentialId) „%2$s“ jaoks</string>
+    <string name="user_verification_required_description_precise">%1$s eeldab tuvastamist, et tõesti on tegemist sinuga.</string>
 </resources>

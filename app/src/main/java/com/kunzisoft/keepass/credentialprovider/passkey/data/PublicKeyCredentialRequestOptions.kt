@@ -20,12 +20,33 @@
 package com.kunzisoft.keepass.credentialprovider.passkey.data
 
 import com.kunzisoft.encrypt.Base64Helper
+import com.kunzisoft.keepass.credentialprovider.passkey.data.PublicKeyCredentialDescriptor.Companion.getPublicKeyCredentialDescriptorList
 import org.json.JSONObject
 
+// https://www.w3.org/TR/webauthn-3/#enumdef-residentkeyrequirement
 class PublicKeyCredentialRequestOptions(requestJson: String) {
-    val json: JSONObject = JSONObject(requestJson)
-    val challenge: ByteArray = Base64Helper.b64Decode(json.getString("challenge"))
-    val timeout: Long = json.optLong("timeout", 0)
-    val rpId: String = json.optString("rpId", "")
-    val userVerification: String = json.optString("userVerification", "preferred")
+    private val json: JSONObject = JSONObject(requestJson)
+
+    val challenge: ByteArray =
+        Base64Helper.b64Decode(json.getString("challenge"))
+
+    val timeout: Long =
+        json.optLong("timeout", 0)
+
+    val rpId: String =
+        json.optString("rpId", "")
+
+    val allowCredentials: List<PublicKeyCredentialDescriptor> =
+        json.getPublicKeyCredentialDescriptorList("allowCredentials")
+
+    val userVerification: UserVerificationRequirement =
+        UserVerificationRequirement.fromString(
+            json.optString("userVerification", "preferred"))
+            ?: UserVerificationRequirement.PREFERRED
+
+    // TODO Hints
+    val hints: List<String> = listOf()
+
+    // TODO Extensions
+    // val extensions: AuthenticationExtensionsClientInputs
 }

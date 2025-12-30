@@ -1,0 +1,58 @@
+package com.kunzisoft.keepass.viewmodels
+
+import androidx.lifecycle.ViewModel
+import com.kunzisoft.keepass.credentialprovider.UserVerificationData
+import com.kunzisoft.keepass.database.element.MasterCredential.CREATOR.getCheckKey
+import com.kunzisoft.keepass.database.exception.InvalidCredentialsDatabaseException
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+
+/**
+ * ViewModel for the User Verification
+ */
+class UserVerificationViewModel: ViewModel() {
+
+    private val mUVState = MutableStateFlow<UVState>(UVState.Loading)
+    val userVerificationState: StateFlow<UVState> = mUVState
+
+    var dataToVerify: UserVerificationData? = null
+
+    fun checkMainCredential(checkString: String) {
+        // Check the password part
+        val data = dataToVerify
+        if (data?.database?.checkKey(getCheckKey(checkString)) == true)
+            onUserVerificationSucceeded(data)
+        else {
+            onUserVerificationFailed(dataToVerify, InvalidCredentialsDatabaseException())
+        }
+        dataToVerify = null
+    }
+
+    fun onUserVerificationSucceeded(dataToVerify: UserVerificationData) {
+        mUVState.value = UVState.OnUserVerificationSucceeded(dataToVerify)
+    }
+
+    fun onUserVerificationFailed(
+        dataToVerify: UserVerificationData? = null,
+        error: Throwable? = null
+    ) {
+        this.dataToVerify = dataToVerify
+        mUVState.value = UVState.OnUserVerificationCanceled(dataToVerify, error)
+    }
+
+    fun onUserVerificationReceived() {
+        mUVState.value = UVState.Loading
+    }
+
+    sealed class UVState {
+        object Loading: UVState()
+        data class OnUserVerificationSucceeded(
+            val dataToVerify: UserVerificationData
+        ): UVState()
+        data class OnUserVerificationCanceled(
+            val dataToVerify: UserVerificationData?,
+            val error: Throwable?
+        ): UVState()
+    }
+
+}

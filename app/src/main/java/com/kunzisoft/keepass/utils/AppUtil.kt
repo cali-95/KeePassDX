@@ -77,6 +77,18 @@ object AppUtil {
                 )
     }
 
+    /**
+     * Indicates whether the [packageName] is a web browser.
+     */
+    @RequiresApi(Build.VERSION_CODES.P)
+    fun Context.isWebBrowserPackage(packageName: String?): Boolean {
+        if (packageName == null || packageName.isEmpty())
+            return false
+        return getInstalledBrowsersWithSignatures(this).any {
+            it.packageName == packageName
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.P)
     fun getInstalledBrowsersWithSignatures(context: Context): List<AndroidPrivilegedApp> {
         val packageManager = context.packageManager

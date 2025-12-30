@@ -32,7 +32,7 @@
     <string name="application">Uygulama</string>
     <string name="brackets">Parantez</string>
     <string name="extended_ASCII">Genişletilmiş ASCII</string>
-    <string name="file_manager_install_description">Veri tabanı dosyalarını oluşturmak, açmak ve kaydetmek için ACTION_CREATE_DOCUMENT ve ACTION_OPEN_DOCUMENT intent eylemlerini kabul eden bir dosya yöneticisi gereklidir.</string>
+    <string name="file_manager_install_description">Veri tabanı dosyalarını oluşturmak, açmak ve kaydetmek için ACTION_CREATE_DOCUMENT (Dosya oluşturma) ve ACTION_OPEN_DOCUMENT (Dosya açma) yetkilerini kabul eden bir dosya yöneticisi gereklidir.</string>
     <string name="allow">İzin ver</string>
     <string name="clipboard_cleared">Pano temizlendi</string>
     <string name="clipboard_error_title">Pano hatası</string>
@@ -57,10 +57,10 @@
     <string name="error_invalid_db">Veri tabanı okunamadı.</string>
     <string name="error_invalid_path">Yolun doğru olduğundan emin olun.</string>
     <string name="error_no_name">Bir isim girin.</string>
-    <string name="select_to_copy">%1$s dosyasını panoya kopyalamak için seçin</string>
+    <string name="select_to_copy">%1$s\'yi panoya kopyalamak için seçin</string>
     <string name="retrieving_db_key">Veri tabanı anahtarı alınıyor…</string>
     <string name="decrypting_db">Veri tabanı içeriğinin şifresi çözülüyor…</string>
-    <string name="default_checkbox">Öntanımlı veri tabanı olarak kullan</string>
+    <string name="default_checkbox">Varsayılan veri tabanı olarak kullan</string>
     <string name="digits">Rakamlar</string>
     <string name="html_about_licence">KeePassDX © %1$d Kunzisoft &lt;strong&gt;açık kaynaklıdır&lt;/strong&gt; ve &lt;strong&gt;reklam içermez&lt;/strong&gt;.
 \n&lt;strong&gt;GPLv3&lt;/strong&gt; lisansı altında sağlanmaktadır, herhangi bir garanti vermez.</string>
@@ -101,8 +101,6 @@
     <string name="list_size_summary">Öge listesindeki metin boyutu</string>
     <string name="loading_database">Veri tabanı yükleniyor…</string>
     <string name="lowercase">Küçük harf</string>
-    <string name="hide_password_title">Parolaları gizle</string>
-    <string name="hide_password_summary">Parolaları öntanımlı olarak (***) ile maskele</string>
     <string name="about">Hakkında</string>
     <string name="menu_change_key_settings">Ana anahtarı değiştir</string>
     <string name="copy_field">%1$s kopyalandı</string>
@@ -111,13 +109,12 @@
     <string name="menu_form_filling_settings">Form doldurma</string>
     <string name="menu_database_settings">Veri tabanı ayarları</string>
     <string name="menu_donate">Bağış Yap</string>
-    <string name="menu_edit">Düzen</string>
+    <string name="menu_edit">Düzenle</string>
     <string name="menu_copy">Kopyala</string>
     <string name="menu_move">Taşı</string>
     <string name="menu_paste">Yapıştır</string>
     <string name="menu_delete">Sil</string>
     <string name="menu_cancel">İptal</string>
-    <string name="menu_hide_password">Parolayı gizle</string>
     <string name="menu_lock">Veri tabanını kilitle</string>
     <string name="menu_open">Aç</string>
     <string name="menu_search">Ara</string>
@@ -182,10 +179,8 @@
     <string name="list_password_generator_options_title">Parola karakterleri</string>
     <string name="list_password_generator_options_summary">İzin verilen parola üreticisi karakterlerini ayarla</string>
     <string name="clipboard">Pano</string>
-    <string name="clipboard_notifications_title">Pano bildirimleri</string>
-    <string name="clipboard_notifications_summary">Bir girdiyi görüntülerken alanları kopyalamak için pano bildirimlerini göster</string>
     <string name="clipboard_warning">Panodaki otomatik silme başarısız olursa, geçmişini elle silin.</string>
-    <string name="lock">Kilit</string>
+    <string name="lock">Kilitle</string>
     <string name="lock_database_screen_off_title">Ekran kilidi</string>
     <string name="lock_database_screen_off_summary">Ekran kapandığında birkaç saniye sonra veri tabanını kilitle</string>
     <string name="device_unlock">Aygıt kilidini aç</string>
@@ -225,7 +220,6 @@
     <string name="keyboard_notification_entry_summary">Bir girdi kullanılabilir olduğunda bildirim göster</string>
     <string name="keyboard_notification_entry_content_title_text">Girdi</string>
     <string name="keyboard_notification_entry_content_title">%1$s Magikeyboard\'da kullanılabilir</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Kapanışta temizle</string>
     <string name="keyboard_notification_entry_clear_close_summary">Bildirimi kapatırken veri tabanını kapat</string>
     <string name="keyboard_appearance_category">Görünüm</string>
@@ -295,8 +289,6 @@
     <string name="selection_mode">Seçim modu</string>
     <string name="do_not_kill_app">Uygulamayı sonlandırmayın…</string>
     <string name="lock_database_back_root_summary">Veri tabanının kök ekranındaysanız, \'Geri\' düğmesine basarak veri tabanını kilitleyin</string>
-    <string name="clear_clipboard_notification_title">Kapanışta temizle</string>
-    <string name="clear_clipboard_notification_summary">Panonun süresi dolduğunda veya kullanmaya başladıktan sonra bildirim kapatıldığında veri tabanını kilitle</string>
     <string name="content_description_open_file">Dosya aç</string>
     <string name="content_description_add_node">Düğüm ekle</string>
     <string name="content_description_add_entry">Girdi ekle</string>
@@ -337,7 +329,7 @@
     <string name="entry_history">Geçmiş</string>
     <string name="entry_setup_otp">Tek seferlik parola ayarla</string>
     <string name="otp_type">OTP türü</string>
-    <string name="otp_secret">Sır</string>
+    <string name="otp_secret">Özel veri</string>
     <string name="otp_period">Dönem (saniye)</string>
     <string name="otp_counter">Sayaç</string>
     <string name="otp_digits">Basamak</string>
@@ -479,7 +471,7 @@
     <string name="error_field_name_already_exists">Alan adı zaten var.</string>
     <string name="device_unlock_delete_all_key_warning">Aygıt kilidi açma tanımayla ilgili tüm şifreleme anahtarları silinsin mi?</string>
     <string name="device_credential_unlock_enable_summary">Veri tabanını açmak için aygıt kimlik bilgilerinizi kullanmanıza olanak tanır</string>
-    <string name="device_credential_unlock_enable_title">Aygıt kimlik bilgisiyle kilit açma</string>
+    <string name="device_credential_unlock_enable_title">Cihaz kimlik bilgisi ile kilit açma</string>
     <string name="device_credential">Aygıt kimlik bilgileri</string>
     <string name="credential_before_click_device_unlock_button">Parolayı yazın ve ardından bu düğmeye tıklayın.</string>
     <string name="device_unlock_prompt_not_initialized">Aygıt kilit açma istemi başlatılamıyor.</string>
@@ -710,9 +702,9 @@
     <string name="passkeys_backup_eligibility_summary">Oluşturma sırasında, ortak anahtar kimlik bilgisi kaynağının yedeklenmesine izin verilip verilmeyeceğini belirleyin</string>
     <string name="passkeys_backup_state_title">Yedekleme Durumu</string>
     <string name="passkeys_backup_state_summary">Kimlik bilgilerinin yedeklendiğini ve tek bir aygıtın kaybolmasına karşı korunduğunu belirtir</string>
-    <string name="passkey_service_name">KeePassDX Kimlik Bilgisi Sağlayıcısı</string>
-    <string name="passkey_database_username">KeePassDX Veri Tabanı</string>
-    <string name="passkey_locked_database_description">Kilidini açmak için seçin</string>
+    <string name="credential_provider_service_name">KeePassDX Kimlik Bilgisi Sağlayıcısı</string>
+    <string name="credential_provider_database_username">KeePassDX Veri Tabanı</string>
+    <string name="credential_provider_locked_database_description">Kilidini açmak için seçin</string>
     <string name="passkeys">Geçiş anahtarları</string>
     <string name="passkeys_explanation_summary">Hızlı ve güvenli parolasız oturum açma için geçiş anahtarlarını yapılandırın</string>
     <string name="passkeys_preference_title">Geçiş anahtarı ayarları</string>

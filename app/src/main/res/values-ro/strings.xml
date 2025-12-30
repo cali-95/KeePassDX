@@ -163,7 +163,6 @@
     <string name="menu_paste">Lipește</string>
     <string name="menu_delete">Șterge</string>
     <string name="menu_cancel">Anulare</string>
-    <string name="menu_hide_password">Ascunde parola</string>
     <string name="menu_lock">Blocare bază de date</string>
     <string name="menu_save_database">Salvare date</string>
     <string name="menu_open">Deschidere</string>
@@ -180,8 +179,6 @@
     <string name="no_results">Nu există rezultate de căutare</string>
     <string name="html_about_licence">KeePassDX © %1$d Kunzisoft este &lt;strong&gt;open source&lt;/strong&gt; și &lt;strong&gt;fără reclame&lt;/strong&gt;. \nEste furnizat ca atare, sub licență &lt;strong&gt;GPLv3&lt;/strong&gt;, fără nicio garanție.</string>
     <string name="html_about_contribution">Pentru a ne &lt;strong&gt;păstra libertatea&lt;/strong&gt;, &lt;strong&gt;pentru a remedia erori&lt;/strong&gt;, &lt;strong&gt;pentru a adăuga funcții&lt;/strong&gt; și &lt;strong&gt;pentru a fi mereu activi&lt;/strong&gt;, ne bazăm pe &lt;strong&gt;contribuția&lt;/strong&gt; dvs.</string>
-    <string name="hide_password_title">Ascundeți parolele</string>
-    <string name="hide_password_summary">Mascați parolele (***) în mod implicit</string>
     <string name="about">Despre</string>
     <string name="no_url_handler">Instalați un browser web pentru a deschide această adresă URL.</string>
     <string name="select_database_file">Deschideți seiful existent</string>
@@ -247,8 +244,6 @@
     <string name="database_opened">Bază de date deschisă</string>
     <string name="clipboard">Clipboard</string>
     <string name="clipboard_explanation_summary">Copiați câmpurile de intrare utilizând clipboardul dispozitivului dvs.</string>
-    <string name="clipboard_notifications_title">Notificări clipboard</string>
-    <string name="clipboard_notifications_summary">Afișare notificări din clipboard pentru a copia câmpuri atunci când se vizualizează o intrare</string>
     <string name="clipboard_warning">Dacă ștergerea automată a clipboardului nu reușește, ștergeți manual istoricul acestuia.</string>
     <string name="lock">Blocare</string>
     <string name="lock_database_screen_off_title">Blocare ecran</string>
@@ -291,8 +286,6 @@
     <string name="allow_copy_password_warning">Avertisment: Clipboardul este partajat de toate aplicațiile. Dacă sunt copiate date sensibile, alte programe le pot recupera.</string>
     <string name="enable">Activare</string>
     <string name="disable">Dezactivare</string>
-    <string name="clear_clipboard_notification_title">Curăță la închidere</string>
-    <string name="clear_clipboard_notification_summary">Blocați baza de date atunci când durata clipboardului expiră sau notificarea este închisă după ce ați început să o utilizați</string>
     <string name="database_name_title">Numele bazei de date</string>
     <string name="database_description_title">Descrierea bazei de date</string>
     <string name="database_default_username_title">Nume de utilizator implicit</string>
@@ -323,7 +316,6 @@
     <string name="keyboard_entry_timeout_summary">Timpul de așteptare pentru a șterge intrarea de la tastatură</string>
     <string name="keyboard_notification_entry_content_title_text">Intrare</string>
     <string name="keyboard_notification_entry_content_title">%1$s disponibil pe Tastatura magică</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_appearance_category">Aspect</string>
     <string name="keyboard_theme_title">Tema tastaturii</string>
     <string name="keyboard_keys_category">Chei</string>
@@ -710,5 +702,5 @@
     <string name="passkeys_auto_select_title">Selectare automată</string>
     <string name="passkeys_auto_select_summary">Selectare automată dacă există o singură intrare și baza de date este deschisă, doar dacă aplicația solicitantă este compatibilă</string>
     <string name="passkeys_backup_eligibility_title">Eligibilitate pentru copia de siguranță</string>
-    <string name="passkey_locked_database_description">Selectează ca să deblochezi</string>
+    <string name="credential_provider_locked_database_description">Selectează ca să deblochezi</string>
 </resources>

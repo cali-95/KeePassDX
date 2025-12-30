@@ -19,7 +19,6 @@
  */
 package com.kunzisoft.keepass.database.element.database
 
-import android.util.Base64
 import android.util.Log
 import com.kunzisoft.encrypt.HashManager
 import com.kunzisoft.keepass.database.crypto.EncryptionAlgorithm
@@ -28,7 +27,12 @@ import com.kunzisoft.keepass.database.crypto.kdf.AesKdf
 import com.kunzisoft.keepass.database.crypto.kdf.KdfEngine
 import com.kunzisoft.keepass.database.crypto.kdf.KdfFactory
 import com.kunzisoft.keepass.database.crypto.kdf.KdfParameters
-import com.kunzisoft.keepass.database.element.*
+import com.kunzisoft.keepass.database.element.CompositeKey
+import com.kunzisoft.keepass.database.element.CustomData
+import com.kunzisoft.keepass.database.element.DateInstant
+import com.kunzisoft.keepass.database.element.DeletedObject
+import com.kunzisoft.keepass.database.element.MasterCredential
+import com.kunzisoft.keepass.database.element.Tags
 import com.kunzisoft.keepass.database.element.binary.BinaryData
 import com.kunzisoft.keepass.database.element.database.DatabaseKDB.Companion.BACKUP_FOLDER_TITLE
 import com.kunzisoft.keepass.database.element.entry.EntryKDBX
@@ -36,7 +40,11 @@ import com.kunzisoft.keepass.database.element.entry.FieldReferencesEngine
 import com.kunzisoft.keepass.database.element.group.GroupKDBX
 import com.kunzisoft.keepass.database.element.icon.IconImageCustom
 import com.kunzisoft.keepass.database.element.icon.IconImageStandard
-import com.kunzisoft.keepass.database.element.node.*
+import com.kunzisoft.keepass.database.element.node.NodeHandler
+import com.kunzisoft.keepass.database.element.node.NodeId
+import com.kunzisoft.keepass.database.element.node.NodeIdUUID
+import com.kunzisoft.keepass.database.element.node.NodeKDBXInterface
+import com.kunzisoft.keepass.database.element.node.NodeVersioned
 import com.kunzisoft.keepass.database.element.security.MemoryProtectionConfig
 import com.kunzisoft.keepass.database.element.template.Template
 import com.kunzisoft.keepass.database.element.template.TemplateEngineCompatible
@@ -51,7 +59,8 @@ import java.io.IOException
 import java.nio.charset.Charset
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.util.*
+import java.util.Arrays
+import java.util.UUID
 import javax.crypto.Mac
 import kotlin.math.min
 
@@ -253,6 +262,9 @@ class DatabaseKDBX : DatabaseVersioned<UUID, UUID, GroupKDBX, EntryKDBX> {
             keyFileBytes,
             hardwareKeyBytes
         )
+
+        // Build check key
+        this.checkKey = masterCredential.getCheckKey()
     }
 
     @Throws(DatabaseOutputException::class)
@@ -608,8 +620,8 @@ class DatabaseKDBX : DatabaseVersioned<UUID, UUID, GroupKDBX, EntryKDBX> {
     /**
      * Retrieve the value of a field reference
      */
-    fun getFieldReferenceValue(textReference: String, recursionLevel: Int): String {
-        return mFieldReferenceEngine.compile(textReference, recursionLevel)
+    fun getFieldReferenceValue(entry: EntryKDBX, textReference: String, recursionLevel: Int): String {
+        return mFieldReferenceEngine.compile(entry, textReference, recursionLevel)
     }
 
     @Throws(IOException::class)
@@ -635,7 +647,7 @@ class DatabaseKDBX : DatabaseVersioned<UUID, UUID, GroupKDBX, EntryKDBX> {
                 messageDigest = MessageDigest.getInstance("SHA-512")
                 cmpKey[64] = 1
                 hmacKey = messageDigest.digest(cmpKey)
-            } catch (e: NoSuchAlgorithmException) {
+            } catch (_: NoSuchAlgorithmException) {
                 throw IOException("No SHA-512 implementation")
             } finally {
                 Arrays.fill(cmpKey, 0.toByte())

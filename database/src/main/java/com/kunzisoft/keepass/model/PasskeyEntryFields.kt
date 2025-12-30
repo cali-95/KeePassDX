@@ -177,6 +177,13 @@ object PasskeyEntryFields {
     }
 
     /**
+     * Detect if the current field is a Passkey credential id
+     */
+    fun Field.isCredentialId(): Boolean {
+        return name == FIELD_CREDENTIAL_ID
+    }
+
+    /**
      * Detect if the current field is a Passkey relying party
      */
     fun Field.isRelyingParty(): Boolean {

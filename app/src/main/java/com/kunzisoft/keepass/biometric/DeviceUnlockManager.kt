@@ -218,7 +218,7 @@ class DeviceUnlockManager(private var appContext: Context) {
                             type = DeviceUnlockCryptoPromptType.CREDENTIAL_DECRYPTION,
                             cipher = cipher,
                             titleId = R.string.device_unlock_prompt_extract_credential_title,
-                            descriptionId = null,
+                            descriptionId = R.string.device_unlock_prompt_extract_credential_message,
                             isDeviceCredentialOperation = isDeviceCredentialOperation(
                                 deviceCredentialUnlockEnable
                             ),

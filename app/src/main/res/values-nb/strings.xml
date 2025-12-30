@@ -80,7 +80,7 @@
     <string name="error_autofill_enable_service">Autofyll-tjenesten kan ikke skrus på.</string>
     <string name="field_name">Feltnavn</string>
     <string name="field_value">Feltverdi</string>
-    <string name="file_not_found_content">Fant ikke filen. Prøv å åpne den fra din innholdsleverandør.</string>
+    <string name="file_not_found_content">Kunne ikke finne filen</string>
     <string name="file_browser">Filbehandler</string>
     <string name="generate_password">Opprett passord</string>
     <string name="hint_conf_pass">Bekreft passord</string>
@@ -101,8 +101,6 @@
     <string name="list_size_summary">Tekststørrelse i elemenetlisten</string>
     <string name="loading_database">Laster database…</string>
     <string name="lowercase">Små bokstaver</string>
-    <string name="hide_password_title">Masker passord</string>
-    <string name="hide_password_summary">Skjul passord som forvalg</string>
     <string name="about">Om</string>
     <string name="menu_change_key_settings">Endre hovednøkkel</string>
     <string name="copy_field">Kopi av%1$s</string>
@@ -117,7 +115,6 @@
     <string name="menu_paste">Lim inn</string>
     <string name="menu_delete">Slett</string>
     <string name="menu_cancel">Avbryt</string>
-    <string name="menu_hide_password">Skjul passord</string>
     <string name="menu_lock">Lås database</string>
     <string name="menu_open">Åpne</string>
     <string name="menu_search">Søk</string>
@@ -181,8 +178,6 @@
     <string name="list_password_generator_options_title">Passordtegn</string>
     <string name="list_password_generator_options_summary">Sett forvalgte passordgenereringstegn</string>
     <string name="clipboard">Utklippstavle</string>
-    <string name="clipboard_notifications_title">Utklippstavlemerknader</string>
-    <string name="clipboard_notifications_summary">Vis utklippstavle-varsler for å kopiere felt når du ser på en oppføring</string>
     <string name="clipboard_warning">Hvis din enhet ikke er i stand til å slette ting fra utklippstavlen automatisk, slett det kopierte elementet fra din utklippshistorikk manuelt.</string>
     <string name="lock">Lås</string>
     <string name="lock_database_screen_off_title">Skjermlås</string>
@@ -280,7 +275,6 @@
     <string name="keyboard_notification_entry_summary">Vis en merknad når en oppføring er tilgjengelig</string>
     <string name="keyboard_notification_entry_content_title_text">Oppføring</string>
     <string name="keyboard_notification_entry_content_title">%1$s tilgjengelig på Magikeyboard</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="keyboard_notification_entry_clear_close_title">Tøm ved lukking</string>
     <string name="keyboard_notification_entry_clear_close_summary">Lukk databasen når du lukker varselet</string>
     <string name="keyboard_appearance_category">Utseende</string>
@@ -292,8 +286,6 @@
     <string name="do_not_kill_app">Ikke drep programmet…</string>
     <string name="lock_database_back_root_title">Trykk «Tilbake» for å låse</string>
     <string name="lock_database_back_root_summary">Trykk «Tilbake» for å låse databasen hvis du er ved rotskjermen til databasen</string>
-    <string name="clear_clipboard_notification_title">Tøm ved lukking</string>
-    <string name="clear_clipboard_notification_summary">Lås databasen når utklippstavlens varighet utløper eller varselet lukkes etter at du begynner å bruke den</string>
     <string name="recycle_bin">Papirkurv</string>
     <string name="keyboard_selection_entry_title">Oppføringsvalg</string>
     <string name="keyboard_selection_entry_summary">Når du ser på en oppføring i KeePassDX blir Magikeyboard fylt opp med den oppføringen</string>
@@ -524,7 +516,7 @@
     <string name="permission">Tilgang</string>
     <string name="biometric_security_update_required">Biometrisk sikkerhetsoppdatering kreves.</string>
     <string name="warning_exact_alarm">Du har ikke tillat programmet å bruke en eksakt alarm. Som resultat vil funksjoner som krever et tidsur ikke gjøres til eksakt tid.</string>
-    <string name="device_unlock_prompt_store_credential_message">Du må fortsatt huske hovedlegitimasjonen for hvelvet selv om du bruker enhetens opplåsingsgjenkjenning.</string>
+    <string name="device_unlock_prompt_store_credential_message">ADVARSEL: Du må fortsatt huske hovedlegitimasjonen for hvelvet</string>
     <string name="device_unlock_not_recognized">Kunne ikke gjenkjenne enhetens oppåsningsmetode</string>
     <string name="credential_before_click_device_unlock_button">Skriv inn passordet, og klikk deretter på denne knappen.</string>
     <string name="device_credential">Enhetens påloggingsinformasjon</string>
@@ -723,16 +715,17 @@
     <string name="passkey_update_description">Oppdater passnøkkel i %1$s</string>
     <string name="passkey_selection_username">Ingen passnøkkel funnet</string>
     <string name="passkey_selection_description">Velg en eksisterende passnøkkel</string>
-    <string name="passkey_database_username">KeePassDX-database</string>
-    <string name="passkey_locked_database_description">Velg for å låse opp</string>
+    <string name="credential_provider_database_username">KeePassDX-database</string>
+    <string name="credential_provider_locked_database_description">Velg for å låse opp</string>
     <string name="passkey_username">Passnøkkel-brukernavn</string>
     <string name="passkey_private_key">Passnøkkel-privatnøkkel</string>
     <string name="passkey_user_handle">Passnøkkel-brukernavn</string>
     <string name="error_passkey_result">Kunne ikke returnere passnøkkelen</string>
     <string name="credential_provider">Påloggingsinformasjons-leverandør</string>
-    <string name="passkey_service_name">Påloggingsleverandør til KeePassDX</string>
+    <string name="credential_provider_service_name">Påloggingsleverandør til KeePassDX</string>
     <string name="passkey_credential_id">Passnøkkel-ID</string>
     <string name="passkey_relying_party">Passnøkkelens tillitspart</string>
     <string name="passkey_backup_eligibility">Mulighet for sikkerhetskopiering av passnøkkelen</string>
     <string name="passkey_backup_state">Tilstand til sikkerhetskopien til passnøkkelen</string>
+    <string name="clipboard_otp_notifications_title">Varsel med engangskode</string>
 </resources>

@@ -21,11 +21,12 @@ package com.kunzisoft.keepass.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.kunzisoft.keepass.otp.OtpElement
 import com.kunzisoft.keepass.otp.OtpTokenType
 import com.kunzisoft.keepass.otp.OtpType
 import com.kunzisoft.keepass.otp.TokenCalculator
 import com.kunzisoft.keepass.otp.TokenCalculator.OTP_DEFAULT_ALGORITHM
+import com.kunzisoft.keepass.utils.readEnum
+import com.kunzisoft.keepass.utils.writeEnum
 
 class OtpModel() : Parcelable {
 
@@ -40,16 +41,15 @@ class OtpModel() : Parcelable {
     var algorithm: TokenCalculator.HashAlgorithm = OTP_DEFAULT_ALGORITHM
 
     constructor(parcel: Parcel) : this() {
-        val typeRead = parcel.readInt()
-        type = OtpType.values()[typeRead]
-        tokenType = OtpTokenType.values()[parcel.readInt()]
+        type = parcel.readEnum<OtpType>() ?: type
+        tokenType = parcel.readEnum<OtpTokenType>() ?: tokenType
         name = parcel.readString() ?: name
         issuer = parcel.readString() ?: issuer
         secret = parcel.createByteArray() ?: secret
         counter = parcel.readLong()
         period = parcel.readInt()
         digits = parcel.readInt()
-        algorithm = TokenCalculator.HashAlgorithm.values()[parcel.readInt()]
+        algorithm = parcel.readEnum<TokenCalculator.HashAlgorithm>() ?: algorithm
     }
 
     override fun equals(other: Any?): Boolean {
@@ -91,15 +91,19 @@ class OtpModel() : Parcelable {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeInt(type.ordinal)
-        parcel.writeInt(tokenType.ordinal)
+        parcel.writeEnum(type)
+        parcel.writeEnum(tokenType)
         parcel.writeString(name)
         parcel.writeString(issuer)
         parcel.writeByteArray(secret)
         parcel.writeLong(counter)
         parcel.writeInt(period)
         parcel.writeInt(digits)
-        parcel.writeInt(algorithm.ordinal)
+        parcel.writeEnum(algorithm)
+    }
+
+    override fun toString(): String {
+        return "$type ($name)"
     }
 
     companion object CREATOR : Parcelable.Creator<OtpModel> {

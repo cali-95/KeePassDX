@@ -27,6 +27,7 @@ import android.graphics.BlendMode
 import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.CancellationSignal
+import android.provider.Settings
 import android.service.autofill.AutofillService
 import android.service.autofill.FillCallback
 import android.service.autofill.FillRequest
@@ -38,23 +39,30 @@ import android.service.autofill.SaveInfo
 import android.service.autofill.SaveRequest
 import android.util.Log
 import android.view.autofill.AutofillId
+import android.view.autofill.AutofillManager
 import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import androidx.autofill.inline.UiVersions
 import androidx.autofill.inline.v1.InlineSuggestionUi
+import androidx.core.content.ContextCompat
+import androidx.core.net.toUri
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.credentialprovider.activity.AutofillLauncherActivity
 import com.kunzisoft.keepass.credentialprovider.autofill.StructureParser.Companion.APPLICATION_ID_POPUP_WINDOW
+import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.DatabaseTaskProvider
+import com.kunzisoft.keepass.database.element.DateInstant
 import com.kunzisoft.keepass.database.helper.SearchHelper
 import com.kunzisoft.keepass.model.CreditCard
 import com.kunzisoft.keepass.model.RegisterInfo
 import com.kunzisoft.keepass.model.SearchInfo
+import com.kunzisoft.keepass.services.ClipboardEntryNotificationService
 import com.kunzisoft.keepass.settings.AutofillSettingsActivity
 import com.kunzisoft.keepass.settings.PreferencesUtil
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import org.joda.time.DateTime
+import org.joda.time.Instant
 
 
 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -66,6 +74,8 @@ class KeeAutofillService : AutofillService() {
     private var webDomainBlocklist: Set<String>? = null
     private var askToSaveData: Boolean = false
     private var autofillInlineSuggestionsEnabled: Boolean = false
+    private var autofillSharedToMagikeyboard: Boolean = false
+    private var switchToMagikeyboard: Boolean = false
 
     override fun onCreate() {
         super.onCreate()
@@ -90,6 +100,8 @@ class KeeAutofillService : AutofillService() {
         webDomainBlocklist = PreferencesUtil.webDomainBlocklist(this)
         askToSaveData = PreferencesUtil.askToSaveAutofillData(this)
         autofillInlineSuggestionsEnabled = PreferencesUtil.isAutofillInlineSuggestionsEnable(this)
+        autofillSharedToMagikeyboard = PreferencesUtil.isAutofillSharedToMagikeyboardEnable(this)
+        switchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(this)
     }
 
     override fun onFillRequest(
@@ -107,7 +119,16 @@ class KeeAutofillService : AutofillService() {
 
         // Check user's settings for authenticating Responses and Datasets.
         val latestStructure = request.fillContexts.last().structure
-        StructureParser(latestStructure).parse()?.let { parseResult ->
+        StructureParser(latestStructure).parse(saveValue = false)?.let { parseResult ->
+
+            // Build the search info from the parser
+            val searchInfo = SearchInfo().apply {
+                applicationId = parseResult.applicationId
+                webScheme = parseResult.webScheme
+                webDomain = parseResult.webDomain
+            }
+            // Add the search info to the magikeyboard service
+            MagikeyboardService.addSearchInfo(searchInfo)
 
             // Build search info only if applicationId or webDomain are not blocked
             if (autofillAllowedFor(
@@ -116,47 +137,66 @@ class KeeAutofillService : AutofillService() {
                     webDomain = parseResult.webDomain,
                     webDomainBlocklist = webDomainBlocklist)
                 ) {
-                val searchInfo = SearchInfo().apply {
-                    applicationId = parseResult.applicationId
-                    webDomain = parseResult.webDomain
-                    webScheme = parseResult.webScheme
-                }
-                val inlineSuggestionsRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
-                        && autofillInlineSuggestionsEnabled) {
-                    CompatInlineSuggestionsRequest(request)
-                } else {
-                    null
-                }
-                val autofillComponent = AutofillComponent(
-                    latestStructure,
-                    inlineSuggestionsRequest
-                )
-                SearchHelper.checkAutoSearchInfo(
-                    context = this,
-                    database = mDatabase,
-                    searchInfo = searchInfo,
-                    onItemsFound = { openedDatabase, items ->
-                        callback.onSuccess(
-                            AutofillHelper.buildResponse(
-                                context = this,
-                                database = openedDatabase,
-                                entriesInfo = items,
-                                parseResult = parseResult,
-                                autofillComponent = autofillComponent
+
+                if (parseResult.isValid()) {
+                    val inlineSuggestionsRequest =
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R
+                            && autofillInlineSuggestionsEnabled
+                        ) {
+                            CompatInlineSuggestionsRequest(request)
+                        } else {
+                            null
+                        }
+                    val autofillComponent = AutofillComponent(
+                        latestStructure,
+                        inlineSuggestionsRequest
+                    )
+                    SearchHelper.checkAutoSearchInfo(
+                        context = this,
+                        database = mDatabase,
+                        searchInfo = searchInfo,
+                        onItemsFound = { openedDatabase, items ->
+                            // Add Autofill entries to Magic Keyboard #2024 #995
+                            if (autofillSharedToMagikeyboard) {
+                                MagikeyboardService.addEntries(
+                                    context = this,
+                                    entryList = items,
+                                    toast = true,
+                                    autoSwitchKeyboard = switchToMagikeyboard
+                                )
+                            } else {
+                                // Add OTP to clipboard notification #1347
+                                ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
+                                    context = this,
+                                    entries = items
+                                )
+                            }
+                            callback.onSuccess(
+                                AutofillHelper.buildResponse(
+                                    context = this,
+                                    database = openedDatabase,
+                                    entriesInfo = items,
+                                    parseResult = parseResult,
+                                    autofillComponent = autofillComponent
+                                )
                             )
-                        )
-                    },
-                    onItemNotFound = { openedDatabase ->
-                        // Show UI if no search result
-                        showUIForEntrySelection(parseResult, openedDatabase,
-                            searchInfo, autofillComponent, callback)
-                    },
-                    onDatabaseClosed = {
-                        // Show UI if database not open
-                        showUIForEntrySelection(parseResult, null,
-                            searchInfo, autofillComponent, callback)
-                    }
-                )
+                        },
+                        onItemNotFound = { openedDatabase ->
+                            // Show UI if no search result
+                            showUIForEntrySelection(
+                                parseResult, openedDatabase,
+                                searchInfo, autofillComponent, callback
+                            )
+                        },
+                        onDatabaseClosed = {
+                            // Show UI if database not open
+                            showUIForEntrySelection(
+                                parseResult, null,
+                                searchInfo, autofillComponent, callback
+                            )
+                        }
+                    )
+                }
             }
         }
     }
@@ -362,9 +402,9 @@ class KeeAutofillService : AutofillService() {
         var success = false
         if (askToSaveData && Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             val latestStructure = request.fillContexts.last().structure
-            StructureParser(latestStructure).parse(true)?.let { parseResult ->
+            StructureParser(latestStructure).parse(saveValue = true)?.let { parseResult ->
 
-                if (autofillAllowedFor(
+                if (parseResult.isValid() && autofillAllowedFor(
                         applicationId = parseResult.applicationId,
                         applicationIdBlocklist = applicationIdBlocklist,
                         webDomain = parseResult.webDomain,
@@ -395,12 +435,12 @@ class KeeAutofillService : AutofillService() {
                         searchInfo = searchInfo,
                         username = parseResult.usernameValue?.textValue?.toString(),
                         password = parseResult.passwordValue?.textValue?.toString(),
-                        creditCard = parseResult.creditCardNumber?.let { cardNumber ->
+                        expiration = DateInstant(Instant(expiration)),
+                        creditCard = parseResult.creditCardNumber?.textValue?.toString()?.let { cardNumber ->
                             CreditCard(
-                                parseResult.creditCardHolder,
-                                cardNumber,
-                                expiration,
-                                parseResult.cardVerificationValue
+                                cardholder = parseResult.creditCardHolder?.textValue?.toString(),
+                                number = cardNumber,
+                                cvv = parseResult.cardVerificationValue?.textValue?.toString()
                             )
                         }
                     )
@@ -465,6 +505,27 @@ class KeeAutofillService : AutofillService() {
                 }
             }
             return true
+        }
+
+        fun Context.isKeeAutofillActivated(): Boolean {
+            val activated = ContextCompat.getSystemService(
+                this,
+                AutofillManager::class.java
+            )?.hasEnabledAutofillServices() == true
+            return activated
+        }
+
+        fun Context.showAutofillDeviceSettings() {
+            try {
+                startActivity(
+                    Intent(Settings.ACTION_REQUEST_SET_AUTOFILL_SERVICE).apply {
+                        data = "package:${KeeAutofillService::class.java.canonicalName}".toUri()
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                )
+            } catch (e: Exception) {
+                Log.e(TAG, "Unable to choose the autofill service", e)
+            }
         }
     }
 }
