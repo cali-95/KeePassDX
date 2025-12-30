@@ -202,7 +202,6 @@
     <string name="path">Ceļš</string>
     <string name="contribute">Dot savu artavu</string>
     <string name="menu_file_selection_read_only">Aizsargāts pret rakstīšanu (tikai lasāms)</string>
-    <string name="keyboard_notification_entry_content_text">%1$s</string>
     <string name="general">Vispārīgie</string>
     <string name="passkeys">Piekļuves atslēgas</string>
     <string name="passkeys_explanation_summary">Iestatīt piekļuves atslēgas, lai ātri un droši autorizēties bez parolēm</string>
