@@ -752,8 +752,9 @@
     <string name="error_password_result">无法返回密码</string>
     <string name="content_description_user_verification_information">用户验证信息</string>
     <string name="user_verification_required_title">用户验证</string>
-    <string name="user_verification_required_description">访问此数据需要验证</string>
+    <string name="user_verification_required_description">访问此数据需要验证您的身份。</string>
     <string name="user_verification_database_credential">请输入数据库密码的前四个字符</string>
     <string name="first_chars">前几个字符</string>
     <string name="check">检查</string>
+    <string name="user_verification_required_description_precise">%1$s 需要验证您的身份。</string>
 </resources>
