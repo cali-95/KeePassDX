@@ -730,8 +730,9 @@
     <string name="error_password_result">Грешка при връщане на парола</string>
     <string name="content_description_user_verification_information">Информация за проверка на потребител</string>
     <string name="user_verification_required_title">Проверка на потребител</string>
-    <string name="user_verification_required_description">За достъп до тези сведения е необходима проверка</string>
+    <string name="user_verification_required_description">За достъп до тези сведения е необходимо удостоверяване.</string>
     <string name="user_verification_database_credential">Въведете първите четири знака от паролата на хранилището</string>
     <string name="first_chars">Първи знаци</string>
     <string name="check">Проверяване</string>
+    <string name="user_verification_required_description_precise">%1$s изисква удостоверяване.</string>
 </resources>
