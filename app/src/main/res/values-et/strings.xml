@@ -158,7 +158,7 @@
     <string name="error_hardware_key_unsupported">Raudvaraline võti pole toetatud.</string>
     <string name="field_name">Välja nimi</string>
     <string name="field_value">Välja väärtus</string>
-    <string name="file_not_found_content">Faili ei õnnestunud leida. Proovi teda avada failihalduriga.</string>
+    <string name="file_not_found_content">Faili ei õnnestunud leida</string>
     <string name="file_browser">Failihaldur</string>
     <string name="generate_password">Loo salasõna</string>
     <string name="hint_conf_pass">Kinnita salasõna</string>
@@ -311,7 +311,7 @@
     <string name="sort_last_access_time">Viimati kasutamise aja alusel</string>
     <string name="version_label">Versioon: %1$s</string>
     <string name="configure">Seadista</string>
-    <string name="device_unlock_prompt_store_credential_message">Sa pead igal juhul oma salasõnalaeka salasõna meeles pidama - seda ka siis, kui kasutad muid seadmes leiduvaid lukustuse eemaldamise võimalusi.</string>
+    <string name="device_unlock_prompt_store_credential_message">HOIATUS: Sa pead igal juhul oma salasõnalaeka salasõna meeles pidama</string>
     <string name="file_name">Failinimi</string>
     <string name="path">Asukoht</string>
     <string name="assign_master_key">Seadista peavõti</string>
@@ -591,7 +591,7 @@
     <string name="keystore_not_accessible">Võtmehoidla pole korrektselt valmendatud.</string>
     <string name="special">Eriteave</string>
     <string name="warning_remove_unlinked_attachment">Linkimata andmete eemaldamine võib vähendada andmebaasi suurust, aga samaga võivad kaduda ka andmed, mida kasutavad KeePassi lisamoodulid.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Seadmekohane lukustuse eemaldamine</string>
+    <string name="device_unlock_prompt_extract_credential_title">Seadmekohane lukustuse avamine</string>
     <string name="device_unlock_prompt_extract_credential_message">Ava andmebaas kasutades nutiseadme-põhist autentimist</string>
     <string name="device_unlock_invalid_key">Seadme lukustuse eemaldamise võtit ei õnnestu lugeda. Palun kustuta ta ja korda lukustuse eemaldamist tuvastamise alusel.</string>
     <string name="device_unlock">Nutiseadme-põhine lukustuse eemaldamine</string>
@@ -695,4 +695,25 @@
     <string name="passkey_backup_eligibility">Pääsuvõtme kõlblikkus varundamiseks</string>
     <string name="passkey_backup_state">Pääsuvõtme varunduse olek</string>
     <string name="error_passkey_result">Pääsuvõtme väljastamine vastuseks ei õnnestu</string>
+    <string name="clipboard_otp_notifications_title">OTP teavitus</string>
+    <string name="clipboard_otp_notifications_summary">Automaattäite ja maagilise klahvistiku lisatud OTP (ühekordse salasõna) kopeerimiseks ava teavitus</string>
+    <string name="autofill_share_magikeyboard_title">Jaga maagilisele klahvistikule</string>
+    <string name="autofill_share_magikeyboard_summary">Jaga automaattäite kirjed maagilisele klahvistikule</string>
+    <string name="keyboard_auto_switch_title">Võta maagiline klahvistik automaatselt kasutusele</string>
+    <string name="keyboard_auto_switch_summary">Peale kirjete lisamist proovi maagiline klahvistik võtta automaatselt kasutusele</string>
+    <string name="user_verification_database_credential">Sisesta oma andmebaasi salasõna neli esimest tähemärki</string>
+    <string name="check">Kontrolli</string>
+    <string name="first_chars">Esimesed tähemärgid</string>
+    <string name="user_verification_required_title">Kasutaja verifitseerimine</string>
+    <string name="user_verification_required_description">Ligipääs nendele andmetele eeldab tuvastamist, et tõesti on tegemist sinuga.</string>
+    <string name="content_description_user_verification_information">Kasutaja verifitseerimise teave</string>
+    <string name="password_selection_description">Vali olemasolev salasõna</string>
+    <string name="password_creation_description">Salvesta salasõna uues kirjes</string>
+    <string name="error_password_result">Ei õnnestu salasõna juurde tagasi pööduda</string>
+    <string name="user_verification_preferred_title">Kasutaja eelistatud verifitseerimine</string>
+    <string name="user_verification_device_credential_title">Kasutaja verifitseerimine allikas</string>
+    <string name="user_verification_device_credential_summary">Kui võimalik, siis pruugi kasutaja verifitseerimiseks nutiseadmepõhist tuvastamist</string>
+    <string name="user_verification_preferred_summary">Kui edastav osapool eeldab eelistatud tuvastamist, siis verifitseeri kasutaja</string>
+    <string name="error_passkey_credential_id">Pääsuvõtit ei leidu edastava osapoole „%1$s“ ja tuvastustunnuse (credentialId) „%2$s“ jaoks</string>
+    <string name="user_verification_required_description_precise">%1$s eeldab tuvastamist, et tõesti on tegemist sinuga.</string>
 </resources>

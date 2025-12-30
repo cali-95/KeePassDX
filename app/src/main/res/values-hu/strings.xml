@@ -73,7 +73,7 @@
     <string name="error_wrong_length">Írjon be egy pozitív egész számot a „Hossz” mezőbe.</string>
     <string name="field_name">Mezőnév</string>
     <string name="field_value">Mezőérték</string>
-    <string name="file_not_found_content">A fájl nem található. Próbálja meg újra megnyitni a fájlkezelőben.</string>
+    <string name="file_not_found_content">A fájl nem található</string>
     <string name="file_browser">Fájlkezelő</string>
     <string name="generate_password">Jelszó előállítása</string>
     <string name="hint_conf_pass">Jelszó megerősítése</string>
@@ -396,7 +396,7 @@
     <string name="entry_history">Előzmények</string>
     <string name="disable">Letiltás</string>
     <string name="enable">Engedélyezés</string>
-    <string name="biometric_auto_open_prompt_summary">Az eszközfeloldás automatikus kérése, ha az adatbázis úgy van beállítva, hogy használja</string>
+    <string name="biometric_auto_open_prompt_summary">Automatikusan kéri az eszköz feloldását, ha az adatbázis be van állítva annak használatára</string>
     <string name="biometric_auto_open_prompt_title">Automatikus megnyitási képernyő</string>
     <string name="biometric">Ujjlenyomat</string>
     <string name="menu_device_unlock_settings">Eszköz feloldása</string>
@@ -508,8 +508,8 @@
     <string name="autofill_select_entry">Válasszon bejegyzést…</string>
     <string name="warning_database_info_changed_options">Adatok egyesítése, majd a külső módosítások felülírása az adatbázis mentésével, vagy újratöltés a legfrissebb változtatásokkal.</string>
     <string name="device_unlock_prompt_store_credential_title">Hivatkozás az eszköz feloldásához</string>
-    <string name="device_unlock_prompt_store_credential_message">Ha az eszköz feloldásának felismerését használja, akkor is meg kell jegyeznie a széf fő hitelesítési adatait.</string>
-    <string name="device_unlock_prompt_extract_credential_message">Adatbázis hitelesítési adatainak kinyerése az eszköz feloldási adatok alapján</string>
+    <string name="device_unlock_prompt_store_credential_message">FIGYELEM: Továbbra is meg kell jegyeznie a fő hitelesítési adatát</string>
+    <string name="device_unlock_prompt_extract_credential_message">Nyissa meg az adatbázist az eszköz hitelesítési adatával</string>
     <string name="device_unlock_invalid_key">Az eszközfeloldási kulcs nem olvasható. Törölje, és ismételje meg a feloldásfelismerési folyamatot.</string>
     <string name="device_unlock_not_recognized">Az eszközfeloldási ujjlenyomat nem ismerhető fel</string>
     <string name="device_unlock_prompt_not_initialized">Az eszközfeloldási képernyő előkészítése sikertelen.</string>
@@ -519,7 +519,7 @@
     <string name="temp_device_unlock_timeout_title">Eszközfeloldás lejárati ideje</string>
     <string name="warning_database_revoked">A fájl elérését visszavonta a fájlkezelő, zárja be az adatbázist és nyissa meg újra a helyéről.</string>
     <string name="warning_exact_alarm">Nem engedélyezte az alkalmazásnak, hogy pontos riasztást használjon. Ezért az időzítőt használó funkciók nem a pontos időt fogják használni.</string>
-    <string name="device_unlock_prompt_extract_credential_title">Eszköz feloldásának felismerése</string>
+    <string name="device_unlock_prompt_extract_credential_title">Eszköz feloldása</string>
     <string name="credential_before_click_device_unlock_button">Írja be a jelszót, majd kattintson erre a gombra.</string>
     <string name="temp_device_unlock_enable_title">Ideiglenes eszközfeloldás</string>
     <string name="permission">Engedély</string>
@@ -731,4 +731,25 @@
     <string name="passkey_backup_eligibility">Hozzáférési kulcs mentésének jogosultsága</string>
     <string name="passkey_backup_state">Hozzáférési kulcs mentésének állapota</string>
     <string name="error_passkey_result">A hozzáférési kulcs visszaadása nem lehetséges</string>
+    <string name="clipboard_otp_notifications_title">OTP értesítés</string>
+    <string name="clipboard_otp_notifications_summary">Nyisson meg egy értesítést, hogy kimásolja az OTP-t az automatikusan kitöltött vagy mágikus billentyűzet segítségével beírt bejegyzésekből</string>
+    <string name="user_verification_device_credential_title">Felhasználó hitelesítési adatainak ellenőrzése</string>
+    <string name="user_verification_device_credential_summary">Eszköz hitelesítési adatainak használata a felhasználó ellenőrzéséhez, ha elérhető</string>
+    <string name="user_verification_preferred_title">Előnyben részesített felhasználói ellenőrzés</string>
+    <string name="user_verification_preferred_summary">Felhasználói ellenőrzést hajt végre, amikor a megbízható fél „preferált” állapotot kérelmez</string>
+    <string name="keyboard_auto_switch_title">Automatikus mágikus billentyűzet váltás</string>
+    <string name="keyboard_auto_switch_summary">Megpróbál automatikusan átváltani a mágikus billentyűzetre, amikor a mezők ki vannak töltve</string>
+    <string name="autofill_share_magikeyboard_title">Megosztás mágikus billentyűzettel</string>
+    <string name="autofill_share_magikeyboard_summary">Az automatikus kitöltésből lekért bejegyzések megosztása a mágikus billentyűzettel</string>
+    <string name="error_passkey_credential_id">Nem található hozzáférési kulcs a megbízó fél (%1$s) és a hitelesítési adatok (%2$s) alapján</string>
+    <string name="password_creation_description">Jelszó mentése új bejegyzésben</string>
+    <string name="password_selection_description">Kiválaszt egy meglévő jelszót</string>
+    <string name="error_password_result">Nem lehetséges visszaadni a jelszót</string>
+    <string name="content_description_user_verification_information">Felhasználói ellenőrzési információk</string>
+    <string name="user_verification_required_title">Felhasználói ellenőrzés</string>
+    <string name="user_verification_required_description">Az adatokhoz való hozzáféréshez meg kell győződni arról, hogy valóban Ön az.</string>
+    <string name="user_verification_database_credential">Írja be az adatbázis jelszavának első négy karakterét</string>
+    <string name="first_chars">Első karakterek</string>
+    <string name="check">Ellenőrzés</string>
+    <string name="user_verification_required_description_precise">A(z) %1$s alkalmazásnak meg kell bizonyosodnia arról, hogy valóban Ön az.</string>
 </resources>
