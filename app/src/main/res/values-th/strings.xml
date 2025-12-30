@@ -669,7 +669,6 @@
     <string name="hide_templates_summary">แม่แบบไม่แสดง</string>
     <string name="credential_provider">ผู้ให้บริการบัญชีเข้าใช้</string>
     <string name="credential_provider_service_subtitle">ผู้ให้บริการพาสคีย์และการป้อนข้อมูลอัตโนมัติ</string>
-    <string name="passkey_service_name">ผู้ให้บริการบัญชีเข้าใช้ KeePassDX</string>
     <string name="passkeys_explanation_summary">ตั้งค่าพาสคีย์เพื่อการเข้าสู่ระบบที่รวดเร็วและปลอดภัยยิ่งขึ้นโดยไม่ต้องกรอกรหัสผ่าน</string>
     <string name="passkeys_preference_title">การตั้งค่าพาสคีย์</string>
     <string name="passkeys_close_database_title">ปิดฐานข้อมูล</string>

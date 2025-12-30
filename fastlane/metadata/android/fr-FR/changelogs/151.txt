@@ -1,0 +1,9 @@
+ * Changement manuel de la langue #1884 #1990
+ * Ajout Verification Utilisateur #2283
+ * Partage d'Entrée depuis le remplissage auto vers le Magiclavier #920 #995 #2024 #1465
+ * Amélioration du changement de clavier #311 #643 #2305
+ * Notification OTP #2301 #1347 #1558 #2316
+ * Référence de champ S: #2270 (@thegards)
+ * API du fournisseur d'identification par mot de passe #2139
+ * Meilleure reconnaissance de formulaires #553
+ * Petites corrections #2289 #2277 #2068 #2288 #2276 #1793 #2282

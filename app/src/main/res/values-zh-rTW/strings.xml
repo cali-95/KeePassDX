@@ -692,13 +692,10 @@
     <string name="passkeys_auto_select_summary">如果只有一個條目且資料庫已打開，並且請求的應用程式相容，則自動選擇</string>
     <string name="passkeys_backup_eligibility_summary">在創建時確定是否允許備份公鑰憑證來源</string>
     <string name="passkeys_backup_state_title">備份狀態</string>
-    <string name="passkey_service_name">KeePassDX 憑證提供者</string>
     <string name="passkey_creation_description">將密碼儲存到新條目中</string>
     <string name="passkey_update_description">在 %1$s 中更新密碼</string>
     <string name="passkey_selection_username">未找到 passkey</string>
     <string name="passkey_selection_description">選擇現有 passkey</string>
-    <string name="passkey_database_username">KeePassDX 數據庫</string>
-    <string name="passkey_locked_database_description">選擇解鎖</string>
     <string name="passkey_username">Passkey 使用者名稱</string>
     <string name="passkey_private_key">Passkey 私鑰</string>
     <string name="passkeys_missing_signature_app_ask_message">%1$s 無法識別，並嘗試使用現有 passkey 進行身份驗證。</string>
