@@ -134,7 +134,7 @@
     <string name="error_registration_read_only">新しい項目の保存は読み取り専用のデータベースでは許可されていません。</string>
     <string name="field_name">フィールド名</string>
     <string name="field_value">フィールドの値</string>
-    <string name="file_not_found_content">ファイルが見つかりませんでした。ファイル ブラウザから再度開いてみてください。</string>
+    <string name="file_not_found_content">ファイルが見つかりませんでした</string>
     <string name="file_browser">ファイル マネージャー</string>
     <string name="generate_password">パスワードを生成</string>
     <string name="hint_conf_pass">パスワードを確認</string>
@@ -480,9 +480,9 @@
     <string name="credential_before_click_device_unlock_button">パスワードを入力し、このボタンをタップします。</string>
     <string name="device_unlock_prompt_not_initialized">デバイスのロック解除プロンプトを初期化できません。</string>
     <string name="device_unlock_invalid_key">デバイスのロック解除キーを読み取ることができません。削除して、ロック解除認識手順を繰り返してください。</string>
-    <string name="device_unlock_prompt_extract_credential_message">デバイスのロック解除データを使用してデータベースの資格情報を抽出する</string>
-    <string name="device_unlock_prompt_extract_credential_title">デバイスのロック解除認識</string>
-    <string name="device_unlock_prompt_store_credential_message">デバイスのロック解除認識を使用する場合でも、保管庫のメイン資格情報を覚えておく必要があります。</string>
+    <string name="device_unlock_prompt_extract_credential_message">デバイスの資格情報でデータベースを開く</string>
+    <string name="device_unlock_prompt_extract_credential_title">デバイスのロック解除</string>
+    <string name="device_unlock_prompt_store_credential_message">注意: 保管庫のメイン資格情報を覚えておく必要があります</string>
     <string name="device_unlock_prompt_store_credential_title">デバイスのロック解除のリンク</string>
     <string name="select_entry">エントリーを選択</string>
     <string name="education_device_unlock_summary">スキャンした生体情報またはデバイス認証情報にパスワードをリンクして、データベースのロックをすばやく解除します。</string>
@@ -728,4 +728,24 @@
     <string name="passkey_backup_eligibility">パスキーのバックアップ資格</string>
     <string name="passkey_backup_state">パスキーのバックアップ状態</string>
     <string name="error_passkey_result">パスキーを復元できません</string>
+    <string name="clipboard_otp_notifications_title">OTPの通知</string>
+    <string name="clipboard_otp_notifications_summary">通知を開きOTPを自動入力・マジックキーボードで入力項目へコピー</string>
+    <string name="user_verification_device_credential_title">ユーザーの認証資格情報</string>
+    <string name="user_verification_device_credential_summary">利用可能ならデバイスの認証情報をユーザー検証に使用する</string>
+    <string name="user_verification_preferred_title">ユーザー検証を優先</string>
+    <string name="user_verification_preferred_summary">プロバイダによる“優先“を要求時にユーザー認証を実行</string>
+    <string name="keyboard_auto_switch_title">マジックキーボードへ自動切替</string>
+    <string name="keyboard_auto_switch_summary">入力完了時にマジックキーボードへの自動切替を試みる</string>
+    <string name="autofill_share_magikeyboard_title">マジックキーボードへ共有</string>
+    <string name="autofill_share_magikeyboard_summary">オートフィルからの取得項目をマジックキーボードへ共有</string>
+    <string name="error_passkey_credential_id">プロバイダ %1$s ・認証情報ID %2$s に対応するパスキーが見つかりませんでした</string>
+    <string name="password_creation_description">パスワードを新規エントリとして保存</string>
+    <string name="password_selection_description">既存のパスワードを選択</string>
+    <string name="error_password_result">パスワードを返せませんでした</string>
+    <string name="content_description_user_verification_information">ユーザー認証情報</string>
+    <string name="user_verification_required_title">ユーザー認証</string>
+    <string name="user_verification_required_description">このデータへのアクセスには認証が必要です</string>
+    <string name="user_verification_database_credential">データベースパスワードの先頭４文字を入力</string>
+    <string name="first_chars">先頭の文字</string>
+    <string name="check">チェック</string>
 </resources>
