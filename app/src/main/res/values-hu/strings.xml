@@ -751,5 +751,5 @@
     <string name="user_verification_database_credential">Írja be az adatbázis jelszavának első négy karakterét</string>
     <string name="first_chars">Első karakterek</string>
     <string name="check">Ellenőrzés</string>
-    <string name="user_verification_required_description_precise">A(z) %1$s alkalmazásnak meg kell bizonyosodnia arról, hogy valóban Ön az.</string>
+    <string name="user_verification_required_description_precise">A(z) %1$s ellenőrzést kér annak megerősítésére, hogy valóban Ön az.</string>
 </resources>
