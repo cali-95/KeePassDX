@@ -753,8 +753,9 @@
     <string name="error_password_result">Невозможно вернуть пароль</string>
     <string name="content_description_user_verification_information">Информация о проверке пользователя</string>
     <string name="user_verification_required_title">Проверка пользователя</string>
-    <string name="user_verification_required_description">Для доступа к этим данным требуется проверка</string>
+    <string name="user_verification_required_description">Для доступа к этим данным требуется подтверждение вашей личности.</string>
     <string name="user_verification_database_credential">Введите первые четыре символа пароля базы</string>
     <string name="first_chars">Первые символы</string>
     <string name="check">Проверка</string>
+    <string name="user_verification_required_description_precise">%1$s требует подтверждения вашей личности.</string>
 </resources>
