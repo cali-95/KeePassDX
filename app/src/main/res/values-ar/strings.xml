@@ -740,8 +740,9 @@
     <string name="error_password_result">غير قادر على إعادة كلمة السر</string>
     <string name="content_description_user_verification_information">معلومات التحقق من المستخدم</string>
     <string name="user_verification_required_title">تحقق المستخدم</string>
-    <string name="user_verification_required_description">الوصول إلى هذه البيانات يتطلب التحقق</string>
+    <string name="user_verification_required_description">الوصول إلى هذه البيانات يتطلب التحقق من أنك أنت بالفعل.</string>
     <string name="user_verification_database_credential">أدخل الأحرف الأربعة الأولى من كلمة سر قاعدة بياناتك</string>
     <string name="first_chars">الأحرف الأولى</string>
     <string name="check">تحقق</string>
+    <string name="user_verification_required_description_precise">%1$s يتطلب التحقق من أنك أنت بالفعل.</string>
 </resources>
