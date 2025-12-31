@@ -755,8 +755,9 @@
     <string name="error_password_result">Kan het wachtwoord niet retourneren</string>
     <string name="content_description_user_verification_information">Gebruikersverificatieinfo</string>
     <string name="user_verification_required_title">Gebruikersverificatie</string>
-    <string name="user_verification_required_description">Toegang tot deze gegevens vereist verificatie</string>
+    <string name="user_verification_required_description">Toegang tot deze gegevens vereist verificatie dat jij het inderdaad bent.</string>
     <string name="user_verification_database_credential">Voer de eerste vier tekens van het databasewachtwoord in</string>
     <string name="first_chars">Eerste tekens</string>
     <string name="check">Controleren</string>
+    <string name="user_verification_required_description_precise">%1$s vereist verificatie dat jij het inderdaad bent.</string>
 </resources>
