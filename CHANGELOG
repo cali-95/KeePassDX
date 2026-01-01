@@ -1,3 +1,6 @@
+KeePassDX(4.3.1)
+ * Fix reloading changed database #2334
+
 KeePassDX(4.3.0)
  * Manual change of app language #1884 #1990
  * Add Passkey User Verification #2283

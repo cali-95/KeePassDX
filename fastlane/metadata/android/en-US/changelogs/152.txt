@@ -1,0 +1,1 @@
+ * Fix reloading changed database #2334

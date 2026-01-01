@@ -145,16 +145,20 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         mDatabaseTaskProvider.startDatabaseMerge(save, fromDatabaseUri, mainCredential)
     }
 
-    fun reloadDatabase(fixDuplicateUuid: Boolean) {
-        mDatabaseTaskProvider.askToStartDatabaseReload(
-            conditionToAsk = database?.dataModifiedSinceLastLoading != false
-        ) {
+    fun reloadDatabase(fixDuplicateUuid: Boolean, forceReload: Boolean = false) {
+        if (!forceReload && database?.dataModifiedSinceLastLoading == true) {
+            mActionState.value = ActionState.ShowDatabaseInfoReloadedDialog(fixDuplicateUuid)
+        } else {
             mDatabaseTaskProvider.startDatabaseReload(fixDuplicateUuid)
         }
     }
 
     fun onDatabaseChangeValidated() {
         mDatabaseTaskProvider.onDatabaseChangeValidated()
+    }
+
+    fun cancelAction() {
+        mActionState.value = ActionState.Wait
     }
 
     /*
@@ -479,6 +483,9 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
             val previousDatabaseInfo: SnapFileDatabaseInfo,
             val newDatabaseInfo: SnapFileDatabaseInfo,
             val readOnlyDatabase: Boolean
+        ): ActionState()
+        data class ShowDatabaseInfoReloadedDialog(
+            var fixDuplicateUuid: Boolean
         ): ActionState()
         data class OnDatabaseActionStarted(
             var database: ContextualDatabase,

@@ -164,7 +164,6 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
                                 uiState.result
                             )
                         }
-
                         else -> {}
                     }
                 }
@@ -273,7 +272,7 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
     }
 
     private fun reloadDatabase() {
-        mDatabaseViewModel.reloadDatabase(false)
+        mDatabaseViewModel.reloadDatabase(fixDuplicateUuid = false)
     }
 
     override fun onDatabaseRetrieved(database: ContextualDatabase) {
