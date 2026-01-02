@@ -482,7 +482,7 @@
     <string name="device_unlock_prompt_not_initialized">Невозможно инициализировать запрос разблокировки устройства.</string>
     <string name="device_unlock_not_recognized">Невозможно распознать разблокировку устройства</string>
     <string name="device_unlock_invalid_key">Невозможно прочитать ключ разблокировки устройства. Удалите его и повторите процедуру распознавания разблокировки.</string>
-    <string name="device_unlock_prompt_extract_credential_message">Открывать базу с использованием учётных данных устройства</string>
+    <string name="device_unlock_prompt_extract_credential_message">Открыть базу с использованием учётных данных устройства</string>
     <string name="device_unlock_prompt_extract_credential_title">Разблокировка устройства</string>
     <string name="device_unlock_prompt_store_credential_message">ВНИМАНИЕ: вам всё равно необходимо помнить основные учётные данные</string>
     <string name="device_unlock_delete_all_key_warning">Удалить все ключи шифрования, связанные с распознаванием разблокировки устройства\?</string>
