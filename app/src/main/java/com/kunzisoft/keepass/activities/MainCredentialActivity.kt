@@ -123,8 +123,9 @@ class MainCredentialActivity : DatabaseModeActivity() {
     private var mRememberHardwareKey: Boolean = false
 
     private var mReadOnly: Boolean = false
-    private var mUserVerificationAllowed: Boolean = false
     private var mForceReadOnly: Boolean = false
+    private var mUserVerificationAllowed: Boolean = false
+    private var mForceUserVerificationAllowed: Boolean = false
 
     override fun manageDatabaseInfo(): Boolean  = false
 
@@ -152,11 +153,18 @@ class MainCredentialActivity : DatabaseModeActivity() {
         } else {
             false
         }
-        mUserVerificationAllowed = if (savedInstanceState != null && savedInstanceState.containsKey(KEY_USER_VERIFICATION)) {
-            savedInstanceState.getBoolean(KEY_USER_VERIFICATION)
+
+        mForceUserVerificationAllowed = mTypeMode == TypeMode.PASSWORD || mTypeMode == TypeMode.PASSKEY
+        mUserVerificationAllowed = if (mForceUserVerificationAllowed) {
+            true
         } else {
-            PreferencesUtil.isUserVerificationModeEnabledByDefault(this)
+            if (savedInstanceState != null && savedInstanceState.containsKey(KEY_USER_VERIFICATION)) {
+                savedInstanceState.getBoolean(KEY_USER_VERIFICATION)
+            } else {
+                PreferencesUtil.isUserVerificationModeEnabledByDefault(this)
+            }
         }
+
         mRememberKeyFile = PreferencesUtil.rememberKeyFileLocations(this)
         mRememberHardwareKey = PreferencesUtil.rememberHardwareKey(this)
 
@@ -625,9 +633,13 @@ class MainCredentialActivity : DatabaseModeActivity() {
             changeDatabaseReadModeIcon(menu.findItem(R.id.menu_open_file_read_mode_key))
         }
 
-        changeUserVerificationModeIcon(
-            menu.findItem(R.id.menu_open_file_user_verification_mode_key)
-        )
+        if (mForceUserVerificationAllowed) {
+            menu.removeItem(R.id.menu_open_file_user_verification_mode_key)
+        } else {
+            changeUserVerificationModeIcon(
+                menu.findItem(R.id.menu_open_file_user_verification_mode_key)
+            )
+        }
 
         if (mSpecialMode == SpecialMode.DEFAULT) {
             MenuUtil.defaultMenuInflater(this, inflater, menu)
