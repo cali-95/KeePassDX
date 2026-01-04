@@ -155,6 +155,9 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
                 it.addRule(START_OF, showButtonId)
                 it.addRule(BELOW, labelViewId)
             }
+            setTextIsSelectable(false)
+            isFocusable = false
+            isFocusableInTouchMode = false
         }
     }
 
