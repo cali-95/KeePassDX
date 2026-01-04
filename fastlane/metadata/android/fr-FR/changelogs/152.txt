@@ -1,1 +1,3 @@
+ * Selection du mode de Vérification Utilisateur lors de l'ouverture de la base de données #2321
  * Correction du rechargement de la base de données #2334
+ * Correction des champs protégés selectionnables #2345

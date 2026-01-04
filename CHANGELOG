@@ -1,5 +1,7 @@
 KeePassDX(4.3.1)
+ * Select User Verification mode at database opening #2321
  * Fix reloading changed database #2334
+ * Fix selectable protected field #2345
 
 KeePassDX(4.3.0)
  * Manual change of app language #1884 #1990
