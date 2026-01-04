@@ -690,13 +690,19 @@ object PreferencesUtil {
             context.resources.getBoolean(R.bool.passkeys_close_database_default))
     }
 
+    fun isUserVerificationModeEnabledByDefault(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.user_verification_mode_key),
+            context.resources.getBoolean(R.bool.user_verification_mode_default))
+    }
+
     fun isUserVerificationDeviceCredential(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.user_verification_device_credential_key),
             context.resources.getBoolean(R.bool.user_verification_device_credential_default))
     }
 
-    fun isUserVerificationPreferred(context: Context): Boolean {
+    fun isUserVerificationForcedWhenPreferred(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.user_verification_preferred_key),
             context.resources.getBoolean(R.bool.user_verification_preferred_default))

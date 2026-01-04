@@ -90,6 +90,7 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
     private val mDatabase: ContextualDatabase?
         get() = mDatabaseViewModel.database
     private var mDatabaseReadOnly: Boolean = false
+    private var mDatabaseUserVerificationAllowed: Boolean = false
     private var mMergeDataAllowed: Boolean = false
     private var mDatabaseAutoSaveEnabled: Boolean = true
 
@@ -277,6 +278,7 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
 
     override fun onDatabaseRetrieved(database: ContextualDatabase) {
         mDatabaseReadOnly = database.isReadOnly
+        mDatabaseUserVerificationAllowed = database.allowUserVerification
         mMergeDataAllowed = database.isMergeDataAllowed()
 
         if (database.loaded) {
@@ -486,14 +488,21 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
         findPreference<Preference>(changeCredentialKey)?.apply {
             isEnabled = if (!mDatabaseReadOnly) {
                 onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                    checkUserVerification(
-                        mUserVerificationViewModel,
-                        UserVerificationData(
-                            actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
-                            database = database,
-                            preferenceKey = changeCredentialKey
+                    if (mDatabaseUserVerificationAllowed) {
+                        checkUserVerification(
+                            mUserVerificationViewModel,
+                            UserVerificationData(
+                                actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
+                                database = database,
+                                preferenceKey = changeCredentialKey
+                            )
                         )
-                    )
+                    } else {
+                        // Show credential dialog directly without user verification
+                        SetMainCredentialDialogFragment
+                            .getInstance(database.allowNoMasterKey)
+                            .show(parentFragmentManager, "passwordDialog")
+                    }
                     false
                 }
                 true
@@ -789,14 +798,21 @@ class NestedDatabaseSettingsFragment : NestedSettingsFragment(), DatabaseRetriev
 
         if (dialogFragment != null && !mDatabaseReadOnly) {
             mSettingsViewModel.dialogFragment = dialogFragment
-            checkUserVerification(
-                mUserVerificationViewModel,
-                UserVerificationData(
-                    actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
-                    database = mDatabase,
-                    preferenceKey =  preference.key
+            if (mDatabaseUserVerificationAllowed) {
+                checkUserVerification(
+                    mUserVerificationViewModel,
+                    UserVerificationData(
+                        actionType = UserVerificationActionType.EDIT_DATABASE_SETTING,
+                        database = mDatabase,
+                        preferenceKey = preference.key
+                    )
                 )
-            )
+            } else {
+                // Show dialog directly without user verification
+                @Suppress("DEPRECATION")
+                dialogFragment.setTargetFragment(this@NestedDatabaseSettingsFragment, 0)
+                dialogFragment.show(parentFragmentManager, TAG_PREF_FRAGMENT)
+            }
         }
         // Could not be handled here. Try with the super method.
         else if (otherDialogFragment) {

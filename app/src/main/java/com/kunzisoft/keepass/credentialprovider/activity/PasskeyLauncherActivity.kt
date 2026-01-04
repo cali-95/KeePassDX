@@ -51,7 +51,7 @@ import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.getUserVerifiedWithAuth
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.retrieveUserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.data.AndroidPrivilegedApp
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PassHelper.addAppOrigin
@@ -62,7 +62,7 @@ import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.model.AppOrigin
 import com.kunzisoft.keepass.model.SearchInfo
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.ACTION_DATABASE_UPDATE_ENTRY_TASK
-import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationPreferred
+import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationForcedWhenPreferred
 import com.kunzisoft.keepass.tasks.ActionRunnable
 import com.kunzisoft.keepass.utils.AppUtil.randomRequestCode
 import com.kunzisoft.keepass.view.toastError
@@ -209,18 +209,35 @@ class PasskeyLauncherActivity : DatabaseLockActivity() {
     override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
         super.onUnknownDatabaseRetrieved(database)
         // To manage https://github.com/Kunzisoft/KeePassDX/issues/2283
-        val userVerificationNeeded = intent.isUserVerificationNeeded(
-            userVerificationPreferred = isUserVerificationPreferred(this)
-        ) && intent.getUserVerifiedWithAuth().not()
+        val userVerificationForcedWhenPreferred = isUserVerificationForcedWhenPreferred(this)
+        val userVerificationRequirement = intent.retrieveUserVerificationRequirement()
+        val userVerificationNeeded = (userVerificationRequirement == UserVerificationRequirement.REQUIRED
+                || (userVerificationForcedWhenPreferred
+                && userVerificationRequirement == UserVerificationRequirement.PREFERRED)
+                ) && intent.getUserVerifiedWithAuth().not()
         if (userVerificationNeeded) {
-            checkUserVerification(
-                userVerificationViewModel = userVerificationViewModel,
-                dataToVerify = UserVerificationData(
+            // If user verification is needed, it means that the database is open
+            // otherwise, it would be verified with auth
+            if (database != null) {
+                val dataToVerify = UserVerificationData(
                     actionType = UserVerificationActionType.LAUNCH_PASSKEY_CEREMONY,
                     database = database,
                     originName = intent.retrieveSearchInfo()?.toString()
                 )
-            )
+                if (database.allowUserVerification) {
+                    checkUserVerification(
+                        userVerificationViewModel = userVerificationViewModel,
+                        dataToVerify = dataToVerify
+                    )
+                } else {
+                    userVerificationViewModel.onUserVerificationFailed(
+                        dataToVerify = dataToVerify,
+                        error = SecurityException(
+                            "User Verification is not allowed for this opened database"
+                        )
+                    )
+                }
+            }
         } else {
             passkeyLauncherViewModel.launchActionIfNeeded(
                 intent = intent,

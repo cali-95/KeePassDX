@@ -67,6 +67,7 @@ abstract class DatabaseLockActivity : DatabaseModeActivity(),
     private var mExitLock: Boolean = false
 
     protected var mDatabaseReadOnly: Boolean = true
+    protected var mDatabaseAllowUserVerification: Boolean = true
     protected var mMergeDataAllowed: Boolean = false
     private var mAutoSaveEnable: Boolean = true
 
@@ -122,6 +123,7 @@ abstract class DatabaseLockActivity : DatabaseModeActivity(),
         }
 
         mDatabaseReadOnly = database.isReadOnly
+        mDatabaseAllowUserVerification = database.allowUserVerification
         mMergeDataAllowed = database.isMergeDataAllowed()
 
         checkRegister()

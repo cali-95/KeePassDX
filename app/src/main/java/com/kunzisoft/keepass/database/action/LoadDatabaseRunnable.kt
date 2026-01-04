@@ -39,6 +39,7 @@ class LoadDatabaseRunnable(
     private val mMainCredential: MainCredential,
     private val mChallengeResponseRetriever: (hardwareKey: HardwareKey, seed: ByteArray?) -> ByteArray,
     private val mReadonly: Boolean,
+    private val mAllowUserVerification: Boolean,
     private val mFixDuplicateUUID: Boolean,
     private val progressTaskUpdater: ProgressTaskUpdater?
 ) : ActionRunnable() {
@@ -63,6 +64,7 @@ class LoadDatabaseRunnable(
                 mMainCredential.toMasterCredential(contentResolver),
                 mChallengeResponseRetriever,
                 mReadonly,
+                mAllowUserVerification,
                 binaryDir,
                 { memoryWanted ->
                     BinaryData.canMemoryBeAllocatedInRAM(context, memoryWanted)

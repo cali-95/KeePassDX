@@ -105,6 +105,7 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
         databaseUri: Uri,
         mainCredential: MainCredential,
         readOnly: Boolean,
+        allowUserVerification: Boolean,
         cipherEncryptDatabase: CipherEncryptDatabase?,
         fixDuplicateUuid: Boolean
     ) {
@@ -112,6 +113,7 @@ class DatabaseViewModel(application: Application): AndroidViewModel(application)
             databaseUri,
             mainCredential,
             readOnly,
+            allowUserVerification,
             cipherEncryptDatabase,
             fixDuplicateUuid
         )

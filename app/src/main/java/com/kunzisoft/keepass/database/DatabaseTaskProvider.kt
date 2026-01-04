@@ -268,6 +268,7 @@ class DatabaseTaskProvider(
         databaseUri: Uri,
         mainCredential: MainCredential,
         readOnly: Boolean,
+        allowUserVerification: Boolean,
         cipherEncryptDatabase: CipherEncryptDatabase?,
         fixDuplicateUuid: Boolean
     ) {
@@ -275,6 +276,7 @@ class DatabaseTaskProvider(
             putParcelable(DatabaseTaskNotificationService.DATABASE_URI_KEY, databaseUri)
             putParcelable(DatabaseTaskNotificationService.MAIN_CREDENTIAL_KEY, mainCredential)
             putBoolean(DatabaseTaskNotificationService.READ_ONLY_KEY, readOnly)
+            putBoolean(DatabaseTaskNotificationService.USER_VERIFICATION_KEY, allowUserVerification)
             putParcelable(
                 DatabaseTaskNotificationService.CIPHER_DATABASE_KEY,
                 cipherEncryptDatabase

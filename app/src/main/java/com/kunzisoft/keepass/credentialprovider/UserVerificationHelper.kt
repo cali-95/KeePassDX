@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentActivity
 import com.kunzisoft.keepass.R
 import com.kunzisoft.keepass.activities.dialogs.CheckDatabaseCredentialDialogFragment
 import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
-import com.kunzisoft.keepass.model.EntryInfo
 import com.kunzisoft.keepass.settings.PreferencesUtil.isUserVerificationDeviceCredential
 import com.kunzisoft.keepass.utils.getEnumExtra
 import com.kunzisoft.keepass.utils.putEnumExtra
@@ -76,23 +75,9 @@ class UserVerificationHelper {
         /**
          * Get the User Verification from the intent
          */
-        fun Intent.isUserVerificationNeeded(userVerificationPreferred: Boolean): Boolean {
-            val userVerification: UserVerificationRequirement =
-                getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
+        fun Intent.retrieveUserVerificationRequirement(): UserVerificationRequirement {
+            return getEnumExtra<UserVerificationRequirement>(EXTRA_USER_VERIFICATION)
                 ?: UserVerificationRequirement.PREFERRED
-            return (userVerification == UserVerificationRequirement.REQUIRED
-                    || (userVerificationPreferred
-                        && userVerification == UserVerificationRequirement.PREFERRED)
-                    )
-        }
-
-        /**
-         * Check if the User needs to be verified for this entry
-         */
-        fun EntryInfo.isUserVerificationNeeded(): Boolean {
-            // Apply to any entry with protected content
-            // Not only this.passkey != null
-            return true
         }
 
         fun Fragment.checkUserVerification(

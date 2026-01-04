@@ -62,11 +62,11 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.buildSpecialModeResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveRegisterInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
-import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
+import com.kunzisoft.keepass.credentialprovider.passkey.util.PasskeyHelper.buildPasskeyResponseAndSetResult
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PasswordHelper.buildPasswordResponseAndSetResult
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -406,20 +406,28 @@ class EntryEditActivity : DatabaseLockActivity(),
                         is EntryEditViewModel.EntryEditState.OnChangeFieldProtectionRequested -> {
                             mDatabase?.let { database ->
                                 val fieldProtection = entryEditState.fieldProtection
-                                if (fieldProtection.isCurrentlyProtected) {
-                                    checkUserVerification(
-                                        userVerificationViewModel = mUserVerificationViewModel,
-                                        dataToVerify = UserVerificationData(
-                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
-                                            database = database,
-                                            fieldProtection = fieldProtection
+                                if (mDatabaseAllowUserVerification) {
+                                    if (fieldProtection.isCurrentlyProtected) {
+                                        checkUserVerification(
+                                            userVerificationViewModel = mUserVerificationViewModel,
+                                            dataToVerify = UserVerificationData(
+                                                actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                                database = database,
+                                                fieldProtection = fieldProtection
+                                            )
                                         )
-                                    )
-                                    mEntryEditViewModel.actionPerformed()
+                                        mEntryEditViewModel.actionPerformed()
+                                    } else {
+                                        mEntryEditViewModel.updateFieldProtection(
+                                            fieldProtection = fieldProtection,
+                                            value = true
+                                        )
+                                    }
                                 } else {
+                                    // Toggle field protection directly without user verification
                                     mEntryEditViewModel.updateFieldProtection(
                                         fieldProtection = fieldProtection,
-                                        value = true
+                                        value = !fieldProtection.isCurrentlyProtected
                                     )
                                 }
                             }
