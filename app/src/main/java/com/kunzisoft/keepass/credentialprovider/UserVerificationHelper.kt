@@ -95,16 +95,7 @@ class UserVerificationHelper {
             dataToVerify: UserVerificationData
         ) {
             if (isAuthenticatorsAllowed() && isUserVerificationDeviceCredential(this)) {
-                try {
-                    showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
-                } catch (e: Exception) {
-                    Log.e(
-                        UserVerificationHelper::class.simpleName,
-                        "Unable to perform User Verification with device credential, " +
-                                "retry with database credential", e
-                    )
-                    showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
-                }
+                showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
             } else if (dataToVerify.database != null) {
                 showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
             }
@@ -133,7 +124,7 @@ class UserVerificationHelper {
                                 Log.i("UserVerification", "$errString")
                             }
                             else -> {
-                                toastError(SecurityException("Authentication error: $errString"))
+                                toastError(SecurityException("$errString"))
                             }
                         }
                         userVerificationViewModel.onUserVerificationFailed(dataToVerify)
