@@ -3,3 +3,4 @@
  * Fix selectable protected field #2345
  * Fix User Verification error with device credential #2352
  * Fix password credential provider workflow #2353
+ * Fix infinite loading #2277

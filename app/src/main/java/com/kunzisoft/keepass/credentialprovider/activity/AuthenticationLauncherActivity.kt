@@ -2,6 +2,7 @@ package com.kunzisoft.keepass.credentialprovider.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -31,7 +32,8 @@ abstract class AuthenticationLauncherActivity: DatabaseLockActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        // To prevent auto finish the activity
+        mTimeoutEnable = false
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.RESUMED) {
                 userVerificationViewModel.userVerificationState.collect { uiState ->
@@ -116,4 +118,6 @@ abstract class AuthenticationLauncherActivity: DatabaseLockActivity() {
     )
 
     abstract fun cancelResult()
+
+    override fun viewToInvalidateTimeout(): View? = null
 }

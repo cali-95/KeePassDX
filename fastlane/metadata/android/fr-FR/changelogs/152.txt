@@ -3,3 +3,4 @@
  * Correction des champs protégés selectionnables #2345
  * Correction des erreurs de Verifications Utilisateurs avec l'identificant de l'appareil #2352
  * Correction du flux de travail du fournisseur d'informations par mot de passe #2353
+ * Correction du chargement infini #2277
