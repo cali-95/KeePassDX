@@ -6,6 +6,7 @@ KeePassDX(4.3.1)
  * Fix password credential provider workflow #2353
  * Fix infinite loading #2277
  * Fix webview recognition #2348 #2343 #2349 #1716
+ * Fix Magikeyboard exception #2356
 
 KeePassDX(4.3.0)
  * Manual change of app language #1884 #1990
