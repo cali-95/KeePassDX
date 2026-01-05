@@ -116,6 +116,8 @@ class EntryActivity : DatabaseLockActivity() {
     private var mExternalFileHelper: ExternalFileHelper? = null
     private var mAttachmentSelected: Attachment? = null
 
+    private var mSwitchToMagikeyboard: Boolean = false
+
     private var mEntryActivityResultLauncher = EntryEditActivity.registerForEntryResult(this) {
         // Reload the current id from database
         mEntryViewModel.loadDatabase(mDatabase)
@@ -192,6 +194,9 @@ class EntryActivity : DatabaseLockActivity() {
             adapter = tagsAdapter
         }
 
+        // Init preferences
+        mSwitchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(this)
+
         // Init content tab
         entryContentTab?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -257,7 +262,12 @@ class EntryActivity : DatabaseLockActivity() {
                 if (savedInstanceState == null) {
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
-                        MagikeyboardService.addEntry(this, entryInfo)
+                        MagikeyboardService.addEntry(
+                            context = this,
+                            entry = entryInfo,
+                            toast = true,
+                            autoSwitchKeyboard = mSwitchToMagikeyboard
+                        )
                     }
                 }
                 // Assign title icon

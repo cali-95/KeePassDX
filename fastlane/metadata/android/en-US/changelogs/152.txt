@@ -4,4 +4,4 @@
  * Fix password credential provider workflow #2353
  * Fix infinite loading #2277
  * Fix webview recognition #2348 #2343 #2349 #1716
- * Fix Magikeyboard exception #2356
+ * Fix Magikeyboard #2356 #2357

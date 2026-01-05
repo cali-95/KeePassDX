@@ -447,7 +447,8 @@ class MagikeyboardService : InputMethodService(),
                     addEntries(
                         context = this,
                         entryList = items,
-                        toast = true
+                        toast = true,
+                        autoSwitchKeyboard = false
                     )
                     assignKeyboardView()
                 }
@@ -567,10 +568,9 @@ class MagikeyboardService : InputMethodService(),
         fun addEntry(
             context: Context,
             entry: EntryInfo,
-            toast: Boolean = false,
-            autoSwitchKeyboard: Boolean = false
+            toast: Boolean,
+            autoSwitchKeyboard: Boolean
         ) {
-            // Launch notification if allowed
             addEntries(
                 context = context,
                 entryList = listOf(entry),
@@ -582,8 +582,8 @@ class MagikeyboardService : InputMethodService(),
         fun addEntries(
             context: Context,
             entryList: List<EntryInfo>,
-            toast: Boolean = false,
-            autoSwitchKeyboard: Boolean = false
+            toast: Boolean,
+            autoSwitchKeyboard: Boolean
         ) {
             // Open OTP notification
             ClipboardEntryNotificationService.launchOtpNotificationIfAllowed(
