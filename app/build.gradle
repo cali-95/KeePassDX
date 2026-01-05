@@ -33,6 +33,9 @@ android {
         release {
             minifyEnabled = false
         }
+        debug {
+            applicationIdSuffix = ".dev"
+        }
     }
 
     buildFeatures {
