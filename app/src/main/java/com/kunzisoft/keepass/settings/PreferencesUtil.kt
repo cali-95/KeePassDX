@@ -846,6 +846,7 @@ object PreferencesUtil {
             when (name) {
                 context.getString(R.string.allow_no_password_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.delete_entered_password_key) -> editor.putBoolean(name, value.toBoolean())
+                context.getString(R.string.user_verification_mode_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.user_verification_device_credential_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.enable_auto_save_database_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.enable_keep_screen_on_key) -> editor.putBoolean(name, value.toBoolean())
