@@ -776,14 +776,14 @@ class GroupActivity : DatabaseLockActivity(),
                                 TypeMode.MAGIKEYBOARD -> entry?.let {
                                     entrySelectedForSelection(database, it)
                                 }
+                                TypeMode.AUTOFILL -> entry?.let {
+                                    entrySelectedForSelection(database, it)
+                                }
                                 TypeMode.PASSKEY -> entry?.let {
                                     entrySelectedForPasskeySelection(database, it)
                                 }
                                 TypeMode.PASSWORD -> entry?.let {
                                     entrySelectedForPasswordSelection(database, it)
-                                }
-                                TypeMode.AUTOFILL -> entry?.let {
-                                    entrySelectedForSelection(database, it)
                                 }
                             }
                         },
@@ -960,12 +960,6 @@ class GroupActivity : DatabaseLockActivity(),
                                     entrySelectedForSelection(database, entryVersioned)
                                 }
                             }
-                            TypeMode.PASSWORD -> {
-                                entrySelectedForPasswordSelection(database, entryVersioned)
-                            }
-                            TypeMode.PASSKEY -> {
-                                entrySelectedForPasskeySelection(database, entryVersioned)
-                            }
                             TypeMode.AUTOFILL -> {
                                 if (entryVersioned.allowedToSaveSearchInfo(database, searchInfo)
                                     && PreferencesUtil.isAutofillSaveSearchInfoEnable(this@GroupActivity)
@@ -978,6 +972,12 @@ class GroupActivity : DatabaseLockActivity(),
                                 } else {
                                     entrySelectedForSelection(database, entryVersioned)
                                 }
+                            }
+                            TypeMode.PASSWORD -> {
+                                entrySelectedForPasswordSelection(database, entryVersioned)
+                            }
+                            TypeMode.PASSKEY -> {
+                                entrySelectedForPasskeySelection(database, entryVersioned)
                             }
                         }
                         loadGroup()
@@ -1745,6 +1745,11 @@ class GroupActivity : DatabaseLockActivity(),
                                     activity.buildSpecialModeResponseAndSetResult(items)
                                     onValidateSpecialMode()
                                 }
+                                TypeMode.AUTOFILL -> {
+                                    // Response is build
+                                    activity.buildSpecialModeResponseAndSetResult(items)
+                                    onValidateSpecialMode()
+                                }
                                 TypeMode.PASSWORD -> {
                                     EntrySelectionHelper.performSelection(
                                         items = items,
@@ -1789,11 +1794,6 @@ class GroupActivity : DatabaseLockActivity(),
                                             onLaunchActivitySpecialMode()
                                         }
                                     )
-                                }
-                                TypeMode.AUTOFILL -> {
-                                    // Response is build
-                                    activity.buildSpecialModeResponseAndSetResult(items)
-                                    onValidateSpecialMode()
                                 }
                             }
                         },

@@ -9,7 +9,6 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.kunzisoft.keepass.activities.legacy.DatabaseLockActivity
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.retrieveSearchInfo
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
-import com.kunzisoft.keepass.credentialprovider.TypeMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
@@ -73,7 +72,7 @@ abstract class AuthenticationLauncherActivity: DatabaseLockActivity() {
                 || (userVerificationForcedWhenPreferred
                 && userVerificationRequirement == UserVerificationRequirement.PREFERRED)
                 ) && intent.getUserVerifiedWithAuth().not()
-        if (userVerificationNeeded) {
+        if (mTypeMode.useUserVerification && userVerificationNeeded) {
             // If user verification is needed, it means that the database is open
             // otherwise, it would be verified with auth
             if (database != null) {
@@ -104,8 +103,6 @@ abstract class AuthenticationLauncherActivity: DatabaseLockActivity() {
             )
         }
     }
-
-    abstract fun retrieveTypeMode(): TypeMode
 
     open fun setUserVerified() {}
 

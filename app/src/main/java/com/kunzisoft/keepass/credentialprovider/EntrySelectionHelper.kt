@@ -349,16 +349,6 @@ object EntrySelectionHelper {
                             typeMode,
                             searchInfo
                         )
-                        TypeMode.PASSWORD,
-                        TypeMode.PASSKEY ->
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                                selectionAction.invoke(
-                                    isIntentSenderMode(specialMode, typeMode),
-                                    typeMode,
-                                    searchInfo
-                                )
-                            } else
-                                defaultAction.invoke()
                         TypeMode.AUTOFILL -> {
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 selectionAction.invoke(
@@ -369,6 +359,16 @@ object EntrySelectionHelper {
                             } else
                                 defaultAction.invoke()
                         }
+                        TypeMode.PASSWORD,
+                        TypeMode.PASSKEY ->
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                                selectionAction.invoke(
+                                    isIntentSenderMode(specialMode, typeMode),
+                                    typeMode,
+                                    searchInfo
+                                )
+                            } else
+                                defaultAction.invoke()
                     }
                 } else {
                     if (searchInfo != null)

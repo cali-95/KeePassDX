@@ -68,8 +68,6 @@ class PasswordLauncherActivity : AuthenticationLauncherActivity() {
             passwordLauncherViewModel.manageRegistrationResult(it)
         }
 
-    override fun retrieveTypeMode(): TypeMode = TypeMode.PASSWORD
-
     override fun applyCustomStyle(): Boolean = false
 
     override fun finishActivityIfReloadRequested(): Boolean = false

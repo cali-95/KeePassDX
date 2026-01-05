@@ -75,8 +75,6 @@ class PasskeyLauncherActivity : AuthenticationLauncherActivity() {
             passkeyLauncherViewModel.manageRegistrationResult(it)
         }
 
-    override fun retrieveTypeMode(): TypeMode = TypeMode.PASSKEY
-
     override fun applyCustomStyle(): Boolean = false
 
     override fun finishActivityIfReloadRequested(): Boolean = false

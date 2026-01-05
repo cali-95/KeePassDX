@@ -512,12 +512,12 @@ class EntryEditActivity : DatabaseLockActivity(),
                                         TypeMode.DEFAULT -> {}
                                         TypeMode.MAGIKEYBOARD ->
                                             entryValidatedForKeyboardSelection(database, entry)
+                                        TypeMode.AUTOFILL ->
+                                            entryValidatedForAutofill(database, entry)
                                         TypeMode.PASSWORD ->
                                             entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
-                                        TypeMode.AUTOFILL ->
-                                            entryValidatedForAutofill(database, entry)
                                     }
                                 },
                                 registrationAction = { _, typeMode, _ ->
@@ -525,12 +525,12 @@ class EntryEditActivity : DatabaseLockActivity(),
                                         TypeMode.DEFAULT ->
                                             entryValidatedForSave(entry)
                                         TypeMode.MAGIKEYBOARD -> {}
+                                        TypeMode.AUTOFILL ->
+                                            entryValidatedForAutofill(database, entry)
                                         TypeMode.PASSWORD ->
                                             entryValidatedForPassword(database, entry)
                                         TypeMode.PASSKEY ->
                                             entryValidatedForPasskey(database, entry)
-                                        TypeMode.AUTOFILL ->
-                                            entryValidatedForAutofill(database, entry)
                                     }
                                 }
                             )

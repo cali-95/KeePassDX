@@ -1,9 +1,9 @@
 package com.kunzisoft.keepass.credentialprovider
 
-enum class TypeMode(val forceUserVerification: Boolean = false) {
+enum class TypeMode(val useUserVerification: Boolean = false) {
     DEFAULT,
     MAGIKEYBOARD,
-    PASSWORD(forceUserVerification = true),
-    PASSKEY(forceUserVerification = true),
-    AUTOFILL
+    AUTOFILL,
+    PASSWORD(useUserVerification = true),
+    PASSKEY(useUserVerification = true)
 }
