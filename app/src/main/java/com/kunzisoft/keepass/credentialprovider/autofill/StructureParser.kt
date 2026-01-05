@@ -36,7 +36,7 @@ import java.util.Locale
 @RequiresApi(api = Build.VERSION_CODES.O)
 class StructureParser(
     private val structure: AssistStructure,
-    private val webViewDenied: Boolean = true
+    private val webViewDenied: Boolean = false
 ) {
     private var result: Result? = null
     private var usernameIdCandidate: AutofillId? = null
@@ -548,8 +548,6 @@ class StructureParser(
         var otpTokenId: AutofillId? = null
 
         fun isValid(): Boolean {
-            if (isWebView)
-                return false
             return passwordId != null || creditCardNumberId != null || otpTokenId != null
         }
 
