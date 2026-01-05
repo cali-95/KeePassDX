@@ -39,6 +39,9 @@ class ClipboardEntryNotificationService : LockNotificationService() {
     override val notificationId = 485
     private var clipboardHelper: ClipboardHelper? = null
 
+    private var pendingCopyIntent: PendingIntent? = null
+    private var pendingDeleteIntent: PendingIntent? = null
+
     override fun retrieveChannelId(): String {
         return CHANNEL_CLIPBOARD_ID
     }
@@ -71,6 +74,9 @@ class ClipboardEntryNotificationService : LockNotificationService() {
                 }
                 stopService()
             }
+            ACTION_CLEAN_OTP -> {
+                stopService()
+            }
             else -> {}
         }
         return START_NOT_STICKY
@@ -81,11 +87,16 @@ class ClipboardEntryNotificationService : LockNotificationService() {
         val firstOtpModel = otpModels[0]
         val otpElement = OtpElement(firstOtpModel)
         val builder = buildNewNotification()
-                .setSmallIcon(R.drawable.notification_ic_clipboard_key_24dp)
-                .setContentTitle(firstOtpModel.toString())
-                .setAutoCancel(false)
-        builder.setContentText(otpElement.token)
-        builder.setContentIntent(buildCopyPendingIntent(firstOtpModel))
+        pendingCopyIntent = buildCopyPendingIntent(firstOtpModel)
+        pendingDeleteIntent = buildDeletePendingIntent()
+        builder.run {
+            setSmallIcon(R.drawable.notification_ic_clipboard_key_24dp)
+            setContentTitle(firstOtpModel.toString())
+            setAutoCancel(false)
+            setContentText(otpElement.token)
+            setContentIntent(pendingCopyIntent)
+            setDeleteIntent(pendingDeleteIntent)
+        }
         // Add others OTP
         if (otpModels.size > 1) {
             for (i in 1..<otpModels.size) {
@@ -122,12 +133,17 @@ class ClipboardEntryNotificationService : LockNotificationService() {
 
     private fun buildCopyPendingIntent(otpToCopy: OtpModel): PendingIntent {
         return buildServicePendingIntent(
-            Intent(
-                this,
-                ClipboardEntryNotificationService::class.java
-            ).apply {
+            Intent(this, ClipboardEntryNotificationService::class.java).apply {
                 action = ACTION_COPY_CLIPBOARD
                 putExtra(EXTRA_OTP_TO_COPY, otpToCopy)
+            }
+        )
+    }
+
+    private fun buildDeletePendingIntent(): PendingIntent {
+        return buildServicePendingIntent(
+            Intent(this, ClipboardEntryNotificationService::class.java).apply {
+                action = ACTION_CLEAN_OTP
             }
         )
     }
@@ -139,6 +155,12 @@ class ClipboardEntryNotificationService : LockNotificationService() {
         )
     }
 
+    override fun onDestroy() {
+        pendingCopyIntent?.cancel()
+        pendingDeleteIntent?.cancel()
+        super.onDestroy()
+    }
+
     companion object {
 
         private val TAG = ClipboardEntryNotificationService::class.simpleName
@@ -147,8 +169,9 @@ class ClipboardEntryNotificationService : LockNotificationService() {
         private const val EXTRA_LIST_OTP = "com.kunzisoft.keepass.EXTRA_LIST_OTP"
         private const val EXTRA_OTP_TO_COPY = "com.kunzisoft.keepass.EXTRA_OTP_TO_COPY"
 
-        const val ACTION_NEW_NOTIFICATION = "com.kunzisoft.keepass.ACTION_NEW_NOTIFICATION"
-        const val ACTION_COPY_CLIPBOARD = "com.kunzisoft.keepass.ACTION_COPY_CLIPBOARD"
+        private const val ACTION_NEW_NOTIFICATION = "com.kunzisoft.keepass.ACTION_NEW_NOTIFICATION"
+        private const val ACTION_COPY_CLIPBOARD = "com.kunzisoft.keepass.ACTION_COPY_CLIPBOARD"
+        private const val ACTION_CLEAN_OTP = "com.kunzisoft.keepass.ACTION_CLEAN_OTP"
 
         fun launchOtpNotificationIfAllowed(
             context: Context,
