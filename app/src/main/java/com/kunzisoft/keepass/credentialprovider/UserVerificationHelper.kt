@@ -95,7 +95,16 @@ class UserVerificationHelper {
             dataToVerify: UserVerificationData
         ) {
             if (isAuthenticatorsAllowed() && isUserVerificationDeviceCredential(this)) {
-                showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
+                try {
+                    showUserVerificationDeviceCredential(userVerificationViewModel, dataToVerify)
+                } catch (e: Exception) {
+                    Log.e(
+                        UserVerificationHelper::class.simpleName,
+                        "Unable to perform User Verification with device credential, " +
+                                "retry with database credential", e
+                    )
+                    showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
+                }
             } else if (dataToVerify.database != null) {
                 showUserVerificationDatabaseCredential(userVerificationViewModel, dataToVerify)
             }

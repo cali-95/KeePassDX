@@ -1,3 +1,4 @@
  * Select User Verification mode at database opening #2321
  * Fix reloading changed database #2334
  * Fix selectable protected field #2345
+ * Fix User Verification error with device credential #2352
