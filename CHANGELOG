@@ -3,6 +3,7 @@ KeePassDX(4.3.1)
  * Fix reloading changed database #2334
  * Fix selectable protected field #2345
  * Fix User Verification error with device credential #2352
+ * Fix password credential provider workflow #2353
 
 KeePassDX(4.3.0)
  * Manual change of app language #1884 #1990

@@ -240,7 +240,8 @@ class PasskeyProviderService : CredentialProviderService() {
                             context = applicationContext,
                             specialMode = SpecialMode.SELECTION,
                             nodeId = passwordEntry.id,
-                            searchInfo = searchInfo
+                            searchInfo = searchInfo,
+                            userVerifiedWithAuth = false
                         )?.let { usagePendingIntent ->
                             passwordEntries.add(
                                 PasswordCredentialEntry(
@@ -268,7 +269,8 @@ class PasskeyProviderService : CredentialProviderService() {
                     PasswordLauncherActivity.getPendingIntent(
                         context = applicationContext,
                         specialMode = SpecialMode.SELECTION,
-                        searchInfo = searchInfo
+                        searchInfo = searchInfo,
+                        userVerifiedWithAuth = false
                     )?.let { pendingIntent ->
                         passwordEntries.add(
                             PasswordCredentialEntry(
@@ -291,7 +293,8 @@ class PasskeyProviderService : CredentialProviderService() {
                     PasswordLauncherActivity.getPendingIntent(
                         context = applicationContext,
                         specialMode = SpecialMode.SELECTION,
-                        searchInfo = searchInfo
+                        searchInfo = searchInfo,
+                        userVerifiedWithAuth = true
                     )?.let { pendingIntent ->
                         passwordEntries.add(
                             PasswordCredentialEntry(
@@ -320,7 +323,8 @@ class PasskeyProviderService : CredentialProviderService() {
         PasswordLauncherActivity.getPendingIntent(
             context = applicationContext,
             specialMode = SpecialMode.REGISTRATION,
-            searchInfo = searchInfo
+            searchInfo = searchInfo,
+            userVerifiedWithAuth = false
         )?.let { pendingIntent ->
             this.add(
                 CreateEntry(
@@ -380,7 +384,8 @@ class PasskeyProviderService : CredentialProviderService() {
                     PasswordLauncherActivity.getPendingIntent(
                         context = applicationContext,
                         specialMode = SpecialMode.REGISTRATION,
-                        searchInfo = searchInfo
+                        searchInfo = searchInfo,
+                        userVerifiedWithAuth = true
                     )?.let { pendingIntent ->
                         createEntries.add(
                             CreateEntry(

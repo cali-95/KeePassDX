@@ -154,7 +154,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
             false
         }
 
-        mForceUserVerificationAllowed = mTypeMode == TypeMode.PASSWORD || mTypeMode == TypeMode.PASSKEY
+        mForceUserVerificationAllowed = mTypeMode.forceUserVerification
         mUserVerificationAllowed = if (mForceUserVerificationAllowed) {
             true
         } else {
