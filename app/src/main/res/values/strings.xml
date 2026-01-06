@@ -446,8 +446,13 @@
     <string name="autofill_explanation_summary">Configure autofilling to quickly fill out forms in other apps</string>
     <string name="autofill_select_entry">Select entry…</string>
     <string name="autofill_preference_title">Autofill settings</string>
+    <string name="user_verification">User Verification</string>
     <string name="user_verification_device_credential_title">User Verification credential</string>
     <string name="user_verification_device_credential_summary">Use the device credential as user verification if available</string>
+    <string name="user_verification_mode_title">User Verification Mode</string>
+    <string name="user_verification_mode_summary">Enables User Verification mode by default when opening a database</string>
+    <string name="menu_user_verification_enabled">User Verification enabled</string>
+    <string name="menu_user_verification_disabled">User Verification disabled</string>
     <string name="user_verification_preferred_title">Preferred User Verification</string>
     <string name="user_verification_preferred_summary">Perform a user verification when the relying party requests \"preferred\"</string>
     <string name="password_size_title">Generated password size</string>

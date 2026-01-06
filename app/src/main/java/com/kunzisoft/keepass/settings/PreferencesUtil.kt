@@ -690,13 +690,19 @@ object PreferencesUtil {
             context.resources.getBoolean(R.bool.passkeys_close_database_default))
     }
 
+    fun isUserVerificationModeEnabledByDefault(context: Context): Boolean {
+        val prefs = PreferenceManager.getDefaultSharedPreferences(context)
+        return prefs.getBoolean(context.getString(R.string.user_verification_mode_key),
+            context.resources.getBoolean(R.bool.user_verification_mode_default))
+    }
+
     fun isUserVerificationDeviceCredential(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.user_verification_device_credential_key),
             context.resources.getBoolean(R.bool.user_verification_device_credential_default))
     }
 
-    fun isUserVerificationPreferred(context: Context): Boolean {
+    fun isUserVerificationForcedWhenPreferred(context: Context): Boolean {
         val prefs = PreferenceManager.getDefaultSharedPreferences(context)
         return prefs.getBoolean(context.getString(R.string.user_verification_preferred_key),
             context.resources.getBoolean(R.bool.user_verification_preferred_default))
@@ -840,6 +846,7 @@ object PreferencesUtil {
             when (name) {
                 context.getString(R.string.allow_no_password_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.delete_entered_password_key) -> editor.putBoolean(name, value.toBoolean())
+                context.getString(R.string.user_verification_mode_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.user_verification_device_credential_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.enable_auto_save_database_key) -> editor.putBoolean(name, value.toBoolean())
                 context.getString(R.string.enable_keep_screen_on_key) -> editor.putBoolean(name, value.toBoolean())

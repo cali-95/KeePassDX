@@ -24,7 +24,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -32,7 +31,6 @@ import androidx.annotation.RequiresApi
 import androidx.lifecycle.lifecycleScope
 import com.kunzisoft.keepass.activities.FileDatabaseSelectActivity
 import com.kunzisoft.keepass.activities.GroupActivity
-import com.kunzisoft.keepass.activities.legacy.DatabaseLockActivity
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addNodeId
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addSearchInfo
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addSpecialMode
@@ -40,6 +38,8 @@ import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.addTypeMode
 import com.kunzisoft.keepass.credentialprovider.EntrySelectionHelper.setActivityResult
 import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.TypeMode
+import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.addUserVerification
+import com.kunzisoft.keepass.credentialprovider.passkey.data.UserVerificationRequirement
 import com.kunzisoft.keepass.credentialprovider.passkey.util.PassHelper.addAuthCode
 import com.kunzisoft.keepass.credentialprovider.viewmodel.CredentialLauncherViewModel
 import com.kunzisoft.keepass.credentialprovider.viewmodel.PasswordLauncherViewModel
@@ -53,7 +53,7 @@ import kotlinx.coroutines.launch
 import java.util.UUID
 
 @RequiresApi(Build.VERSION_CODES.UPSIDE_DOWN_CAKE)
-class PasswordLauncherActivity : DatabaseLockActivity() {
+class PasswordLauncherActivity : AuthenticationLauncherActivity() {
 
     private val passwordLauncherViewModel: PasswordLauncherViewModel by viewModels()
 
@@ -67,13 +67,9 @@ class PasswordLauncherActivity : DatabaseLockActivity() {
             passwordLauncherViewModel.manageRegistrationResult(it)
         }
 
-    override fun applyCustomStyle(): Boolean {
-        return false
-    }
+    override fun applyCustomStyle(): Boolean = false
 
-    override fun finishActivityIfReloadRequested(): Boolean {
-        return false
-    }
+    override fun finishActivityIfReloadRequested(): Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,13 +143,20 @@ class PasswordLauncherActivity : DatabaseLockActivity() {
         }
     }
 
-    override fun onUnknownDatabaseRetrieved(database: ContextualDatabase?) {
-        super.onUnknownDatabaseRetrieved(database)
+    override fun launchActionIfNeeded(
+        intent: Intent,
+        specialMode: SpecialMode,
+        database: ContextualDatabase?
+    ) {
         passwordLauncherViewModel.launchActionIfNeeded(
             intent = intent,
             specialMode = mSpecialMode,
             database = database
         )
+    }
+
+    override fun cancelResult() {
+        passwordLauncherViewModel.cancelResult()
     }
 
     override fun onDatabaseActionFinished(
@@ -168,10 +171,6 @@ class PasswordLauncherActivity : DatabaseLockActivity() {
                 // passkeyLauncherViewModel.autoSelectPasskey(result, database)
             }
         }
-    }
-
-    override fun viewToInvalidateTimeout(): View? {
-        return null
     }
 
     companion object {
@@ -190,7 +189,8 @@ class PasswordLauncherActivity : DatabaseLockActivity() {
             context: Context,
             specialMode: SpecialMode,
             searchInfo: SearchInfo? = null,
-            nodeId: UUID? = null
+            nodeId: UUID? = null,
+            userVerifiedWithAuth: Boolean = true
         ): PendingIntent? {
             return PendingIntent.getActivity(
                 context,
@@ -201,6 +201,9 @@ class PasswordLauncherActivity : DatabaseLockActivity() {
                     addSearchInfo(searchInfo)
                     addNodeId(nodeId)
                     addAuthCode(nodeId)
+                    // User Verification request is always preferred for password,
+                    // Allows to configure whether it is necessary or not with the corresponding setting
+                    addUserVerification(UserVerificationRequirement.PREFERRED, userVerifiedWithAuth)
                 },
                 PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
             )

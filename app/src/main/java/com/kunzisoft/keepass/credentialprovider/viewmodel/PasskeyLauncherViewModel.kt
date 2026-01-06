@@ -151,14 +151,8 @@ class PasskeyLauncherViewModel(application: Application): CredentialLauncherView
         }
     }
 
-    fun launchActionIfNeeded(
-        userVerified: Boolean,
-        intent: Intent,
-        specialMode: SpecialMode,
-        database: ContextualDatabase?
-    ) {
-        this.mUserVerified = userVerified
-        launchActionIfNeeded(intent, specialMode, database)
+    fun setUserVerified() {
+        this.mUserVerified = true
     }
 
     override fun launchActionIfNeeded(

@@ -73,6 +73,7 @@ import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.DATABASE_URI_KEY
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.MAIN_CREDENTIAL_KEY
 import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.READ_ONLY_KEY
+import com.kunzisoft.keepass.services.DatabaseTaskNotificationService.Companion.USER_VERIFICATION_KEY
 import com.kunzisoft.keepass.settings.AppearanceSettingsActivity
 import com.kunzisoft.keepass.settings.DeviceUnlockSettingsActivity
 import com.kunzisoft.keepass.settings.PreferencesUtil
@@ -123,6 +124,8 @@ class MainCredentialActivity : DatabaseModeActivity() {
 
     private var mReadOnly: Boolean = false
     private var mForceReadOnly: Boolean = false
+    private var mUserVerificationAllowed: Boolean = false
+    private var mForceUserVerificationAllowed: Boolean = false
 
     override fun manageDatabaseInfo(): Boolean  = false
 
@@ -150,6 +153,18 @@ class MainCredentialActivity : DatabaseModeActivity() {
         } else {
             false
         }
+
+        mForceUserVerificationAllowed = mTypeMode.useUserVerification
+        mUserVerificationAllowed = if (mForceUserVerificationAllowed) {
+            true
+        } else {
+            if (savedInstanceState != null && savedInstanceState.containsKey(KEY_USER_VERIFICATION)) {
+                savedInstanceState.getBoolean(KEY_USER_VERIFICATION)
+            } else {
+                PreferencesUtil.isUserVerificationModeEnabledByDefault(this)
+            }
+        }
+
         mRememberKeyFile = PreferencesUtil.rememberKeyFileLocations(this)
         mRememberHardwareKey = PreferencesUtil.rememberHardwareKey(this)
 
@@ -342,6 +357,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
                                 var databaseUri: Uri? = null
                                 var mainCredential = MainCredential()
                                 var readOnly = true
+                                var allowUserVerification = true
                                 var cipherEncryptDatabase: CipherEncryptDatabase? = null
 
                                 result.data?.let { resultData ->
@@ -350,6 +366,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
                                         resultData.getParcelableCompat(MAIN_CREDENTIAL_KEY)
                                             ?: mainCredential
                                     readOnly = resultData.getBoolean(READ_ONLY_KEY)
+                                    allowUserVerification = resultData.getBoolean(USER_VERIFICATION_KEY)
                                     cipherEncryptDatabase =
                                         resultData.getParcelableCompat(CIPHER_DATABASE_KEY)
                                 }
@@ -359,6 +376,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
                                         databaseFileUri,
                                         mainCredential,
                                         readOnly,
+                                        allowUserVerification,
                                         cipherEncryptDatabase,
                                         true
                                     )
@@ -544,6 +562,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         outState.putBoolean(KEY_READ_ONLY, mReadOnly)
+        outState.putBoolean(KEY_USER_VERIFICATION, mUserVerificationAllowed)
         super.onSaveInstanceState(outState)
     }
 
@@ -574,6 +593,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
                     databaseUri,
                     mainCredential ?: MainCredential(),
                     mReadOnly,
+                    mUserVerificationAllowed,
                     cipherEncryptDatabase,
                     false
                 )
@@ -584,12 +604,14 @@ class MainCredentialActivity : DatabaseModeActivity() {
     private fun showProgressDialogAndLoadDatabase(databaseUri: Uri,
                                                   mainCredential: MainCredential,
                                                   readOnly: Boolean,
+                                                  allowUserVerification: Boolean,
                                                   cipherEncryptDatabase: CipherEncryptDatabase?,
                                                   fixDuplicateUUID: Boolean) {
         mDatabaseViewModel.loadDatabase(
             databaseUri,
             mainCredential,
             readOnly,
+            allowUserVerification,
             cipherEncryptDatabase,
             fixDuplicateUUID
         )
@@ -608,7 +630,15 @@ class MainCredentialActivity : DatabaseModeActivity() {
         if (mForceReadOnly) {
             menu.removeItem(R.id.menu_open_file_read_mode_key)
         } else {
-            changeOpenFileReadIcon(menu.findItem(R.id.menu_open_file_read_mode_key))
+            changeDatabaseReadModeIcon(menu.findItem(R.id.menu_open_file_read_mode_key))
+        }
+
+        if (mForceUserVerificationAllowed) {
+            menu.removeItem(R.id.menu_open_file_user_verification_mode_key)
+        } else {
+            changeUserVerificationModeIcon(
+                menu.findItem(R.id.menu_open_file_user_verification_mode_key)
+            )
         }
 
         if (mSpecialMode == SpecialMode.DEFAULT) {
@@ -687,13 +717,23 @@ class MainCredentialActivity : DatabaseModeActivity() {
         }
     }
 
-    private fun changeOpenFileReadIcon(togglePassword: MenuItem) {
+    private fun changeDatabaseReadModeIcon(readOnlyMenuItem: MenuItem) {
         if (mReadOnly) {
-            togglePassword.setTitle(R.string.menu_file_selection_read_only)
-            togglePassword.setIcon(R.drawable.ic_read_only_white_24dp)
+            readOnlyMenuItem.setTitle(R.string.menu_file_selection_read_only)
+            readOnlyMenuItem.setIcon(R.drawable.ic_read_only_white_24dp)
         } else {
-            togglePassword.setTitle(R.string.menu_open_file_read_and_write)
-            togglePassword.setIcon(R.drawable.ic_read_write_white_24dp)
+            readOnlyMenuItem.setTitle(R.string.menu_open_file_read_and_write)
+            readOnlyMenuItem.setIcon(R.drawable.ic_read_write_white_24dp)
+        }
+    }
+
+    private fun changeUserVerificationModeIcon(userVerificationMenuItem: MenuItem) {
+        if (mUserVerificationAllowed) {
+            userVerificationMenuItem.setTitle(R.string.menu_user_verification_enabled)
+            userVerificationMenuItem.setIcon(R.drawable.ic_user_verification_enabled_white_24dp)
+        } else {
+            userVerificationMenuItem.setTitle(R.string.menu_user_verification_disabled)
+            userVerificationMenuItem.setIcon(R.drawable.ic_user_verification_disabled_white_24dp)
         }
     }
 
@@ -703,13 +743,17 @@ class MainCredentialActivity : DatabaseModeActivity() {
             android.R.id.home -> finish()
             R.id.menu_open_file_read_mode_key -> {
                 mReadOnly = !mReadOnly
-                changeOpenFileReadIcon(item)
+                changeDatabaseReadModeIcon(item)
                 // Save the read-only state to database
                 mDatabaseFileUri?.let { databaseUri ->
                     FileDatabaseHistoryAction.getInstance(applicationContext).addOrUpdateDatabaseFile(
                         DatabaseFile(databaseUri = databaseUri, readOnly = mReadOnly)
                     )
                 }
+            }
+            R.id.menu_open_file_user_verification_mode_key -> {
+                mUserVerificationAllowed = !mUserVerificationAllowed
+                changeUserVerificationModeIcon(item)
             }
             else -> MenuUtil.onDefaultMenuOptionsItemSelected(this, item)
         }
@@ -736,6 +780,7 @@ class MainCredentialActivity : DatabaseModeActivity() {
         private const val VIEW_INTENT = "android.intent.action.VIEW"
 
         private const val KEY_READ_ONLY = "KEY_READ_ONLY"
+        private const val KEY_USER_VERIFICATION = "KEY_USER_VERIFICATION"
         private const val KEY_PASSWORD = "password"
         private const val KEY_LAUNCH_IMMEDIATELY = "launchImmediately"
 

@@ -33,7 +33,6 @@ import android.os.Bundle
 import android.os.IBinder
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.RECEIVER_NOT_EXPORTED
 import com.kunzisoft.keepass.R
@@ -269,6 +268,7 @@ class DatabaseTaskProvider(
         databaseUri: Uri,
         mainCredential: MainCredential,
         readOnly: Boolean,
+        allowUserVerification: Boolean,
         cipherEncryptDatabase: CipherEncryptDatabase?,
         fixDuplicateUuid: Boolean
     ) {
@@ -276,6 +276,7 @@ class DatabaseTaskProvider(
             putParcelable(DatabaseTaskNotificationService.DATABASE_URI_KEY, databaseUri)
             putParcelable(DatabaseTaskNotificationService.MAIN_CREDENTIAL_KEY, mainCredential)
             putBoolean(DatabaseTaskNotificationService.READ_ONLY_KEY, readOnly)
+            putBoolean(DatabaseTaskNotificationService.USER_VERIFICATION_KEY, allowUserVerification)
             putParcelable(
                 DatabaseTaskNotificationService.CIPHER_DATABASE_KEY,
                 cipherEncryptDatabase
@@ -300,19 +301,6 @@ class DatabaseTaskProvider(
         start(Bundle().apply {
             putBoolean(DatabaseTaskNotificationService.FIX_DUPLICATE_UUID_KEY, fixDuplicateUuid)
         }, ACTION_DATABASE_RELOAD_TASK)
-    }
-
-    fun askToStartDatabaseReload(conditionToAsk: Boolean, approved: () -> Unit) {
-        if (conditionToAsk) {
-            AlertDialog.Builder(context)
-                .setMessage(R.string.warning_database_info_reloaded)
-                .setNegativeButton(android.R.string.cancel, null)
-                .setPositiveButton(android.R.string.ok) { _, _ ->
-                    approved.invoke()
-                }.create().show()
-        } else {
-            approved.invoke()
-        }
     }
 
     fun startDatabaseAssignCredential(

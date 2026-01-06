@@ -69,8 +69,6 @@
     <bool name="allow_no_password_default" translatable="false">false</bool>
     <string name="delete_entered_password_key" translatable="false">delete_entered_password_key</string>
     <bool name="delete_entered_password_default" translatable="false">true</bool>
-    <string name="user_verification_device_credential_key" translatable="false">user_verification_device_credential_key</string>
-    <bool name="user_verification_device_credential_default" translatable="false">true</bool>
     <string name="enable_auto_save_database_key" translatable="false">enable_auto_save_database_key</string>
     <bool name="enable_auto_save_database_default" translatable="false">true</bool>
     <string name="enable_keep_screen_on_key" translatable="false">enable_keep_screen_on_key</string>
@@ -86,6 +84,10 @@
     <bool name="lock_database_back_root_default" translatable="false">false</bool>
     <string name="lock_database_show_button_key" translatable="false">lock_database_show_button_key</string>
     <bool name="lock_database_show_button_default" translatable="false">true</bool>
+    <string name="user_verification_mode_key" translatable="false">user_verification_mode_key</string>
+    <bool name="user_verification_mode_default" translatable="false">true</bool>
+    <string name="user_verification_device_credential_key" translatable="false">user_verification_device_credential_key</string>
+    <bool name="user_verification_device_credential_default" translatable="false">true</bool>
     <string name="allow_copy_password_key" translatable="false">allow_copy_password_key</string>
     <bool name="allow_copy_password_default" translatable="false">false</bool>
     <string name="remember_database_locations_key" translatable="false">remember_database_locations_key</string>

@@ -79,6 +79,8 @@ open class Database {
 
     var isReadOnly = false
 
+    var allowUserVerification = false
+
     var loaded = false
         set(value) {
             field = value
@@ -566,6 +568,7 @@ open class Database {
         masterCredential: MasterCredential,
         challengeResponseRetriever: (HardwareKey, ByteArray?) -> ByteArray,
         readOnly: Boolean,
+        allowUserVerification: Boolean,
         cacheDirectory: File,
         isRAMSufficient: (memoryWanted: Long) -> Boolean,
         fixDuplicateUUID: Boolean,
@@ -573,6 +576,7 @@ open class Database {
     ) {
         // Check if the file is writable
         this.isReadOnly = readOnly
+        this.allowUserVerification = allowUserVerification
 
         try {
             // Read database stream for the first time

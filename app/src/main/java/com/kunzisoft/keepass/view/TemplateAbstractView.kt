@@ -320,8 +320,10 @@ abstract class TemplateAbstractView<
 
     fun setFieldProtection(value: FieldProtection) {
         if (value.isCurrentlyProtected) {
+            this.mUnprotectedFields.remove(value.field)
             this.mFields[value.field]?.protect()
         } else {
+            this.mUnprotectedFields.add(value.field)
             this.mFields[value.field]?.unprotect()
         }
     }

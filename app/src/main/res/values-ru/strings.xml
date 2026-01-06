@@ -482,7 +482,7 @@
     <string name="device_unlock_prompt_not_initialized">Невозможно инициализировать запрос разблокировки устройства.</string>
     <string name="device_unlock_not_recognized">Невозможно распознать разблокировку устройства</string>
     <string name="device_unlock_invalid_key">Невозможно прочитать ключ разблокировки устройства. Удалите его и повторите процедуру распознавания разблокировки.</string>
-    <string name="device_unlock_prompt_extract_credential_message">Открывать базу с использованием учётных данных устройства</string>
+    <string name="device_unlock_prompt_extract_credential_message">Открыть базу с использованием учётных данных устройства</string>
     <string name="device_unlock_prompt_extract_credential_title">Разблокировка устройства</string>
     <string name="device_unlock_prompt_store_credential_message">ВНИМАНИЕ: вам всё равно необходимо помнить основные учётные данные</string>
     <string name="device_unlock_delete_all_key_warning">Удалить все ключи шифрования, связанные с распознаванием разблокировки устройства\?</string>
@@ -534,7 +534,7 @@
     <string name="description_app_properties">Управление настройками приложения KeePassDX</string>
     <string name="export_app_properties_summary">Создать резервную копию настроек</string>
     <string name="export_app_properties_title">Экспорт настроек</string>
-    <string name="import_app_properties_summary">Выберите резервную копию настроек</string>
+    <string name="import_app_properties_summary">Выбрать резервную копию настроек</string>
     <string name="import_app_properties_title">Импорт настроек</string>
     <string name="error_start_database_action">Произошла ошибка при выполнении действия с базой.</string>
     <string name="error_move_group_here">Сюда группу переместить невозможно.</string>
@@ -753,8 +753,9 @@
     <string name="error_password_result">Невозможно вернуть пароль</string>
     <string name="content_description_user_verification_information">Информация о проверке пользователя</string>
     <string name="user_verification_required_title">Проверка пользователя</string>
-    <string name="user_verification_required_description">Для доступа к этим данным требуется проверка</string>
+    <string name="user_verification_required_description">Для доступа к этим данным требуется подтверждение вашей личности.</string>
     <string name="user_verification_database_credential">Введите первые четыре символа пароля базы</string>
     <string name="first_chars">Первые символы</string>
     <string name="check">Проверка</string>
+    <string name="user_verification_required_description_precise">%1$s требует подтверждения вашей личности.</string>
 </resources>

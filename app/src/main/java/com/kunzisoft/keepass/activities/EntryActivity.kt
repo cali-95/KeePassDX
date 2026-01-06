@@ -59,7 +59,6 @@ import com.kunzisoft.keepass.credentialprovider.SpecialMode
 import com.kunzisoft.keepass.credentialprovider.UserVerificationActionType
 import com.kunzisoft.keepass.credentialprovider.UserVerificationData
 import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.checkUserVerification
-import com.kunzisoft.keepass.credentialprovider.UserVerificationHelper.Companion.isUserVerificationNeeded
 import com.kunzisoft.keepass.credentialprovider.magikeyboard.MagikeyboardService
 import com.kunzisoft.keepass.database.ContextualDatabase
 import com.kunzisoft.keepass.database.element.Attachment
@@ -116,6 +115,8 @@ class EntryActivity : DatabaseLockActivity() {
     private var mAttachmentFileBinderManager: AttachmentFileBinderManager? = null
     private var mExternalFileHelper: ExternalFileHelper? = null
     private var mAttachmentSelected: Attachment? = null
+
+    private var mSwitchToMagikeyboard: Boolean = false
 
     private var mEntryActivityResultLauncher = EntryEditActivity.registerForEntryResult(this) {
         // Reload the current id from database
@@ -193,6 +194,9 @@ class EntryActivity : DatabaseLockActivity() {
             adapter = tagsAdapter
         }
 
+        // Init preferences
+        mSwitchToMagikeyboard = PreferencesUtil.isAutoSwitchToMagikeyboardEnable(this)
+
         // Init content tab
         entryContentTab?.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
@@ -258,7 +262,12 @@ class EntryActivity : DatabaseLockActivity() {
                 if (savedInstanceState == null) {
                     // Manage entry to populate Magikeyboard and launch keyboard notification if allowed
                     if (PreferencesUtil.isKeyboardEntrySelectionEnable(this)) {
-                        MagikeyboardService.addEntry(this, entryInfo)
+                        MagikeyboardService.addEntry(
+                            context = this,
+                            entry = entryInfo,
+                            toast = true,
+                            autoSwitchKeyboard = mSwitchToMagikeyboard
+                        )
                     }
                 }
                 // Assign title icon
@@ -329,35 +338,50 @@ class EntryActivity : DatabaseLockActivity() {
                         is EntryViewModel.EntryState.OnChangeFieldProtectionRequested -> {
                             mDatabase?.let { database ->
                                 val fieldProtection = entryState.fieldProtection
-                                if (fieldProtection.isCurrentlyProtected) {
-                                    checkUserVerification(
-                                        userVerificationViewModel = mUserVerificationViewModel,
-                                        dataToVerify = UserVerificationData(
-                                            actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
-                                            database = database,
-                                            fieldProtection = fieldProtection
+                                if (mDatabaseAllowUserVerification) {
+                                    if (fieldProtection.isCurrentlyProtected) {
+                                        checkUserVerification(
+                                            userVerificationViewModel = mUserVerificationViewModel,
+                                            dataToVerify = UserVerificationData(
+                                                actionType = UserVerificationActionType.SHOW_PROTECTED_FIELD,
+                                                database = database,
+                                                fieldProtection = fieldProtection
+                                            )
                                         )
-                                    )
-                                    mEntryViewModel.actionPerformed()
+                                        mEntryViewModel.actionPerformed()
+                                    } else {
+                                        mEntryViewModel.updateProtectionField(
+                                            fieldProtection = fieldProtection,
+                                            value = true
+                                        )
+                                    }
                                 } else {
+                                    // Toggle field protection directly without user verification
                                     mEntryViewModel.updateProtectionField(
                                         fieldProtection = fieldProtection,
-                                        value = true
+                                        value = !fieldProtection.isCurrentlyProtected
                                     )
                                 }
                             }
                         }
                         is EntryViewModel.EntryState.OnFieldProtectionUpdated -> {}
                         is EntryViewModel.EntryState.RequestCopyProtectedField -> {
-                            mDatabase?.let { database ->
-                                checkUserVerification(
-                                    userVerificationViewModel = mUserVerificationViewModel,
-                                    dataToVerify = UserVerificationData(
-                                        actionType = UserVerificationActionType.COPY_PROTECTED_FIELD,
-                                        database = database,
-                                        fieldProtection = entryState.fieldProtection,
+                            if (mDatabaseAllowUserVerification) {
+                                mDatabase?.let { database ->
+                                    checkUserVerification(
+                                        userVerificationViewModel = mUserVerificationViewModel,
+                                        dataToVerify = UserVerificationData(
+                                            actionType = UserVerificationActionType.COPY_PROTECTED_FIELD,
+                                            database = database,
+                                            fieldProtection = entryState.fieldProtection,
+                                        )
                                     )
-                                )
+                                }
+                            } else {
+                                // Copy field value directly without user verification
+                                entryState.fieldProtection.field.let {
+                                    mEntryViewModel.copyToClipboard(it)
+                                }
                             }
                             mEntryViewModel.actionPerformed()
                         }
@@ -573,7 +597,7 @@ class EntryActivity : DatabaseLockActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_edit -> {
-                if (mEntryViewModel.entryInfo?.isUserVerificationNeeded() == true) {
+                if (mDatabaseAllowUserVerification) {
                     mDatabase?.let { database ->
                         checkUserVerification(
                             userVerificationViewModel = mUserVerificationViewModel,

@@ -14,7 +14,7 @@ data class UserVerificationData(
 )
 
 enum class UserVerificationActionType {
-    LAUNCH_PASSKEY_CEREMONY,
+    LAUNCH_AUTHENTICATION_CEREMONY,
     SHOW_PROTECTED_FIELD,
     COPY_PROTECTED_FIELD,
     EDIT_ENTRY,

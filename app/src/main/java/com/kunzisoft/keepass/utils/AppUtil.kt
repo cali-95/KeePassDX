@@ -78,11 +78,12 @@ object AppUtil {
     }
 
     /**
-     * Indicates whether the [packageName] is a web browser.
+     * Indicates whether the [packageName] is a web browser if at least Android P
      */
-    @RequiresApi(Build.VERSION_CODES.P)
     fun Context.isWebBrowserPackage(packageName: String?): Boolean {
         if (packageName == null || packageName.isEmpty())
+            return false
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P)
             return false
         return getInstalledBrowsersWithSignatures(this).any {
             it.packageName == packageName
