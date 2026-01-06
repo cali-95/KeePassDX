@@ -189,7 +189,6 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
 
     open fun setValue(@StringRes valueId: Int) {
         value = resources.getString(valueId)
-        changeProtectedValueParameters()
     }
 
     override var default: String = ""
