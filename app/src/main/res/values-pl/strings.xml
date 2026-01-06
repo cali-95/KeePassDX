@@ -743,9 +743,9 @@
     <string name="error_password_result">Nie można zwrócić hasła</string>
     <string name="content_description_user_verification_information">Informacje o weryfikacji użytkownika</string>
     <string name="user_verification_required_title">Weryfikacja użytkownika</string>
-    <string name="user_verification_required_description">Dostęp do tych danych wymaga upewnienia się, że to rzeczywiście Ty.</string>
+    <string name="user_verification_required_description">Dostęp do tych danych wymaga weryfikacji, że to rzeczywiście Ty.</string>
     <string name="user_verification_database_credential">Wpisz pierwsze cztery znaki hasła do bazy danych</string>
     <string name="first_chars">Pierwsze znaki</string>
     <string name="check">Sprawdź</string>
-    <string name="user_verification_required_description_precise">%1$s wymaga upewnienia się, że to rzeczywiście Ty.</string>
+    <string name="user_verification_required_description_precise">%1$s wymaga weryfikacji, że to rzeczywiście Ty.</string>
 </resources>

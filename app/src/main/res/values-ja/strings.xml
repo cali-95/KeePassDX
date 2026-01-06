@@ -744,8 +744,9 @@
     <string name="error_password_result">パスワードを返せませんでした</string>
     <string name="content_description_user_verification_information">ユーザー認証情報</string>
     <string name="user_verification_required_title">ユーザー認証</string>
-    <string name="user_verification_required_description">このデータへのアクセスには認証が必要です</string>
+    <string name="user_verification_required_description">このデータへのアクセスには本人確認が必要です。</string>
     <string name="user_verification_database_credential">データベースパスワードの先頭４文字を入力</string>
     <string name="first_chars">先頭の文字</string>
     <string name="check">チェック</string>
+    <string name="user_verification_required_description_precise">%1$s は実際に本人であると確認する必要があります。</string>
 </resources>

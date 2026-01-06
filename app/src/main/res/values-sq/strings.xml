@@ -694,8 +694,10 @@
     <string name="error_password_result">S’arrihet të kthehet fjalëkalimi</string>
     <string name="content_description_user_verification_information">Hollësi verifikimi përdoruesi</string>
     <string name="user_verification_required_title">Verifikim Përdoruesi</string>
-    <string name="user_verification_required_description"></string>
+    <string name="user_verification_required_description">Hyrja në këto të dhëna lyp verifikim që jeni përnjëmend ju.</string>
     <string name="user_verification_database_credential">Jepni katër shenjat e para të fjalëkalimit të bazës suaj të të dhënave</string>
     <string name="first_chars">Shenja e parë</string>
     <string name="clipboard_otp_notifications_summary">Hap një njoftim të kopjohet OTP nga zëra të populluar me vetëplotësim, ose me Magikeyboard</string>
+    <string name="user_verification_required_description_precise">%1$s lyp verifikim që jeni përnjëmend ju.</string>
+    <string name="credential_provider_service_subtitle">Kyçkalime, Shërbim furnizimi kredencialesh për vetëplotësim</string>
 </resources>
