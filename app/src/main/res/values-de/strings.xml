@@ -750,6 +750,6 @@
     <string name="keyboard_auto_switch_summary">Versuchen, automatisch zum Magikeyboard zu wechseln, wenn Einträge ausgefüllt werden</string>
     <string name="autofill_share_magikeyboard_title">Mit Magikeyboard teilen</string>
     <string name="autofill_share_magikeyboard_summary">Einträge an Magikeyboard weitergeben, die automatisch ausgefüllt wurden</string>
-    <string name="user_verification_required_description">Der Zugriff auf diese Daten erfordert eine Überprüfung, ob Sie es wirlich sind.</string>
+    <string name="user_verification_required_description">Der Zugriff auf diese Daten erfordert eine Überprüfung, ob Sie es wirklich sind.</string>
     <string name="user_verification_required_description_precise">%1$s erfordert die Überprüfung, ob es sich wirklich um Sie handelt.</string>
 </resources>
