@@ -5,4 +5,4 @@
  * Correction du chargement infini #2277
  * Correction de la reconnaissance des webview #2348 #2343 #2349 #1716
  * Correction du Magiclavier #2356 #2357
- * Correction de l'affichage du champ protégé #2350
+ * Correction d'affichage du champ protégé #2350
