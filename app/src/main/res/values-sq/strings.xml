@@ -672,7 +672,7 @@
     <string name="passkeys_backup_state_summary">Trego se kredencialet janë kopjeruajtur dhe mbrojtur kundër humbjes së një pajisjeje që është e vetme</string>
     <string name="user_verification_device_credential_title">Kredenciale Verifikimi përdoruesi</string>
     <string name="user_verification_device_credential_summary">Përdor kredencialet e pajisjes si verifikim përdoruesi, në pastë</string>
-    <string name="user_verification_preferred_title">Verifikim përdoruesi i parapëlqyer</string>
+    <string name="user_verification_preferred_title">Verifikim i Parapëlqyer Përdoruesish</string>
     <string name="keyboard_auto_switch_summary">Provo të kalosh automatikisht te Magikeyboard, kur zërat janë të populluar</string>
     <string name="style_name_divine">Hyjnor</string>
     <string name="style_name_kunzite">Kuncit</string>
@@ -700,4 +700,9 @@
     <string name="clipboard_otp_notifications_summary">Hap një njoftim të kopjohet OTP nga zëra të populluar me vetëplotësim, ose me Magikeyboard</string>
     <string name="user_verification_required_description_precise">%1$s lyp verifikim që jeni përnjëmend ju.</string>
     <string name="credential_provider_service_subtitle">Kyçkalime, Shërbim furnizimi kredencialesh për vetëplotësim</string>
+    <string name="menu_user_verification_disabled">Verifikimi i Përdoruesve është i çaktivizuar</string>
+    <string name="menu_user_verification_enabled">Verifikim Përdoruesish është i aktivizuar</string>
+    <string name="user_verification_mode_summary">Aktivizon, si parazgjedhje, mënyrën Verifikim Përdoruesish, kur hapet një bazë të dhënash</string>
+    <string name="user_verification_mode_title">Mënyra Verifikim Përdoruesish</string>
+    <string name="user_verification">Verifikim Përdoruesish</string>
 </resources>
