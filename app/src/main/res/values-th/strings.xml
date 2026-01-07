@@ -154,7 +154,7 @@
     <string name="version_label">เวอร์ชัน: %1$s</string>
     <string name="build_label">รุ่น %1$s</string>
     <string name="autofill_sign_in_prompt">เข้าสู่ระบบด้วย KeePassDX</string>
-    <string name="list_password_generator_options_summary">ตั้งชนิดอักขระรหัสผ่านที่ยอมรับ</string>
+    <string name="list_password_generator_options_summary">ตั้งชนิดอักขระรหัสผ่านที่อนุญาต</string>
     <string name="database_opened">เปิดฐานข้อมูลแล้ว</string>
     <string name="clipboard">คลิปบอร์ด</string>
     <string name="clipboard_explanation_summary">คัดลอกเขตข้อมูลโดยใช้คลิปบอร์ดบนอุปกรณ์ของคุณ</string>
@@ -165,12 +165,12 @@
     <string name="device_unlock">การปลดล็อกด้วยอุปกรณ์</string>
     <string name="device_credential_unlock_enable_summary">ให้คุณใช้ข้อมูลประจำตัวของอุปกรณ์เพื่อปลดล็อกฐานข้อมูล</string>
     <string name="monospace_font_fields_enable_title">แบบอักษรในช่องเขตข้อมูล</string>
-    <string name="recycle_bin">ถึงขยะ</string>
+    <string name="recycle_bin">ถังขยะ</string>
     <string name="templates">แม่แบบ</string>
     <string name="keyboard_name">เมจิคีย์บอร์ด</string>
     <string name="keyboard_change">เปลี่ยนแป้นพิมพ์</string>
     <string name="backspace">Backspace</string>
-    <string name="enter">Enter</string>
+    <string name="enter">ขึ้นบรรทัดใหม่</string>
     <string name="select_entry">เลือกรายการ</string>
     <string name="autofill_close_database_title">ปิดฐานข้อมูล</string>
     <string name="autofill_manual_selection_summary">แสดงตัวเลือกเพื่อให้ผู้ใช้เลือกรายการฐานข้อมูล</string>
@@ -178,29 +178,24 @@
     <string name="enable_auto_save_database_title">บันทึกฐานข้อมูลอัตโนมัติ</string>
     <string name="enable_keep_screen_on_title">เปิดหน้าจอไว้</string>
     <string name="enable_screenshot_mode_title">โหมดจับภาพหน้าจอ</string>
-    <string name="education_select_database_summary">เปิดไฟล์ฐานข้อมูลก่อนหน้านี้จากตัวจัดการไฟล์เพื่อใช้งานมันต้อ</string>
-    <string name="education_new_node_title">เพื่มรายการใหม่ในฐานข้อมูล</string>
+    <string name="education_select_database_summary">เปิดไฟล์ฐานข้อมูลก่อนหน้านี้จากตัวจัดการไฟล์เพื่อใช้งานต่อ</string>
+    <string name="education_new_node_title">เพิ่มรายการใหม่ในฐานข้อมูล</string>
     <string name="education_new_node_summary">รายการช่วยจัดการตัวตนดิจิทัลของคุณ
 \n
 \nกลุ่ม(หรือโฟล์เดอร์)เอาไว้จัดระเบียบรายการในฐานข้อมูลของคุณ</string>
     <string name="education_search_title">ค้นหาในรายการ</string>
     <string name="education_search_summary">กรอกหัวเรื่อง, ชื่อผู้ใช้ หรือเนื้อหาจากช่องเขตข้อมูลอื่นๆเพื่อเรียกรหัสผ่าน</string>
     <string name="education_generate_password_title">สร้างรหัสผ่านที่แข็งแรง</string>
-    <string name="education_entry_new_field_title">เพื่มช่องเขตข้อมูลที่กำหนดเอง</string>
-    <string name="education_add_attachment_title">เพื่มเอกสารแนบ</string>
-    <string name="education_read_only_summary">เปลี่ยนโหมดที่จะเปิดในเซสชั่น
-\n
-\n\"ป้องกันการเขียน\" ป้องกันการเปลี่ยนแปลงที่ไม่ได้ตั้งใจถูกบันทึกลงในฐานข้อมูล
-\n\"แก้ไขได้\" ให้คุณเพื่ม, ลบ, หรือเปลี่ยนแปลงทุกๆองค์ประกอบได้ตามต้องการ</string>
-    <string name="education_field_copy_summary">เขตข้อมูลที่คัดลอกแล้วสามารถวางได้ที่ใหนก็ได้
-\n
-\nใช้การวิธีการกรอกข้อมูลตามต้องการ</string>
+    <string name="education_entry_new_field_title">เพิ่มช่องเขตข้อมูลที่กำหนดเอง</string>
+    <string name="education_add_attachment_title">เพิ่มเเนบไฟล์</string>
+    <string name="education_read_only_summary">เปลี่ยนโหมดที่จะเปิดในเซสชั่น \n \n\"ป้องกันการเขียน\" ป้องกันการเปลี่ยนแปลงที่ไม่ได้ตั้งใจบันทึกลงในฐานข้อมูล \n\"แก้ไขได้\" ให้คุณเพิ่ม, ลบ, หรือเปลี่ยนแปลงทุกๆองค์ประกอบได้ตามต้องการ</string>
+    <string name="education_field_copy_summary">เขตข้อมูลที่คัดลอกแล้วสามารถวางได้ที่ใดก็ได้ \n \nใช้การวิธีการกรอกข้อมูลตามต้องการ</string>
     <string name="education_lock_title">ล็อกฐานข้อมูล</string>
     <string name="education_lock_summary">ล็อกฐานข้อมูลอย่างรวดเร็ว คุณสามารถตั้งค่าการล็อกมันหลังจากผ่านไปสักพัก และเมื่อปิดหน้าจอ</string>
     <string name="education_sort_title">จัดเรียงรายการ</string>
     <string name="education_sort_summary">เลือกรายการและกลุ่มที่จะถูกจัดเรียง</string>
     <string name="html_text_donation">เพื่อเป็นการรักษาความอิสระและพัฒนาอยู่เสมอ เรารอคอยการ&lt;strong&gt;ร่วมแก้ไข&lt;/strong&gt;ของคุณ</string>
-    <string name="html_text_dev_feature_encourage">you are encouraging developers to create &lt;strong&gt;new features&lt;/strong&gt; and to &lt;strong&gt;fix bugs&lt;/strong&gt; according to your remarks.</string>
+    <string name="html_text_dev_feature_encourage">คุณกำลังสนับสนุนให้นักพัฒนาสร้าง<strong>ฟีเจอร์ใหม่</strong>และ<strong>แก้ไขข้อบกพร่อง</strong>ตามที่คุณกล่าวไว้</string>
     <string name="html_text_dev_feature_thanks">ขอขอบคุณสำหรับการร่วมแก้ไขของคุณเป็นอย่างมาก</string>
     <string name="html_text_dev_feature_work_hard">เรากำลังทำงานหนักเพื่อปล่อยให้ใด้ใช้งานฟีเจอร์นี้โดยเร็วที่สุด</string>
     <string name="html_text_dev_feature_upgrade">อย่าลืมอัปเดทแอปให้ทันสมัยอยู่เสมอด้วยการติดตั้งเวอร์ชั่นใหม่</string>
@@ -208,8 +203,8 @@
     <string name="contribute">ร่วมพัฒนา</string>
     <string name="download_attachment">ดาวน์โหลด %1$s</string>
     <string name="upload_attachment">อัปโหลด %1$s</string>
-    <string name="download_initialization">กำลังเรื่ม…</string>
-    <string name="download_progression">กำลังดาวน์โหลด: %1$d%%</string>
+    <string name="download_initialization">กำลังเริ่ม…</string>
+    <string name="download_progression">กำลังดำเนินการดาวน์โหลด: %1$d%%</string>
     <string name="download_finalization">กำลังเสร็จสิ้น…</string>
     <string name="download_complete">เสร็จสิ้น!</string>
     <string name="download_canceled">ยกเลิกแล้ว!</string>
@@ -228,7 +223,7 @@
     <string name="lower_case">ตัวพิมพ์เล็ก</string>
     <string name="character_count">จำนวนตัวอักษร: %1$d</string>
     <string name="screenshot_mode_banner_text">โหมดถ่ายภาพหน้าจอ</string>
-    <string name="style_brightness_title">ความสว่างของธีม</string>
+    <string name="style_brightness_title">ธีมสว่าง</string>
     <string name="icon_section_standard">มาตรฐาน</string>
     <string name="icon_section_custom">กำหนดเอง</string>
     <string name="hide_expired_entries_title">ซ่อนรายการที่หมดอายุแล้ว</string>
@@ -373,8 +368,8 @@
     <string name="keyboard_entry_category">รายการ</string>
     <string name="keyboard_selection_entry_title">การเลือกรายการ</string>
     <string name="keyboard_notification_entry_title">ข้อมูลการแจ้งเตือน</string>
-    <string name="keyboard_notification_entry_summary">แสดงการแจ้งเตือนเพื่มมีรายการให้ใช้งาน</string>
-    <string name="keyboard_save_search_info_title">บันทึกขัอมูลที่ใช้รวมกัน</string>
+    <string name="keyboard_notification_entry_summary">แสดงการแจ้งเตือนเพิ่มมีรายการให้ใช้งาน</string>
+    <string name="keyboard_save_search_info_title">บันทึกข้อมูลที่ใช้รวมกัน</string>
     <string name="database_data_remove_unlinked_attachments_title">ลบข้อมูลที่ไม่ได้เชื่อมไว้</string>
     <string name="templates_group_enable_title">การใช้แม่แบบ</string>
     <string name="max_history_items_title">จำนวนสูงสุด</string>
@@ -382,7 +377,7 @@
     <string name="enable">เปิดใช้งาน</string>
     <string name="disable">ปิดใช้งาน</string>
     <string name="notification">การแจ้งเตือน</string>
-    <string name="database_description_title">คำอธิบานฐานข้อมูล</string>
+    <string name="database_description_title">คำอธิบายฐานข้อมูล</string>
     <string name="other">อื่นๆ</string>
     <string name="compression_none">ไม่มี</string>
     <string name="compression">การบีบอัดข้อมูล</string>
@@ -393,13 +388,13 @@
     <string name="keyboard_entry_timeout_title">ระยะหมดเวลา</string>
     <string name="keyboard_notification_entry_content_title">%1$s ใช้งานได้บนเมจิคีย์บอร์ด</string>
     <string name="keyboard_keys_category">ปุ่ม</string>
-    <string name="keyboard_entry_timeout_summary">ระยะหมดเวลาทั้จะล้างรายการในแป้นพิมพ์</string>
+    <string name="keyboard_entry_timeout_summary">ระยะหมดเวลาที่จะล้างรายการในแป้นพิมพ์</string>
     <string name="keyboard_notification_entry_content_title_text">รายการ</string>
     <string name="compression_gzip">Gzip</string>
     <string name="keyboard_theme_title">ธีมแป้นพิมพ์</string>
     <string name="keyboard_auto_go_action_title">การกระทำปุ่มอัตโนมัติ</string>
     <string name="keyboard_key_vibrate_title">การสั่นที่ปุ่มกด</string>
-    <string name="keyboard_key_sound_title">การได้ยินเสียงที่ปุ่มกด</string>
+    <string name="keyboard_key_sound_title">การได้ยินเสียงที่กดปุ่ม</string>
     <string name="keyboard_previous_search_title">หน้าจอค้นหา</string>
     <string name="keyboard_previous_fill_in_title">ปุ่มกลับ</string>
     <string name="keyboard_previous_lock_summary">สลับไปยังแป้นพิมพ์ก่อนหน้านี้โดยอัตโนมัติหลังจากล็อกฐานข้อมูล</string>
@@ -414,10 +409,10 @@
     <string name="show_entry_colors_title">สีของรายการ</string>
     <string name="icon_pack_choose_summary">ชุดไอคอนที่ใช้ในแอป</string>
     <string name="style_brightness_summary">เลือกธีมมืดหรือสว่าง</string>
-    <string name="style_choose_summary">ธีมที่ใข้ในแอป</string>
+    <string name="style_choose_summary">ธีมที่ใช้ในแอป</string>
     <string name="style_choose_title">ธีมของแอป</string>
     <string name="education_read_only_title">ปกป้องฐานข้อมูลของคุณ</string>
-    <string name="education_donation_title">มีส่วมร่วม</string>
+    <string name="education_donation_title">มีส่วนร่วม</string>
     <string name="warning_database_info_reloaded">การโหลดฐานข้อมูลซ้ำจะลบข้อมูลที่ถูกแก้ไขภายในเครื่อง</string>
     <string name="default_checkbox">ใช้เป็นฐานข้อมูลเริ่มต้น</string>
     <string name="html_about_privacy"><strong>ไม่มีการรวบรวมข้อมูลผู้ใช้งาน</strong>, แอปพลิเคชั่นนี้ไม่ได้ติดต่อกับเซิร์ฟเวอร์ใดๆ ทำงานจำเพาะในอุปกรณ์เท่านั้น และเคารพความเป็นส่วนตัวของผู้ใช้งานอย่างเต็มที่</string>
@@ -460,7 +455,7 @@
     <string name="unsupported_db_version">รุ่นของฐานข้อมูล Keepass ไม่รองรับ</string>
     <string name="warning_exact_alarm">คุณไม่ได้อนุญาตให้แอปใช้การตั้งปลุกแบบแม่นยำ ดังนั้น ฟังก์ชันที่ต้องใช้ตัวจับเวลาจึงจะไม่ทำงานตามเวลาที่แน่นอน</string>
     <string name="upper_case">ตัวพิมพ์ใหญ่</string>
-    <string name="title_case">Title Case</string>
+    <string name="title_case">ชื่อเรื่อง</string>
     <string name="show_entry_colors_summary">แสดงสีพื้นหน้าและสีพื้นหลังสําหรับรายการ</string>
     <string name="file_manager_install_description">ต้องการตัวจัดการไฟล์ที่ยอมรับ Intent Action ACTION_CREATE_DOCUMENT ACTION_OPEN_DOCUMENT เพื่อจะสร้าง, เปิด, และบันทึกไฟล์ฐานข้อมูล</string>
     <string name="id_card">บัตรประจำตัว</string>
@@ -532,8 +527,8 @@
     <string name="lock_database_screen_off_title">หน้าจอล็อก</string>
     <string name="unavailable_feature_version">อุปกรณ์นี้เป็น Android %1$s, แต่ต้องการ %2$s ขึ้นไป</string>
     <string name="lock_database_screen_off_summary">ล็อกฐานข้อมูลหลังจากปิดหน้าจอในไม่กี่วินาที</string>
-    <string name="lock_database_back_root_summary">ล็อกฐานข้อมูลเมื่อผู้ใช้กดปุ่มกลับบนหน้ารายการราก</string>
-    <string name="device_unlock_tap_delete">แตะเพื่อลบกุญแจการปลดล็อกด้วนอุปกรณ์</string>
+    <string name="lock_database_back_root_summary">ล็อกฐานข้อมูลเมื่อผู้ใช้กดปุ่มกลับบนหน้ารายการหน้าหลักฐานข้อมูล</string>
+    <string name="device_unlock_tap_delete">แตะเพื่อลบกุญแจการปลดล็อกด้วยอุปกรณ์</string>
     <string name="device_unlock_explanation_summary">ใช้การปลดล็อกด้วยอุปกรณ์เพื่อปลดล็อกฐานข้อมูลได้ง่ายขึ้น</string>
     <string name="biometric_unlock_enable_title">การปลดล็อกด้วยไบโอเมตริก</string>
     <string name="biometric_auto_open_prompt_title">เปิดหน้ายืนยันอัตโนมัติ</string>
@@ -552,7 +547,7 @@
 \n
 \nขึ้นอยู่กับการใช้ Native API โดยระบบปฎิบัติการ มันอาจจะทำงานไม่สมบูรณ์
 \nตรวจสอบความเข้ากันได้และความปลอดภัยของ KeyStore กับผู้ผลิตหรือผู้พัฒนารอมที่คุณใช้อยู่</string>
-    <string name="unavailable_feature_text">เรื่มใข้ฟีเจอร์นี้ไม่ได้</string>
+    <string name="unavailable_feature_text">เริ่มฟิวเจอร์นี้ไม่ได้</string>
     <string name="data">ข้อมูล</string>
     <string name="database_data_compression_summary">การบีบอัดข้อมูลจะลดขนาดของฐานข้อมูล</string>
     <string name="database_data_remove_unlinked_attachments_summary">ลบข้อมูลแนบที่อยู่ในฐานข้อมูลแต่ไม่ได้เชื่อมกับรายการ</string>
@@ -575,16 +570,16 @@
     <string name="magic_keyboard_explanation_summary">เปิดใช้งานแป้นพิมพ์แบบพิเศษที่จะสำรวจช่องกรอกรหัสผ่านและข้อมูลอื่นๆ</string>
     <string name="allow_copy_password_summary">อนุญาตให้คัดลอกรหัสผ่านและเขตข้อมูลที่ป้องกันไว้เก็บในคลิปบอร์ด</string>
     <string name="allow_copy_password_warning">คำเตือน:คลิปบอร์ดถูกใช้ร่วมกันในทุกแอป หากข้อมูลละเอียดอ่อนถูกคัดลอกไป ซอฟท์แวร์อื่นอาจกู้มันกลับมาได้</string>
-    <string name="database_default_username_title">ชื่อผู้ใช้เรื่มต้น</string>
+    <string name="database_default_username_title">ชื่อผู้ใช้เริ่มต้น</string>
     <string name="database_custom_color_title">สีของฐานข้อมูลที่กำหนดเอง</string>
     <string name="database_version_title">เวอร์ชั่นของฐานข้อมูล</string>
-    <string name="application_appearance">อินเตอร์เฟซ</string>
+    <string name="application_appearance">อินเตอร์เฟส</string>
     <string name="keyboard_selection_entry_summary">เมื่อดูรายการใน KeePassDX, เมจิคีย์บอร์ด จะใช้รายการนั้นด้วย</string>
     <string name="keyboard_save_search_info_summary">พยายามบันทึกข้อมูลที่ใช้ร่วมกันเมื่อเลือกกรอกรายการนั้นด้วยตนเองเพื่อใช้งานในอนาคตง่ายขึ้น</string>
     <string name="keyboard_notification_entry_clear_close_summary">ปิดฐานข้อมูลเมื่อปิดการแจ้งเตือน</string>
     <string name="text_appearance">ลักษณะตัวหนังสือ</string>
     <string name="keyboard_appearance_category">ลักษณะ</string>
-    <string name="keyboard_auto_go_action_summary">กระทำปุ่ม \"ไป\" หลังจากกดปุ่ม \"เขตข้อมูล\"</string>
+    <string name="keyboard_auto_go_action_summary">กดปุ่ม \"ไป\" หลังจากกด \"เขตข้อมูล\"</string>
     <string name="keyboard_previous_database_credentials_title">หน้าจอการยืนยันข้อมูลประจำตัวฐานข้อมูล</string>
     <string name="keyboard_previous_database_credentials_summary">สลับไปยังแป้นพิมพ์ก่อนหน้านี้โดยอัตโนมัติบนหน้าจอการยืนยันข้อมูลประจำตัวฐานข้อมูล</string>
     <string name="custom_fields">เขตข้อมูลที่กำหนดเอง</string>
@@ -603,8 +598,8 @@
     <string name="autofill_web_domain_blocklist_summary">รายการที่บล็อกเพื่อกันไม่ให้กรอกข้อมูลในเว็บอัตโนมัติ</string>
     <string name="biometric_delete_all_key_summary">ลบกุญแจเข้ารหัสทั้งหมดที่เกี่ยวข้องกับการปลดล็อกด้วยอุปกรณ์</string>
     <string name="error_save_read_only">การบันทึกฐานข้อมูลไม่อนุญาตสำหรับฐานข้อมูลที่อ่านอย่างเดียว</string>
-    <string name="autofill_block_restart">เปิดแอปที่แบบฟอร์มนั้นขั้นมาใหม่เพื่อใช้งานการบล็อก</string>
-    <string name="autofill_inline_suggestions_keyboard">เพื่มการแนะนำการกรอกอัตโนมัติ</string>
+    <string name="autofill_block_restart">เปิดแอปที่แบบฟอร์มนั้นขึ้นมาใหม่เพื่อใช้งานการบล็อก</string>
+    <string name="autofill_inline_suggestions_keyboard">เพิ่มการแนะนำการกรอกอัตโนมัติ</string>
     <string name="allow_no_password_title">อนุญาตให้ไม่มีรหัสผ่านหลัก</string>
     <string name="allow_no_password_summary">อนุญาตให้แตะปุ่ม \"เปิด\" เมื่อไม่มีข้อมูลประจำตัวถูกเลือก</string>
     <string name="delete_entered_password_summary">ลบรหัสผ่านที่ป้อนแล้วหลังจากพยายามเชื่อมต่อที่ฐานข้อมูล</string>
@@ -612,24 +607,24 @@
     <string name="icon_pack_choose_title">ชุดไอคอน</string>
     <string name="enable_auto_save_database_summary">บันทึกฐานข้อมูลหลังจากการกระทำที่สำคัญ(ในโหมด\"แก้ไขได้\")</string>
     <string name="enable_keep_screen_on_summary">เปิดหน้าจอไว้ขณะดูหรือแก้ไขรายการ</string>
-    <string name="enable_screenshot_mode_summary">อนุญาตแอปอื่นๆบันทึกหรือถ่ายภาพหน้าจอแอปนี้</string>
+    <string name="enable_screenshot_mode_summary">อนุญาตแอปบุคคลที่สามอื่นๆสามารถบันทึกหรือถ่ายภาพหน้าจอแอปนี้</string>
     <string name="enable_education_screens_summary">ไฮไลท์องค์ประกอบเพื่อเรียนรู้ว่าแอปใช้ยังไง</string>
     <string name="enable_education_screens_title">คำแนะนำการใช้งาน</string>
     <string name="education_device_unlock_title">การปลดล็อกฐานข้อมูลด้วยอุปกรณ์</string>
     <string name="education_device_unlock_summary">เชื่อมโยงรหัสผ่านกับข้อมูลไบโอเมตริกหรือข้อมูลการเข้าสู่ระบบเพื่อปลดล็อกฐานข้อมูลได้เร็วขึ้น</string>
     <string name="education_entry_edit_title">แก้ไขรายการ</string>
     <string name="education_entry_edit_summary">แก้ไขรายการด้วยเขตข้อมูลที่กำหนดเอง ข้อมูลสามารถอ้างอิงได้ระหว่างรายการเขตข้อมูลต่างๆ</string>
-    <string name="education_entry_new_field_summary">กำหนดช่องเขตข้อมูลเพื่มเติม, เพื่มค่าหรือจะเพื่มการป้องกันให้มันด้วยก็ได้</string>
+    <string name="education_entry_new_field_summary">กำหนดช่องเขตข้อมูลเพิ่มเติม, เพิ่มค่าหรือจะเพิ่มการป้องกันให้ด้วยก็ได้</string>
     <string name="education_generate_password_summary">สร้างรหัสผ่านที่แข็งแรงเพื่อใช้กับรายการของคุณ ความง่ายในการระบุขึ้นอยู่กับลักษณะแบบฟอร์มนั้น และจงอย่าลืมรหัสผ่านที่ปลอดภัย</string>
-    <string name="education_add_attachment_summary">อัปโหลดเอกสารแนบไปยังรายการของคุณเพื่อบันทึกข้อมูลภายนอกเพิ่มเติม</string>
-    <string name="education_setup_OTP_summary">ตั่้งค่ารหัสผ่านแบบใช้ครั้งเดียว (HOTP/TOTP) เพิ่อสร้างโทเค็นสำหรับการยืนยันสองขั้นตอน (2FA)</string>
+    <string name="education_add_attachment_summary">อัปโหลดไฟล์แนบไปยังรายการของคุณเพื่อบันทึกข้อมูลภายนอกเพิ่มเติม</string>
+    <string name="education_setup_OTP_summary">ตั้งค่ารหัสผ่านแบบใช้ครั้งเดียว (HOTP/TOTP) เพื่อสร้างโทเค็นสำหรับการตรวจสอบสิทธิ์สองปัจจัย (2FA)</string>
     <string name="education_field_copy_title">คัดลอกเขตข้อมูล</string>
-    <string name="education_donation_summary">ช่วยเพื่มความสเถียร ความปลอดภัย และใส่ฟีเจอร์เข้าไปเพื่มเติม</string>
+    <string name="education_donation_summary">ช่วยเพิ่มความเสถียร ความปลอดภัย และใส่ฟีเจอร์เข้าไปเพิ่มเติม</string>
     <string name="html_text_ad_free">ไม่เหมือนแอปจัดการรหัสผ่านอื่นๆ แอปนี้&lt;strong&gt;เป็นซอฟท์แวร์แบบเสรี&lt;/strong&gt;, &lt;strong&gt;ปลอดโฆษณา&lt;/strong&gt; และไม่เก็บข้อมูลผู้ใช้ไว้บนเซิฟเวอร์ ไม่ว่าจะใช้เวอร์ชั่นอะไรก็ตาม</string>
     <string name="html_text_buy_pro">โดยการซื้อเวอร์ชั่นโปร คุณจะได้เข้าถึง &lt;strong&gt;สไตล์ของแอปที่มากขึ้น&lt;/strong&gt; และยังมีส่วนช่วย &lt;strong&gt;พัฒนาโครงการโดยชุมชนนี้ต่อไป&lt;/strong&gt;</string>
     <string name="html_text_feature_generosity">&lt;strong&gt;สไตล์ของแอป&lt;/strong&gt; นี้ใช้งานได้ ขอขอบคุณการสนับสนุนของคุณ</string>
     <string name="html_text_dev_feature">ฟีเจอร์นี้ &lt;strong&gt;อยู่ในระหว่างการพัฒนา&lt;/strong&gt; และต้องการ &lt;strong&gt;ร่วมแก้ไข&lt;/strong&gt;ของคุณ และเปิดให้ใช้งานเร็วๆนี้</string>
-    <string name="html_text_dev_feature_buy_pro">โดยการซื้อเวอร์ขั่น&lt;strong&gt;โปร&lt;/strong&gt;</string>
+    <string name="html_text_dev_feature_buy_pro">โดยการซื้อเวอร์ชั่น<strong>โปร</strong></string>
     <string name="merge_success">การควบรวมเสร็จสมบูรณ์</string>
     <string name="warning_database_notification_permission">การอนุญาตสิทธิ์แจ้งเตือนจะทำให้คุณเห็นสถานะของฐานข้อมูลและล็อกมันด้วยปุ่มที่เข้าถืงง่าย
 \n
@@ -649,15 +644,13 @@
     <string name="menu_device_unlock_settings_summary">ไบโอเมตริก, ข้อมูลประจำตัวของอุปกรณ์</string>
     <string name="menu_database_settings_summary">เมตาดาต้า, ถังขยะ, แม่แบบ, ประวัติ</string>
     <string name="menu_app_settings_summary">การค้นหา, การล็อก, ประวัติ, ค่ากำหนด</string>
-    <string name="education_validate_entry_summary">พึงระลึกไว้ว่าตรวจสอบข้อมูลรายการและบันทึกฐานข้อมูลไว้ให้ดี
-\n
-\nหากการล็อกอัตโนมัติเปิดใช้งานและลีมบันทึกการเปลี่ยนแปลงไว้ คุณมีความเสียงที่ข้อมูลจะสูญหาย</string>
+    <string name="education_validate_entry_summary">พึงระลึกไว้ว่าตรวจสอบข้อมูลรายการและบันทึกฐานข้อมูลไว้ให้ดี \n \nหากการล็อกอัตโนมัติเปิดใช้งานและลืมบันทึกการเปลี่ยนแปลงไว้ คุณมีความเสี่ยงที่ข้อมูลจะสูญหาย</string>
     <string name="style_name_light">สว่าง</string>
     <string name="warning_database_info_changed_options_read_only">โหลดฐานข้อมูลใหม่ด้วยการเปลี่ยนแปลงล่าสุด</string>
     <string name="style_name_forest">ป่าไม้</string>
     <string name="style_name_classic">คลาสสิก</string>
     <string name="style_name_simple">เรียบง่าย</string>
-    <string name="style_name_moon">แสงจันทร์</string>
+    <string name="style_name_moon">แสงพระจันทร์</string>
     <string name="style_name_sun">พระอาทิตย์</string>
     <string name="style_name_follow_system">ตามสีของระบบ</string>
     <string name="style_name_dark">มืด</string>
@@ -665,7 +658,7 @@
     <string name="nodes">โหนด</string>
     <string name="warning_large_keyfile">ไม่แนะนำให้ใช้ keyfile ขนาดใหญ่ๆ เพราะอาจจะทำให้เปิดฐานข้อมูลรหัสผ่านไม่ได้</string>
     <string name="hide_templates_title">ซ่อนแม่แบบ</string>
-    <string name="hide_templates_summary">แม่แบบไม่แสดง</string>
+    <string name="hide_templates_summary">ไม่แสดงเเม่เเบบ</string>
     <string name="credential_provider">ผู้ให้บริการบัญชีเข้าใช้</string>
     <string name="credential_provider_service_subtitle">ผู้ให้บริการพาสคีย์และการป้อนข้อมูลอัตโนมัติ</string>
     <string name="passkeys_explanation_summary">ตั้งค่าพาสคีย์เพื่อการเข้าสู่ระบบที่รวดเร็วและปลอดภัยยิ่งขึ้นโดยไม่ต้องกรอกรหัสผ่าน</string>
@@ -700,4 +693,38 @@
     <string name="user_verification_device_credential_summary">หากมี ให้ใช้ข้อมูลประจำตัวของอุปกรณ์เพื่อยืนยันตัวตนผู้ใช้</string>
     <string name="user_verification_preferred_title">การยืนยันผู้ใช้ที่ต้องการ</string>
     <string name="user_verification_preferred_summary">ดำเนินการตรวจสอบผู้ใช้เมื่อฝ่ายที่พึ่งพาขอ \"ตัวเลือกที่ต้องการ\"</string>
+    <string name="keyboard_auto_switch_title">ออโต้เมจิคีย์บอร์ดสวิสต์</string>
+    <string name="keyboard_auto_switch_summary">ลองตั้งค่าให้สลับไปใช้ Magikeyboard โดยอัตโนมัติเมื่อมีการป้อนข้อมูลเสร็จแล้ว</string>
+    <string name="autofill_share_magikeyboard_title">เเบ่งปันไปที่เมจิคีย์บอร์ด</string>
+    <string name="autofill_share_magikeyboard_summary">เเบ่งปันข้อมูลที่ดึงมาจากฟังก์ชันเติมข้อความอัตโนมัติไปยัง Magikeyboard</string>
+    <string name="style_name_divine">ศักด์สิทธิ์</string>
+    <string name="style_name_reply">ตอบกลับ</string>
+    <string name="style_name_kunzite">คุนไซต์</string>
+    <string name="passkey">พาสคีย์</string>
+    <string name="credential_provider_service_name">ผู้ให้บริการข้อมูลประจำตัว KeePassDX</string>
+    <string name="credential_provider_database_username">ฐานข้อมูล KeePassDX</string>
+    <string name="credential_provider_locked_database_description">เลือกที่จะปลดล็อก</string>
+    <string name="passkey_creation_description">บันทึกพาสคีย์ในรายการใหม่</string>
+    <string name="passkey_update_description">ปรับปรุงพาสคีย์ใน %1$s</string>
+    <string name="passkey_selection_username">ไม่พบพาสคีย์</string>
+    <string name="passkey_selection_description">เลือกพาสคีย์ที่มีอยู่</string>
+    <string name="passkey_username">ชื่อผู้ใช้พาสคีย์</string>
+    <string name="passkey_private_key">คีย์สาธารณะพาสคีย์</string>
+    <string name="passkey_credential_id">รหัสประจำตัวพาสคีย์</string>
+    <string name="passkey_user_handle">ชื่อผู้ใช้พาสคีย์</string>
+    <string name="passkey_relying_party">ผู้ออกพาสคีย์</string>
+    <string name="passkey_backup_eligibility">คุณสมบัติการสำรองข้อมูลพาสคีย์</string>
+    <string name="passkey_backup_state">สถานะการสำรองข้อมูลพาสคีย์</string>
+    <string name="error_passkey_result">ไม่สามารถส่งคืนพาสคีย์ได้</string>
+    <string name="error_passkey_credential_id">ไม่พบผู้ออกสำหรับพาสคีย์ %1$s และรหัสประจำตัว %2$s</string>
+    <string name="password_creation_description">บันทึกรหัสผ่านในรายการใหม่</string>
+    <string name="password_selection_description">เลือกรหัสผ่านที่มีอยู่</string>
+    <string name="error_password_result">ไม่สามารถส่งคืนรหัสผ่าน</string>
+    <string name="content_description_user_verification_information">ข้อมูลการยืนยันผู้ใช้</string>
+    <string name="user_verification_required_title">การยืนยันผู้ใช้</string>
+    <string name="user_verification_required_description">การเข้าถึงข้อมูลนี้จำเป็นต้องมีการตรวจสอบยืนยันว่าเป็นคุณจริง</string>
+    <string name="user_verification_required_description_precise">%1$s จำเป็นต้องมีการตรวจสอบยืนยันว่าเป็นคุณจริง</string>
+    <string name="user_verification_database_credential">ป้อนอักขระสี่ตัวแรกของรหัสผ่านฐานข้อมูลของคุณ</string>
+    <string name="first_chars">อักษรเเรก</string>
+    <string name="check">ตรวจสอบ</string>
 </resources>
