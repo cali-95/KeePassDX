@@ -4,7 +4,7 @@
     <string name="encryption">การเข้ารหัส</string>
     <string name="contribution">ร่วมพัฒนา</string>
     <string name="feedback">ข้อเสนอแนะ</string>
-    <string name="about_description">แอปจัดการรหัสผ่านแบบ KeePass ในเวอร์ชั่น Android</string>
+    <string name="about_description">แอปจัดการรหัสผ่านแบบ KeePass ในเวอร์ชั่น Android.</string>
     <string name="accept">ยอมรับ</string>
     <string name="add_group">เพิ่มกลุ่ม</string>
     <string name="master_key">รหัสผ่านหลัก</string>
@@ -117,7 +117,7 @@
     <string name="file_browser">ตัวจัดการไฟล์</string>
     <string name="hint_group_name">ชื่อกลุ่ม</string>
     <string name="hint_icon_name">ชื่อไอคอน</string>
-    <string name="hint_keyfile">Keyfile</string>
+    <string name="hint_keyfile">คีย์ไฟล์</string>
     <string name="hint_length">ความยาว</string>
     <string name="passphrase">วลีรหัสผ่าน</string>
     <string name="invalid_credentials">ไม่สามารถอ่านข้อมูลประจําตัว</string>
@@ -194,7 +194,7 @@
     <string name="education_lock_summary">ล็อกฐานข้อมูลอย่างรวดเร็ว คุณสามารถตั้งค่าการล็อกมันหลังจากผ่านไปสักพัก และเมื่อปิดหน้าจอ</string>
     <string name="education_sort_title">จัดเรียงรายการ</string>
     <string name="education_sort_summary">เลือกรายการและกลุ่มที่จะถูกจัดเรียง</string>
-    <string name="html_text_donation">เพื่อเป็นการรักษาความอิสระและพัฒนาอยู่เสมอ เรารอคอยการ&lt;strong&gt;ร่วมแก้ไข&lt;/strong&gt;ของคุณ</string>
+    <string name="html_text_donation">การ<strong>สนับสนุน</strong>โครงการ <i>(ทางการเงิน โค้ด หรือการแปล)</i> จะช่วยให้โครงการนี้ดำเนินต่อไปและเติบโตได้ และคุณยังมีสิทธิ์เข้าร่วมขั้นตอนการปลดล็อก<strong>ธีม</strong>อีกด้วย</string>
     <string name="html_text_dev_feature_encourage">คุณกำลังสนับสนุนให้นักพัฒนาสร้าง<strong>ฟีเจอร์ใหม่</strong>และ<strong>แก้ไขข้อบกพร่อง</strong>ตามที่คุณกล่าวไว้</string>
     <string name="html_text_dev_feature_thanks">ขอขอบคุณสำหรับการร่วมแก้ไขของคุณเป็นอย่างมาก</string>
     <string name="html_text_dev_feature_work_hard">เรากำลังทำงานหนักเพื่อปล่อยให้ใด้ใช้งานฟีเจอร์นี้โดยเร็วที่สุด</string>
@@ -420,7 +420,7 @@
     <string name="date_of_issue">วันที่ออก</string>
     <string name="entry_notes">โน้ต</string>
     <string name="entry_cancel">ยกเลิก</string>
-    <string name="entry_keyfile">Keyfile</string>
+    <string name="entry_keyfile">คีย์ไฟล์</string>
     <string name="tags">แท็ก</string>
     <string name="custom_data">ข้อมูลที่กำหนดเอง</string>
     <string name="otp_algorithm">อัลกอริทึม</string>
@@ -543,10 +543,7 @@
     <string name="temp_device_unlock_timeout_summary">ระยะเวลาของการใช้การปลดล็อกด้วยอุปกรณ์ก่อนที่จะลบข้อมูลดังกล่าวออก</string>
     <string name="biometric_delete_all_key_title">ลบกุญแจเข้ารหัส</string>
     <string name="database_data_compression_title">การบีบอัดข้อมูล</string>
-    <string name="device_unlock_keystore_warning">ฟีเจอร์นี่จะเก็บข้อมูลประจำตัวที่เข้ารหัสไว้ที่ KeyStore ที่ปลอดภัยในอุปกรณ์ของคุณ
-\n
-\nขึ้นอยู่กับการใช้ Native API โดยระบบปฎิบัติการ มันอาจจะทำงานไม่สมบูรณ์
-\nตรวจสอบความเข้ากันได้และความปลอดภัยของ KeyStore กับผู้ผลิตหรือผู้พัฒนารอมที่คุณใช้อยู่</string>
+    <string name="device_unlock_keystore_warning">ฟีเจอร์นี่จะเก็บข้อมูลประจำตัวที่เข้ารหัสไว้ที่ KeyStore ที่ปลอดภัยในอุปกรณ์ของคุณ \n \nขึ้นอยู่กับการใช้ Native API โดยระบบปฎิบัติการ มันอาจจะทำงานไม่สมบูรณ์ \n\nตรวจสอบความเข้ากันได้และความปลอดภัยของ KeyStore กับผู้ผลิตหรือผู้พัฒนารอมที่คุณใช้อยู่</string>
     <string name="unavailable_feature_text">เริ่มฟิวเจอร์นี้ไม่ได้</string>
     <string name="data">ข้อมูล</string>
     <string name="database_data_compression_summary">การบีบอัดข้อมูลจะลดขนาดของฐานข้อมูล</string>
@@ -727,4 +724,9 @@
     <string name="user_verification_database_credential">ป้อนอักขระสี่ตัวแรกของรหัสผ่านฐานข้อมูลของคุณ</string>
     <string name="first_chars">อักษรเเรก</string>
     <string name="check">ตรวจสอบ</string>
+    <string name="menu_user_verification_disabled">ปิดใช้งานการตรวจสอบผู้ใช้</string>
+    <string name="menu_user_verification_enabled">เปิดใช้งานการตรวจสอบผู้ใช้</string>
+    <string name="user_verification_mode_summary">เปิดใช้งานโหมดการตรวจสอบผู้ใช้โดยค่าเริ่มต้นเมื่อเปิดฐานข้อมูล</string>
+    <string name="user_verification_mode_title">โหมดการตรวจสอบผู้ใช้</string>
+    <string name="user_verification">การตรวจสอบผู้ใช้</string>
 </resources>
