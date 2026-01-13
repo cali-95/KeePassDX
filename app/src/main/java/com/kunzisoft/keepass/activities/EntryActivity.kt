@@ -265,7 +265,7 @@ class EntryActivity : DatabaseLockActivity() {
                         MagikeyboardService.addEntry(
                             context = this,
                             entry = entryInfo,
-                            toast = true,
+                            toast = false,
                             autoSwitchKeyboard = mSwitchToMagikeyboard
                         )
                     }

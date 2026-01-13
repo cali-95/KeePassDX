@@ -1,3 +1,6 @@
+KeePassDX(4.3.2)
+ * Fix dialog for entry available on magikeyboard #2367
+
 KeePassDX(4.3.1)
  * Select User Verification mode at database opening #2321
  * Fix reloading changed database #2334
