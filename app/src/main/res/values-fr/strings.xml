@@ -761,4 +761,6 @@
     <string name="user_verification_mode_summary">Activer le mode de Vérification Utilisateur par défaut lors de l\'ouverture d\'une base de données</string>
     <string name="menu_user_verification_enabled">Vérification Utilisateur activé</string>
     <string name="menu_user_verification_disabled">Vérification Utilisateur désactivé</string>
+    <string name="education_user_verification_title">Vérification pour les actions sensibles</string>
+    <string name="education_user_verification_summary">Changer le mode de vérification de l\'utilisateur pour cette session\n\n\"Vérification Utilisateur activé\" vérifie l\'action pour les champs protégés et les paramètres de base de données.\n\"Vérification Utilisateur désactivé\" vous permet de changer toute donnée dans votre base de données sans vérification.</string>
 </resources>
