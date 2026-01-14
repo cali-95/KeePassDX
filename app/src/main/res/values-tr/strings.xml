@@ -728,4 +728,5 @@
     <string name="passkey_backup_eligibility">Geçiş Anahtarı Yedekleme Uygunluğu</string>
     <string name="passkey_backup_state">Geçiş Anahtarı Yedekleme Durumu</string>
     <string name="error_passkey_result">Geçiş anahtarı döndürülemiyor</string>
+    <string name="user_verification_preferred_title">Önerilen Kullanıcı Doğrulaması</string>
 </resources>

@@ -19,7 +19,7 @@
 --><resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="feedback">Comentários</string>
     <string name="homepage">Página inicial</string>
-    <string name="about_description">Uma implementação do gestor de palavras-chave KeePass para Android</string>
+    <string name="about_description">Implementação do gestor de senhas KeePass para Android.</string>
     <string name="accept">Aceitar</string>
     <string name="add_entry">Adicionar entrada</string>
     <string name="add_group">Adicionar grupo</string>
@@ -696,4 +696,7 @@
     <string name="hide_templates_title">Ocultar modelos</string>
     <string name="hide_templates_summary">Os modelos não são mostrados</string>
     <string name="error_otp_secret_length">Chave secreta deve ter pelo menos %1$d caracteres.</string>
+    <string name="clipboard_otp_notifications_title">Notificação OTP</string>
+    <string name="clipboard_otp_notifications_summary">Abra uma notificação para copiar o OTP das entradas preenchidas com preenchimento automático ou magikeyboard</string>
+    <string name="entry_application_id">Id de aplicação</string>
 </resources>
