@@ -645,6 +645,11 @@
 \n
 \n\"Write-protected\" prevents unintended changes to the database.
 \n\"Modifiable\" lets you add, delete, or modify all the elements as you wish.</string>
+    <string name="education_user_verification_title">Verification for sensitive actions</string>
+    <string name="education_user_verification_summary">Change user verification mode for the session.
+\n
+\n\"User Verification Enabled\" verifies action on protected fields and database settings.
+\n\"User Verification Disabled\" lets you change any data in your database without verification.</string>
     <string name="education_field_copy_title">Copy a field</string>
     <string name="education_field_copy_summary">Copied fields can be pasted anywhere.\n\nUse the form filling method you prefer.</string>
     <string name="education_lock_title">Lock the database</string>
