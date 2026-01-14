@@ -753,4 +753,6 @@
     <string name="user_verification_mode_summary">Domyślnie włącza tryb weryfikacji użytkownika podczas otwierania bazy danych</string>
     <string name="menu_user_verification_enabled">Weryfikacja użytkownika włączona</string>
     <string name="menu_user_verification_disabled">Weryfikacja użytkownika wyłączona</string>
+    <string name="education_user_verification_title">Weryfikacja działań wrażliwych</string>
+    <string name="education_user_verification_summary">Zmień tryb weryfikacji użytkownika w sesji.\n\nOpcja „Weryfikacja użytkownika włączona” weryfikuje działania dotyczące pól chronionych i ustawień bazy danych.\nOpcja „Weryfikacja użytkownika wyłączona” umożliwia zmianę dowolnych danych w bazie danych bez weryfikacji.</string>
 </resources>
