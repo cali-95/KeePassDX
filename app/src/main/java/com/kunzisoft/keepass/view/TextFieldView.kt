@@ -155,9 +155,6 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
                 it.addRule(START_OF, showButtonId)
                 it.addRule(BELOW, labelViewId)
             }
-            setTextIsSelectable(false)
-            isFocusable = false
-            isFocusableInTouchMode = false
         }
     }
 
@@ -225,8 +222,11 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
         valueView.apply {
             if (showButton.isVisible) {
                 applyHiddenStyle(isCurrentlyProtected)
+                setCopyButtonState(mButtonState)
             } else {
                 linkify()
+                isFocusable = true
+                setTextIsSelectable(true)
             }
         }
         invalidate()
@@ -255,7 +255,11 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
         return null
     }
 
+    private var mButtonState: ButtonState = ButtonState.DEACTIVATE
+
     fun setCopyButtonState(buttonState: ButtonState) {
+        val isCurrentlyProtected = isCurrentlyProtected()
+        mButtonState = buttonState
         when (buttonState) {
             ButtonState.ACTIVATE -> {
                 copyButton.apply {
@@ -263,8 +267,8 @@ open class TextFieldView @JvmOverloads constructor(context: Context,
                     isActivated = false
                 }
                 valueView.apply {
-                    isFocusable = true
-                    setTextIsSelectable(true)
+                    isFocusable = !showButton.isVisible || !isCurrentlyProtected
+                    setTextIsSelectable(!showButton.isVisible || !isCurrentlyProtected)
                 }
             }
             ButtonState.DEACTIVATE -> {

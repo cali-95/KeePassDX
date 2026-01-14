@@ -1,1 +1,3 @@
  * Fix dialog for entry available on magikeyboard #2367
+ * Fix automatic URL and ApplicationId links #2373
+ * Fix selectable non protected field #2368
