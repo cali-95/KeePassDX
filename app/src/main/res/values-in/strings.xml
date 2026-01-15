@@ -643,7 +643,7 @@
     <string name="warning_database_notification_permission">Izin notifikasi memungkinkan Anda untuk menampilkan status basis data dan menguncinya dengan tombol yang mudah diakses.
 \n
 \nJika Anda tidak mengaktifkan, basis data yang terbuka di latar belakang tidak akan terlihat jika ada aplikasi lain di latar depan.</string>
-    <string name="warning_copy_permission">Izin pemberitahuan diperlukan untuk menggunakan fitur pemberitahuan papan klip.</string>
+    <string name="warning_permission">Izin pemberitahuan diperlukan untuk menggunakan fitur pemberitahuan papan klip.</string>
     <string name="ask">Tanya</string>
     <string name="configure">Atur</string>
     <string name="later">Nanti</string>

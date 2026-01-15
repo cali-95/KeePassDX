@@ -663,7 +663,7 @@
     <string name="education_validate_entry_summary">Girdinizi doğrulamayı ve veri tabanınızı kaydetmeyi unutmayın. \n \nOtomatik kilitleme etkinleştirilirse ve değişiklik yaptığınızı unutursanız verilerinizi kaybetme riskiyle karşı karşıya kalırsınız.</string>
     <string name="warning_database_notification_permission">Bildirim izni, veri tabanının durumunu görüntülemenize ve kolayca erişilebilen bir düğmeyle kilitlemenize olanak tanır. \n \nBu izni etkinleştirmezseniz arka planda açık olan veri tabanı, ön planda başka bir uygulama varken görünmeyecektir.</string>
     <string name="unlock_and_link_biometric">Aygıt kilit açma bağlantısı</string>
-    <string name="warning_copy_permission">Pano bildirim özelliğini kullanmak için bildirim izni gereklidir.</string>
+    <string name="warning_permission">Pano bildirim özelliğini kullanmak için bildirim izni gereklidir.</string>
     <string name="menu_database_settings_summary">Meta veriler, geri dönüşüm kutusu, şablonlar, geçmiş</string>
     <string name="menu_app_settings_summary">Ara, kilit, geçmiş, özellikler</string>
     <string name="later">Daha Sonra</string>

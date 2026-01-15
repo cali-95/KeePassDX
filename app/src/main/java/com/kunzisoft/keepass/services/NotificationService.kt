@@ -225,7 +225,7 @@ abstract class NotificationService : Service() {
                 if (showError) {
                     Toast.makeText(
                         context,
-                        R.string.warning_copy_permission,
+                        R.string.warning_permission,
                         Toast.LENGTH_LONG
                     ).show()
                 }

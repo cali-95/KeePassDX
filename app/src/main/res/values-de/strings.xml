@@ -676,7 +676,7 @@
     <string name="warning_database_notification_permission">Die Benachrichtigungsberechtigung ermöglicht es, den Status der Datenbank anzuzeigen und sie mit einer leicht zugänglichen Taste zu sperren.
 \n
 \nWird diese Berechtigung nicht aktiviert, ist die im Hintergrund geöffnete Datenbank nicht sichtbar, wenn eine Anwendung im Vordergrund läuft.</string>
-    <string name="warning_copy_permission">Die Benachrichtigungsberechtigung ist erforderlich, um die Benachrichtigungsfunktion der Zwischenablage zu nutzen.</string>
+    <string name="warning_permission">Die Benachrichtigungsberechtigung ist erforderlich, um die Benachrichtigungsfunktion der Zwischenablage zu nutzen.</string>
     <string name="unlock">Entsperren</string>
     <string name="education_validate_entry_title">Eintrag überprüfen</string>
     <string name="education_validate_entry_summary">Bitte daran denken, den Eintrag zu überprüfen und die Datenbank zu speichern.

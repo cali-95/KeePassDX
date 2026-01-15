@@ -665,7 +665,7 @@
     <string name="menu_database_settings_summary">Metadati, cestino, modelli, cronologia</string>
     <string name="menu_security_settings_summary">Crittografia, funzione di derivazione della chiave</string>
     <string name="master_key_settings_summary">Cambio, rinnovo</string>
-    <string name="warning_copy_permission">L\'autorizzazione per le notifiche è necessaria per usare la funzione di notifica degli appunti.</string>
+    <string name="warning_permission">L\'autorizzazione per le notifiche è necessaria per usare la funzione di notifica degli appunti.</string>
     <string name="later">Dopo</string>
     <string name="ask">Chiedi</string>
     <string name="configure">Configura</string>

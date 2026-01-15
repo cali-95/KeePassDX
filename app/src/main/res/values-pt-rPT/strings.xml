@@ -670,7 +670,7 @@
 \nSe um bloqueio automático estiver ativado e se esquecer que está a fazer uma modificação, corre o risco de perder os seus dados.</string>
     <string name="menu_device_unlock_settings_summary">Biometria, credencial do dispositivo</string>
     <string name="menu_database_settings_summary">Metadados, reciclagem, modelos, histórico</string>
-    <string name="warning_copy_permission">A permissão de notificação é necessária para utilizar a funcionalidade de notificação da área de transferência.</string>
+    <string name="warning_permission">A permissão de notificação é necessária para utilizar a funcionalidade de notificação da área de transferência.</string>
     <string name="later">Mais tarde</string>
     <string name="ask">Perguntar</string>
     <string name="configure">Configurar</string>

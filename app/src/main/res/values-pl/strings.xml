@@ -651,7 +651,7 @@
     <string name="menu_database_settings_summary">Metadane, kosz, szablony, historia</string>
     <string name="menu_security_settings_summary">Szyfrowanie, funkcja wyprowadzania klucza</string>
     <string name="master_key_settings_summary">Zmiana, odnowienie</string>
-    <string name="warning_copy_permission">Uprawnienie do powiadamiania jest wymagane do korzystania z funkcji powiadamiania o schowku.</string>
+    <string name="warning_permission">Uprawnienie do powiadamiania jest wymagane do korzystania z funkcji powiadamiania o schowku.</string>
     <string name="later">Później</string>
     <string name="ask">Zapytaj</string>
     <string name="configure">Skonfiguruj</string>

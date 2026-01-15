@@ -675,7 +675,7 @@
     <string name="hide_templates_title">Skryť šablóny</string>
     <string name="hide_templates_summary">Šablóny sa nezobrazujú</string>
     <string name="warning_database_notification_permission">Oprávnenie na oznámenia umožňuje zobraziť stav databázy a uzamknúť ju ľahko dostupným tlačidlom.\n\nAk neaktivujete toto oprávnenie, databáza otvorená na pozadí nebude viditeľná ak je v popredí iná aplikácia.</string>
-    <string name="warning_copy_permission">Oprávnenie na oznámenia je potrebné na použitie funkcie oznámenia o schránke.</string>
+    <string name="warning_permission">Oprávnenie na oznámenia je potrebné na použitie funkcie oznámenia o schránke.</string>
     <string name="later">Neskôr</string>
     <string name="education_validate_entry_title">Overiť vstup</string>
     <string name="warning_database_info_changed_options_read_only">Znovu načítať databázu s poslednými zmenami.</string>

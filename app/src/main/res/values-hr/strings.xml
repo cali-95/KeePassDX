@@ -654,7 +654,7 @@
     <string name="menu_form_filling_settings_summary">Tipkovnica, automatsko ispunjavanje, međuspremnik</string>
     <string name="menu_database_settings_summary">Metapodaci, koš za smeće, predlošci, povijest</string>
     <string name="menu_security_settings_summary">Šifriranje, funkcija derivacije ključa</string>
-    <string name="warning_copy_permission">Dozvola za obavijesti je potrebna za korištenje funkcije obavijesti međuspremnika.</string>
+    <string name="warning_permission">Dozvola za obavijesti je potrebna za korištenje funkcije obavijesti međuspremnika.</string>
     <string name="later">Kasnije</string>
     <string name="ask">Pitaj</string>
     <string name="warning_database_notification_permission">Dozvola za obavijesti omogućuje prikaz stanja baze podataka i zaključavanje pomoću lako dostupnog gumba.

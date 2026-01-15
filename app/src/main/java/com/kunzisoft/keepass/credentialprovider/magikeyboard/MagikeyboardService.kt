@@ -37,7 +37,6 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.BlendModeColorFilterCompat
 import androidx.core.graphics.BlendModeCompat
@@ -447,7 +446,6 @@ class MagikeyboardService : InputMethodService(),
                     addEntries(
                         context = this,
                         entryList = items,
-                        toast = true,
                         autoSwitchKeyboard = false
                     )
                     assignKeyboardView()
@@ -568,13 +566,11 @@ class MagikeyboardService : InputMethodService(),
         fun addEntry(
             context: Context,
             entry: EntryInfo,
-            toast: Boolean,
             autoSwitchKeyboard: Boolean
         ) {
             addEntries(
                 context = context,
                 entryList = listOf(entry),
-                toast = toast,
                 autoSwitchKeyboard = autoSwitchKeyboard
             )
         }
@@ -582,7 +578,6 @@ class MagikeyboardService : InputMethodService(),
         fun addEntries(
             context: Context,
             entryList: List<EntryInfo>,
-            toast: Boolean,
             autoSwitchKeyboard: Boolean
         ) {
             // Open OTP notification
@@ -601,17 +596,6 @@ class MagikeyboardService : InputMethodService(),
                         && currentDefaultKeyboard(context) != getMagikeyboardId(context)
                     ) {
                         context.startActivity(getSwitchMagikeyboardIntent(context))
-                    } else if (toast) {
-                        // Show the message for the first entry
-                        Toast.makeText(
-                            context,
-                            context.getString(
-                                R.string.keyboard_notification_entry_content_title,
-                                entryList.getOrNull(0)?.getVisualTitle()
-                                    ?: context.getString(R.string.keyboard_notification_entry_content_title_text)
-                            ),
-                            Toast.LENGTH_SHORT
-                        ).show()
                     }
                 }
             } else {

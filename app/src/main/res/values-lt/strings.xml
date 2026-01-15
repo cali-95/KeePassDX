@@ -441,7 +441,7 @@
     <string name="kdf_explanation">Norint sugeneruoti raktą šifravimo algoritmui, pagrindinis raktas yra transformuojamas naudojant atsitiktinai su druska užpildytą rakto išvedimo funkciją.</string>
     <string name="warning_large_keyfile">Nerekomenduojama pridėti didelio rakto failo, tai gali sutrukdyti atidaryti duomenų bazę.</string>
     <string name="warning_database_notification_permission">Pranešimo leidimas leidžia rodyti duomenų bazės būseną ir užrakinti ją lengvai prieinamu mygtuku.\n\nJei neaktyvuosite šio leidimo, duomenų bazė, atidaryta fone, nebus matoma, jei priekyje yra kita programa.</string>
-    <string name="warning_copy_permission">Reikalingas pranešimo leidimas iškarpinės pranešimo funkcijos naudojimui.</string>
+    <string name="warning_permission">Reikalingas pranešimo leidimas iškarpinės pranešimo funkcijos naudojimui.</string>
     <string name="warning_overwrite_data_title">Perrašyti esamus duomenis?</string>
     <string name="warning_overwrite_data_description">Šis veiksmas pakeis esamus duomenis įraše, senus duomenis galite atgauti jei įjungta istorija.</string>
     <string name="build_label">Sukurta %1$s</string>

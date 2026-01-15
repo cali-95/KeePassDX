@@ -661,7 +661,7 @@
     <string name="menu_database_settings_summary">Метадані, кошик, шаблони, історія</string>
     <string name="menu_security_settings_summary">Шифрування, функція генерування ключів</string>
     <string name="master_key_settings_summary">Зміни, оновлення</string>
-    <string name="warning_copy_permission">Щоб використовувати функцію сповіщень буфера обміну, потрібен дозвіл на сповіщення.</string>
+    <string name="warning_permission">Щоб використовувати функцію сповіщень буфера обміну, потрібен дозвіл на сповіщення.</string>
     <string name="later">Пізніше</string>
     <string name="ask">Запитувати</string>
     <string name="configure">Сконфігурувати</string>

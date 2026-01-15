@@ -431,7 +431,7 @@
     <string name="warning_large_keyfile">Liiga suure võtmefaili lisamine pole hea mõte - see võib tekitada olukorra, kus andmebaasi ei saa avada.</string>
     <string name="warning_empty_keyfile_explanation">Võtmefaili sisu ei tohiks kunagi muutuda ning ideaalis peaks ta koosnema juhuslikult loodud andmetest.</string>
     <string name="warning_database_info_changed">Sinu andmebaasis leiduvat teavet on muutnud väline rakendus.</string>
-    <string name="warning_copy_permission">Selleks, et lõikelauaga seotud teavitused toimiks, peavad rakendusel olema teavituste saatmise õigused.</string>
+    <string name="warning_permission">Selleks, et lõikelauaga seotud teavitused toimiks, peavad rakendusel olema teavituste saatmise õigused.</string>
     <string name="ask">Küsi</string>
     <string name="merge_success">Mestimine õnnestus</string>
     <string name="biometric_security_update_required">Vajalik on biomeetrilise turvalisuse uuendus.</string>

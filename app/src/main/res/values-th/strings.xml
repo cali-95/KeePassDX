@@ -620,7 +620,7 @@
     <string name="warning_database_notification_permission">การอนุญาตสิทธิ์แจ้งเตือนจะทำให้คุณเห็นสถานะของฐานข้อมูลและล็อกมันด้วยปุ่มที่เข้าถืงง่าย \n \nหากคุณไม่อนุญาตสิทธิ์นี้ ฐานข้อมูลที่เปิดในพื้นหลังจะไม่สามารถมองเห็นได้หากมีอีกแอปพลิเคชั่นอยู่ในพื้นหน้า</string>
     <string name="unlock_and_link_biometric">เชื่อมโยงการปลดล็อกของอุปกรณ์</string>
     <string name="ask">ถาม</string>
-    <string name="warning_copy_permission">ต้องการสิทธิ์การแจ้งเตือนสำหรับคุณสมบัติการแจ้งเตือนของคลิปบอร์ด</string>
+    <string name="warning_permission">ต้องการสิทธิ์การแจ้งเตือนสำหรับคุณสมบัติการแจ้งเตือนของคลิปบอร์ด</string>
     <string name="later">ภายหลัง</string>
     <string name="unlock">ปลดล็อก</string>
     <string name="master_key_settings_summary">เปลี่ยน, รอบการเปลี่ยน</string>
