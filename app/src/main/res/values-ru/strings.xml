@@ -208,7 +208,7 @@
     <string name="monospace_font_fields_enable_summary">Использовать в полях специальный шрифт для лучшей читаемости</string>
     <string name="allow_copy_password_title">Доверять буферу обмена</string>
     <string name="allow_copy_password_summary">Разрешить копирование пароля и защищённых полей в буфер обмена</string>
-    <string name="allow_copy_password_warning">Внимание: буфер обмена доступен всем приложениям. Если копируются чувствительные данные, другие программы могут их перехватить.</string>
+    <string name="allow_copy_password_warning">Внимание: буфер обмена доступен всем приложениям. Если копируются конфиденциальные данные, другие программы могут их перехватить.</string>
     <string name="database_name_title">Название базы</string>
     <string name="database_description_title">Описание базы</string>
     <string name="database_version_title">Версия базы</string>
@@ -763,4 +763,6 @@
     <string name="user_verification">Проверка пользователя</string>
     <string name="menu_user_verification_enabled">Проверка пользователя включена</string>
     <string name="menu_user_verification_disabled">Проверка пользователя отключена</string>
+    <string name="education_user_verification_title">Проверяйте действия с конфиденциальными данными</string>
+    <string name="education_user_verification_summary">Измените режим проверки пользователя для сеанса. \n \n\"Проверка пользователя включена\": запрашивается проверка для действий в защищённых полях и настройках базы. \n\"Проверка пользователя отключена\": можно изменять любые данные в базе без проверки.</string>
 </resources>
