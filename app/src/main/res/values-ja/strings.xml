@@ -754,4 +754,6 @@
     <string name="user_verification_mode_summary">デフォルトでデータベースを開く際のユーザー検証モードを有効にします</string>
     <string name="menu_user_verification_enabled">ユーザー検証を有効化</string>
     <string name="menu_user_verification_disabled">ユーザー検証を無効化</string>
+    <string name="education_user_verification_title">高機密性操作の検証</string>
+    <string name="education_user_verification_summary">セッションのユーザー検証モードを変更します。\n\n”ユーザー検証を有効化” は保護項目とデータベース設定に対する操作を検証します。\n”ユーザー検証を無効化”は無検証でデータベース内のあらゆるデータが変更できます。</string>
 </resources>
