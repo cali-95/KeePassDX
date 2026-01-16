@@ -670,7 +670,7 @@
     <string name="warning_database_notification_permission">通知权限允许展示数据库状态并通过可以轻松访问的按钮锁定它。
 \n
 \n如未授予此权限，那么在前台存在另一个程序情况下，后台打开的数据库将不可见。</string>
-    <string name="warning_copy_permission">必须授予通知权限才能使用剪贴板通知功能。</string>
+    <string name="warning_permission">必须授予通知权限才能使用剪贴板通知功能。</string>
     <string name="ask">询问</string>
     <string name="education_validate_entry_summary">记得验证你的条目并保存你的数据库。
 \n
@@ -757,4 +757,11 @@
     <string name="first_chars">前几个字符</string>
     <string name="check">检查</string>
     <string name="user_verification_required_description_precise">%1$s 需要验证您的身份。</string>
+    <string name="user_verification">用户验证</string>
+    <string name="user_verification_mode_title">用户验证模式</string>
+    <string name="user_verification_mode_summary">打开数据库时默认启用用户验证模式</string>
+    <string name="menu_user_verification_enabled">用户验证已启用</string>
+    <string name="menu_user_verification_disabled">用户验证已禁用</string>
+    <string name="education_user_verification_title">敏感操作验证</string>
+    <string name="education_user_verification_summary">更改会话的用户验证模式。\n\n“启用用户验证”会对受保护的字段和数据库设置的操作进行验证。\n“禁用用户验证”允许您在不进行验证的情况下更改数据库中的任何数据。</string>
 </resources>

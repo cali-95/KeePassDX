@@ -638,7 +638,7 @@
     <string name="error_cancel_by_user">Отказано от потребителя.</string>
     <string name="error_driver_required">За %1$s е необходим драйвер.</string>
     <string name="error_location_unknown">Мястото на хранилището е неизвестно, действието не може да бъде извършено.</string>
-    <string name="warning_copy_permission">Разрешението е необходимо за показване на известия за междинната памет.</string>
+    <string name="warning_permission">Разрешението е необходимо за показване на известия за междинната памет.</string>
     <string name="unlock_and_link_biometric">Настройка отключване с устройството</string>
     <string name="clipboard_warning">При неуспешно автоматично изчистване на междинната памет, изчистете историята ѝ ръчно.</string>
     <string name="biometric_unlock_enable_summary">Дава възможност за отключване на хранилището посредством биометрични данни</string>
@@ -735,4 +735,11 @@
     <string name="first_chars">Първи знаци</string>
     <string name="check">Проверяване</string>
     <string name="user_verification_required_description_precise">%1$s изисква установяване на самоличността.</string>
+    <string name="user_verification">Проверка на потребител</string>
+    <string name="user_verification_mode_title">Режим на проверка на потребител</string>
+    <string name="user_verification_mode_summary">Режимът за проверка на потребителя да е включен по подразбиране при отваряне на хранилището</string>
+    <string name="menu_user_verification_enabled">Проверката на потребителя е включена</string>
+    <string name="menu_user_verification_disabled">Проверката на потребителя е изключена</string>
+    <string name="education_user_verification_title">Проверяване при чувствителни действия</string>
+    <string name="education_user_verification_summary">Промяна на режима на проверяване на потребителя за сеанса.\n\n„Проверката на потребителя е включена“ проверява действията върху защитените полета и хранилището.\n„Проверката на потребителя е изключена“ дава възможност за променяне на всички данни на хранилището без проверка.</string>
 </resources>

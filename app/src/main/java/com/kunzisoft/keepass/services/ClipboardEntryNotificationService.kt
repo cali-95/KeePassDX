@@ -116,7 +116,14 @@ class ClipboardEntryNotificationService : LockNotificationService() {
                 stopService()
             }
         }
-        notificationManager?.notify(notificationId, builder.build())
+        try {
+            checkNotificationsPermission(this) {
+                notificationManager?.notify(notificationId, builder.build())
+            }
+        } catch (e: SecurityException) {
+            Log.e(TAG, "Unable to notify the entry in clipboard", e)
+            stopService()
+        }
     }
 
     private fun buildChangeOtpPendingIntent(otpToOpen: OtpModel): PendingIntent {

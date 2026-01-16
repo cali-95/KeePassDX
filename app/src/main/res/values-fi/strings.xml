@@ -439,7 +439,7 @@
     <string name="warning_database_revoked">Tiedostonhallintaohjelma on peruuttanut tiedoston käyttöoikeuden. Sulje tietokanta ja avaa se uudelleen sen sijainnista.</string>
     <string name="warning_exact_alarm">Et ole antanut sovellukselle lupaa käyttää tarkkaa hälytystä. Tämän seurauksena ajastinta vaativat toiminnot eivät toimi tarkalla ajalla.</string>
     <string name="warning_keyfile_integrity">Tiedoston tiivisteen eheys ei ole taattu, koska Android voi muuttaa sen tietoja lennossa. Vaihda tiedostopääte .bin:ksi oikean eheyden varmistamiseksi.</string>
-    <string name="warning_copy_permission">Ilmoitusoikeus tarvitaan leikepöydän ilmoitusominaisuuden käyttämiseen.</string>
+    <string name="warning_permission">Ilmoitusoikeus tarvitaan leikepöydän ilmoitusominaisuuden käyttämiseen.</string>
     <string name="later">Myöhemmin</string>
     <string name="ask">Kysy</string>
     <string name="merge_success">Yhdistäminen suoritettu onnistuneesti</string>

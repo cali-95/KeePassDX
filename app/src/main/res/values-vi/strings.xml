@@ -376,7 +376,7 @@
     <string name="warning_exact_alarm">Bạn chưa cho phép ứng dụng sử dụng báo thức chính xác. Do đó, các tính năng yêu cầu hẹn giờ sẽ không được thực hiện với thời gian chính xác.</string>
     <string name="warning_keyfile_integrity">Hàm băm của tệp không được đảm bảo vì Android có thể thay đổi dữ liệu một cách nhanh chóng. Thay đổi phần mở rộng tệp thành .bin để đảm bảo tính toàn vẹn.</string>
     <string name="warning_database_notification_permission">Quyền thông báo cho phép bạn hiển thị trạng thái của cơ sở dữ liệu và khóa nó bằng một nút dễ truy cập.\n\nNếu bạn không kích hoạt quyền này, cơ sở dữ liệu mở ở chế độ nền sẽ không hiển thị nếu một ứng dụng khác ở nền trước. </string>
-    <string name="warning_copy_permission">Cần có quyền thông báo để sử dụng tính năng thông báo bảng nhớ tạm.</string>
+    <string name="warning_permission">Cần có quyền thông báo để sử dụng tính năng thông báo bảng nhớ tạm.</string>
     <string name="later">Sau</string>
     <string name="ask">Hỏi</string>
     <string name="merge_success">Việc hợp nhất đã hoàn thành thành công</string>

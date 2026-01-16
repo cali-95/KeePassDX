@@ -431,7 +431,7 @@
     <string name="warning_large_keyfile">Liiga suure võtmefaili lisamine pole hea mõte - see võib tekitada olukorra, kus andmebaasi ei saa avada.</string>
     <string name="warning_empty_keyfile_explanation">Võtmefaili sisu ei tohiks kunagi muutuda ning ideaalis peaks ta koosnema juhuslikult loodud andmetest.</string>
     <string name="warning_database_info_changed">Sinu andmebaasis leiduvat teavet on muutnud väline rakendus.</string>
-    <string name="warning_copy_permission">Selleks, et lõikelauaga seotud teavitused toimiks, peavad rakendusel olema teavituste saatmise õigused.</string>
+    <string name="warning_permission">Selleks, et lõikelauaga seotud teavitused toimiks, peavad rakendusel olema teavituste saatmise õigused.</string>
     <string name="ask">Küsi</string>
     <string name="merge_success">Mestimine õnnestus</string>
     <string name="biometric_security_update_required">Vajalik on biomeetrilise turvalisuse uuendus.</string>
@@ -716,4 +716,11 @@
     <string name="user_verification_preferred_summary">Kui edastav osapool eeldab eelistatud tuvastamist, siis verifitseeri kasutaja</string>
     <string name="error_passkey_credential_id">Pääsuvõtit ei leidu edastava osapoole „%1$s“ ja tuvastustunnuse (credentialId) „%2$s“ jaoks</string>
     <string name="user_verification_required_description_precise">%1$s eeldab tuvastamist, et tõesti on tegemist sinuga.</string>
+    <string name="user_verification">Kasutaja verifitseerimine</string>
+    <string name="user_verification_mode_title">Kasutaja verifitseerimise režiim</string>
+    <string name="user_verification_mode_summary">Andmebaasi avamisel käivitab vaikimisi kasutaja verifitseerimise režiimi</string>
+    <string name="menu_user_verification_enabled">Kasutaja verifitseerimine on lülitatud sisse</string>
+    <string name="menu_user_verification_disabled">Kasutaja verifitseerimine on lülitatud välja</string>
+    <string name="education_user_verification_title">Verifitseerimine turvatundlike toimingute puhul</string>
+    <string name="education_user_verification_summary">Saad muuta kasutaja verifitseerimist sessioonikohaselt.\n\n„Kasutaja verifitseerimine on lülitatud sisse“ - kaitstud väljade ja andmebaasiseadistuste puhul on vajalik täiendav tuvastus.\n„Kasutaja verifitseerimine on lülitatud välja“ - saad muuta kõiki andmebaasis olevaid andmeid ilma täiendava tuvastuseta.</string>
 </resources>

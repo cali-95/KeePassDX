@@ -170,7 +170,6 @@ class AutofillLauncherViewModel(application: Application): CredentialLauncherVie
                                 MagikeyboardService.addEntries(
                                     context = getApplication(),
                                     entryList = entries,
-                                    toast = true,
                                     autoSwitchKeyboard = mSwitchToMagikeyboard
                                 )
                             } else {

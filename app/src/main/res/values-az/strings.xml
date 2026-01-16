@@ -191,7 +191,7 @@
     <string name="special">Özəl</string>
     <string name="unsupported_db_version">Dəstəklənməyən məlumat bazas versiyası.</string>
     <string name="merge_success">Birləşdirmə uğurla tamamlandı</string>
-    <string name="warning_copy_permission">Mübadilə buferi bildiriş funksiyası üçün bildiriş icazəsinə ehtiyyac var.</string>
+    <string name="warning_permission">Mübadilə buferi bildiriş funksiyası üçün bildiriş icazəsinə ehtiyyac var.</string>
     <string name="later">Sonra</string>
     <string name="ask">Soruş</string>
     <string name="configure">Kofiqurasiya et</string>

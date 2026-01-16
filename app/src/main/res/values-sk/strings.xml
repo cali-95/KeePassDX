@@ -446,7 +446,7 @@
     <string name="lock_database_back_root_title">Stlačte \'Späť\' pre uzamknutie</string>
     <string name="device_credential_unlock_enable_title">Odomykanie heslom zariadenia</string>
     <string name="biometric_auto_open_prompt_title">Výzva na automatické otvorenie</string>
-    <string name="biometric_delete_all_key_summary">Odstrániť všetky šifrovacie kľúče súvisiace s rozpoznávaním odomykania zariadením</string>
+    <string name="biometric_delete_all_key_summary">Odstráňte všetky šifrovacie kľúče súvisiace s odomykacím zariadením</string>
     <string name="unavailable_feature_hardware">Nepodarilo sa nájsť zodpovedajúci hardvér.</string>
     <string name="assign_master_key">Priraďte hlavný kľúč</string>
     <string name="data">Údaje</string>
@@ -675,7 +675,7 @@
     <string name="hide_templates_title">Skryť šablóny</string>
     <string name="hide_templates_summary">Šablóny sa nezobrazujú</string>
     <string name="warning_database_notification_permission">Oprávnenie na oznámenia umožňuje zobraziť stav databázy a uzamknúť ju ľahko dostupným tlačidlom.\n\nAk neaktivujete toto oprávnenie, databáza otvorená na pozadí nebude viditeľná ak je v popredí iná aplikácia.</string>
-    <string name="warning_copy_permission">Oprávnenie na oznámenia je potrebné na použitie funkcie oznámenia o schránke.</string>
+    <string name="warning_permission">Oprávnenie na oznámenia je potrebné na použitie funkcie oznámenia o schránke.</string>
     <string name="later">Neskôr</string>
     <string name="education_validate_entry_title">Overiť vstup</string>
     <string name="warning_database_info_changed_options_read_only">Znovu načítať databázu s poslednými zmenami.</string>

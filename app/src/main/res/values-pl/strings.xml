@@ -651,7 +651,7 @@
     <string name="menu_database_settings_summary">Metadane, kosz, szablony, historia</string>
     <string name="menu_security_settings_summary">Szyfrowanie, funkcja wyprowadzania klucza</string>
     <string name="master_key_settings_summary">Zmiana, odnowienie</string>
-    <string name="warning_copy_permission">Uprawnienie do powiadamiania jest wymagane do korzystania z funkcji powiadamiania o schowku.</string>
+    <string name="warning_permission">Uprawnienie do powiadomień jest potrzebne, aby korzystać z funkcji powiadomień w schowku.</string>
     <string name="later">Później</string>
     <string name="ask">Zapytaj</string>
     <string name="configure">Skonfiguruj</string>
@@ -748,4 +748,11 @@
     <string name="first_chars">Pierwsze znaki</string>
     <string name="check">Sprawdź</string>
     <string name="user_verification_required_description_precise">%1$s wymaga weryfikacji, że to rzeczywiście Ty.</string>
+    <string name="user_verification">Weryfikacja użytkownika</string>
+    <string name="user_verification_mode_title">Tryb weryfikacji użytkownika</string>
+    <string name="user_verification_mode_summary">Domyślnie włącza tryb weryfikacji użytkownika podczas otwierania bazy danych</string>
+    <string name="menu_user_verification_enabled">Weryfikacja użytkownika włączona</string>
+    <string name="menu_user_verification_disabled">Weryfikacja użytkownika wyłączona</string>
+    <string name="education_user_verification_title">Weryfikacja działań wrażliwych</string>
+    <string name="education_user_verification_summary">Zmień tryb weryfikacji użytkownika w sesji.\n\nOpcja „Weryfikacja użytkownika włączona” weryfikuje działania dotyczące pól chronionych i ustawień bazy danych.\nOpcja „Weryfikacja użytkownika wyłączona” umożliwia zmianę dowolnych danych w bazie danych bez weryfikacji.</string>
 </resources>

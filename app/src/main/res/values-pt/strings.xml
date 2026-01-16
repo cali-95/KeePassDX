@@ -640,7 +640,7 @@
     <string name="menu_database_settings_summary">Metadados, reciclagem, modelos, histórico</string>
     <string name="menu_security_settings_summary">Encriptação, função de derivação de chaves</string>
     <string name="master_key_settings_summary">Mudança, renovação</string>
-    <string name="warning_copy_permission">A permissão de notificação é necessária para utilizar a funcionalidade de notificação da área de transferência.</string>
+    <string name="warning_permission">A permissão de notificação é necessária para utilizar a funcionalidade de notificação da área de transferência.</string>
     <string name="later">Mais tarde</string>
     <string name="ask">Perguntar</string>
     <string name="configure">Configurar</string>

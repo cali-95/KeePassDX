@@ -161,7 +161,6 @@ class KeeAutofillService : AutofillService() {
                                 MagikeyboardService.addEntries(
                                     context = this,
                                     entryList = items,
-                                    toast = true,
                                     autoSwitchKeyboard = switchToMagikeyboard
                                 )
                             } else {

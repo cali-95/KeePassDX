@@ -648,7 +648,7 @@
     <string name="warning_database_notification_permission">Varslingstillatelsen lar deg vise statusen til databasen og låse den med en lett tilgjengelig knapp.
 \n
 \nHvis du ikke aktiverer denne tillatelsen, vil databasen som er åpen i bakgrunnen ikke være synlig hvis en annen applikasjon er i forgrunnen.</string>
-    <string name="warning_copy_permission">Varslingstillatelsen er nødvendig for å bruke utklippstavlens varslingsfunksjon.</string>
+    <string name="warning_permission">Varslingstillatelsen er nødvendig for å bruke utklippstavlens varslingsfunksjon.</string>
     <string name="later">Senere</string>
     <string name="ask">Spør</string>
     <string name="merge_success">Sammenslåingen er fullført</string>

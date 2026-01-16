@@ -653,7 +653,7 @@
     <string name="menu_security_settings_summary">Cifrado, función de derivación de las claves</string>
     <string name="master_key_settings_summary">Cambio, renovación</string>
     <string name="warning_database_notification_permission">El permiso de notificación te permite mostrar el estado de la base de datos y bloquearla con un botón de fácil acceso.\n\nSi no activas este permiso, la base de datos abierta en segundo plano no será visible si hay otra aplicación en primer plano.</string>
-    <string name="warning_copy_permission">El permiso de notificación es necesario para utilizar la función de notificaciones para el portapapeles.</string>
+    <string name="warning_permission">El permiso de notificación es necesario para utilizar la función de notificaciones para el portapapeles.</string>
     <string name="later">Más tarde</string>
     <string name="ask">Preguntar</string>
     <string name="configure">Configurar</string>

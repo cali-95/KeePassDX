@@ -485,7 +485,7 @@
     <string name="device_unlock_invalid_key">Не вдалося розпізнати ключ розблокування пристрою. Видаліть його й повторіть процедуру створення ключа.</string>
     <string name="device_unlock_prompt_extract_credential_message">Відкрити базу даних за допомогою облікових даних пристрою</string>
     <string name="device_unlock_prompt_extract_credential_title">Розблокування пристрою</string>
-    <string name="device_unlock_prompt_store_credential_message">УВАГА: Вам все одно потрібно запам\'ятати основні облікові дані сховища</string>
+    <string name="device_unlock_prompt_store_credential_message">УВАГА: Вам усе одно потрібно запам\'ятати основні облікові дані сховища</string>
     <string name="device_unlock_prompt_store_credential_title">Посилання на розблокування пристрою</string>
     <string name="menu_keystore_remove_key">Видалити ключ розблокування пристрою</string>
     <string name="enter">Enter</string>
@@ -661,7 +661,7 @@
     <string name="menu_database_settings_summary">Метадані, кошик, шаблони, історія</string>
     <string name="menu_security_settings_summary">Шифрування, функція генерування ключів</string>
     <string name="master_key_settings_summary">Зміни, оновлення</string>
-    <string name="warning_copy_permission">Щоб використовувати функцію сповіщень буфера обміну, потрібен дозвіл на сповіщення.</string>
+    <string name="warning_permission">Щоб використовувати функцію сповіщень буфера обміну, потрібен дозвіл на сповіщення.</string>
     <string name="later">Пізніше</string>
     <string name="ask">Запитувати</string>
     <string name="configure">Сконфігурувати</string>
@@ -738,12 +738,12 @@
     <string name="passkey_backup_state">Стан резервного копіювання ключа доступу</string>
     <string name="error_passkey_result">Не вдалося повернути ключ доступу</string>
     <string name="check">Перевірити</string>
-    <string name="clipboard_otp_notifications_title">Повідомлення OTP</string>
+    <string name="clipboard_otp_notifications_title">Сповіщення OTP</string>
     <string name="clipboard_otp_notifications_summary">Відкрийте сповіщення, щоб скопіювати OTP із записів, заповнених за допомогою автозаповнення або magikeyboard</string>
     <string name="user_verification_device_credential_title">Облікові дані для перевірки користувача</string>
     <string name="user_verification_device_credential_summary">Використовувати облікові дані пристрою для перевірки користувача, якщо вони доступні</string>
     <string name="user_verification_preferred_title">Бажана перевірка користувача</string>
-    <string name="user_verification_preferred_summary">Виконати перевірку користувача, коли довірена сторона запитує «бажаний»</string>
+    <string name="user_verification_preferred_summary">Виконувати перевірку користувача, коли довірена сторона запитує «бажаний»</string>
     <string name="keyboard_auto_switch_title">Автоперемикач Magikeyboard</string>
     <string name="keyboard_auto_switch_summary">Намагатися автоматично переключитися на Magikeyboard, коли поля заповнюються</string>
     <string name="autofill_share_magikeyboard_title">Поділитися з Magikeyboard</string>

@@ -70,7 +70,6 @@ class EntrySelectionLauncherActivity : DatabaseModeActivity() {
                         MagikeyboardService.addEntries(
                             context = this@EntrySelectionLauncherActivity,
                             entryList = uiState.entryInfoList,
-                            toast = true,
                             autoSwitchKeyboard = true
                         )
                     }

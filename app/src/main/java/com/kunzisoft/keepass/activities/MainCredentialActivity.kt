@@ -691,29 +691,48 @@ class MainCredentialActivity : DatabaseModeActivity() {
                     {
                         performedNextEducation(menu)
                     })
-            try {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-                    && !readOnlyEducationPerformed) {
-                    val biometricCanAuthenticate = DeviceUnlockManager.canAuthenticate(this)
-                    if ((biometricCanAuthenticate == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
-                            || biometricCanAuthenticate == BiometricManager.BIOMETRIC_SUCCESS)
-                            && deviceUnlockButton != null) {
-                        mPasswordActivityEducation.checkAndPerformedBiometricEducation(
-                            deviceUnlockButton!!,
-                            {
-                                startActivity(
-                                    Intent(
-                                        this,
-                                        DeviceUnlockSettingsActivity::class.java
+            if (!readOnlyEducationPerformed) {
+                val userVerificationEducationPerformed =
+                    educationToolbar?.findViewById<View>(R.id.menu_open_file_user_verification_mode_key) != null
+                            && mPasswordActivityEducation.checkAndPerformedUserVerificationEducation(
+                        educationToolbar.findViewById(R.id.menu_open_file_user_verification_mode_key),
+                        {
+                            try {
+                                menu.findItem(R.id.menu_open_file_user_verification_mode_key)
+                            } catch (e: Exception) {
+                                Log.e(TAG, "Unable to find user verification mode menu", e)
+                            }
+                            performedNextEducation(menu)
+                        },
+                        {
+                            performedNextEducation(menu)
+                        })
+                try {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                        && !userVerificationEducationPerformed
+                    ) {
+                        val biometricCanAuthenticate = DeviceUnlockManager.canAuthenticate(this)
+                        if ((biometricCanAuthenticate == BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED
+                                    || biometricCanAuthenticate == BiometricManager.BIOMETRIC_SUCCESS)
+                            && deviceUnlockButton != null
+                        ) {
+                            mPasswordActivityEducation.checkAndPerformedBiometricEducation(
+                                deviceUnlockButton!!,
+                                {
+                                    startActivity(
+                                        Intent(
+                                            this,
+                                            DeviceUnlockSettingsActivity::class.java
+                                        )
                                     )
-                                )
-                            },
-                            {
+                                },
+                                {
 
-                            })
+                                })
+                        }
                     }
-                }
-            } catch (_: Exception) {}
+                } catch (_: Exception) {}
+            }
         }
     }
 

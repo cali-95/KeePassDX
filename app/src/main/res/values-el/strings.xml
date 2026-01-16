@@ -662,7 +662,7 @@
     <string name="menu_database_settings_summary">Μεταδεδομένα, κάδος ανακύκλωσης, πρότυπα, ιστορικό</string>
     <string name="menu_security_settings_summary">Κρυπτογράφηση, λειτουργία παραγωγής κλειδιού</string>
     <string name="master_key_settings_summary">Αλλαγή, ανανέωση</string>
-    <string name="warning_copy_permission">Η άδεια ειδοποίησης απαιτείται για τη χρήση της δυνατότητας ειδοποίησης του προχείρου.</string>
+    <string name="warning_permission">Η άδεια ειδοποίησης απαιτείται για τη χρήση της δυνατότητας ειδοποίησης του προχείρου.</string>
     <string name="unlock_and_link_biometric">Σύνδεσμος ξεκλειδώματος συσκευής</string>
     <string name="menu_appearance_settings_summary">Θέματα, χρώματα, ιδιότητες</string>
     <string name="ask">Ερώτηση</string>

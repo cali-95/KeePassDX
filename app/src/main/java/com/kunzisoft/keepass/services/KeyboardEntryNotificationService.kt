@@ -118,7 +118,14 @@ class KeyboardEntryNotificationService : LockNotificationService() {
                 }
             }
         }
-        notificationManager?.notify(notificationId, builder.build())
+        try {
+            checkNotificationsPermission(this) {
+                notificationManager?.notify(notificationId, builder.build())
+            }
+        } catch (e: SecurityException) {
+            Log.e(TAG, "Unable to notify the entry in keyboard", e)
+            stopService()
+        }
     }
 
     override fun onTaskRemoved(rootIntent: Intent?) {
@@ -151,11 +158,13 @@ class KeyboardEntryNotificationService : LockNotificationService() {
             // Show the notification if allowed in Preferences
             if (PreferencesUtil.isKeyboardNotificationEntryEnable(context)
                 && context.isMagikeyboardActivated()) {
-                startService = true
-                context.startService(intent.apply {
-                    putExtra(TITLE_INFO_KEY, title)
-                    action = ACTION_NEW_NOTIFICATION
-                })
+                checkNotificationsPermission(context, showError = false) {
+                    startService = true
+                    context.startService(intent.apply {
+                        putExtra(TITLE_INFO_KEY, title)
+                        action = ACTION_NEW_NOTIFICATION
+                    })
+                }
             }
 
             if (!startService)

@@ -514,7 +514,7 @@
     <string name="warning_database_info_changed_options">Unisci i dati, sovrascrivi le modifiche esterne salvando il database o ricaricalo con le ultime modifiche.</string>
     <string name="warning_database_info_changed">I dati nel tuo database sono stati modificati al di fuori di questa app.</string>
     <string name="menu_reload_database">Ricarica dati</string>
-    <string name="error_otp_type">Il tipo di OTP esistente non è riconosciuto da questo modulo e la sua convalida potrebbe non generare più il token correttamente.</string>
+    <string name="error_otp_type">Il tipo di OTP esistente non è riconosciuto da questo modulo e la sua convalida potrebbe non generare più correttamente il token.</string>
     <string name="download_canceled">Annullato!</string>
     <string name="unit_gibibyte">GiB</string>
     <string name="unit_mebibyte">MiB</string>
@@ -665,7 +665,7 @@
     <string name="menu_database_settings_summary">Metadati, cestino, modelli, cronologia</string>
     <string name="menu_security_settings_summary">Crittografia, funzione di derivazione della chiave</string>
     <string name="master_key_settings_summary">Cambio, rinnovo</string>
-    <string name="warning_copy_permission">L\'autorizzazione per le notifiche è necessaria per usare la funzione di notifica degli appunti.</string>
+    <string name="warning_permission">L\'autorizzazione per le notifiche è necessaria per usare la funzione di notifica degli appunti.</string>
     <string name="later">Dopo</string>
     <string name="ask">Chiedi</string>
     <string name="configure">Configura</string>
@@ -756,8 +756,14 @@
     <string name="error_password_result">Impossibile restituire la password</string>
     <string name="content_description_user_verification_information">Info di verifica utente</string>
     <string name="user_verification_required_title">Verifica utente</string>
-    <string name="user_verification_required_description">L\'accesso a questi dati richiede la verifica</string>
+    <string name="user_verification_required_description">L\'accesso a questi dati richiede di verificare che sei effettivamente tu.</string>
     <string name="user_verification_database_credential">Inserisci i primi quattro caratteri della password del tuo database</string>
     <string name="first_chars">Primi caratteri</string>
     <string name="check">Controlla</string>
+    <string name="user_verification">Verifica utente</string>
+    <string name="user_verification_mode_title">Modalità verifica utente</string>
+    <string name="user_verification_mode_summary">Attiva la modalità di verifica dell\'utente in modo predefinito all\'apertura del database</string>
+    <string name="menu_user_verification_enabled">Verifica utente attivata</string>
+    <string name="menu_user_verification_disabled">Verifica utente disattivata</string>
+    <string name="user_verification_required_description_precise">%1$s richiede di verificare che sei effettivamente tu.</string>
 </resources>
