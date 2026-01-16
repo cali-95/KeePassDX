@@ -765,4 +765,6 @@
     <string name="user_verification_mode_summary">Schakelt standaard de Gebruikersverificatiemodus in bij het openen van een database</string>
     <string name="menu_user_verification_enabled">Gebruikersverificatie ingeschakeld</string>
     <string name="menu_user_verification_disabled">Gebruikersverificatie uitgeschakeld</string>
+    <string name="education_user_verification_title">Verificatie voor gevoelige acties</string>
+    <string name="education_user_verification_summary">De gebruikersverificatiemodus voor de sessie wijzigen.\n\n\"Gebruikersverificatie ingeschakeld\" verifieert acties op beveiligde velden en database-instellingen.\n\"Gebruikersverificatie uitgeschakeld\" staat toe dat je gegevens in je database wijzigt zonder verificatie.</string>
 </resources>

@@ -735,8 +735,8 @@
     <string name="clipboard_otp_notifications_summary">Nyisson meg egy értesítést, hogy kimásolja az OTP-t az automatikusan kitöltött vagy mágikus billentyűzet segítségével beírt bejegyzésekből</string>
     <string name="user_verification_device_credential_title">Felhasználó hitelesítési adatainak ellenőrzése</string>
     <string name="user_verification_device_credential_summary">Eszköz hitelesítési adatainak használata a felhasználó ellenőrzéséhez, ha elérhető</string>
-    <string name="user_verification_preferred_title">Előnyben részesített felhasználói ellenőrzés</string>
-    <string name="user_verification_preferred_summary">Felhasználói ellenőrzést hajt végre, amikor a megbízható fél „preferált” állapotot kérelmez</string>
+    <string name="user_verification_preferred_title">Előnyben részesített felhasználó-ellenőrzés</string>
+    <string name="user_verification_preferred_summary">Felhasználó-ellenőrzést hajt végre, amikor a megbízható fél „preferált” állapotot kérelmez</string>
     <string name="keyboard_auto_switch_title">Automatikus mágikus billentyűzet váltás</string>
     <string name="keyboard_auto_switch_summary">Megpróbál automatikusan átváltani a mágikus billentyűzetre, amikor a mezők ki vannak töltve</string>
     <string name="autofill_share_magikeyboard_title">Megosztás mágikus billentyűzettel</string>
@@ -745,16 +745,18 @@
     <string name="password_creation_description">Jelszó mentése új bejegyzésben</string>
     <string name="password_selection_description">Kiválaszt egy meglévő jelszót</string>
     <string name="error_password_result">Nem lehetséges visszaadni a jelszót</string>
-    <string name="content_description_user_verification_information">Felhasználói ellenőrzési információk</string>
-    <string name="user_verification_required_title">Felhasználói ellenőrzés</string>
+    <string name="content_description_user_verification_information">Felhasználó-ellenőrzési információk</string>
+    <string name="user_verification_required_title">Felhasználó-ellenőrzés</string>
     <string name="user_verification_required_description">Az adatokhoz való hozzáféréshez meg kell győződni arról, hogy valóban Ön az.</string>
     <string name="user_verification_database_credential">Írja be az adatbázis jelszavának első négy karakterét</string>
     <string name="first_chars">Első karakterek</string>
     <string name="check">Ellenőrzés</string>
     <string name="user_verification_required_description_precise">A(z) %1$s ellenőrzést kér annak megerősítésére, hogy valóban Ön az.</string>
-    <string name="user_verification">Felhasználói ellenőrzés</string>
-    <string name="user_verification_mode_title">Felhasználói ellenőrzés mód</string>
-    <string name="user_verification_mode_summary">Alapértelmezés szerint engedélyezi a felhasználói ellenőrzés módot az adatbázis megnyitásakor</string>
-    <string name="menu_user_verification_enabled">Felhasználói ellenőrzés engedélyezve</string>
-    <string name="menu_user_verification_disabled">Felhasználói ellenőrzés letiltva</string>
+    <string name="user_verification">Felhasználó-ellenőrzés</string>
+    <string name="user_verification_mode_title">Felhasználó-ellenőrzési mód</string>
+    <string name="user_verification_mode_summary">Alapértelmezés szerint engedélyezi a felhasználó-ellenőrzés módot az adatbázis megnyitásakor</string>
+    <string name="menu_user_verification_enabled">Felhasználó-ellenőrzés engedélyezve</string>
+    <string name="menu_user_verification_disabled">Felhasználó-ellenőrzés letiltva</string>
+    <string name="education_user_verification_title">Érzékeny műveletek ellenőrzése</string>
+    <string name="education_user_verification_summary">A munkamenet felhasználói ellenőrzési módjának módosítása.\n \nA „Felhasználó-ellenőrzés engedélyezve” beállítás ellenőrzi a védett mezőkben és az adatbázis beállításaiban végzett műveleteket.\nA „Felhasználó-ellenőrzés letiltva” beállítás lehetővé teszi az adatbázisban szereplő adatok ellenőrzés nélküli módosítását.</string>
 </resources>

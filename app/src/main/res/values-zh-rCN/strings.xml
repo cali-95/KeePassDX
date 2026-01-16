@@ -762,4 +762,6 @@
     <string name="user_verification_mode_summary">打开数据库时默认启用用户验证模式</string>
     <string name="menu_user_verification_enabled">用户验证已启用</string>
     <string name="menu_user_verification_disabled">用户验证已禁用</string>
+    <string name="education_user_verification_title">敏感操作验证</string>
+    <string name="education_user_verification_summary">更改会话的用户验证模式。\n\n“启用用户验证”会对受保护的字段和数据库设置的操作进行验证。\n“禁用用户验证”允许您在不进行验证的情况下更改数据库中的任何数据。</string>
 </resources>

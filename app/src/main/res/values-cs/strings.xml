@@ -764,4 +764,6 @@
     <string name="user_verification_mode_summary">Povolí automatický režim Ověření uživatele po otevření databáze</string>
     <string name="menu_user_verification_enabled">Ověření uživatele povoleno</string>
     <string name="menu_user_verification_disabled">Ověření uživatele zakázáno</string>
+    <string name="education_user_verification_title">Ověření u citlivých akcí</string>
+    <string name="education_user_verification_summary">Změnit režim ověření uživatele pro relaci.\n\n„Ověření uživatele povoleno“ ověří akci u chráněných polí a nastavení databáze.\n„Ověření uživatele zakázáno“ vám umožní změnit jakákoli data ve vaší databázi bez ověření.</string>
 </resources>

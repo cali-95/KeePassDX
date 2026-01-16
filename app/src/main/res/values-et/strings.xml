@@ -721,4 +721,6 @@
     <string name="user_verification_mode_summary">Andmebaasi avamisel käivitab vaikimisi kasutaja verifitseerimise režiimi</string>
     <string name="menu_user_verification_enabled">Kasutaja verifitseerimine on lülitatud sisse</string>
     <string name="menu_user_verification_disabled">Kasutaja verifitseerimine on lülitatud välja</string>
+    <string name="education_user_verification_title">Verifitseerimine turvatundlike toimingute puhul</string>
+    <string name="education_user_verification_summary">Saad muuta kasutaja verifitseerimist sessioonikohaselt.\n\n„Kasutaja verifitseerimine on lülitatud sisse“ - kaitstud väljade ja andmebaasiseadistuste puhul on vajalik täiendav tuvastus.\n„Kasutaja verifitseerimine on lülitatud välja“ - saad muuta kõiki andmebaasis olevaid andmeid ilma täiendava tuvastuseta.</string>
 </resources>
