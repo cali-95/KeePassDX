@@ -677,12 +677,12 @@
 \n如果激活了自动锁定，且你忘了你正在进行更改，你可能失去你的数据。</string>
     <string name="style_name_follow_system">跟随系统</string>
     <string name="style_name_forest">Forest</string>
-    <string name="style_name_divine">Divine</string>
+    <string name="style_name_divine">神秘圣域</string>
     <string name="style_name_classic">Classic</string>
-    <string name="style_name_simple">Simple</string>
+    <string name="style_name_simple">简单</string>
     <string name="style_name_moon">Moon</string>
     <string name="style_name_sun">Sun</string>
-    <string name="style_name_reply">Reply</string>
+    <string name="style_name_reply">回复</string>
     <string name="style_name_kunzite">Kunzite</string>
     <string name="style_name_light">浅色</string>
     <string name="style_name_dark">深色</string>
@@ -754,7 +754,7 @@
     <string name="user_verification_required_title">用户验证</string>
     <string name="user_verification_required_description">访问此数据需要验证您的身份。</string>
     <string name="user_verification_database_credential">请输入数据库密码的前四个字符</string>
-    <string name="first_chars">前几个字符</string>
+    <string name="first_chars">首个字符</string>
     <string name="check">检查</string>
     <string name="user_verification_required_description_precise">%1$s 需要验证您的身份。</string>
     <string name="user_verification">用户验证</string>
