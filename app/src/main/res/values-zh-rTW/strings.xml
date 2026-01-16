@@ -624,7 +624,7 @@
     <string name="auto_type">自動填入</string>
     <string name="info">資訊</string>
     <string name="html_about_privacy">&lt;strong&gt;不收集用戶資料。&lt;/strong&gt;，此應用程式不連接任何伺服器，僅在裝置上運作，而且完全尊重用戶私穩。</string>
-    <string name="waiting_challenge_request">正在等待開發請求…</string>
+    <string name="waiting_challenge_request">正等待質疑請求…</string>
     <string name="waiting_challenge_response">正等待Challenge回應……</string>
     <string name="error_XML_malformed">XML格式錯誤。</string>
     <string name="error_challenge_already_requested">已請求Challenge。</string>
